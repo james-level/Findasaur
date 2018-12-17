@@ -63,22 +63,19 @@ export default class Period extends Component {
         borderRadius: 0
       }}
         >
-            <View style={{ padding: 5,
+            <View style={{
           marginTop: 35,
-          margin: 5,
-          flexDirection: 'row' }}
+          flexDirection: 'column' }}
         >
       {/*    <Image
                   style={s.profilePicture}
                   source={require('../assets/app_icons/bones.png') }
                 /> */}
-          <Text style={[
-            s.displayName,
-            { flex: 1 }
-          ]}
-                >
-            {title}
-                </Text>
+                <Image
+                            style={s.profilePicture}
+                            source={ this.eraImage(id) }
+                          />
+
           <View style={[
             { height: 20 },
             s.badgeSection
@@ -88,15 +85,21 @@ export default class Period extends Component {
                 </View>
         </View>
         <View>
+        <Text style={[
+          s.displayName
+        ]}  >   {title}
+                </Text>
+        </View>
+
+        <View>
+
           <Text style={s.bodyText}>
                 {description}
             </Text>
 
-            <Image
-                        style={s.profilePicture}
-                        source={ this.eraImage(id) }
-                      />
+
           </View>
+
         <View style={s.reactionBox}>
               <TouchableHighlight
             underlayColor="transparent"
@@ -133,33 +136,21 @@ export default class Period extends Component {
 const s = StyleSheet.create({
   bodyText: {
     fontSize: 16,
-    color: 'white',
-    backgroundColor: 'transparent',
-    margin: 20
+    color: 'white'
   },
   linearGradient: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
     borderRadius: 0
   },
   reactionBox: {
     flex: 1,
-    justifyContent: 'flex-end',
-    margin: 40
+    justifyContent: 'flex-end'
   },
   description: {
     width: 0,
     height: 0,
     textAlign: 'center',
     backgroundColor: 'transparent',
-  },
-  footerText: {
-    textAlign: 'center',
-    backgroundColor: 'transparent',
-    // FontSize: 10,
-    color: 'white',
-    padding: 0
   },
   buttonText: {
     fontSize: 18,
@@ -171,17 +162,12 @@ const s = StyleSheet.create({
   },
   // -------
   profilePicture: {
-    width: 300,
+    width: "100%",
     height: 224.9,
-    borderRadius: 15,
-    backgroundColor: 'black',
-    margin: 20,
-    marginRight: 20
+    backgroundColor: 'black'
   },
   displayName: {
-    backgroundColor: 'transparent',
     color: 'white',
-    marginLeft: 0,
     marginTop: 22,
     fontSize: 33,
     marginBottom: 5
@@ -195,11 +181,6 @@ const s = StyleSheet.create({
     marginRight: 10,
     // MarginTop: 15,
     justifyContent: 'center'
-  },
-  badgeSlug: {
-    borderRadius: 0,
-    paddingVertical: 5,
-    paddingHorizontal: 12
   },
   badgeText: {
     textAlign: 'center',

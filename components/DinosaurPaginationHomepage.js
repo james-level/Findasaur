@@ -124,33 +124,38 @@ export default class DinosaurPaginationHomepage extends Component {
             pagingEnabled
           startDotIconFamily="Ionicons"
           startDotIconName="ios-arrow-back"
-          startDotIconColor="#00C78C"
+          startDotIconColor="#00e500"
+          startDotIconSize={30}
+          endDotIconSize={30}
           endDotIconFamily="Ionicons"
           endDotIconName="ios-arrow-forward"
-          endDotIconColor="#00C78C"
+          endDotIconColor="#00e500"
           dotIconName="ios-close"
             hideEmptyDots
 
           dotEmptyHide
-          dotIconColorActive="#00C78C"
-          dotIconColorNotActive="#00C78C"
+          dotIconColorActive="#00e500"
+          dotIconColorNotActive="#00e500"
           // DotIconColorEmpty={"blue"}
           dotIconSizeActive={15}
           /*
            *  DotIconSizeNotActive={10}
-           * StartDotIconSize={30}
-           * EndDotIconSize={30}
+
            */
           listRef={this.refs}// To allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
           paginationVisibleItems={this.state.viewableItems}// Needs to track what the user sees
           paginationItems={this.state.items}// Pass the same list as data
-          paginationItemPadSize={3}
+          paginationItemPadSize={2}
         />
         </View>);
   }
 }
 const s = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    width: '100%',
+    padding: 0,
+    margin: 0
+
   }
 });
