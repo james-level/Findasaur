@@ -7,15 +7,14 @@ export default class HeroImageCarousel extends React.Component {
   render() {
     return (
       <ImageSlider images = {[
-        'assets/Dino_images/transparent_dinos/ank.jpg',
-        'assets/Dino_images/transparent_dinos/brachiosaurus.png',
-        'assets/Dino_images/transparent_dinos/carnotaurus.png',
-        'assets/Dino_images/transparent_dinos/Metriacanthosaurus.png',
-        'assets/Dino_images/transparent_dinos/suchomimus.jpeg',
-        'assets/Dino_images/transparent_dinos/trex.png',
-        'assets/Dino_images/transparent_dinos/trex2.png',
-        'assets/Dino_images/transparent_dinos/triceratops.png',
-        'assets/Dino_images/transparent_dinos/veloc.png'
+        'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0001_trex.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0000_triceratops.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0009_carnotaurus.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0006_mosasaurus_0.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0015_ankylosaurus.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0002_stygimoloch.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0011_blue.png',
+        'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0004_pteranodon_0.png',
       ]} />
     )
   }

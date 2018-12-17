@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> HELLLO WORLD </Text>
+        <HeroImageCarousel/>
       </View>
     );
   }
