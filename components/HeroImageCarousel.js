@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native';
@@ -8,18 +9,20 @@ export default class HeroImageCarousel extends React.Component {
 
   render() {
     const images = [
-     'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0001_trex.png',
-   'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0000_triceratops.png',
-     'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0009_carnotaurus.png',
-      'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0006_mosasaurus_0.png',
-   'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0015_ankylosaurus.png',
-        'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0002_stygimoloch.png',      'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0011_blue.png',      'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0004_pteranodon_0.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0001_trex.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0000_triceratops.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0009_carnotaurus.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0006_mosasaurus_0.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0015_ankylosaurus.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0002_stygimoloch.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0011_blue.png',
+    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0004_pteranodon_0.png',
     ];
 
     return (
       <SafeAreaView style={HomeImageCarouselStyle.container}>
         <View style={HomeImageCarouselStyle.content1}>
-          <Text style={HomeImageCarouselStyle.contentText}>Dinosaurs</Text>
+          <Text style={HomeImageCarouselStyle.contentText}>Find-a-Dino</Text>
         </View>
         <ImageSlider
           loopBothSides
@@ -51,7 +54,7 @@ export default class HeroImageCarousel extends React.Component {
           )}
         />
         <View style={HomeImageCarouselStyle.content2}>
-          <Text style={HomeImageCarouselStyle.contentText}>[BUTTON]</Text>
+            <AwesomeButtonRick type="anchor">EXPLORE DINOSAURS</AwesomeButtonRick>
         </View>
       </SafeAreaView>
     );
