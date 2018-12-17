@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
-// Get here [TODO ADD URL]
 import Period from './Period';
 import Pagination from 'react-native-pagination';
-import _ from 'lodash';// If you dont have this then gtfo
+import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 
 const bonesIcon = require('../assets/app_icons/bones.png');
@@ -14,6 +13,8 @@ export default class DinosaurPaginationHomepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
+      // List of periods
       items: [
 
         {
@@ -23,7 +24,6 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Middle Triassic",
           color: '#000000',
           description: "247 to 237 million years ago",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -32,9 +32,8 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 1,
           key: 1,
           title: "Late Triassic",
-          color: '#2A2A2A',
+          color: '#000000',
           description: "Late Triassic",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -43,9 +42,8 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 2,
           key: 2,
           title: "Early Jurassic",
-          color: 'black',
+          color: '#000000',
           description: "Early Jurassic",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -54,9 +52,8 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 3,
           key: 3,
           title: "Middle Jurassic",
-          color: '#2A2A2A',
+          color: '#000000',
           description: "Middle Jurassic",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -65,9 +62,8 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 4,
           key: 4,
           title: "Late Jurassic",
-          color: 'black',
+          color: '#000000',
           description: "Late Jurassic",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -76,9 +72,8 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 5,
           key: 5,
           title: "Early Cretaceous",
-          color: '#2A2A2A',
+          color: '#000000',
           description: "Early Cretaceous",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
 
@@ -87,32 +82,29 @@ export default class DinosaurPaginationHomepage extends Component {
           index: 6,
           key: 6,
           title: "Late Cretaceous",
-          color: 'black',
+          color: '#000000',
           description: "Late Cretaceous",
-          // Image:faker.image.business(),
           image: faker.internet.avatar()
         },
-
-
       ]
-      // Selected: (new Map(): Map<string, boolean>),
     };
   }
-  // Render list seen here [TODO ADD URL]
+
   _renderItem = ({ item }) => (
     <Period
     onPressItem={this._onPressItem}
+    id={item.id}
     title={item.title}
     color={item.color}
     description={item.description}
     image={item.image}
   />);
-  // Map to some key. We use the "id" attribute of each item in our list created in our MockTweetList
+
   _keyExtractor = (item, index) => item.id.toString()
   // REQUIRED for ReactNativePagination to work correctly
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
-      console.log(this.state.items)
+
     return (
       <View style={[ s.container ]}>
         <FlatList
@@ -159,7 +151,6 @@ export default class DinosaurPaginationHomepage extends Component {
 }
 const s = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'grey'// <-- use with "dotThemeLight"
+    flex: 1
   }
 });

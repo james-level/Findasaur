@@ -19,6 +19,25 @@ import PropTypes from 'prop-types';
 const bonesIcon = require('../assets/app_icons/bones.png');
 
 export default class Period extends Component {
+
+  eraImage(index){
+
+    console.log(index);
+
+    switch(index) {
+
+    case 0: return require("../assets/era_images/middle_triassic.png");
+    case 1: return require("../assets/era_images/mid_jurassic.png");
+    case 2: return require("../assets/era_images/mid_jurassic.png");
+    case 3: return require("../assets/era_images/mid_jurassic.png");
+    case 4: return require("../assets/era_images/mid_jurassic.png");
+    case 5: return require("../assets/era_images/mid_jurassic.png");
+    case 6: return require("../assets/era_images/mid_jurassic.png");
+
+  }
+  }
+
+
   render() {
 
     const {
@@ -38,10 +57,10 @@ export default class Period extends Component {
         flex: 1,
         // MarginTop:40,
         backgroundColor: color,
-        opacity: 0.9,
+        opacity: 1,
         width,
         // Margin:5,
-        borderRadius: 5
+        borderRadius: 0
       }}
         >
             <View style={{ padding: 5,
@@ -49,10 +68,10 @@ export default class Period extends Component {
           margin: 5,
           flexDirection: 'row' }}
         >
-          <Image
+      {/*    <Image
                   style={s.profilePicture}
                   source={require('../assets/app_icons/bones.png') }
-                />
+                /> */}
           <Text style={[
             s.displayName,
             { flex: 1 }
@@ -65,13 +84,18 @@ export default class Period extends Component {
             s.badgeSection
           ]}
                 >
-        
+
                 </View>
         </View>
         <View>
           <Text style={s.bodyText}>
                 {description}
             </Text>
+
+            <Image
+                        style={s.profilePicture}
+                        source={ this.eraImage(id) }
+                      />
           </View>
         <View style={s.reactionBox}>
               <TouchableHighlight
@@ -102,9 +126,13 @@ export default class Period extends Component {
     );
 }
 }
+
+// CSS for this period page
+
+
 const s = StyleSheet.create({
   bodyText: {
-    fontSize: 32,
+    fontSize: 16,
     color: 'white',
     backgroundColor: 'transparent',
     margin: 20
@@ -113,7 +141,7 @@ const s = StyleSheet.create({
     flex: 1,
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5
+    borderRadius: 0
   },
   reactionBox: {
     flex: 1,
@@ -143,12 +171,12 @@ const s = StyleSheet.create({
   },
   // -------
   profilePicture: {
-    width: 60,
-    height: 60,
-    borderRadius: 5,
+    width: 300,
+    height: 224.9,
+    borderRadius: 15,
     backgroundColor: 'black',
     margin: 20,
-    marginRight: 10
+    marginRight: 20
   },
   displayName: {
     backgroundColor: 'transparent',
@@ -169,7 +197,7 @@ const s = StyleSheet.create({
     justifyContent: 'center'
   },
   badgeSlug: {
-    borderRadius: 15,
+    borderRadius: 0,
     paddingVertical: 5,
     paddingHorizontal: 12
   },
