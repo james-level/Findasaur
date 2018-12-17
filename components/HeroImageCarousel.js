@@ -4,8 +4,25 @@ import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import HomeImageCarouselStyle from '../CSS/HomeImageCarousel.js';
+import DinosaurPaginationHomepage from './DinosaurPaginationHomepage.js';
 
 export default class HeroImageCarousel extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonClicked: false
+    };
+
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  handleButtonClick(){
+    console.log("HELLO");
+    this.setState({
+      buttonClicked: true
+    })
+  }
 
   render() {
     const images = [
@@ -19,7 +36,10 @@ export default class HeroImageCarousel extends React.Component {
     'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0004_pteranodon_0.png',
     ];
 
+  if (this.state.buttonClicked === false){
+
     return (
+
       <SafeAreaView style={HomeImageCarouselStyle.container}>
         <View style={HomeImageCarouselStyle.content1}>
           <Text style={HomeImageCarouselStyle.contentText}>Find-a-Dino</Text>
@@ -54,9 +74,17 @@ export default class HeroImageCarousel extends React.Component {
           )}
         />
         <View style={HomeImageCarouselStyle.content2}>
-            <AwesomeButtonRick type="anchor">EXPLORE DINOSAURS</AwesomeButtonRick>
+            <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
         </View>
       </SafeAreaView>
     );
+  }
+
+  else {
+    return (
+      <DinosaurPaginationHomepage
+      />
+    )
+  }
   }
 }

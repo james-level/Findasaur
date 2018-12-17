@@ -8,10 +8,13 @@ global.self = global;
 
 
 export default class App extends React.Component {
+
+
   render() {
     return (
       <View style={styles.container}>
-        <HeroImageCarousel/>
+        <HeroImageCarousel
+        />
       </View>
     );
   }
