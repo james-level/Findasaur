@@ -65,23 +65,7 @@ export default class Period extends Component {
             s.badgeSection
           ]}
                 >
-            <View style={[
-              s.badgeSlug,
-              { backgroundColor: 'white' }
-            ]}
-              >
-                  <Text style={[
-                s.badgeText,
-                { color: 'rgba(0,0,0,.6)' }
-              ]}
-              >
-                  (
-                  {index}
-) in
-                {' '}
-                  {city}
-              </Text>
-            </View>
+        
                 </View>
         </View>
         <View>
@@ -110,7 +94,7 @@ export default class Period extends Component {
               { color: darkColor }
             ]}
             >
-              {description}
+
             </Text>
           </TouchableHighlight>
           </View>
@@ -137,16 +121,10 @@ const s = StyleSheet.create({
     margin: 40
   },
   description: {
+    width: 0,
+    height: 0,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    fontSize: 10,
-    padding: 15,
-    color: 'white',
-    textShadowRadius: 5,
-    textShadowOffset: {
-      width: 2,
-      heigth: 2
-    }
   },
   footerText: {
     textAlign: 'center',

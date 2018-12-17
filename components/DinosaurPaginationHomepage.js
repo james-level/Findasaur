@@ -132,18 +132,18 @@ export default class DinosaurPaginationHomepage extends Component {
             pagingEnabled
           startDotIconFamily="Ionicons"
           startDotIconName="ios-arrow-back"
+          startDotIconColor="#00C78C"
           endDotIconFamily="Ionicons"
           endDotIconName="ios-arrow-forward"
+          endDotIconColor="#00C78C"
           dotIconName="ios-close"
             hideEmptyDots
-          dotIconFamily="Ionicons"
-          dotIconNameNotActive="logo-twitter"
-          dotIconNameActive="logo-twitter"
+
           dotEmptyHide
-          dotIconColorActive="white"
-          dotIconColorNotActive="rgba(255,255,255,0.5)"
+          dotIconColorActive="#00C78C"
+          dotIconColorNotActive="#00C78C"
           // DotIconColorEmpty={"blue"}
-          dotIconSizeActive={25}
+          dotIconSizeActive={15}
           /*
            *  DotIconSizeNotActive={10}
            * StartDotIconSize={30}
