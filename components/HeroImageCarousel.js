@@ -19,7 +19,7 @@ export default class HeroImageCarousel extends React.Component {
     return (
       <SafeAreaView style={HomeImageCarouselStyle.container}>
         <View style={HomeImageCarouselStyle.content1}>
-          <Text style={HomeImageCarouselStyle.contentText}>Findasaurus</Text>
+          <Text style={HomeImageCarouselStyle.contentText}>Dinosaurs</Text>
         </View>
         <ImageSlider
           loopBothSides

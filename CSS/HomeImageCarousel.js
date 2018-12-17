@@ -8,7 +8,7 @@ const homeImageCarouselStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  slider: { backgroundColor: '#2A2A2A', height: 350 },
+  slider: { backgroundColor: '#FF0033', height: 350 },
   content1: {
     width: '100%',
     height: 100,
