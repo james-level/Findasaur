@@ -28,7 +28,7 @@ const MockPersonList = new _.times(35, (i) => ({
         ]),
         email: faker.internet.email()
       })),
-      MockTweetList = new _.times(15, (i) => ({
+      MockTweetList = new _.times(7, (i) => ({
         id: i,
         index: i,
         key: i,
