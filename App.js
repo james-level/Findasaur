@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 global.self = global;
 
+
 export default class App extends React.Component {
   render() {
     return (
