@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Font } from 'expo';
 import {
   Dimensions,
   Image,
@@ -20,7 +21,18 @@ const bonesIcon = require('../assets/app_icons/bones.png');
 
 export default class Period extends Component {
 
+  constructor(props) {
+
+    super(props);
+
+  this.state = {
+    fontLoaded: false
+  }
+
+}
+
   eraImage(index){
+
 
     console.log(index);
 
@@ -35,6 +47,15 @@ export default class Period extends Component {
     case 6: return require("../assets/era_images/late_cretaceous.png");
 
   }
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
+    });
+
+     this.setState({ fontLoaded: true });
+
   }
 
 
@@ -85,11 +106,22 @@ export default class Period extends Component {
                 </View>
         </View>
         <View>
+    {
+
+        this.state.fontLoaded ? (
+
+        <View>
         <Text style={[
           s.displayName
         ]}  >   {title}
                 </Text>
         </View>
+
+      ) : null
+
+    }
+
+    </View>
 
         <View>
 
@@ -167,7 +199,8 @@ const s = StyleSheet.create({
     backgroundColor: 'black'
   },
   displayName: {
-    color: 'white',
+    fontFamily: 'FrederickatheGreat-Regular',
+    color: '#00e500',
     marginTop: 22,
     fontSize: 33,
     marginBottom: 5
