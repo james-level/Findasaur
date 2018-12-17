@@ -27,12 +27,12 @@ export default class Period extends Component {
     switch(index) {
 
     case 0: return require("../assets/era_images/middle_triassic.png");
-    case 1: return require("../assets/era_images/mid_jurassic.png");
-    case 2: return require("../assets/era_images/mid_jurassic.png");
+    case 1: return require("../assets/era_images/late_triassic.png");
+    case 2: return require("../assets/era_images/early_jurassic.png");
     case 3: return require("../assets/era_images/mid_jurassic.png");
-    case 4: return require("../assets/era_images/mid_jurassic.png");
-    case 5: return require("../assets/era_images/mid_jurassic.png");
-    case 6: return require("../assets/era_images/mid_jurassic.png");
+    case 4: return require("../assets/era_images/late_jurassic.png");
+    case 5: return require("../assets/era_images/early_cretaceous.png");
+    case 6: return require("../assets/era_images/late_cretaceous.png");
 
   }
   }
