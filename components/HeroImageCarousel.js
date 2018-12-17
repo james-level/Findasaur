@@ -23,7 +23,7 @@ export default class HeroImageCarousel extends React.Component {
         </View>
         <ImageSlider
           loopBothSides
-          autoPlayWithInterval={3000}
+          autoPlayWithInterval={1500}
           images={images}
           customSlide={({ index, item, style, width }) => (
             // It's important to put style here because it's got offset inside
@@ -51,7 +51,7 @@ export default class HeroImageCarousel extends React.Component {
           )}
         />
         <View style={HomeImageCarouselStyle.content2}>
-          <Text style={HomeImageCarouselStyle.contentText}>Pick a period</Text>
+          <Text style={HomeImageCarouselStyle.contentText}>[BUTTON]</Text>
         </View>
       </SafeAreaView>
     );
