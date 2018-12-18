@@ -10,8 +10,9 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
-
+import MultiToggleSwitch from 'react-native-multi-toggle-switch';
 
 const darkColor = 'black',
       lightColor = 'white',
@@ -155,7 +156,7 @@ export default class Period extends Component {
 
     </View>
 
-        <View style={{backgroundColor: 'black', height: '50%', justifyContent: 'center'}}>
+        <View style={{backgroundColor: 'black', justifyContent: 'center'}}>
 
           <Text style={s.bodyText}>
                 {description}
@@ -165,11 +166,27 @@ export default class Period extends Component {
                   Filter dinosaurs by diet:
               </Text>
 
-          
+              <MultiToggleSwitch>
+  <MultiToggleSwitch.Item primaryColor={'green'} onPress={() => console.log("First tapped!")}>
+      <Icon name={'flower'} size={30} />
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item primaryColor={'#CF4647'}>
+      <Icon name={'pig'} size={30} />
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item>
+      <Icon name={'food'} size={30}/>
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item primaryColor={'orange'}>
+      <Icon name={'all-inclusive'} size={30} />
+  </MultiToggleSwitch.Item>
+</MultiToggleSwitch>
+
+  <AwesomeButtonRick style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
 
           </View>
 
         <View style={s.reactionBox}>
+
               <TouchableHighlight
             underlayColor="transparent"
             onPress={() => {
@@ -193,9 +210,10 @@ export default class Period extends Component {
             >
 
             </Text>
+
           </TouchableHighlight>
 
-          <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
+
 
           </View>
 
