@@ -115,7 +115,7 @@ export default class DinosaurPaginationHomepage extends Component {
   }
 
   populateDropdown(){
-    console.log("Populating dropdown with dinosaurs...");
+    console.log("Populating dropdown with dinosaurs...", this.state.dinosaurs);
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
@@ -126,11 +126,58 @@ export default class DinosaurPaginationHomepage extends Component {
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
     axios.get(url).then((response) => {
-      console.log("Dinosaurs:", response.data);
+      console.log("Dinosaurs:", response.data.records);
+
       self.setState({
-        dinosaurs: response.data
+
+        dinosaurs: self.filterByGenusName(self.filterDinosaurData(response.data.records))
+
       }, function(){self.populateDropdown()})
     })
+  }
+
+ filterDinosaurData(dinosaurs) {
+    const newArray = [];
+
+    dinosaurs.forEach((dinosaur) => {
+      const newName = dinosaur.tna.split(' ');
+      dino = {
+        name: newName[0],
+        coords: [dinosaur.lat, dinosaur.lng],
+        enviroment: dinosaur.jev,
+        diet: dinosaur.jdt,
+        range: `${dinosaur.eag} - ${dinosaur.lag}`,
+        imageId: dinosaur.img,
+        period: this.periodSelected
+      }
+      newArray.push(dino)
+    })
+    return newArray;
+  }
+
+  filterByGenusName(dinosaurs) {
+    const filteredDinosaurs = dinosaurs.reduce((uniqueDinosaurs, dinosaur,   oldIndex) => {
+      const dinosaurIsUnique = !uniqueDinosaurs.some((uniqueDinosaur) => {
+        return uniqueDinosaur.name === dinosaur.name;
+      });
+      if (dinosaurIsUnique){
+        uniqueDinosaurs.push(dinosaur);
+      }
+      else {
+        const existingDinosaur = uniqueDinosaurs.find((existingDinosaur) => {
+        return existingDinosaur.name === dinosaur.name;
+        });
+      if (Array.isArray(existingDinosaur.coords[0])) {
+          existingDinosaur.coords.push(dinosaur.coords)
+        }
+      else {
+          existingDinosaur.coords = [existingDinosaur.coords, dinosaur.coords];
+        }
+      }
+      return uniqueDinosaurs;
+    }, [])
+
+      return filteredDinosaurs;
   }
 
   _renderItem = ({ item }) => (
