@@ -34,10 +34,15 @@ export default class Period extends Component {
   this.state = {
     text: null,
     fontLoaded: false,
-    dinosaurs: null
+    dinosaurs: null,
+    dietSelected: "herbivores"
   }
 
   this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
+  this.handleCarnivoreSelection = this.handleCarnivoreSelection.bind(this);
+  this.handleOmnivoreSelection = this.handleOmnivoreSelection.bind(this);
+  this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
+  this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
 
 }
 
@@ -89,6 +94,50 @@ export default class Period extends Component {
 
      this.setState({ fontLoaded: true });
 
+  }
+
+  handleHerbivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'herbivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleCarnivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'carnivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleOmnivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'omnivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleAllDietsSelection(){
+
+    this.setState({
+
+      dietSelected: 'all'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
   }
 
 
@@ -156,7 +205,7 @@ export default class Period extends Component {
 
     </View>
 
-        <View style={{backgroundColor: 'black', justifyContent: 'center'}}>
+        <View style={{backgroundColor: 'black'}}>
 
           <Text style={s.bodyText}>
                 {description}
@@ -167,16 +216,16 @@ export default class Period extends Component {
               </Text>
 
               <MultiToggleSwitch>
-  <MultiToggleSwitch.Item primaryColor={'green'} onPress={() => console.log("First tapped!")}>
+  <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
       <Icon name={'flower'} size={30} />
   </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item primaryColor={'#CF4647'}>
+  <MultiToggleSwitch.Item onPress={this.handleCarnivoreSelection} primaryColor={'#CF4647'}>
       <Icon name={'pig'} size={30} />
   </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item onPress={this.handleOmnivoreSelection}>
       <Icon name={'food'} size={30}/>
   </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item primaryColor={'orange'}>
+  <MultiToggleSwitch.Item onPress={this.handleAllDietsSelection} primaryColor={'orange'}>
       <Icon name={'all-inclusive'} size={30} />
   </MultiToggleSwitch.Item>
 </MultiToggleSwitch>
