@@ -7,6 +7,7 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
+import PaginatedHomepage from './PaginatedHomepage.js';
 
 const bonesIcon = require('../assets/app_icons/bones.png');
 
@@ -21,6 +22,7 @@ export default class DinosaurPaginationHomepage extends Component {
       herbivores: null,
       carnivores: null,
       omnivores: null,
+      searchButtonClicked: false,
       // List of periods
       items: [
 
@@ -112,10 +114,10 @@ export default class DinosaurPaginationHomepage extends Component {
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   componentDidMount(){
-    console.log("HHHII");
     this.getDinosaursForPeriod(237, 247);
   }
 
@@ -125,6 +127,16 @@ export default class DinosaurPaginationHomepage extends Component {
     console.log("CARNIVORES", this.state.carnivores);
     console.log("HERBIVORES", this.state.herbivores);
     console.log("OMNIVORES", this.state.omnivores);
+  }
+
+  handleSearchSubmit(){
+
+    this.setState({
+
+      searchButtonClicked: true
+
+    })
+
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
@@ -206,13 +218,13 @@ export default class DinosaurPaginationHomepage extends Component {
     return filteredDiets;
   }
 
-
   getDinosaursByDiet(dietSelected, dinosaurs) {
     return dinosaurs.filter(dinosaur => dinosaur.diet === dietSelected);
   };
 
   _renderItem = ({ item }) => (
     <Period
+    handleSearchSubmit={this.handleSearchSubmit}
     onPressItem={this._onPressItem}
     id={item.id}
     title={item.title}
@@ -227,6 +239,8 @@ export default class DinosaurPaginationHomepage extends Component {
   // REQUIRED for ReactNativePagination to work correctly
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
+
+    if (this.state.searchButtonClicked === false){
 
     return (
 
@@ -272,7 +286,18 @@ export default class DinosaurPaginationHomepage extends Component {
           paginationItems={this.state.items}// Pass the same list as data
           paginationItemPadSize={2}
         />
-        </View>);
+        </View>)
+      }
+
+      else {
+
+        return (
+
+          <PaginatedHomepage />
+
+        )
+
+      }
   }
 }
 const s = StyleSheet.create({

@@ -13,6 +13,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import MultiToggleSwitch from 'react-native-multi-toggle-switch';
+import PaginatedHomepage from './PaginatedHomepage.js';
 
 const darkColor = 'black',
       lightColor = 'white',
@@ -35,7 +36,8 @@ export default class Period extends Component {
     text: null,
     fontLoaded: false,
     dinosaurs: null,
-    dietSelected: "herbivores"
+    dietSelected: "herbivores",
+    searchButtonClicked: false
   }
 
   this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -43,9 +45,9 @@ export default class Period extends Component {
   this.handleOmnivoreSelection = this.handleOmnivoreSelection.bind(this);
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
   this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
+  this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 
 }
-
 
   componentDidMount(){
     console.log("HHHII");
@@ -88,8 +90,11 @@ export default class Period extends Component {
   }
 
   async componentDidMount() {
+
     await Font.loadAsync({
+
       'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
+
     });
 
      this.setState({ fontLoaded: true });
@@ -140,6 +145,15 @@ export default class Period extends Component {
     });
   }
 
+  handleSearchSubmit(){
+
+    this.setState({
+
+      searchButtonClicked: true
+
+    })
+
+  }
 
   render() {
 
@@ -155,7 +169,9 @@ export default class Period extends Component {
       image
     } = this.props;
     // Console.warn(" image: ",image);
+
     return (
+
       <View style={{
         flex: 1,
         // MarginTop:40,
@@ -216,21 +232,21 @@ export default class Period extends Component {
               </Text>
 
               <MultiToggleSwitch>
-  <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
-      <Icon name={'flower'} size={30} />
-  </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item onPress={this.handleCarnivoreSelection} primaryColor={'#CF4647'}>
-      <Icon name={'pig'} size={30} />
-  </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item onPress={this.handleOmnivoreSelection}>
-      <Icon name={'food'} size={30}/>
-  </MultiToggleSwitch.Item>
-  <MultiToggleSwitch.Item onPress={this.handleAllDietsSelection} primaryColor={'orange'}>
-      <Icon name={'all-inclusive'} size={30} />
-  </MultiToggleSwitch.Item>
-</MultiToggleSwitch>
+                <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
+                    <Icon name={'flower'} size={30} />
+                </MultiToggleSwitch.Item>
+                <MultiToggleSwitch.Item onPress={this.handleCarnivoreSelection} primaryColor={'#CF4647'}>
+                    <Icon name={'pig'} size={30} />
+                </MultiToggleSwitch.Item>
+                <MultiToggleSwitch.Item onPress={this.handleOmnivoreSelection}>
+                    <Icon name={'food'} size={30}/>
+                </MultiToggleSwitch.Item>
+                <MultiToggleSwitch.Item onPress={this.handleAllDietsSelection} primaryColor={'orange'}>
+                    <Icon name={'all-inclusive'} size={30} />
+                </MultiToggleSwitch.Item>
+              </MultiToggleSwitch>
 
-  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>FIND DINOS</AwesomeButtonRick>
+  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
 
           </View>
 
@@ -268,8 +284,9 @@ export default class Period extends Component {
 
         </View>
     );
-}
-}
+
+  }
+  }
 
 // CSS for this period page
 
