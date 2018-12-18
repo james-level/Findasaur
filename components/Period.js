@@ -10,8 +10,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
-import DropdownMenu from 'react-native-dropdown-menu';
 
 const darkColor = 'black',
       lightColor = 'white',
@@ -93,9 +93,6 @@ export default class Period extends Component {
 
   render() {
 
-
-    var data = [["Show all", "Carnivores", "Herbivores", "Omnivores"]];
-
     const {
       id,
       index,
@@ -168,27 +165,7 @@ export default class Period extends Component {
                   Filter dinosaurs by diet:
               </Text>
 
-            <DropdownMenu
-                  style={{flex: 1}}
-                  bgColor={'white'}
-                  tintColor={'#666666'}
-                  activityTintColor={'green'}
-                  // arrowImg={}
-                  // checkImage={}
-                  // optionTextStyle={{color: '#333333'}}
-                  // titleStyle={{color: '#333333'}}
-                  // maxHeight={300}
-                  handler={(selection, row) => this.setState({text: data[selection][row]})}
-                  data={data}
-                >
-
-                  <View style={{flex: 1}}>
-                    <Text>
-
-                    </Text>
-                  </View>
-
-                </DropdownMenu>
+          
 
           </View>
 
@@ -218,6 +195,7 @@ export default class Period extends Component {
             </Text>
           </TouchableHighlight>
 
+          <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
 
           </View>
 
