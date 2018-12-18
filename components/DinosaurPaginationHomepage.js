@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
 import Period from './Period';
+import NavBarAndroidLight from './NavBarAndroidLight'
 import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
@@ -229,7 +230,9 @@ export default class DinosaurPaginationHomepage extends Component {
   render() {
 
     return (
+
       <View style={[ s.container ]}>
+        <NavBarAndroidLight home={this.props.home}/>
         <FlatList
             ref={r => this.refs = r}
             data={this.state.items}

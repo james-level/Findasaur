@@ -20,7 +20,7 @@ export default class HeroImageCarousel extends React.Component {
   handleButtonClick(){
     console.log("HELLO");
     this.setState({
-      buttonClicked: true
+      buttonClicked: !this.state.buttonClicked
     })
   }
 
@@ -82,7 +82,7 @@ export default class HeroImageCarousel extends React.Component {
 
   else {
     return (
-      <DinosaurPaginationHomepage
+      <DinosaurPaginationHomepage home={this.handleButtonClick}
       />
     )
   }

@@ -40,6 +40,7 @@
     "react-native-maps": "^0.22.0",
     "react-native-modal": "^6.5.0",
     "react-native-modalbox": "^1.6.0",
+    "react-native-nav": "^2.0.2",
     "react-native-pagination": "^1.5.5",
     "react-native-pulse": "^1.0.6",
     "react-native-really-awesome-button": "^0.8.3",
