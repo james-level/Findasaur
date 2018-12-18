@@ -157,8 +157,6 @@ export default class Period extends Component {
 
   render() {
 
-    if (this.state.searchButtonClicked === false){
-
     const {
       id,
       index,
@@ -248,7 +246,7 @@ export default class Period extends Component {
                 </MultiToggleSwitch.Item>
               </MultiToggleSwitch>
 
-  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>FIND DINOS</AwesomeButtonRick>
+  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
 
           </View>
 
@@ -286,16 +284,7 @@ export default class Period extends Component {
 
         </View>
     );
-  }
 
-  else {
-
-      return (
-
-        <PaginatedHomepage />
-
-    )
-  }
   }
   }
 
