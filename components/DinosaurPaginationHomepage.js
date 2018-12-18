@@ -5,6 +5,8 @@ import Period from './Period';
 import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
+import axios from 'axios';
+
 
 const bonesIcon = require('../assets/app_icons/bones.png');
 
@@ -13,9 +15,10 @@ export default class DinosaurPaginationHomepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      dinosaurs: null,
       // List of periods
       items: [
+
 
         {
           id: 0,
@@ -102,6 +105,32 @@ export default class DinosaurPaginationHomepage extends Component {
         },
       ]
     };
+
+    this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
+  }
+
+  componentDidMount(){
+    console.log("HHHII");
+    this.getDinosaursForPeriod(237, 247);
+  }
+
+  populateDropdown(){
+    console.log("Populating dropdown with dinosaurs...");
+  }
+
+  getDinosaursForPeriod(earliest_date, latest_date){
+    console.log("HHHHHHHH");
+    var self = this;
+
+    // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
+    const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
+
+    axios.get(url).then((response) => {
+      console.log("Dinosaurs:", response.data);
+      self.setState({
+        dinosaurs: response.data
+      }, function(){self.populateDropdown()})
+    })
   }
 
   _renderItem = ({ item }) => (
