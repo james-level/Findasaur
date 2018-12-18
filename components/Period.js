@@ -31,6 +31,8 @@ export default class Period extends Component {
 
 }
 
+
+
   eraImage(index){
 
 

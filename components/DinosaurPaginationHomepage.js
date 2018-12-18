@@ -24,7 +24,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Middle Triassic",
           color: '#000000',
           description: "247 to 237 million years ago",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -34,7 +36,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Late Triassic",
           color: '#000000',
           description: "Late Triassic",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -44,7 +48,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Early Jurassic",
           color: '#000000',
           description: "Early Jurassic",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -54,7 +60,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Middle Jurassic",
           color: '#000000',
           description: "Middle Jurassic",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -64,7 +72,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Late Jurassic",
           color: '#000000',
           description: "Late Jurassic",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -74,7 +84,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Early Cretaceous",
           color: '#000000',
           description: "Early Cretaceous",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
 
         {
@@ -84,7 +96,9 @@ export default class DinosaurPaginationHomepage extends Component {
           title: "Late Cretaceous",
           color: '#000000',
           description: "Late Cretaceous",
-          image: faker.internet.avatar()
+          image: faker.internet.avatar(),
+          earliest_date: 237,
+          latest_date: 247
         },
       ]
     };
@@ -98,6 +112,8 @@ export default class DinosaurPaginationHomepage extends Component {
     color={item.color}
     description={item.description}
     image={item.image}
+    earliest_date={item.earliest_date}
+    latest_date={item.latest_date}
   />);
 
   _keyExtractor = (item, index) => item.id.toString()
