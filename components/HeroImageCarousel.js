@@ -81,9 +81,13 @@ export default class HeroImageCarousel extends React.Component {
   }
 
   else {
+    
     return (
+
       <DinosaurPaginationHomepage
+
       />
+
     )
   }
   }

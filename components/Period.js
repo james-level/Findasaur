@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+
+import DropdownMenu from 'react-native-dropdown-menu';
+
 const darkColor = 'black',
       lightColor = 'white',
       // Import randomcolor from 'randomcolor';
@@ -28,6 +31,7 @@ export default class Period extends Component {
     super(props);
 
   this.state = {
+    text: null,
     fontLoaded: false,
     dinosaurs: null
   }
@@ -88,6 +92,9 @@ export default class Period extends Component {
 
 
   render() {
+
+
+    var data = [["Show all", "Carnivores", "Herbivores", "Omnivores"]];
 
     const {
       id,
@@ -151,12 +158,37 @@ export default class Period extends Component {
 
     </View>
 
-        <View>
+        <View style={{backgroundColor: 'black', height: '50%', justifyContent: 'center'}}>
 
           <Text style={s.bodyText}>
                 {description}
             </Text>
 
+            <Text style={s.filterText}>
+                  Filter dinosaurs by diet:
+              </Text>
+
+            <DropdownMenu
+                  style={{flex: 1}}
+                  bgColor={'white'}
+                  tintColor={'#666666'}
+                  activityTintColor={'green'}
+                  // arrowImg={}
+                  // checkImage={}
+                  // optionTextStyle={{color: '#333333'}}
+                  // titleStyle={{color: '#333333'}}
+                  // maxHeight={300}
+                  handler={(selection, row) => this.setState({text: data[selection][row]})}
+                  data={data}
+                >
+
+                  <View style={{flex: 1}}>
+                    <Text>
+
+                    </Text>
+                  </View>
+
+                </DropdownMenu>
 
           </View>
 
@@ -173,6 +205,7 @@ export default class Period extends Component {
                */
             }}
           >
+
               <Text style={[
               s.description,
               {
@@ -184,7 +217,10 @@ export default class Period extends Component {
 
             </Text>
           </TouchableHighlight>
+
+
           </View>
+
         </View>
     );
 }
@@ -196,6 +232,11 @@ export default class Period extends Component {
 const s = StyleSheet.create({
   bodyText: {
     fontSize: 16,
+    color: 'white'
+  },
+  filterText: {
+    fontWeight: 'bold',
+    fontSize: 18,
     color: 'white'
   },
   linearGradient: {
