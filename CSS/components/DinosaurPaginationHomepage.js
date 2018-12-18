@@ -8,7 +8,6 @@ import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
 
-
 const bonesIcon = require('../assets/app_icons/bones.png');
 
 

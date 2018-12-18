@@ -10,6 +10,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
+import MultiToggleSwitch from 'react-native-multi-toggle-switch';
+
 const darkColor = 'black',
       lightColor = 'white',
       // Import randomcolor from 'randomcolor';
@@ -28,11 +32,17 @@ export default class Period extends Component {
     super(props);
 
   this.state = {
+    text: null,
     fontLoaded: false,
-    dinosaurs: null
+    dinosaurs: null,
+    dietSelected: "herbivores"
   }
 
   this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
+  this.handleCarnivoreSelection = this.handleCarnivoreSelection.bind(this);
+  this.handleOmnivoreSelection = this.handleOmnivoreSelection.bind(this);
+  this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
+  this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
 
 }
 
@@ -84,6 +94,50 @@ export default class Period extends Component {
 
      this.setState({ fontLoaded: true });
 
+  }
+
+  handleHerbivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'herbivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleCarnivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'carnivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleOmnivoreSelection(){
+
+    this.setState({
+
+      dietSelected: 'omnivores'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
+  }
+
+  handleAllDietsSelection(){
+
+    this.setState({
+
+      dietSelected: 'all'
+
+    }, function(){
+      console.log("DIET CHOSEN", this.state.dietSelected);
+    });
   }
 
 
@@ -151,16 +205,37 @@ export default class Period extends Component {
 
     </View>
 
-        <View>
+        <View style={{backgroundColor: 'black'}}>
 
           <Text style={s.bodyText}>
                 {description}
             </Text>
 
+            <Text style={s.filterText}>
+                  Filter dinosaurs by diet:
+              </Text>
+
+              <MultiToggleSwitch>
+  <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
+      <Icon name={'flower'} size={30} />
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item onPress={this.handleCarnivoreSelection} primaryColor={'#CF4647'}>
+      <Icon name={'pig'} size={30} />
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item onPress={this.handleOmnivoreSelection}>
+      <Icon name={'food'} size={30}/>
+  </MultiToggleSwitch.Item>
+  <MultiToggleSwitch.Item onPress={this.handleAllDietsSelection} primaryColor={'orange'}>
+      <Icon name={'all-inclusive'} size={30} />
+  </MultiToggleSwitch.Item>
+</MultiToggleSwitch>
+
+  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>FIND DINOS</AwesomeButtonRick>
 
           </View>
 
         <View style={s.reactionBox}>
+
               <TouchableHighlight
             underlayColor="transparent"
             onPress={() => {
@@ -173,6 +248,7 @@ export default class Period extends Component {
                */
             }}
           >
+
               <Text style={[
               s.description,
               {
@@ -183,8 +259,13 @@ export default class Period extends Component {
             >
 
             </Text>
+
           </TouchableHighlight>
+
+
+
           </View>
+
         </View>
     );
 }
@@ -196,6 +277,11 @@ export default class Period extends Component {
 const s = StyleSheet.create({
   bodyText: {
     fontSize: 16,
+    color: 'white'
+  },
+  filterText: {
+    fontWeight: 'bold',
+    fontSize: 18,
     color: 'white'
   },
   linearGradient: {
