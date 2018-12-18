@@ -12,10 +12,15 @@ const bonesIcon = require('../assets/app_icons/bones.png');
 
 
 export default class DinosaurPaginationHomepage extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       dinosaurs: null,
+      diets: null,
+      herbivores: null,
+      carnivores: null,
+      omnivores: null,
       // List of periods
       items: [
 
@@ -116,6 +121,10 @@ export default class DinosaurPaginationHomepage extends Component {
 
   populateDropdown(){
     console.log("Populating dropdown with dinosaurs...", this.state.dinosaurs);
+    console.log("DIETS", this.state.diets);
+    console.log("CARNIVORES", this.state.carnivores);
+    console.log("HERBIVORES", this.state.herbivores);
+    console.log("OMNIVORES", this.state.omnivores);
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
@@ -126,11 +135,14 @@ export default class DinosaurPaginationHomepage extends Component {
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
     axios.get(url).then((response) => {
-      console.log("Dinosaurs:", response.data.records);
 
       self.setState({
 
-        dinosaurs: self.filterByGenusName(self.filterDinosaurData(response.data.records))
+        dinosaurs: self.filterByGenusName(self.filterDinosaurData(response.data.records)),
+        diets: self.getUniqueDiets(self.filterByGenusName(self.filterDinosaurData(response.data.records))),
+        herbivores: self.getDinosaursByDiet('herbivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
+        carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
+        omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
       }, function(){self.populateDropdown()})
     })
@@ -179,6 +191,26 @@ export default class DinosaurPaginationHomepage extends Component {
 
       return filteredDinosaurs;
   }
+
+  getUniqueDiets(dinosaurs) {
+    const filteredDiets = dinosaurs.reduce((uniqueDiets, dinosaur, index) => {
+      const dietIsUnique = !uniqueDiets.some((uniqueDiet) => {
+        return uniqueDiet === dinosaur.diet;
+      })
+
+      if (dietIsUnique) {
+        uniqueDiets.push(dinosaur.diet)
+      }
+      return uniqueDiets
+    }, []);
+    return filteredDiets;
+  }
+
+
+  getDinosaursByDiet(dietSelected, dinosaurs) {
+    return dinosaurs.filter(dinosaur => dinosaur.diet === dietSelected);
+  };
+
 
   _renderItem = ({ item }) => (
     <Period
