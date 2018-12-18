@@ -211,7 +211,6 @@ export default class DinosaurPaginationHomepage extends Component {
     return dinosaurs.filter(dinosaur => dinosaur.diet === dietSelected);
   };
 
-
   _renderItem = ({ item }) => (
     <Period
     onPressItem={this._onPressItem}
