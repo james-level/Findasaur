@@ -181,7 +181,7 @@ export default class Period extends Component {
   </MultiToggleSwitch.Item>
 </MultiToggleSwitch>
 
-  <AwesomeButtonRick style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
+  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.handleButtonClick}>FIND DINOS</AwesomeButtonRick>
 
           </View>
 
