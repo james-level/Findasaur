@@ -3,7 +3,6 @@ import { Font } from 'expo';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import MultiToggleSwitch from 'react-native-multi-toggle-switch';
-import PaginatedHomepage from './PaginatedHomepage.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -150,11 +149,16 @@ export default class TimePeriodPage extends Component {
       <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
     ) : null
     }
+    {
+      this.state.fontLoaded ? (
+    <Text style={[TimePeriodStyle.eraDescriptionText, {fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
+    ) : null
+  }
       </View>
 
-      <View>
+      <View style={TimePeriodStyle.dinoSearchButton}>
 
-      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>Find dinos</AwesomeButtonRick>
+      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>See dinosaurs</AwesomeButtonRick>
 
       </View>
     </View>

@@ -15,7 +15,9 @@ import { MockRobotsList } from './FakerMocks';
 import Pagination from 'react-native-pagination';
 const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
-export default class PaginatedHomepage extends Component {
+
+export default class DinoListView extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {

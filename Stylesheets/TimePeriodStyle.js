@@ -52,7 +52,16 @@ const TimePeriodStyle = StyleSheet.create({
     textShadowColor: 'black',
     textShadowOffset: {width: -5, height: 5},
     textShadowRadius: 25
-  }
+  },
+  eraDescriptionText: {
+    color: 'white',
+    fontSize: 20
+  },
+  dinoSearchButton: {
+    marginTop: '25%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });
 
 export default TimePeriodStyle;
