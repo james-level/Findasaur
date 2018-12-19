@@ -61,7 +61,7 @@ export default class TimePeriodPage extends Component {
 
     switch(index) {
 
-    case 0: return require("../assets/era_images/late_triassic.png");
+    case 0: return require("../assets/era_images/middle_triassic2.png");
     case 1: return require("../assets/era_images/middle_triassic.png");
     case 2: return require("../assets/era_images/early_jurassic.png");
     case 3: return require("../assets/era_images/mid_jurassic.png");
@@ -153,6 +153,8 @@ export default class TimePeriodPage extends Component {
       </View>
 
       <View>
+
+      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>Find dinos</AwesomeButtonRick>
 
       </View>
     </View>
