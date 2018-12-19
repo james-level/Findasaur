@@ -40,10 +40,10 @@ export default class ChooseTimePeriod extends Component {
           key: 1,
           title: "Late Triassic",
           color: '#000000',
-          description: "Late Triassic",
+          description: "237 to 201 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 201,
+          latest_date: 237
         },
 
         {
@@ -52,10 +52,10 @@ export default class ChooseTimePeriod extends Component {
           key: 2,
           title: "Early Jurassic",
           color: '#000000',
-          description: "Early Jurassic",
+          description: "174 to 201 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 174,
+          latest_date: 201
         },
 
         {
@@ -64,10 +64,10 @@ export default class ChooseTimePeriod extends Component {
           key: 3,
           title: "Middle Jurassic",
           color: '#000000',
-          description: "Middle Jurassic",
+          description: "163 to 174 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 163,
+          latest_date: 174
         },
 
         {
@@ -76,10 +76,10 @@ export default class ChooseTimePeriod extends Component {
           key: 4,
           title: "Late Jurassic",
           color: '#000000',
-          description: "Late Jurassic",
+          description: "145 to 163 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 145,
+          latest_date: 163
         },
 
         {
@@ -88,10 +88,10 @@ export default class ChooseTimePeriod extends Component {
           key: 5,
           title: "Early Cretaceous",
           color: '#000000',
-          description: "Early Cretaceous",
+          description: "100 to 145 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 100,
+          latest_date: 145
         },
 
         {
@@ -100,10 +100,10 @@ export default class ChooseTimePeriod extends Component {
           key: 6,
           title: "Late Cretaceous",
           color: '#000000',
-          description: "Late Cretaceous",
+          description: "66 to 100 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 66,
+          latest_date: 100
         },
       ]
     };

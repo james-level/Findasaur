@@ -149,7 +149,11 @@ export default class TimePeriodPage extends Component {
       <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
     ) : null
     }
-    <Text style={TimePeriodStyle.eraDescriptionText}>{description}</Text>
+    {
+      this.state.fontLoaded ? (
+    <Text style={[TimePeriodStyle.eraDescriptionText, {fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
+    ) : null
+  }
       </View>
 
       <View style={TimePeriodStyle.dinoSearchButton}>

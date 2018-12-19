@@ -58,7 +58,7 @@ const TimePeriodStyle = StyleSheet.create({
     fontSize: 20
   },
   dinoSearchButton: {
-    marginTop: '30%',
+    marginTop: '25%',
     justifyContent: 'center',
     alignItems: 'center'
   },
