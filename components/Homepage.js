@@ -11,10 +11,23 @@ export default class Homepage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonClicked: false
+      buttonClicked: false,
+      fontLoaded: false
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  async componentDidMount() {
+
+    await Font.loadAsync({
+
+      'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
+
+    });
+
+     this.setState({ fontLoaded: true });
+
   }
 
   handleButtonClick(){
@@ -73,7 +86,7 @@ export default class Homepage extends React.Component {
           )}
         />
         <View style={HomepageStyle.content2}>
-            <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
+            <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE ERAS</AwesomeButtonRick>
         </View>
       </SafeAreaView>
     );
