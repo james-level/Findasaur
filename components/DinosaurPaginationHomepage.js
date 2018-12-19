@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Alert, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
 import TimePeriodPage from './TimePeriodPage';
+import {Platform} from 'react-native';
 import NavBarAndroidLight from './NavBarAndroidLight'
+import NavBarIOSLight from './NavBarIOSLight'
 import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
@@ -242,10 +244,12 @@ export default class DinosaurPaginationHomepage extends Component {
 
     if (this.state.searchButtonClicked === false){
 
+      const NavBar = Platform.OS === 'ios' ? NavBarIOSLight : NavBarAndroidLight
+
     return (
 
       <View style={[ s.container ]}>
-        <NavBarAndroidLight home={this.props.home}/>
+        <NavBar home={this.props.home}/>
         <FlatList
             ref={r => this.refs = r}
             data={this.state.items}
