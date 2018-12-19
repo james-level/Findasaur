@@ -32,11 +32,10 @@ const TimePeriodStyle = StyleSheet.create({
     color: '#ffffff',
     backgroundColor: 'transparent'
   },
-  // -------
   profilePicture: {
     width: "100%",
-    height: 224.9,
-    backgroundColor: 'black'
+    height: 295,
+    backgroundColor: 'black',
   },
   displayName: {
     fontFamily: 'FrederickatheGreat-Regular',
@@ -50,7 +49,7 @@ const TimePeriodStyle = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
     position: 'absolute',
-    top: '30%',
+    top: '35%',
     textShadowColor: 'black',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10
