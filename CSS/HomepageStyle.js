@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 
-const homeImageCarouselStyle = StyleSheet.create({
+const HomepageStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2A2A2A',
@@ -52,10 +52,6 @@ const homeImageCarouselStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonSelected: {
-    opacity: 1,
-    color: 'limegreen',
-  },
   customSlide: {
     backgroundColor: '#2A2A2A',
     alignItems: 'center',
@@ -67,4 +63,4 @@ const homeImageCarouselStyle = StyleSheet.create({
   },
 });
 
-export default homeImageCarouselStyle;
+export default HomepageStyle;

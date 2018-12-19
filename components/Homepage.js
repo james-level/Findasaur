@@ -3,10 +3,10 @@ import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/ric
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import HomeImageCarouselStyle from '../CSS/HomeImageCarousel.js';
+import HomepageStyle from '../CSS/HomepageStyle.js';
 import DinosaurPaginationHomepage from './DinosaurPaginationHomepage.js';
 
-export default class HeroImageCarousel extends React.Component {
+export default class Homepage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -18,7 +18,6 @@ export default class HeroImageCarousel extends React.Component {
   }
 
   handleButtonClick(){
-    console.log("HELLO");
     this.setState({
       buttonClicked: !this.state.buttonClicked
     })
@@ -40,9 +39,9 @@ export default class HeroImageCarousel extends React.Component {
 
     return (
 
-      <SafeAreaView style={HomeImageCarouselStyle.container}>
-        <View style={HomeImageCarouselStyle.content1}>
-          <Text style={HomeImageCarouselStyle.contentText}>Find-a-Dino</Text>
+      <SafeAreaView style={HomepageStyle.container}>
+        <View style={HomepageStyle.content1}>
+          <Text style={HomepageStyle.contentText}>Findasaur</Text>
         </View>
         <ImageSlider
           loopBothSides
@@ -50,22 +49,22 @@ export default class HeroImageCarousel extends React.Component {
           images={images}
           customSlide={({ index, item, style, width }) => (
             // It's important to put style here because it's got offset inside
-            <View key={index} style={[style, HomeImageCarouselStyle.customSlide]}>
-              <Image source={{ uri: item }} style={HomeImageCarouselStyle.customImage} />
+            <View key={index} style={[style, HomepageStyle.customSlide]}>
+              <Image source={{ uri: item }} style={HomepageStyle.customImage} />
             </View>
           )}
           customButtons={(position, move) => (
-            <View style={HomeImageCarouselStyle.buttons}>
+            <View style={HomepageStyle.buttons}>
               {images.map((image, index) => {
                 return (
                   <TouchableHighlight
                     key={index}
                     underlayColor="white"
                     onPress={() => move(index)}
-                    style={HomeImageCarouselStyle.button}
+                    style={HomepageStyle.button}
                   >
-                    <Text style={position === index && HomeImageCarouselStyle.buttonSelected}>
-                      {index + 1}
+                    <Text>
+
                     </Text>
                   </TouchableHighlight>
                 );
@@ -73,7 +72,7 @@ export default class HeroImageCarousel extends React.Component {
             </View>
           )}
         />
-        <View style={HomeImageCarouselStyle.content2}>
+        <View style={HomepageStyle.content2}>
             <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE BY PERIOD</AwesomeButtonRick>
         </View>
       </SafeAreaView>

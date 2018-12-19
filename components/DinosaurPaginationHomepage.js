@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
 import Period from './Period';
 import NavBarAndroidLight from './NavBarAndroidLight'
@@ -118,6 +118,11 @@ export default class DinosaurPaginationHomepage extends Component {
   }
 
   componentDidMount(){
+
+    // Alert.alert(
+    //        'Swipe to move between time periods!'
+    //     )
+
     this.getDinosaursForPeriod(237, 247);
   }
 
