@@ -95,7 +95,7 @@ export default class DinoListView extends Component {
           />
           <Text
             style={[
-              s.name,
+              s.name2,
               this.state.activeId === o.item.id
                 ? { color: '#01a699' }
                 : { color: '#ff5b5f' }
@@ -358,6 +358,18 @@ const s = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600'
   },
+  name2: {
+    position: 'absolute',
+    bottom: -14,
+    left: 0,
+    right: 0,
+    backgroundColor: 'black',
+    fontSize: 12,
+    width: 150,
+    textAlign: 'center',
+    fontWeight: '600',
+    marginBottom: 20
+  },
   trashButton: {
     position: 'absolute',
     backgroundColor: '#ff5b5f',
@@ -371,8 +383,9 @@ const s = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   image: {
-    width: 96,
-    height: 96,
-    borderRadius: 48
+    width: 150,
+    height: 150,
+    borderRadius: 25,
+    marginBottom: 30
   }
 });
