@@ -20,9 +20,7 @@ export default class DinosaurPaginationHomepage extends Component {
       carnivores: null,
       omnivores: null,
       searchButtonClicked: false,
-      // List of periods
       items: [
-
 
         {
           id: 0,
@@ -142,7 +140,7 @@ export default class DinosaurPaginationHomepage extends Component {
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
-    console.log("HHHHHHHH");
+
     var self = this;
 
     // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
@@ -265,18 +263,18 @@ export default class DinosaurPaginationHomepage extends Component {
             pagingEnabled
           startDotIconFamily="Ionicons"
           startDotIconName="ios-arrow-back"
-          startDotIconColor="#00e500"
+          startDotIconColor="#66CD00"
           startDotIconSize={30}
           endDotIconSize={30}
           endDotIconFamily="Ionicons"
           endDotIconName="ios-arrow-forward"
-          endDotIconColor="#00e500"
+          endDotIconColor="#66CD00"
           dotIconName="ios-close"
             hideEmptyDots
 
           dotEmptyHide
-          dotIconColorActive="#00e500"
-          dotIconColorNotActive="#00e500"
+          dotIconColorActive="#66CD00"
+          dotIconColorNotActive="#66CD00"
           // DotIconColorEmpty={"blue"}
           dotIconSizeActive={15}
           /*

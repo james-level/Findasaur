@@ -140,43 +140,18 @@ export default class TimePeriodPage extends Component {
     borderRadius: 0
       }}
   >
-    <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center' }}>
+    <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center'}}>
       <Image
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
       />
       <Text style={TimePeriodStyle.eraTitle}>{title}</Text>
-    </View>
-
-        <View style={{backgroundColor: 'black'}}>
-          <Text style={TimePeriodStyle.bodyText}>
-                {description}
-            </Text>
-            <Text style={TimePeriodStyle.filterText}>
-                  Filter dinosaurs by diet:
-              </Text>
-              <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
-          </View>
-
-        <View style={TimePeriodStyle.reactionBox}>
-              <TouchableHighlight
-            underlayColor="transparent"
-            onPress={() => {
-              LayoutAnimation.easeInEaseOut();
-            }}
-          >
-              <Text style={[
-              TimePeriodStyle.description,
-              {
-                textShadowColor: darkColor
-              },
-              { color: darkColor }
-            ]}
-            >
-            </Text>
-          </TouchableHighlight>
-        </View>
       </View>
+
+      <View>
+
+      </View>
+    </View>
     );
   }
   }
