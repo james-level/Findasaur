@@ -23,7 +23,7 @@ export default class Homepage extends React.Component {
 
     await Font.loadAsync({
 
-      'MajorMonoDisplay-Regular': require('../assets/fonts/MajorMonoDisplay-Regular.ttf'),
+      'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
 
     });
 
@@ -62,12 +62,12 @@ export default class Homepage extends React.Component {
 
             this.state.fontLoaded ? (
 
-          <Text style= {[HomepageStyle.contentText,{ fontFamily: 'MajorMonoDisplay-Regular'}]}>Findasaur</Text>
+          <Text style= {[HomepageStyle.contentText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
 
         ) : null
 
       }
-      
+
         </View>
         <ImageSlider
           loopBothSides
@@ -99,7 +99,15 @@ export default class Homepage extends React.Component {
           )}
         />
         <View style={HomepageStyle.content2}>
-            <AwesomeButtonRick type="anchor" onPress={this.handleButtonClick}>EXPLORE ERAS</AwesomeButtonRick>
+
+        {
+
+            this.state.fontLoaded ? (
+            <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.handleButtonClick}>Explore</AwesomeButtonRick>
+
+          ) : null
+        }
+
         </View>
       </SafeAreaView>
     );
