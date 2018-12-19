@@ -30,7 +30,9 @@ export default class DinoListView extends Component {
 
   populateDinosaurs(dinosaurs){
 
-    new _.times(dinosaurs.length, (i) => ({
+    console.log("DINO LENGTH", dinosaurs.length);
+
+    return new _.times(dinosaurs.length, (i) => ({
       id: i,
       index: i,
       key: i,
@@ -44,7 +46,6 @@ export default class DinoListView extends Component {
       ]),
       email: 'Ha',
       locations: dinosaurs[i].coords
-
   }))
 }
 
@@ -193,6 +194,7 @@ export default class DinoListView extends Component {
                   )}?size=350x350&set=set1`
                 }}
               />
+              <Text> {this.state.activeItem.name} </Text>
               <Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>
