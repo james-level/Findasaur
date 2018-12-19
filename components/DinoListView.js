@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {ImageBackground} from 'react-native';
+import FitImage from 'react-native-fit-image'
 import {
   Dimensions,
   FlatList,
@@ -14,6 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 import { MockRobotsList } from './FakerMocks';
 import Pagination from 'react-native-pagination';
+import AutoHeightImage from 'react-native-auto-height-image';
 const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
 
@@ -87,9 +89,10 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black' }
           ]}
         >
-        <ImageBackground source={{
-          uri: `https://upload.wikimedia.org/wikipedia/commons/b/b0/Cetiosaurus_mount.jpg`
-        }} resizeMode='cover' style={s.image}/>
+        <AutoHeightImage
+     width={150}
+     source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
+     />
 
 
           <Text
@@ -156,6 +159,8 @@ export default class DinoListView extends Component {
     );
     return (
       <View style={[s.container]}>
+
+
         <View style={s.innerContainer}>
           {!this.state.activeItem && (
             <View
@@ -184,17 +189,10 @@ export default class DinoListView extends Component {
               onPress={() => this.setItemAsActive(this.state.activeItem)}
               style={[s.renderItem, s.activeItem]}
             >
-              <Image
-                resizeMode="center"
-                style={s.image}
-                source={{
-                  uri: `https://robohash.org/${_.get(
-                    this.state.activeItem,
-                    'name',
-                    'default'
-                  )}?size=350x350&set=set1`
-                }}
-              />
+            <AutoHeightImage
+         width={300}
+         source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
+         />
               <Text> {this.state.activeItem.name} </Text>
               <Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
@@ -202,16 +200,7 @@ export default class DinoListView extends Component {
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity
-            onPress={() => this.clearList()}
-            style={s.trashButton}
-          >
-            <Ionicons
-              name={'ios-trash-outline'}
-              size={25}
-              color="rgba(0,0,0,0.5)"
-            />
-          </TouchableOpacity>
+
         </View>
 
         <View style={{ flex: 1, height, width }}>
@@ -318,7 +307,9 @@ const s = StyleSheet.create({
     width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#01a699'
+    backgroundColor: 'limegreen',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   },
   text: {
     fontWeight: '600',
@@ -327,11 +318,7 @@ const s = StyleSheet.create({
     textAlign: 'center'
   },
   renderItem: {
-    // width: ITEM_HEIGHT,
-    borderColor: 'rgba(0,0,0,.3)',
-    shadowColor: 'rgba(0,0,0,.3)',
-    // height: ITEM_HEIGHT,
-    // margin: 10,
+
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -344,7 +331,6 @@ const s = StyleSheet.create({
     shadowOpacity: 0.8
   },
   activeItem: {
-    borderColor: 'rgba(255,255,255,1)',
     backgroundColor: '#f5fcff',
     shadowColor: 'rgba(255,255,255,1)'
   },
@@ -386,7 +372,17 @@ const s = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
-    
+  },
+  activeImage: {
+    width: 200,
+    height: 200
+  },
+  fitImage: {
+    borderRadius: 20,
+  },
+  fitImageWithSize: {
 
+    width: 150,
+    height: 150
   }
 });
