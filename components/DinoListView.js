@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {ImageBackground} from 'react-native';
 import {
   Dimensions,
   FlatList,
@@ -82,27 +83,27 @@ export default class DinoListView extends Component {
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: '#01a699' }
-              : { backgroundColor: '#ff5b5f' }
+              ? { backgroundColor: 'limegreen' }
+              : { backgroundColor: 'black' }
           ]}
         >
-          <Image
-            resizeMode="center"
-            style={s.image}
-            source={{
-              uri: `https://robohash.org/${o.item.name}?size=350x350&set=set1`
-            }}
-          />
+        <ImageBackground source={{
+          uri: `https://upload.wikimedia.org/wikipedia/commons/b/b0/Cetiosaurus_mount.jpg`
+        }} resizeMode='cover' style={s.image}/>
+
+
           <Text
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? { color: '#01a699' }
-                : { color: '#ff5b5f' }
+                ? { color: 'limegreen' }
+                : { color: '#ffffff' }
             ]}
           >
+
             {o.item.name ? o.item.name : 'no name attribute'}
           </Text>
+
         </TouchableOpacity>
       </View>
     );
@@ -309,7 +310,7 @@ const s = StyleSheet.create({
     width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: 'black'
   },
   innerContainer: {
     flex: 1,
@@ -333,7 +334,7 @@ const s = StyleSheet.create({
     // margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: 5,
     borderWidth: 3,
     shadowOffset: {
       width: 3,
@@ -385,7 +386,7 @@ const s = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
-    borderRadius: 25,
+    
 
   }
 });
