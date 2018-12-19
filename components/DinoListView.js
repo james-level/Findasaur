@@ -17,24 +17,44 @@ const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
 
 export default class DinoListView extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
       activeId: null,
       activeItem: null,
-      items: MockRobotsList
+      items: this.populateDinosaurs(this.props.allDinosaurs)
     };
   }
+
+  populateDinosaurs(dinosaurs){
+
+    console.log("DINO LENGTH", dinosaurs.length);
+
+    return new _.times(dinosaurs.length, (i) => ({
+      id: i,
+      index: i,
+      key: i,
+      name: dinosaurs[i].name,
+      avatar: '',
+      group: _.sample([
+        'Work',
+        'Friend',
+        'Acquaintance',
+        'Other'
+      ]),
+      email: 'Ha',
+      locations: dinosaurs[i].coords
+  }))
+}
 
   getFlatListItems = () => {
     this.setState({ isLoading: true });
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     setTimeout(() => {
       this.setState({
-        isLoading: false,
-        items: MockRobotsList
+        isLoading: false
       });
     }, 2000);
   };
@@ -81,7 +101,7 @@ export default class DinoListView extends Component {
                 : { color: '#ff5b5f' }
             ]}
           >
-            {o.item.name ? o.item.name : 'no name attrabute'}
+            {o.item.name ? o.item.name : 'no name attribute'}
           </Text>
         </TouchableOpacity>
       </View>
@@ -99,6 +119,7 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
+    console.log("ITEMS", this.state.items);
     const ListEmptyComponent = () => (
       <View
         style={{
@@ -173,6 +194,7 @@ export default class DinoListView extends Component {
                   )}?size=350x350&set=set1`
                 }}
               />
+              <Text> {this.state.activeItem.name} </Text>
               <Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>

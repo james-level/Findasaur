@@ -157,10 +157,9 @@ export default class TimePeriodPage extends Component {
       </View>
 
       <View style={TimePeriodStyle.dinoSearchButton}>
-
       <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>See dinosaurs</AwesomeButtonRick>
-
       </View>
+      
     </View>
     );
   }
