@@ -149,11 +149,12 @@ export default class TimePeriodPage extends Component {
       <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
     ) : null
     }
+    <Text style={TimePeriodStyle.eraDescriptionText}>{description}</Text>
       </View>
 
-      <View>
+      <View style={TimePeriodStyle.dinoSearchButton}>
 
-      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>Find dinos</AwesomeButtonRick>
+      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>See dinosaurs</AwesomeButtonRick>
 
       </View>
     </View>
