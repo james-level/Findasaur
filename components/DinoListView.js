@@ -386,6 +386,6 @@ const s = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 25,
-    marginBottom: 30
+
   }
 });
