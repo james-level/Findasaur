@@ -293,10 +293,8 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView />
-
+          <DinoListView allDinosaurs={this.state.dinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
-
       }
   }
 }
