@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { Alert, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
-import Period from './Period';
+import TimePeriodPage from './TimePeriodPage';
 import NavBarAndroidLight from './NavBarAndroidLight'
 import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
 import PaginatedHomepage from './PaginatedHomepage.js';
-
-const bonesIcon = require('../assets/app_icons/bones.png');
-
 
 export default class DinosaurPaginationHomepage extends Component {
 
@@ -228,7 +225,7 @@ export default class DinosaurPaginationHomepage extends Component {
   };
 
   _renderItem = ({ item }) => (
-    <Period
+    <TimePeriodPage
     handleSearchSubmit={this.handleSearchSubmit}
     onPressItem={this._onPressItem}
     id={item.id}

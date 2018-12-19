@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
 import { Font } from 'expo';
-import {
-  Dimensions,
-  Image,
-  LayoutAnimation,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View
-} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import MultiToggleSwitch from 'react-native-multi-toggle-switch';
 import PaginatedHomepage from './PaginatedHomepage.js';
-
-const darkColor = 'black',
-      lightColor = 'white',
-      // Import randomcolor from 'randomcolor';
-      { width, height } = Dimensions.get('window');
+import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-
 import axios from 'axios';
+import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 
-const bonesIcon = require('../assets/app_icons/bones.png');
+const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
 
-export default class Period extends Component {
+
+export default class TimePeriodPage extends Component {
 
   constructor(props) {
 
-    super(props);
+  super(props);
 
   this.state = {
     text: null,
@@ -46,11 +33,9 @@ export default class Period extends Component {
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
   this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-
 }
 
   componentDidMount(){
-    console.log("HHHII");
     this.getDinosaursForPeriod(237, 247);
   }
 
@@ -59,7 +44,7 @@ export default class Period extends Component {
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
-    console.log("HHHHHHHH");
+
     var self = this;
 
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
@@ -74,8 +59,6 @@ export default class Period extends Component {
 
   eraImage(index){
 
-    console.log(index);
-
     switch(index) {
 
     case 0: return require("../assets/era_images/middle_triassic.png");
@@ -85,74 +68,52 @@ export default class Period extends Component {
     case 4: return require("../assets/era_images/late_jurassic.png");
     case 5: return require("../assets/era_images/early_cretaceous.png");
     case 6: return require("../assets/era_images/late_cretaceous.png");
-
   }
   }
 
   async componentDidMount() {
-
     await Font.loadAsync({
-
       'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
-
     });
-
      this.setState({ fontLoaded: true });
-
   }
 
   handleHerbivoreSelection(){
-
     this.setState({
-
       dietSelected: 'herbivores'
-
     }, function(){
       console.log("DIET CHOSEN", this.state.dietSelected);
     });
   }
 
   handleCarnivoreSelection(){
-
     this.setState({
-
       dietSelected: 'carnivores'
-
     }, function(){
       console.log("DIET CHOSEN", this.state.dietSelected);
     });
   }
 
   handleOmnivoreSelection(){
-
     this.setState({
-
       dietSelected: 'omnivores'
-
     }, function(){
       console.log("DIET CHOSEN", this.state.dietSelected);
     });
   }
 
   handleAllDietsSelection(){
-
     this.setState({
-
       dietSelected: 'all'
-
     }, function(){
       console.log("DIET CHOSEN", this.state.dietSelected);
     });
   }
 
   handleSearchSubmit(){
-
     this.setState({
-
       searchButtonClicked: true
-
     })
-
   }
 
   render() {
@@ -168,17 +129,14 @@ export default class Period extends Component {
       description,
       image
     } = this.props;
-    // Console.warn(" image: ",image);
 
     return (
 
       <View style={{
         flex: 1,
-        // MarginTop:40,
         backgroundColor: color,
         opacity: 1,
         width,
-        // Margin:5,
         borderRadius: 0
       }}
         >
@@ -186,18 +144,14 @@ export default class Period extends Component {
           marginTop: 35,
           flexDirection: 'column' }}
         >
-      {/*    <Image
-                  style={s.profilePicture}
-                  source={require('../assets/app_icons/bones.png') }
-                /> */}
                 <Image
-                            style={s.profilePicture}
+                            style={TimePeriodStyle.profilePicture}
                             source={ this.eraImage(id) }
                           />
 
           <View style={[
             { height: 20 },
-            s.badgeSection
+            TimePeriodStyle.badgeSection
           ]}
                 >
 
@@ -210,7 +164,7 @@ export default class Period extends Component {
 
         <View>
         <Text style={[
-          s.displayName
+          TimePeriodStyle.displayName
         ]}  >   {title}
                 </Text>
         </View>
@@ -223,11 +177,11 @@ export default class Period extends Component {
 
         <View style={{backgroundColor: 'black'}}>
 
-          <Text style={s.bodyText}>
+          <Text style={TimePeriodStyle.bodyText}>
                 {description}
             </Text>
 
-            <Text style={s.filterText}>
+            <Text style={TimePeriodStyle.filterText}>
                   Filter dinosaurs by diet:
               </Text>
 
@@ -250,23 +204,18 @@ export default class Period extends Component {
 
           </View>
 
-        <View style={s.reactionBox}>
+        <View style={TimePeriodStyle.reactionBox}>
 
               <TouchableHighlight
             underlayColor="transparent"
             onPress={() => {
               LayoutAnimation.easeInEaseOut();
 
-              /*
-               * This.setState({
-               * footerText: this.state.footerText + 1
-               * })
-               */
             }}
           >
 
               <Text style={[
-              s.description,
+              TimePeriodStyle.description,
               {
                 textShadowColor: darkColor
               },
@@ -288,71 +237,7 @@ export default class Period extends Component {
   }
   }
 
-// CSS for this period page
-
-
-const s = StyleSheet.create({
-  bodyText: {
-    fontSize: 16,
-    color: 'white'
-  },
-  filterText: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: 'white'
-  },
-  linearGradient: {
-    flex: 1,
-    borderRadius: 0
-  },
-  reactionBox: {
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  description: {
-    width: 0,
-    height: 0,
-    textAlign: 'center',
-    backgroundColor: 'transparent',
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent'
-  },
-  // -------
-  profilePicture: {
-    width: "100%",
-    height: 224.9,
-    backgroundColor: 'black'
-  },
-  displayName: {
-    fontFamily: 'FrederickatheGreat-Regular',
-    color: '#00e500',
-    marginTop: 22,
-    fontSize: 33,
-    marginBottom: 5
-  },
-  badgeSection: {
-    // Flex: 1,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    position: 'absolute',
-    marginRight: 10,
-    // MarginTop: 15,
-    justifyContent: 'center'
-  },
-  badgeText: {
-    textAlign: 'center',
-    fontSize: 10,
-    fontWeight: 'bold'
-  }
-});
-Period.propTypes = {
+TimePeriodPage.propTypes = {
   id: PropTypes.number,
   index: PropTypes.number,
   title: PropTypes.string,
@@ -362,13 +247,8 @@ Period.propTypes = {
   description: PropTypes.string,
   image: PropTypes.string
 };
-Period.DefaultProps = {
 
-  /*
-   * Title:PropTypes.string,
-   * image:PropTypes.string,
-   * tag:"",
-   */
+TimePeriodPage.DefaultProps = {
   selected: false,
   createTagColor: true
 };

@@ -4,7 +4,7 @@ import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
-import HomepageStyle from '../CSS/HomepageStyle.js';
+import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import DinosaurPaginationHomepage from './DinosaurPaginationHomepage.js';
 
 export default class Homepage extends React.Component {
