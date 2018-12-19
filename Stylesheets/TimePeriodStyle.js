@@ -45,20 +45,15 @@ const TimePeriodStyle = StyleSheet.create({
     fontSize: 33,
     marginBottom: 5
   },
-  badgeSection: {
-    // Flex: 1,
-    top: 0,
-    bottom: 0,
-    right: 0,
+  eraTitle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 40,
     position: 'absolute',
-    marginRight: 10,
-    // MarginTop: 15,
-    justifyContent: 'center'
-  },
-  badgeText: {
-    textAlign: 'center',
-    fontSize: 10,
-    fontWeight: 'bold'
+    top: '30%',
+    textShadowColor: 'black',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   }
 });
 

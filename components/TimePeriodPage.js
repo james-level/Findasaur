@@ -140,28 +140,12 @@ export default class TimePeriodPage extends Component {
     borderRadius: 0
       }}
   >
-    <View style={{
-      marginTop: 35,
-      flexDirection: 'column' }}
-    >
+    <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center' }}>
       <Image
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
       />
-      <View style={ [{ height: 20 }, TimePeriodStyle.badgeSection] }>
-      </View>
-    </View>
-
-      <View>
-      { this.state.fontLoaded ? (
-        <View>
-        <Text style={[
-          TimePeriodStyle.displayName
-        ]}  >   {title}
-                </Text>
-        </View>
-      ) : null
-    }
+      <Text style={TimePeriodStyle.eraTitle}>{title}</Text>
     </View>
 
         <View style={{backgroundColor: 'black'}}>
@@ -171,20 +155,6 @@ export default class TimePeriodPage extends Component {
             <Text style={TimePeriodStyle.filterText}>
                   Filter dinosaurs by diet:
               </Text>
-              <MultiToggleSwitch>
-                <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
-                    <Icon name={'flower'} size={30} />
-                </MultiToggleSwitch.Item>
-                <MultiToggleSwitch.Item onPress={this.handleCarnivoreSelection} primaryColor={'#CF4647'}>
-                    <Icon name={'pig'} size={30} />
-                </MultiToggleSwitch.Item>
-                <MultiToggleSwitch.Item onPress={this.handleOmnivoreSelection}>
-                    <Icon name={'food'} size={30}/>
-                </MultiToggleSwitch.Item>
-                <MultiToggleSwitch.Item onPress={this.handleAllDietsSelection} primaryColor={'orange'}>
-                    <Icon name={'all-inclusive'} size={30} />
-                </MultiToggleSwitch.Item>
-              </MultiToggleSwitch>
               <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
           </View>
 
