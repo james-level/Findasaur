@@ -132,59 +132,45 @@ export default class TimePeriodPage extends Component {
 
     return (
 
-      <View style={{
-        flex: 1,
-        backgroundColor: color,
-        opacity: 1,
-        width,
-        borderRadius: 0
+  <View style={{
+    flex: 1,
+    backgroundColor: color,
+    opacity: 1,
+    width,
+    borderRadius: 0
       }}
-        >
-            <View style={{
-          marginTop: 35,
-          flexDirection: 'column' }}
-        >
-                <Image
-                            style={TimePeriodStyle.profilePicture}
-                            source={ this.eraImage(id) }
-                          />
+  >
+    <View style={{
+      marginTop: 35,
+      flexDirection: 'column' }}
+    >
+      <Image
+        style={TimePeriodStyle.profilePicture}
+        source={ this.eraImage(id) }
+      />
+      <View style={ [{ height: 20 }, TimePeriodStyle.badgeSection] }>
+      </View>
+    </View>
 
-          <View style={[
-            { height: 20 },
-            TimePeriodStyle.badgeSection
-          ]}
-                >
-
-                </View>
-        </View>
-        <View>
-    {
-
-        this.state.fontLoaded ? (
-
+      <View>
+      { this.state.fontLoaded ? (
         <View>
         <Text style={[
           TimePeriodStyle.displayName
         ]}  >   {title}
                 </Text>
         </View>
-
       ) : null
-
     }
-
     </View>
 
         <View style={{backgroundColor: 'black'}}>
-
           <Text style={TimePeriodStyle.bodyText}>
                 {description}
             </Text>
-
             <Text style={TimePeriodStyle.filterText}>
                   Filter dinosaurs by diet:
               </Text>
-
               <MultiToggleSwitch>
                 <MultiToggleSwitch.Item primaryColor={'green'} onPress={this.handleHerbivoreSelection}>
                     <Icon name={'flower'} size={30} />
@@ -199,21 +185,16 @@ export default class TimePeriodPage extends Component {
                     <Icon name={'all-inclusive'} size={30} />
                 </MultiToggleSwitch.Item>
               </MultiToggleSwitch>
-
-  <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
-
+              <AwesomeButtonRick height={35} width={150} style={{marginTop: 20}} type="anchor" onPress={this.props.handleSearchSubmit}>FIND DINOS</AwesomeButtonRick>
           </View>
 
         <View style={TimePeriodStyle.reactionBox}>
-
               <TouchableHighlight
             underlayColor="transparent"
             onPress={() => {
               LayoutAnimation.easeInEaseOut();
-
             }}
           >
-
               <Text style={[
               TimePeriodStyle.description,
               {
@@ -222,18 +203,11 @@ export default class TimePeriodPage extends Component {
               { color: darkColor }
             ]}
             >
-
             </Text>
-
           </TouchableHighlight>
-
-
-
-          </View>
-
         </View>
+      </View>
     );
-
   }
   }
 
