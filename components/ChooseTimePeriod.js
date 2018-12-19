@@ -7,9 +7,9 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
-import PaginatedHomepage from './PaginatedHomepage.js';
+import DinoListView from './DinoListView.js';
 
-export default class DinosaurPaginationHomepage extends Component {
+export default class ChooseTimePeriod extends Component {
 
   constructor(props) {
     super(props);
@@ -293,7 +293,7 @@ export default class DinosaurPaginationHomepage extends Component {
 
         return (
 
-          <PaginatedHomepage />
+          <DinoListView />
 
         )
 

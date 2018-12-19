@@ -3,7 +3,6 @@ import { Font } from 'expo';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import MultiToggleSwitch from 'react-native-multi-toggle-switch';
-import PaginatedHomepage from './PaginatedHomepage.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';

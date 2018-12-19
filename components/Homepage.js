@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native'
 import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
-import DinosaurPaginationHomepage from './DinosaurPaginationHomepage.js';
+import ChooseTimePeriod from './ChooseTimePeriod.js';
 
 export default class Homepage extends React.Component {
 
@@ -116,7 +116,7 @@ export default class Homepage extends React.Component {
   else {
 
     return (
-      <DinosaurPaginationHomepage home={this.handleButtonClick}
+      <ChooseTimePeriod home={this.handleButtonClick}
       />
 
     )
