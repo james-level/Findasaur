@@ -153,6 +153,8 @@ export default class DinoListView extends Component {
         </TouchableOpacity>
       </View>
     );
+
+  
     return (
       <View style={[s.container]}>
         <View style={s.innerContainer}>

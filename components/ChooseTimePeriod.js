@@ -22,6 +22,7 @@ export default class ChooseTimePeriod extends Component {
       carnivores: null,
       omnivores: null,
       searchButtonClicked: false,
+      dinosaurImageUrls: null,
       items: [
 
         {
