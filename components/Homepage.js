@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../CSS/HomepageStyle.js';
 import DinosaurPaginationHomepage from './DinosaurPaginationHomepage.js';
@@ -22,7 +23,7 @@ export default class Homepage extends React.Component {
 
     await Font.loadAsync({
 
-      'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
+      'MajorMonoDisplay-Regular': require('../assets/fonts/MajorMonoDisplay-Regular.ttf'),
 
     });
 
@@ -52,9 +53,21 @@ export default class Homepage extends React.Component {
 
     return (
 
+
+
       <SafeAreaView style={HomepageStyle.container}>
         <View style={HomepageStyle.content1}>
-          <Text style={HomepageStyle.contentText}>Findasaur</Text>
+
+        {
+
+            this.state.fontLoaded ? (
+
+          <Text style= {[HomepageStyle.contentText,{ fontFamily: 'MajorMonoDisplay-Regular'}]}>Findasaur</Text>
+
+        ) : null
+
+      }
+      
         </View>
         <ImageSlider
           loopBothSides

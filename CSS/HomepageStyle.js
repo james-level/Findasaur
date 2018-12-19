@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const HomepageStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -13,16 +13,16 @@ const HomepageStyle = StyleSheet.create({
     width: '100%',
     height: 100,
     marginBottom: 10,
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },
   content2: {
     width: '100%',
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
     height: 100,
     marginBottom: 20,
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -33,7 +33,7 @@ const HomepageStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
 },
   buttons: {
     zIndex: 1,
@@ -53,7 +53,7 @@ const HomepageStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   customSlide: {
-    backgroundColor: '#2A2A2A',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },
