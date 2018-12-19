@@ -61,8 +61,8 @@ export default class TimePeriodPage extends Component {
 
     switch(index) {
 
-    case 0: return require("../assets/era_images/middle_triassic.png");
-    case 1: return require("../assets/era_images/late_triassic.png");
+    case 0: return require("../assets/era_images/late_triassic.png");
+    case 1: return require("../assets/era_images/middle_triassic.png");
     case 2: return require("../assets/era_images/early_jurassic.png");
     case 3: return require("../assets/era_images/mid_jurassic.png");
     case 4: return require("../assets/era_images/late_jurassic.png");
@@ -73,7 +73,7 @@ export default class TimePeriodPage extends Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'FrederickatheGreat-Regular': require('../assets/fonts/FrederickatheGreat-Regular.ttf'),
+      'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
     });
      this.setState({ fontLoaded: true });
   }
@@ -145,7 +145,11 @@ export default class TimePeriodPage extends Component {
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
       />
-      <Text style={TimePeriodStyle.eraTitle}>{title}</Text>
+      {
+        this.state.fontLoaded ? (
+      <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
+    ) : null
+    }
       </View>
 
       <View>

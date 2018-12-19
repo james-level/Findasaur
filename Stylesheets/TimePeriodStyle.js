@@ -46,13 +46,12 @@ const TimePeriodStyle = StyleSheet.create({
   },
   eraTitle: {
     color: 'white',
-    fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 45,
     position: 'absolute',
     top: '35%',
     textShadowColor: 'black',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
+    textShadowOffset: {width: -5, height: 5},
+    textShadowRadius: 25
   }
 });
 
