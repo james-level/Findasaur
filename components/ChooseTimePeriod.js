@@ -124,11 +124,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   populateDropdown(){
-    console.log("Populating dropdown with dinosaurs...", this.state.dinosaurs);
-    console.log("DIETS", this.state.diets);
-    console.log("CARNIVORES", this.state.carnivores);
-    console.log("HERBIVORES", this.state.herbivores);
-    console.log("OMNIVORES", this.state.omnivores);
+    console.log("Populating dropdown with dinosaurs...");
   }
 
   handleSearchSubmit(){
@@ -158,7 +154,7 @@ export default class ChooseTimePeriod extends Component {
         carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
-      }, function(){self.populateDropdown()})
+      }, )
     })
     console.log(self.state)
   }
@@ -227,6 +223,7 @@ export default class ChooseTimePeriod extends Component {
 
   _renderItem = ({ item }) => (
     <TimePeriodPage
+    getDinosaursForPeriod={this.getDinosaursForPeriod}
     handleSearchSubmit={this.handleSearchSubmit}
     onPressItem={this._onPressItem}
     id={item.id}
@@ -303,6 +300,7 @@ export default class ChooseTimePeriod extends Component {
       }
   }
 }
+
 const s = StyleSheet.create({
   container: {
     flex: 1,

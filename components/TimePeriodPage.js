@@ -34,10 +34,6 @@ export default class TimePeriodPage extends Component {
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 }
 
-  componentDidMount(){
-    this.getDinosaursForPeriod(237, 247);
-  }
-
   populateDropdown(){
     console.log("Populating dropdown with dinosaurs...");
   }
@@ -49,7 +45,7 @@ export default class TimePeriodPage extends Component {
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
     axios.get(url).then((response) => {
-      console.log("Dinosaurs:", response.data);
+
       self.setState({
         dinosaurs: response.data
       }, function(){this.populateDropdown()})
@@ -74,7 +70,9 @@ export default class TimePeriodPage extends Component {
     await Font.loadAsync({
       'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
     });
-     this.setState({ fontLoaded: true });
+     this.setState({ fontLoaded: true }, function(){
+       this.props.getDinosaursForPeriod(this.props.earliest_date, this.props.latest_date);
+     });
   }
 
   handleHerbivoreSelection(){
