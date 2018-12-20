@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
 import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
@@ -56,6 +56,11 @@ export default class Homepage extends React.Component {
     return (
 
       <SafeAreaView style={HomepageStyle.container}>
+
+        <ImageBackground
+          source={require('./assets/Dino_images/foliage.png')}
+          style={styles.backgroundStyle}
+        >
 
         <View style={HomepageStyle.content1}>
         {
@@ -119,7 +124,7 @@ export default class Homepage extends React.Component {
               Alert.alert('Modal has been closed.');
             }}>
             <View>
- 
+
             <View style={HomepageStyle.infoModal}>
 
                 <ScrollView>
@@ -155,7 +160,7 @@ export default class Homepage extends React.Component {
             </TouchableHighlight>
           </View>
 
-
+        </ImageBackground>
       </SafeAreaView>
 
     );
