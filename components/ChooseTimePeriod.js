@@ -160,6 +160,7 @@ export default class ChooseTimePeriod extends Component {
 
       }, function(){self.populateDropdown()})
     })
+    console.log(self.state)
   }
 
  filterDinosaurData(dinosaurs) {
