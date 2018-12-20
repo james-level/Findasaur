@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 const HomepageStyle = StyleSheet.create({
   container: {
@@ -6,8 +6,10 @@ const HomepageStyle = StyleSheet.create({
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
+    height: '100%',
   },
-  slider: { backgroundColor: '#FF0033', height: 350 },
+
   content1: {
     width: '100%',
     height: 100,
@@ -32,7 +34,7 @@ const HomepageStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
 },
   buttons: {
     zIndex: 1,
@@ -61,7 +63,7 @@ const HomepageStyle = StyleSheet.create({
     height: 250,
   },
   infoModal:{
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -72,7 +74,7 @@ const HomepageStyle = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 50,
     fontSize: 30,
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
   },
   infoModalBody:{
     color: 'limegreen',
@@ -81,7 +83,7 @@ const HomepageStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
   },
   infoModalText: {
     fontSize: 17,
@@ -89,7 +91,13 @@ const HomepageStyle = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
-  }
+  },
+  // backgroundImage: {
+  //   width: '100%',
+  //   height: '100%',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
 
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
-import { Font } from 'expo';
+import { Font, LinearGradient  } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
@@ -55,12 +55,14 @@ export default class Homepage extends React.Component {
 
     return (
 
+
       <SafeAreaView style={HomepageStyle.container}>
 
-        <ImageBackground
-          source={require('./assets/Dino_images/foliage.png')}
-          style={styles.backgroundStyle}
-        >
+
+      {/*<ImageBackground
+        source={require('../assets/Dino_images/foliage.png')}
+        style={HomepageStyle.backgroundImage}
+      >*/}
 
         <View style={HomepageStyle.content1}>
         {
@@ -69,7 +71,6 @@ export default class Homepage extends React.Component {
         ) : null
       }
         </View>
-
 
 {/* 'IMAGE CAROUSEL' SECTION*/}
         <ImageSlider
@@ -125,6 +126,10 @@ export default class Homepage extends React.Component {
             }}>
             <View>
 
+          <LinearGradient
+          colors={['black', '#1e932d']}
+          style={{ padding: 25 }}>
+
             <View style={HomepageStyle.infoModal}>
 
                 <ScrollView>
@@ -149,6 +154,7 @@ export default class Homepage extends React.Component {
                   </TouchableHighlight>
                   </ScrollView>
                 </View>
+                </LinearGradient>
               </View>
             </Modal>
 
@@ -159,8 +165,7 @@ export default class Homepage extends React.Component {
               <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
             </TouchableHighlight>
           </View>
-
-        </ImageBackground>
+        {/*</ImageBackground>*/}
       </SafeAreaView>
 
     );
