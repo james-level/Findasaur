@@ -60,6 +60,36 @@ const HomepageStyle = StyleSheet.create({
     width: 375,
     height: 250,
   },
+  infoModal:{
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  infoModalHeading:{
+    color: 'limegreen',
+    paddingTop: 50,
+    fontSize: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+  },
+  infoModalBody:{
+    color: 'limegreen',
+    paddingTop: 50,
+    fontSize: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+  },
+  infoModalText: {
+    fontSize: 17,
+    color: 'white',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+  }
+
 });
 
 export default HomepageStyle;

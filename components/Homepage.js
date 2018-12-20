@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, ScrollView } from 'react-native';
 import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
@@ -110,7 +110,7 @@ export default class Homepage extends React.Component {
 
 
 {/* 'ABOUT/INFO' MODAL SECTION*/}
-        <View style={{marginTop: 22}}>
+        <View>
           <Modal
             animationType="slide"
             transparent={false}
@@ -118,16 +118,28 @@ export default class Homepage extends React.Component {
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
             }}>
-            <View style={{marginTop: 22}}>
-              <View>
-                <Text>Hello World!</Text>
+            <View>
+              <View style={HomepageStyle.infoModal}>
+                <ScrollView>
+                  <Text style= {[HomepageStyle.infoModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
+
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf - an app by <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears.</Text> Weather2Golf is part of the Weather2 series (see also 'Weather2Wed')</Text>
+
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>David, James & Stephen can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative.</Text></Text>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf aims to help golfers assess the weather for trips to the course (any UK course). Powered by <Text style={{fontSize: 17, color: '#52c24b'}} onPress={()=>Linking.openURL('https://darksky.net/')}>Dark Sky</Text>, the app returns the typical weather (based on historical averages) for any given course. The app utilises<Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://www.geograph.org.uk/')}> Geograph's API</Text> which means that any part of the UK can be entered as a search term (the fuzzy search can handle place names, postcodes, regions, sites of interest or even landmarks). Weather2Golf will also suggest nearby hotels in and around a course using the <Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://developer.foursquare.com/places-api')}>FourSquare API</Text>. NB. There is no commercial benefit to us, the creators; this information is provided as a free service. Icons on this app are from flaticon.com.</Text>
+
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf</Text>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>November 2018</Text>
+
+
 
                   <TouchableHighlight
                     onPress={() => {
                       this.setModalVisible(!this.state.modalVisible);
                     }}>
-                    <Text>Hide Modal</Text>
+                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
                   </TouchableHighlight>
+                  </ScrollView>
                 </View>
               </View>
             </Modal>
@@ -136,7 +148,7 @@ export default class Homepage extends React.Component {
               onPress={() => {
                 this.setModalVisible(true);
             }}>
-              <Text style={{color:'white'}}>Show Modal</Text>
+              <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
             </TouchableHighlight>
           </View>
 
