@@ -119,7 +119,7 @@ export default class Homepage extends React.Component {
               Alert.alert('Modal has been closed.');
             }}>
             <View>
-
+ 
             <View style={HomepageStyle.infoModal}>
 
                 <ScrollView>
