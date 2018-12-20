@@ -13,6 +13,7 @@ import DinoListView from './DinoListView.js';
 
 export default class ChooseTimePeriod extends Component {
 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -162,6 +163,7 @@ export default class ChooseTimePeriod extends Component {
       }, function(){self.populateDropdown()})
     })
   }
+
 
  filterDinosaurData(dinosaurs) {
     const newArray = [];
