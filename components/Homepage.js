@@ -119,19 +119,22 @@ export default class Homepage extends React.Component {
               Alert.alert('Modal has been closed.');
             }}>
             <View>
-              <View style={HomepageStyle.infoModal}>
+
+            <View style={HomepageStyle.infoModal}>
+
                 <ScrollView>
                   <Text style= {[HomepageStyle.infoModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
+                    <View style={{alignItems: "center"}}>
+                      <Image source={require('../assets/Dino_images/friendlydino.gif')} style={{height: 150, width: 225}}/>
+                    </View>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur, an app by<Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears.</Text><Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>They can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative.</Text></Text></Text>
 
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf - an app by <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears.</Text> Weather2Golf is part of the Weather2 series (see also 'Weather2Wed')</Text>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur looks to educate users on various dinosaurs from a range of eras. It utilises the Wikipedia API to provide information relating to aspects of each speciment, such as diet and location (of fossil finds)</Text>
 
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>David, James & Stephen can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative.</Text></Text>
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf aims to help golfers assess the weather for trips to the course (any UK course). Powered by <Text style={{fontSize: 17, color: '#52c24b'}} onPress={()=>Linking.openURL('https://darksky.net/')}>Dark Sky</Text>, the app returns the typical weather (based on historical averages) for any given course. The app utilises<Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://www.geograph.org.uk/')}> Geograph's API</Text> which means that any part of the UK can be entered as a search term (the fuzzy search can handle place names, postcodes, regions, sites of interest or even landmarks). Weather2Golf will also suggest nearby hotels in and around a course using the <Text style={{fontSize: 18, color: '#52c24b'}} onPress={()=>Linking.openURL('https://developer.foursquare.com/places-api')}>FourSquare API</Text>. NB. There is no commercial benefit to us, the creators; this information is provided as a free service. Icons on this app are from flaticon.com.</Text>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur is based on an exisitng webproject (Findasaurus), however the conversion to ReactNative is soley ours. Icons provided by 'FlatIcons'. This app is an not-for-profit project.</Text>
 
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Weather2Golf</Text>
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>November 2018</Text>
-
-
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
+                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
 
                   <TouchableHighlight
                     onPress={() => {

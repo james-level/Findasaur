@@ -64,13 +64,14 @@ const HomepageStyle = StyleSheet.create({
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   infoModalHeading:{
     color: 'limegreen',
-    paddingTop: 50,
-    fontSize: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 50,
+    fontSize: 30,
     backgroundColor: 'black',
   },
   infoModalBody:{
