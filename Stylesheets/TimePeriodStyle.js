@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, LayoutAnimation, TouchableHighlight, TouchableOpacity } from 'react-native';
+
 
 const TimePeriodStyle = StyleSheet.create({
   bodyText: {
@@ -34,8 +36,10 @@ const TimePeriodStyle = StyleSheet.create({
   },
   profilePicture: {
     width: "100%",
-    height: 295,
+    height: Dimensions.get('window').height*0.66,
     backgroundColor: 'black',
+    resizeMode: 'stretch',
+
   },
   displayName: {
     fontFamily: 'FrederickatheGreat-Regular',
@@ -58,10 +62,19 @@ const TimePeriodStyle = StyleSheet.create({
     fontSize: 20
   },
   dinoSearchButton: {
-    marginTop: '25%',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: Dimensions.get('window').width*0.2
+
   },
+  plusButton: {
+    width: Dimensions.get('window').width*0.2,
+    height: Dimensions.get('window').width*0.2,
+    resizeMode: 'stretch',
+    marginLeft: '50%',
+
+
+
+
+  }
 });
 
 export default TimePeriodStyle;

@@ -144,22 +144,48 @@ export default class TimePeriodPage extends Component {
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
       />
-      {
-        this.state.fontLoaded ? (
-      <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
-    ) : null
-    }
+
+
+  <View style={{position: 'absolute',
+    right: 0,
+    bottom: 0,
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderLeftWidth: 0,
+    borderRightWidth: Dimensions.get('window').width,
+    borderBottomWidth: Dimensions.get('window').width*0.3,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: 'black'}}>
+
+
+
+    </View>
     {
+
       this.state.fontLoaded ? (
-    <Text style={[TimePeriodStyle.eraDescriptionText, {fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
-    ) : null
+    <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
+  ) : null
   }
+
+
+  {
+    this.state.fontLoaded ? (
+  <Text style={[TimePeriodStyle.eraDescriptionText, {display: 'none', fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
+  ) : null
+}
       </View>
 
-      <View style={TimePeriodStyle.dinoSearchButton}>
-      <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.props.handleSearchSubmit}>See dinosaurs</AwesomeButtonRick>
+      <View>
+      <TouchableHighlight
+                onPress={this.props.handleSearchSubmit}>
+                <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
+              </TouchableHighlight>
+
       </View>
-      
+
     </View>
     );
   }

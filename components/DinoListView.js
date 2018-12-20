@@ -187,14 +187,14 @@ export default class DinoListView extends Component {
               onPress={() => this.setItemAsActive(this.state.activeItem)}
               style={[s.renderItem, s.activeItem]}
             >
-            <AutoHeightImage
+            <AutoHeightImage 
          width={300}
          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
          />
               <Text> {this.state.activeItem.name} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
-              </Text>*/} 
+              </Text>*/}
             </TouchableOpacity>
           )}
 

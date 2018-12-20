@@ -250,7 +250,7 @@ export default class ChooseTimePeriod extends Component {
     return (
 
       <View style={[ s.container ]}>
-        <NavBar home={this.props.home}/>
+      {/*  <NavBar home={this.props.home}/> */}
         <FlatList
             ref={r => this.refs = r}
             data={this.state.items}
