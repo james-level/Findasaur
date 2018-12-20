@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, Modal } from 'react-native';
 import { Font } from 'expo';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
+
 
 export default class Homepage extends React.Component {
 
@@ -13,7 +14,8 @@ export default class Homepage extends React.Component {
     super(props);
     this.state = {
       buttonClicked: false,
-      fontLoaded: false
+      fontLoaded: false,
+      modalVisible: false
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -22,19 +24,19 @@ export default class Homepage extends React.Component {
   async componentDidMount() {
 
     await Font.loadAsync({
-
       'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
-
     });
-
      this.setState({ fontLoaded: true });
-
   }
 
   handleButtonClick(){
     this.setState({
       buttonClicked: !this.state.buttonClicked
     })
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
   render() {
@@ -53,22 +55,18 @@ export default class Homepage extends React.Component {
 
     return (
 
-
-
       <SafeAreaView style={HomepageStyle.container}>
+
         <View style={HomepageStyle.content1}>
-
         {
-
             this.state.fontLoaded ? (
-
           <Text style= {[HomepageStyle.contentText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
-
         ) : null
-
       }
-
         </View>
+
+
+{/* 'IMAGE CAROUSEL' SECTION*/}
         <ImageSlider
           loopBothSides
           autoPlayWithInterval={1500}
@@ -79,6 +77,9 @@ export default class Homepage extends React.Component {
               <Image source={{ uri: item }} style={HomepageStyle.customImage} />
             </View>
           )}
+
+
+
           customButtons={(position, move) => (
             <View style={HomepageStyle.buttons}>
               {images.map((image, index) => {
@@ -101,15 +102,47 @@ export default class Homepage extends React.Component {
         <View style={HomepageStyle.content2}>
 
         {
-
             this.state.fontLoaded ? (
             <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.handleButtonClick}>Explore</AwesomeButtonRick>
-
           ) : null
         }
-
         </View>
+
+
+{/* 'ABOUT/INFO' MODAL SECTION*/}
+        <View style={{marginTop: 22}}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+            }}>
+            <View style={{marginTop: 22}}>
+              <View>
+                <Text>Hello World!</Text>
+
+                  <TouchableHighlight
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                    }}>
+                    <Text>Hide Modal</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            </Modal>
+
+            <TouchableHighlight
+              onPress={() => {
+                this.setModalVisible(true);
+            }}>
+              <Text style={{color:'white'}}>Show Modal</Text>
+            </TouchableHighlight>
+          </View>
+
+
       </SafeAreaView>
+
     );
   }
 
