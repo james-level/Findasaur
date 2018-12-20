@@ -194,7 +194,7 @@ export default class DinoListView extends Component {
               <Text> {this.state.activeItem.name} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
-              </Text>*/}
+              </Text>*/} 
             </TouchableOpacity>
           )}
 
