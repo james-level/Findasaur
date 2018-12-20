@@ -69,7 +69,10 @@ const TimePeriodStyle = StyleSheet.create({
     width: Dimensions.get('window').width*0.2,
     height: Dimensions.get('window').width*0.2,
     resizeMode: 'stretch',
-    marginLeft: '50%',
+
+    position: 'absolute',
+    top: -Dimensions.get('window').height*0.11,
+    left: Dimensions.get('window').width*0.6,
 
 
 
