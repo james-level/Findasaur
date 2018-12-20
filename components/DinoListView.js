@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {ImageBackground} from 'react-native';
-import FitImage from 'react-native-fit-image'
+import FitImage from 'react-native-fit-image';
 import {
   Dimensions,
   FlatList,
@@ -89,10 +89,8 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black' }
           ]}
         >
-        <AutoHeightImage
-     width={150}
-     source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
-     />
+        <Image style={s.fossil} source={require('../assets/icons/fossil.png')}/>
+
 
 
           <Text
@@ -194,9 +192,9 @@ export default class DinoListView extends Component {
          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
          />
               <Text> {this.state.activeItem.name} </Text>
-              <Text style={[s.name, { color: '#fff' }]}>
+              {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
-              </Text>
+              </Text>*/}
             </TouchableOpacity>
           )}
 
@@ -322,7 +320,7 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    borderWidth: 3,
+    borderWidth: 0,
     shadowOffset: {
       width: 3,
       height: 3
@@ -350,6 +348,7 @@ const s = StyleSheet.create({
     bottom: -14,
     left: 0,
     right: 0,
+
     backgroundColor: 'black',
     fontSize: 12,
     width: 150,
@@ -372,6 +371,10 @@ const s = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
+  },
+  fossil: {
+    width:150,
+    height: 150
   },
   activeImage: {
     width: 200,
