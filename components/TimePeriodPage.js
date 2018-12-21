@@ -35,23 +35,28 @@ export default class TimePeriodPage extends Component {
 }
 
   retrieveWikiDescription(url){
-
     axios.get(url).then((response) => {
 
       console.log("Retrieving Wiki description");
 
     })
-
   }
 
   retrieveImageFileName(url){
-
     axios.get(url).then((response) => {
 
       console.log("Retrieving image file name JSON");
 
     })
+  }
 
+  getImageAddress(object) {
+    var array = [];
+    for (i = 0; i < object.length; i++) {
+      var pageNumber = Object.keys(object[i].query.pages);
+      array.push(object[i].query.pages[pageNumber].pageimage);
+    };
+    return array;
   }
 
   retrieveImages(){
@@ -73,8 +78,8 @@ export default class TimePeriodPage extends Component {
         return promises;
       }, []))
       .then((images) => {
-        const imgObject = images;
-        const imgAddress = getAddress(imgObject);
+        const imageObject = images;
+        const imgAddress = getImageAddress(imageObject);
         Promise.all(imgAddress.reduce((promises, object) => {
           const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
           const requestImg = new RequestHelper(imgUrl);
