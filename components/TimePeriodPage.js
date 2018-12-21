@@ -11,7 +11,6 @@ import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighligh
 
 const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
 
-
 export default class TimePeriodPage extends Component {
 
   constructor(props) {
@@ -34,7 +33,7 @@ export default class TimePeriodPage extends Component {
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 }
 
-  populateDropdown(){
+  retrieveImages(){
     console.log("Populating dropdown with dinosaurs...");
   }
 
@@ -48,7 +47,7 @@ export default class TimePeriodPage extends Component {
 
       self.setState({
         dinosaurs: response.data
-      }, function(){this.populateDropdown()})
+      }, function(){this.retrieveImages()})
     })
   }
 
