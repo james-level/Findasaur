@@ -113,6 +113,7 @@ export default class ChooseTimePeriod extends Component {
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.retrieveImages = this.retrieveImages.bind(this);
   }
 
   componentDidMount(){
@@ -130,15 +131,12 @@ export default class ChooseTimePeriod extends Component {
 
   handleSearchSubmit(){
 
-    this.setState({
-
-      searchButtonClicked: true
-
-    })
+    this.retrieveImages();
 
   }
 
   addImageToState(imagesObject){
+    console.log("HELLLLLO");
     this.setState({
       images:  [...this.state.images, handleImageUrl(imagesObject)]
     }, function(){
@@ -146,10 +144,94 @@ export default class ChooseTimePeriod extends Component {
     })
   }
 
+  retrieveWikiDescription(url){
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving Wiki description");
+
+    })
+  }
+
+  retrieveImageFileName(url){
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving image file name JSON");
+
+    })
+  }
+
+  retrieveImage(url){
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving image file name JSON");
+    })
+  }
+
+  handleImageUrl(objects) {
+    const newArray = [];
+    objects.forEach((object) => {
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        newArray.push('../assets/transparent_dinos/carnotaurus.png')
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        newArray.push(url)
+      }
+    })
+    return newArray;
+  }
+
+  getImageAddress(object) {
+    var array = [];
+    for (i = 0; i < object.length; i++) {
+      var pageNumber = Object.keys(object[i].query.pages);
+      array.push(object[i].query.pages[pageNumber].pageimage);
+    };
+    return array;
+  }
+
+  retrieveImages(){
+
+    Promise.all(this.state.dinosaurs.reduce((promises, dinosaur) => {
+      const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+      promises.push(this.retrieveWikiDescription(url));
+
+      return promises;
+    }, []))
+    .then(() => {
+      /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
+      /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
+      Promise.all(this.state.dinosaurs.reduce((promises, dinosaur) => {
+        const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+
+        promises.push(this.retrieveImageFileName(imageUrl));
+
+        return promises;
+      }, []))
+      .then((images) => {
+        console.log("IMAGES", images);
+        const imageObject = images;
+        const imgAddress = this.getImageAddress(imageObject);
+        Promise.all(imgAddress.reduce((promises, object) => {
+          const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+          promises.push(requestImg.get());
+
+          return promises
+        }, []))
+        .then((imagesObject) => {
+
+          this.props.addImageToState(imagesObject);
+        })
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
   getDinosaursForPeriod(earliest_date, latest_date){
 
     var self = this;
-
     // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
@@ -163,9 +245,8 @@ export default class ChooseTimePeriod extends Component {
         carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
-      }, )
-    })
-    console.log(self.state)
+      })
+      })
   }
 
  filterDinosaurData(dinosaurs) {
@@ -232,6 +313,7 @@ export default class ChooseTimePeriod extends Component {
 
   _renderItem = ({ item }) => (
     <TimePeriodPage
+    addImageToState={this.addImageToState}
     dinosaurs={this.state.dinosaurs}
     getDinosaursForPeriod={this.getDinosaursForPeriod}
     handleSearchSubmit={this.handleSearchSubmit}
@@ -305,7 +387,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView allDinosaurs={this.state.dinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }

@@ -26,112 +26,12 @@ export default class TimePeriodPage extends Component {
     searchButtonClicked: false
   }
 
-  this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
   this.handleCarnivoreSelection = this.handleCarnivoreSelection.bind(this);
   this.handleOmnivoreSelection = this.handleOmnivoreSelection.bind(this);
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
   this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 }
-
-  retrieveWikiDescription(url){
-    axios.get(url).then((response) => {
-
-      console.log("Retrieving Wiki description");
-
-    })
-  }
-
-  retrieveImageFileName(url){
-    axios.get(url).then((response) => {
-
-      console.log("Retrieving image file name JSON");
-
-    })
-  }
-
-  retrieveImage(url){
-    axios.get(url).then((response) => {
-
-      console.log("Retrieving image file name JSON");
-    })
-  }
-
-  handleImageUrl(objects) {
-    const newArray = [];
-    objects.forEach((object) => {
-      if (object.query.pages["-1"].imageinfo === undefined) {
-        newArray.push('../assets/transparent_dinos/carnotaurus.png')
-      }
-      else {
-        const url = object.query.pages["-1"].imageinfo[0].url;
-        newArray.push(url)
-      }
-    })
-    return newArray;
-  }
-
-  getImageAddress(object) {
-    var array = [];
-    for (i = 0; i < object.length; i++) {
-      var pageNumber = Object.keys(object[i].query.pages);
-      array.push(object[i].query.pages[pageNumber].pageimage);
-    };
-    return array;
-  }
-
-  retrieveImages(){
-
-    Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
-      const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
-      promises.push(this.retrieveWikiDescription(url));
-
-      return promises;
-    }, []))
-    .then(() => {
-      /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
-      /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
-        const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
-
-        promises.push(this.retrieveImageFileName(imageUrl));
-
-        return promises;
-      }, []))
-      .then((images) => {
-        const imageObject = images;
-        const imgAddress = getImageAddress(imageObject);
-        Promise.all(imgAddress.reduce((promises, object) => {
-          const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
-          promises.push(requestImg.get());
-
-          return promises
-        }, []))
-        .then((imagesObject) => {
-
-          this.props.addImageToState(imagesObject);
-
-        })
-      })
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-  }
-
-  getDinosaursForPeriod(earliest_date, latest_date){
-
-    var self = this;
-
-    const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
-
-    axios.get(url).then((response) => {
-
-      self.setState({
-        dinosaurs: response.data
-      }, function(){this.retrieveImages()})
-    })
-  }
 
   eraImage(index){
 
