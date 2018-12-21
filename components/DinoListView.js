@@ -33,7 +33,7 @@ export default class DinoListView extends Component {
 
   populateDinosaurs(dinosaurs){
 
-    console.log("DINO LENGTH", dinosaurs.length);
+    console.log("DINOS TO RENDER", dinosaurs);
 
     return new _.times(dinosaurs.length, (i) => ({
       id: i,
@@ -51,6 +51,10 @@ export default class DinoListView extends Component {
       locations: dinosaurs[i].coords
   }))
 }
+
+  returnImageFromStored(){
+    return this.props.images[0][this.state.activeItem.index];
+  }
 
   getFlatListItems = () => {
     this.setState({ isLoading: true });
@@ -192,7 +196,7 @@ export default class DinoListView extends Component {
             >
             <AutoHeightImage
          width={300}
-         source={{uri: `${this.props.images[0][this.state.activeItem.index]}`}}
+         source={{uri: `${this.returnImageFromStored()}`}}
          />
               <Text> {this.state.activeItem.name} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
