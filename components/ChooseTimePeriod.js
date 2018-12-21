@@ -16,13 +16,14 @@ export default class ChooseTimePeriod extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      imagesLoading: false,
       images: [],
       dinosaurs: null,
       diets: null,
       herbivores: null,
       carnivores: null,
       omnivores: null,
-      searchButtonClicked: false,
+      imagesLoaded: false,
       items: [
 
         {
@@ -114,6 +115,7 @@ export default class ChooseTimePeriod extends Component {
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.retrieveImages = this.retrieveImages.bind(this);
+    this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
   }
 
   componentDidMount(){
@@ -131,18 +133,37 @@ export default class ChooseTimePeriod extends Component {
 
   handleSearchSubmit(){
 
-    this.retrieveImages();
+    this.setState({
+
+      imagesLoading: true
+
+    }, function(){
+      this.retrieveImages();
+    })
 
   }
 
+  toggleDinosaurListView(){
+    this.setState({
+      imagesLoaded: true
+    })
+  }
+
   addImageToState(imagesObject){
-    console.log("HELLLLLO");
+
     this.setState({
       images:  [...this.state.images, this.handleImageUrl(imagesObject)]
     }, function(){
       console.log(`added ${imagesObject} to state array`);
-    })
-  }
+
+        this.setState({
+          imagesLoading: false
+        }, function(){
+          this.toggleDinosaurListView();
+        })
+      })
+    }
+
 
   retrieveWikiDescription(url){
     return fetch(url)
@@ -325,7 +346,7 @@ export default class ChooseTimePeriod extends Component {
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
 
-    if (this.state.searchButtonClicked === false){
+    if (this.state.imagesLoaded === false){
 
       const NavBar = Platform.OS === 'ios' ? NavBarIOSLight : NavBarAndroidLight
 
