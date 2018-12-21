@@ -144,6 +144,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   toggleDinosaurListView(){
+    console.log("IMAGES", this.state.images);
     this.setState({
       imagesLoaded: true
     })
@@ -164,7 +165,6 @@ export default class ChooseTimePeriod extends Component {
       })
     }
 
-
   retrieveWikiDescription(url){
     return fetch(url)
       .then((response) => response.json());
@@ -184,7 +184,7 @@ export default class ChooseTimePeriod extends Component {
     const newArray = [];
     objects.forEach((object) => {
       if (object.query.pages["-1"].imageinfo === undefined) {
-        newArray.push('../assets/transparent_dinos/carnotaurus.png')
+        newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg')
       }
       else {
         const url = object.query.pages["-1"].imageinfo[0].url;
@@ -205,7 +205,7 @@ export default class ChooseTimePeriod extends Component {
 
   retrieveImages(){
 
-    Promise.all(this.state.dinosaurs.slice(0, 3).reduce((promises, dinosaur) => {
+    Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
       const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
       console.log("URL", url);
       promises.push(this.retrieveWikiDescription(url));
@@ -216,7 +216,7 @@ export default class ChooseTimePeriod extends Component {
     .then(() => {
       /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
       /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(this.state.dinosaurs.slice(0, 3).reduce((promises, dinosaur) => {
+      Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
         const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
         console.log("IMAGE URL", imageUrl);
         promises.push(this.retrieveImageFileName(imageUrl));
@@ -401,7 +401,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(0, 10)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }

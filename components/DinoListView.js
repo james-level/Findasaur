@@ -67,9 +67,12 @@ export default class DinoListView extends Component {
     this.setState({
       activeId: activeItem.index,
       activeItem: activeItem.item
-    });
+    })
   }
+
   renderItem = (o, i) => {
+
+
     return (
       <View
         style={{
@@ -121,7 +124,7 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
-    console.log("ITEMS", this.state.items);
+
     const ListEmptyComponent = () => (
       <View
         style={{
@@ -189,7 +192,7 @@ export default class DinoListView extends Component {
             >
             <AutoHeightImage
          width={300}
-         source={{uri: `this.props.images[this.state.activeItem.index]`}}
+         source={{uri: `${this.props.images[0][this.state.activeItem.index]}`}}
          />
               <Text> {this.state.activeItem.name} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
