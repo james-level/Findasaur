@@ -16,12 +16,14 @@ export default class ChooseTimePeriod extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      imagesLoading: false,
+      images: [],
       dinosaurs: null,
       diets: null,
       herbivores: null,
       carnivores: null,
       omnivores: null,
-      searchButtonClicked: false,
+      imagesLoaded: false,
       items: [
 
         {
@@ -112,6 +114,8 @@ export default class ChooseTimePeriod extends Component {
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.retrieveImages = this.retrieveImages.bind(this);
+    this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
   }
 
   componentDidMount(){
@@ -120,7 +124,6 @@ export default class ChooseTimePeriod extends Component {
     //        'Swipe to move between time periods!'
     //     )
 
-    this.getDinosaursForPeriod(237, 247);
   }
 
   populateDropdown(){
@@ -131,16 +134,119 @@ export default class ChooseTimePeriod extends Component {
 
     this.setState({
 
-      searchButtonClicked: true
+      imagesLoading: true
 
+    }, function(){
+      console.log("CALLING DINOS");
+      this.getDinosaursForPeriod(237, 247);
     })
 
+  }
+
+  toggleDinosaurListView(){
+    console.log("IMAGES", this.state.images);
+    this.setState({
+      imagesLoaded: true
+    })
+  }
+
+  addImageToState(imagesObject){
+
+    this.setState({
+      images:  [...this.state.images, this.handleImageUrl(imagesObject)]
+    }, function(){
+      console.log(`added ${imagesObject} to state array`);
+
+        this.setState({
+          imagesLoading: false
+        }, function(){
+          this.toggleDinosaurListView();
+        })
+      })
+    }
+
+  retrieveWikiDescription(url){
+    return fetch(url)
+      .then((response) => response.json());
+  }
+
+  retrieveImageFileName(url){
+    return fetch(url)
+      .then((response) => response.json());
+  }
+
+  retrieveImage(url){
+    return fetch(url)
+      .then((response) => response.json());
+  }
+
+  handleImageUrl(objects) {
+    const newArray = [];
+    objects.forEach((object) => {
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg')
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        newArray.push(url)
+      }
+    })
+    return newArray;
+  }
+
+  getImageAddress(object) {
+    var array = [];
+    for (i = 0; i < object.length; i++) {
+      var pageNumber = Object.keys(object[i].query.pages);
+      array.push(object[i].query.pages[pageNumber].pageimage);
+    };
+    return array;
+  }
+
+  retrieveImages(){
+
+    Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
+      const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+      console.log("URL", url);
+      promises.push(this.retrieveWikiDescription(url));
+        console.log("PROMISES", promises);
+
+      return promises;
+    }, []))
+    .then(() => {
+      /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
+      /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
+      Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
+        const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+        console.log("IMAGE URL", imageUrl);
+        promises.push(this.retrieveImageFileName(imageUrl));
+
+        return promises;
+      }, []))
+      .then((images) => {
+        console.log("IMAGES", images);
+        const imageObject = images;
+        const imgAddress = this.getImageAddress(imageObject);
+        Promise.all(imgAddress.reduce((promises, object) => {
+          const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+          promises.push(this.retrieveImage(imgUrl));
+
+          return promises
+        }, []))
+        .then((imagesObject) => {
+
+          this.addImageToState(imagesObject);
+        })
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){
 
     var self = this;
-
     // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
@@ -154,9 +260,8 @@ export default class ChooseTimePeriod extends Component {
         carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
-      }, )
-    })
-    console.log(self.state)
+      }, function(){ this.retrieveImages() })
+      })
   }
 
  filterDinosaurData(dinosaurs) {
@@ -222,7 +327,9 @@ export default class ChooseTimePeriod extends Component {
   };
 
   _renderItem = ({ item }) => (
+
     <TimePeriodPage
+    dinosaurs={this.state.dinosaurs}
     getDinosaursForPeriod={this.getDinosaursForPeriod}
     handleSearchSubmit={this.handleSearchSubmit}
     onPressItem={this._onPressItem}
@@ -235,12 +342,13 @@ export default class ChooseTimePeriod extends Component {
     latest_date={item.latest_date}
   />);
 
+
   _keyExtractor = (item, index) => item.id.toString()
   // REQUIRED for ReactNativePagination to work correctly
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
 
-    if (this.state.searchButtonClicked === false){
+    if (this.state.imagesLoaded === false){
 
       const NavBar = Platform.OS === 'ios' ? NavBarIOSLight : NavBarAndroidLight
 
@@ -295,7 +403,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView allDinosaurs={this.state.dinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(0, 10)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }

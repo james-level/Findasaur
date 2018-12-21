@@ -25,7 +25,6 @@ export default class TimePeriodPage extends Component {
     searchButtonClicked: false
   }
 
-  this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
   this.handleCarnivoreSelection = this.handleCarnivoreSelection.bind(this);
   this.handleOmnivoreSelection = this.handleOmnivoreSelection.bind(this);
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
@@ -69,9 +68,8 @@ export default class TimePeriodPage extends Component {
     await Font.loadAsync({
       'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
     });
-     this.setState({ fontLoaded: true }, function(){
-       this.props.getDinosaursForPeriod(this.props.earliest_date, this.props.latest_date);
-     });
+     this.setState({ fontLoaded: true }
+     );
   }
 
   handleHerbivoreSelection(){

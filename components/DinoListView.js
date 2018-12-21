@@ -33,7 +33,7 @@ export default class DinoListView extends Component {
 
   populateDinosaurs(dinosaurs){
 
-    console.log("DINO LENGTH", dinosaurs.length);
+    console.log("DINOS TO RENDER", dinosaurs);
 
     return new _.times(dinosaurs.length, (i) => ({
       id: i,
@@ -52,6 +52,10 @@ export default class DinoListView extends Component {
   }))
 }
 
+  returnImageFromStored(){
+    return this.props.images[0][this.state.activeItem.index];
+  }
+
   getFlatListItems = () => {
     this.setState({ isLoading: true });
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
@@ -67,9 +71,12 @@ export default class DinoListView extends Component {
     this.setState({
       activeId: activeItem.index,
       activeItem: activeItem.item
-    });
+    })
   }
+
   renderItem = (o, i) => {
+
+
     return (
       <View
         style={{
@@ -121,7 +128,7 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
-    console.log("ITEMS", this.state.items);
+
     const ListEmptyComponent = () => (
       <View
         style={{
@@ -187,9 +194,9 @@ export default class DinoListView extends Component {
               onPress={() => this.setItemAsActive(this.state.activeItem)}
               style={[s.renderItem, s.activeItem]}
             >
-            <AutoHeightImage 
+            <AutoHeightImage
          width={300}
-         source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/df/CM_Diplodocus.jpg'}}
+         source={{uri: `${this.returnImageFromStored()}`}}
          />
               <Text> {this.state.activeItem.name} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
