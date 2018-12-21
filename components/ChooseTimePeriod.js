@@ -16,6 +16,7 @@ export default class ChooseTimePeriod extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      images: [],
       dinosaurs: null,
       diets: null,
       herbivores: null,
@@ -135,6 +136,14 @@ export default class ChooseTimePeriod extends Component {
 
     })
 
+  }
+
+  addImageToState(imagesObject){
+    this.setState({
+      images:  [...this.state.images, handleImageUrl(imagesObject)]
+    }, function(){
+      console.log(`added ${imagesObject} to state array`);
+    })
   }
 
   getDinosaursForPeriod(earliest_date, latest_date){

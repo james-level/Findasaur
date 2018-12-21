@@ -50,6 +50,27 @@ export default class TimePeriodPage extends Component {
     })
   }
 
+  retrieveImage(url){
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving image file name JSON");
+    })
+  }
+
+  handleImageUrl(objects) {
+    const newArray = [];
+    objects.forEach((object) => {
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        newArray.push('../assets/transparent_dinos/carnotaurus.png')
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        newArray.push(url)
+      }
+    })
+    return newArray;
+  }
+
   getImageAddress(object) {
     var array = [];
     for (i = 0; i < object.length; i++) {
@@ -62,16 +83,16 @@ export default class TimePeriodPage extends Component {
   retrieveImages(){
 
     Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
-      const url =   `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+      const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
       promises.push(this.retrieveWikiDescription(url));
 
       return promises;
     }, []))
-    .then((this.props.dinosaurs) => {
+    .then(() => {
       /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
       /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(this.dinosaursSelected.reduce((promises, dinosaur) => {
-        const imageUrl =   `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+      Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
+        const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
 
         promises.push(this.retrieveImageFileName(imageUrl));
 
@@ -82,27 +103,21 @@ export default class TimePeriodPage extends Component {
         const imgAddress = getImageAddress(imageObject);
         Promise.all(imgAddress.reduce((promises, object) => {
           const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
-          const requestImg = new RequestHelper(imgUrl);
           promises.push(requestImg.get());
 
           return promises
         }, []))
         .then((imagesObject) => {
-          this.wikiImages = getImagesUrl(imagesObject);
-          this.mergeImages(this.wikiImages);
 
-          PubSub.publish('Wikipedia:all-dinosaurs-ready', this.dinosaursSelected);
+          this.props.addImageToState(imagesObject);
+
         })
       })
-
     })
     .catch((err) => {
       console.error(err);
     })
-  })
-}
   }
-
 
   getDinosaursForPeriod(earliest_date, latest_date){
 
