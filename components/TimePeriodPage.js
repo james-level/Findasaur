@@ -34,7 +34,23 @@ export default class TimePeriodPage extends Component {
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 }
 
-  retrieveImageFileName(){
+  retrieveWikiDescription(url){
+
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving Wiki description");
+
+    })
+
+  }
+
+  retrieveImageFileName(url){
+
+    axios.get(url).then((response) => {
+
+      console.log("Retrieving image file name JSON");
+
+    })
 
   }
 
@@ -42,17 +58,17 @@ export default class TimePeriodPage extends Component {
 
     Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
       const url =   `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
-      promises.push(request.get());
+      promises.push(this.retrieveWikiDescription(url));
 
       return promises;
     }, []))
-    .then((dinosaursData) => {
-      this.wikiDinosaurs = getExtraData(dinosaursData);
-      this.mergeData(this.wikiDinosaurs);
-      Promise.all(this.dinosaursSelected.reduce((promises, object) => {
-        const imgAddress =   `https://en.wikipedia.org/w/api.php?action=query&titles=${object.name}&format=json&prop=pageimages&origin=*`
-        const requestaddress = new RequestHelper(imgAddress);
-        promises.push(requestaddress.get());
+    .then((this.props.dinosaurs) => {
+      /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
+      /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
+      Promise.all(this.dinosaursSelected.reduce((promises, dinosaur) => {
+        const imageUrl =   `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+
+        promises.push(this.retrieveImageFileName(imageUrl));
 
         return promises;
       }, []))
@@ -80,7 +96,6 @@ export default class TimePeriodPage extends Component {
     })
   })
 }
-
   }
 
 
