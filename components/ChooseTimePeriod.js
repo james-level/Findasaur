@@ -223,6 +223,7 @@ export default class ChooseTimePeriod extends Component {
 
   _renderItem = ({ item }) => (
     <TimePeriodPage
+    dinosaurs={this.state.dinosaurs}
     getDinosaursForPeriod={this.getDinosaursForPeriod}
     handleSearchSubmit={this.handleSearchSubmit}
     onPressItem={this._onPressItem}

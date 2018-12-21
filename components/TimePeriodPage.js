@@ -34,9 +34,55 @@ export default class TimePeriodPage extends Component {
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 }
 
-  populateDropdown(){
-    console.log("Populating dropdown with dinosaurs...");
+  retrieveImageFileName(){
+
   }
+
+  retrieveImages(){
+
+    Promise.all(this.props.dinosaurs.reduce((promises, dinosaur) => {
+      const url =   `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+      promises.push(request.get());
+
+      return promises;
+    }, []))
+    .then((dinosaursData) => {
+      this.wikiDinosaurs = getExtraData(dinosaursData);
+      this.mergeData(this.wikiDinosaurs);
+      Promise.all(this.dinosaursSelected.reduce((promises, object) => {
+        const imgAddress =   `https://en.wikipedia.org/w/api.php?action=query&titles=${object.name}&format=json&prop=pageimages&origin=*`
+        const requestaddress = new RequestHelper(imgAddress);
+        promises.push(requestaddress.get());
+
+        return promises;
+      }, []))
+      .then((images) => {
+        const imgObject = images;
+        const imgAddress = getAddress(imgObject);
+        Promise.all(imgAddress.reduce((promises, object) => {
+          const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+          const requestImg = new RequestHelper(imgUrl);
+          promises.push(requestImg.get());
+
+          return promises
+        }, []))
+        .then((imagesObject) => {
+          this.wikiImages = getImagesUrl(imagesObject);
+          this.mergeImages(this.wikiImages);
+
+          PubSub.publish('Wikipedia:all-dinosaurs-ready', this.dinosaursSelected);
+        })
+      })
+
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  })
+}
+
+  }
+
 
   getDinosaursForPeriod(earliest_date, latest_date){
 
@@ -48,7 +94,7 @@ export default class TimePeriodPage extends Component {
 
       self.setState({
         dinosaurs: response.data
-      }, function(){this.populateDropdown()})
+      }, function(){this.retrieveImages()})
     })
   }
 
