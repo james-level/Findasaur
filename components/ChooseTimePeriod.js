@@ -137,14 +137,12 @@ export default class ChooseTimePeriod extends Component {
       imagesLoading: true
 
     }, function(){
-      console.log("CALLING DINOS");
       this.getDinosaursForPeriod(237, 247);
     })
 
   }
 
   toggleDinosaurListView(){
-    console.log("IMAGES", this.state.images);
     this.setState({
       imagesLoaded: true
     })
@@ -205,28 +203,26 @@ export default class ChooseTimePeriod extends Component {
 
   retrieveImages(){
 
-    Promise.all(this.state.dinosaurs.slice(0, 10).map((dinosaur) => {
+    var dinosaurs = this.state.dinosaurs.slice(0, 20);
+
+    Promise.all(dinosaurs.map((dinosaur) => {
       const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
-      console.log("URL", url);
       return this.retrieveWikiDescription(url);
 
     }))
     .then(() => {
       /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
       /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(this.state.dinosaurs.slice(0, 10).map((dinosaur) => {
+      Promise.all(dinosaurs.map((dinosaur) => {
         const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
-        console.log("IMAGE URL", imageUrl);
         return this.retrieveImageFileName(imageUrl)
       }))
       .then((images) => {
-        console.log("IMAGES", images);
         const imageObject = images;
         const imgAddress = this.getImageAddress(imageObject);
         Promise.all(imgAddress.map((object) => {
           const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
           return this.retrieveImage(imgUrl);
-
         }))
         .then((imageObject) => {
 
@@ -398,7 +394,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(0, 10)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(0, 20)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }
