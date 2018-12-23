@@ -194,6 +194,8 @@ export default class DinoListView extends Component {
               onPress={() => this.setItemAsActive(this.state.activeItem)}
               style={[s.renderItem, s.activeItem]}
             >
+          
+
             <AutoHeightImage
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
@@ -204,6 +206,7 @@ export default class DinoListView extends Component {
               </Text>*/}
             </TouchableOpacity>
           )}
+
 
 
         </View>

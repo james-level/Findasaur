@@ -205,21 +205,19 @@ export default class ChooseTimePeriod extends Component {
 
   retrieveImages(){
 
-    Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
+    Promise.all(this.state.dinosaurs.slice(0, 10).map((promises, dinosaur) => {
       const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
       console.log("URL", url);
-      promises.push(this.retrieveWikiDescription(url));
-        console.log("PROMISES", promises);
+      this.retrieveWikiDescription(url);
 
-      return promises;
     }, []))
     .then(() => {
       /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
       /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(this.state.dinosaurs.slice(0, 10).reduce((promises, dinosaur) => {
+      Promise.all(this.state.dinosaurs.slice(0, 10).map((promises, dinosaur) => {
         const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
         console.log("IMAGE URL", imageUrl);
-        promises.push(this.retrieveImageFileName(imageUrl));
+        this.retrieveImageFileName(imageUrl);
 
         return promises;
       }, []))
@@ -227,9 +225,9 @@ export default class ChooseTimePeriod extends Component {
         console.log("IMAGES", images);
         const imageObject = images;
         const imgAddress = this.getImageAddress(imageObject);
-        Promise.all(imgAddress.reduce((promises, object) => {
+        Promise.all(imgAddress.map((promises, object) => {
           const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
-          promises.push(this.retrieveImage(imgUrl));
+          this.retrieveImage(imgUrl);
 
           return promises
         }, []))
