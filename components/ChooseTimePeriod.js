@@ -137,7 +137,11 @@ export default class ChooseTimePeriod extends Component {
       imagesLoading: true
 
     }, function(){
-      this.getDinosaursForPeriod(237, 247);
+      var earliest_date = this.state.viewableItems[0].item.earliest_date;
+      var latest_date = this.state.viewableItems[0].item.latest_date;
+      console.log("LATEST", latest_date);
+      console.log("EARLIEST", earliest_date);
+      this.getDinosaursForPeriod(earliest_date, latest_date);
     })
 
   }
