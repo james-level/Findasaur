@@ -57,4 +57,4 @@ npm i react-native-circle-slider
 
 brew cask install android-platform-tools
 
-adb logcat | grep ReactNativeJS
+adb logcat | grep ReactNativeJS (can see logs in new window or in window in which 'expo start' was typed)
