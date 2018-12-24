@@ -18,6 +18,7 @@ export default class ChooseTimePeriod extends Component {
     this.state = {
       imagesLoading: false,
       images: [],
+      dinosaurDescriptions: [],
       dinosaurs: null,
       diets: null,
       herbivores: null,
@@ -184,7 +185,9 @@ export default class ChooseTimePeriod extends Component {
     const newArray = [];
     objects.forEach((object) => {
       if (object.query.pages["-1"].imageinfo === undefined) {
-        newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg')
+        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
+         /* newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg') */
+         objects.pop(object);
       }
       else {
         const url = object.query.pages["-1"].imageinfo[0].url;
