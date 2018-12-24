@@ -184,7 +184,7 @@ export default class DinoListView extends Component {
                   fontSize: 15
                 }}
               >
-                Make a Selection!
+                Pick a dinosaur!
               </Text>
             </View>
           )}
@@ -194,7 +194,7 @@ export default class DinoListView extends Component {
               onPress={() => this.setItemAsActive(this.state.activeItem)}
               style={[s.renderItem, s.activeItem]}
             >
-          
+
 
             <AutoHeightImage
          width={300}

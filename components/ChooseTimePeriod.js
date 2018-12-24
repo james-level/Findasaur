@@ -403,7 +403,11 @@ export default class ChooseTimePeriod extends Component {
           paginationItems={this.state.items}// Pass the same list as data
           paginationItemPadSize={2}
         />
-        </View>)
+
+        
+        </View>
+
+      )
       }
 
       else {
