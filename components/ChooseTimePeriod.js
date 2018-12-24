@@ -207,14 +207,13 @@ export default class ChooseTimePeriod extends Component {
 
     var numberOfDinosaurs = this.state.dinosaurs.length;
     var lowerIndexLimit = numberOfDinosaurs - 20;
-    var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
-    var upperDinosaurIndex = lowerDinosaurIndex + 20;
-    var dinosaurs = this.state.dinosaurs.slice(0, 20);
+    const lowerDinosaurIndex = Math.random() * lowerIndexLimit;
+    const upperDinosaurIndex = lowerDinosaurIndex + 20;
+    var dinosaurs = this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex);
 
     Promise.all(dinosaurs.map((dinosaur) => {
       const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
       return this.retrieveWikiDescription(url);
-
     }))
     .then(() => {
       /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
@@ -231,7 +230,6 @@ export default class ChooseTimePeriod extends Component {
           return this.retrieveImage(imgUrl);
         }))
         .then((imageObject) => {
-
           this.addImageToState(imageObject);
         })
       })
@@ -398,9 +396,14 @@ export default class ChooseTimePeriod extends Component {
 
       else {
 
+        var numberOfDinosaurs = this.state.dinosaurs.length;
+        var lowerIndexLimit = numberOfDinosaurs - 20;
+        const lowerDinosaurIndex = Math.random() * lowerIndexLimit;
+        const upperDinosaurIndex = lowerDinosaurIndex + 20;
+
         return (
 
-          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(0, 20)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }
