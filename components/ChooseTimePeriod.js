@@ -115,7 +115,7 @@ export default class ChooseTimePeriod extends Component {
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    this.retrieveImages = this.retrieveImages.bind(this);
+    this.retrieveImagesAndDescriptions = this.retrieveImagesAndDescriptions.bind(this);
     this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
     this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
   }
@@ -215,7 +215,7 @@ export default class ChooseTimePeriod extends Component {
     return array;
   }
 
-  retrieveImages(){
+  retrieveImagesAndDescriptions(){
 
     var numberOfDinosaurs = this.state.dinosaurs.length;
     var lowerIndexLimit = numberOfDinosaurs - 20;
@@ -267,7 +267,7 @@ export default class ChooseTimePeriod extends Component {
         carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
-      }, function(){ this.retrieveImages() })
+      }, function(){ this.retrieveImagesAndDescriptions() })
       })
   }
 
