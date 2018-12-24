@@ -5,9 +5,7 @@ import AppStyle from './Stylesheets/AppStyle.js';
 
 global.self = global;
 
-
 export default class App extends React.Component {
-
 
   render() {
     return (

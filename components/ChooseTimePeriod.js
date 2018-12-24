@@ -11,6 +11,7 @@ import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
+import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -362,7 +363,7 @@ export default class ChooseTimePeriod extends Component {
 
     return (
 
-      <View style={[ s.container ]}>
+      <View style={[ ChooseTimePeriodStyle.container ]}>
       {/*  <NavBar home={this.props.home}/> */}
         <FlatList
             ref={r => this.refs = r}
@@ -433,13 +434,3 @@ export default class ChooseTimePeriod extends Component {
       }
   }
 }
-
-const s = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    padding: 0,
-    margin: 0
-
-  }
-});
