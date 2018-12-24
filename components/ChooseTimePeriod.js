@@ -205,6 +205,10 @@ export default class ChooseTimePeriod extends Component {
 
   retrieveImages(){
 
+    var numberOfDinosaurs = this.state.dinosaurs.length;
+    var lowerIndexLimit = numberOfDinosaurs - 20;
+    var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
+    var upperDinosaurIndex = lowerDinosaurIndex + 20;
     var dinosaurs = this.state.dinosaurs.slice(0, 20);
 
     Promise.all(dinosaurs.map((dinosaur) => {
