@@ -117,6 +117,7 @@ export default class ChooseTimePeriod extends Component {
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.retrieveImages = this.retrieveImages.bind(this);
     this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
+    this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
   }
 
   componentDidMount(){
@@ -166,9 +167,17 @@ export default class ChooseTimePeriod extends Component {
       })
     }
 
+  saveDescriptionToState(response){
+    this.setState({
+      dinosaurDescriptions: [...this.state.dinosaurDescriptions, response.json()]
+    }, function(){ console.log("Descriptions in state", this.state.dinosaurDescriptions) }
+)
+  }
+
   retrieveWikiDescription(url){
     return fetch(url)
-      .then((response) => response.json());
+      .then((response) => this.saveDescriptionToState(response)
+    )
   }
 
   retrieveImageFileName(url){
