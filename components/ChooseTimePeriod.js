@@ -207,8 +207,8 @@ export default class ChooseTimePeriod extends Component {
 
     var numberOfDinosaurs = this.state.dinosaurs.length;
     var lowerIndexLimit = numberOfDinosaurs - 20;
-    const lowerDinosaurIndex = Math.random() * lowerIndexLimit;
-    const upperDinosaurIndex = lowerDinosaurIndex + 20;
+    var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
+    var upperDinosaurIndex = lowerDinosaurIndex + 20;
     var dinosaurs = this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex);
 
     Promise.all(dinosaurs.map((dinosaur) => {
@@ -398,8 +398,8 @@ export default class ChooseTimePeriod extends Component {
 
         var numberOfDinosaurs = this.state.dinosaurs.length;
         var lowerIndexLimit = numberOfDinosaurs - 20;
-        const lowerDinosaurIndex = Math.random() * lowerIndexLimit;
-        const upperDinosaurIndex = lowerDinosaurIndex + 20;
+        var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
+        var upperDinosaurIndex = lowerDinosaurIndex + 20;
 
         return (
 
