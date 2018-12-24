@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
 import DinoListView from './DinoListView.js';
+import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -372,6 +373,12 @@ export default class ChooseTimePeriod extends Component {
             pagingEnabled
             renderItem={this._renderItem}
         />
+        {
+            this.state.imagesLoading ? (
+          < BarIndicator count={7} size={30} color={'green'} style={{top: '-10%', backgroundColor: 'black'}} />
+        ) : null
+      }
+
             <Pagination
         // DotThemeLight
           horizontal
@@ -404,7 +411,7 @@ export default class ChooseTimePeriod extends Component {
           paginationItemPadSize={2}
         />
 
-        
+
         </View>
 
       )
