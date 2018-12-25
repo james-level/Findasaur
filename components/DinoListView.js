@@ -231,6 +231,7 @@ export default class DinoListView extends Component {
                     {this.capitaliseDiet(this.state.activeItem.diet)}
                   </Text>
               </Text>
+              
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
