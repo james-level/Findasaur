@@ -222,13 +222,15 @@ export default class DinoListView extends Component {
 
 
             <AutoHeightImage
-            onPress={() => {
-              this.setModalVisible(true);
-          }}
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
-              <Text> {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)} <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>{this.capitaliseDiet(this.state.activeItem.diet)} </Text> </Text>
+              <Text onPress={() => { this.setModalVisible(true) }}>
+                {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
+                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>
+                    {this.capitaliseDiet(this.state.activeItem.diet)}
+                  </Text>
+              </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
