@@ -293,7 +293,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   filterByGenusName(dinosaurs) {
-    const filteredDinosaurs = dinosaurs.reduce((uniqueDinosaurs, dinosaur,   oldIndex) => {
+    const filteredDinosaurs = dinosaurs.reduce((uniqueDinosaurs, dinosaur, oldIndex) => {
       const dinosaurIsUnique = !uniqueDinosaurs.some((uniqueDinosaur) => {
         return uniqueDinosaur.name === dinosaur.name;
       });
@@ -429,7 +429,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView images={this.state.images} allDinosaurs={this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions.slice(lowerDinosaurIndex, upperDinosaurIndex)} allDinosaurs={this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }
