@@ -32,6 +32,15 @@ export default class DinoListView extends Component {
     };
   }
 
+  capitaliseDiet(diet){
+    if (diet){
+    return "- " + diet.charAt(0).toUpperCase() + diet.slice(1);
+  }
+    else {
+      return;
+    }
+  }
+
   populateDinosaurs(dinosaurs){
 
     console.log("DINOS TO RENDER", dinosaurs);
@@ -49,7 +58,8 @@ export default class DinoListView extends Component {
         'Other'
       ]),
       email: 'Ha',
-      locations: dinosaurs[i].coords
+      locations: dinosaurs[i].coords,
+      diet: dinosaurs[i].diet
   }))
 }
 
@@ -98,8 +108,6 @@ export default class DinoListView extends Component {
           ]}
         >
         <Image style={s.fossil} source={require('../assets/icons/fossil.png')}/>
-
-
 
           <Text
             style={[
@@ -201,7 +209,7 @@ export default class DinoListView extends Component {
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
-              <Text> {this.state.activeItem.name} </Text>
+              <Text> {this.state.activeItem.name} {this.capitaliseDiet(this.state.activeItem.diet)} </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
