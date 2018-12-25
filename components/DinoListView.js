@@ -34,10 +34,28 @@ export default class DinoListView extends Component {
 
   capitaliseDiet(diet){
     if (diet){
-    return "- " + diet.charAt(0).toUpperCase() + diet.slice(1);
+    return diet.charAt(0).toUpperCase() + diet.slice(1);
   }
     else {
       return;
+    }
+  }
+
+  addPrecedingDash(diet){
+    if (diet){
+      return "- ";
+    }
+  }
+
+  getDietTextColor(diet){
+    if (diet === "carnivore"){
+      return 'red';
+    }
+    if (diet === "herbivore"){
+      return 'green';
+    }
+    else {
+      return 'black';
     }
   }
 
@@ -209,7 +227,7 @@ export default class DinoListView extends Component {
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
-              <Text> {this.state.activeItem.name} {this.capitaliseDiet(this.state.activeItem.diet)} </Text>
+              <Text> {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)} <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>{this.capitaliseDiet(this.state.activeItem.diet)} </Text> </Text>
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
