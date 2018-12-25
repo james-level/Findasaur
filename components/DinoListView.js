@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import {ImageBackground} from 'react-native';
+import ImageBackground from 'react-native';
 import FitImage from 'react-native-fit-image';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  LayoutAnimation,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { LinearGradient } from 'expo';
 import _ from 'lodash';
 import { MockRobotsList } from './FakerMocks';
 import Pagination from 'react-native-pagination';
@@ -28,8 +20,14 @@ export default class DinoListView extends Component {
       isLoading: false,
       activeId: null,
       activeItem: null,
+      modalVisible: false,
       items: this.populateDinosaurs(this.props.allDinosaurs)
     };
+    this.setModalVisible = this.setModalVisible.bind(this);
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
   capitaliseDiet(diet){
@@ -224,6 +222,9 @@ export default class DinoListView extends Component {
 
 
             <AutoHeightImage
+            onPress={() => {
+              this.setModalVisible(true);
+          }}
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
@@ -323,6 +324,50 @@ export default class DinoListView extends Component {
             paginationItemPadSize={3}
           />
         </View>
+
+        <View>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+            }}>
+            <View>
+
+          <LinearGradient
+          colors={['black', '#1e932d']}
+          style={{ padding: 25 }}>
+
+            <View style={DinoListViewStyle.infoModal}>
+
+                <ScrollView>
+                  <Text style= {[DinoListViewStyle.infoModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
+                    <View style={{alignItems: "center"}}>
+                      <Image source={require('../assets/Dino_images/friendlydino.gif')} style={{height: 150, width: 225}}/>
+                    </View>
+                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur, an app by<Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears.</Text><Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>They can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative.</Text></Text></Text>
+
+                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur looks to educate users on various dinosaurs from a range of eras. It utilises the Wikipedia API to provide information relating to aspects of each speciment, such as diet and location (of fossil finds)</Text>
+
+                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur is based on an exisitng webproject (Findasaurus), however the conversion to ReactNative is soley ours. Icons provided by 'FlatIcons'. This app is an not-for-profit project.</Text>
+
+                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
+                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
+
+                  <TouchableHighlight
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                    }}>
+                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+                  </TouchableHighlight>
+                  </ScrollView>
+                </View>
+                </LinearGradient>
+              </View>
+            </Modal>
+          </View>
+
       </View>
     );
   }
