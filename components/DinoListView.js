@@ -55,6 +55,12 @@ export default class DinoListView extends Component {
     }
   }
 
+  renderMatches(dinosaurs){
+    return dinosaurs.map((dinosaur) =>
+      <Text style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
+    )
+  }
+
   getDietTextColor(diet){
     if (diet === "carnivore"){
       return 'red';
@@ -354,26 +360,22 @@ export default class DinoListView extends Component {
         </View>
 
 
-        <View>
+        <View style={{position: 'relative', top: '-40%'}}>
       <Autocomplete
         autoCapitalize="none"
         autoCorrect={false}
-
         data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
         defaultValue={query}
         onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
         placeholder="Search for a dinosaur by name"
         renderItem={({ dinosaur }) => (
           <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: dinosaur })}>
-            <Text>
-              {dinosaur}
-            </Text>
           </TouchableOpacity>
         )}
       />
-      <View>
+      <View style={{backgroundColor: 'white'}}>
         {dinosaurs.length > 0 ? (
-          this.setModalVisible()
+          this.renderMatches(dinosaurs)
         ) : (
           <Text>
             Search for a dinosaur by name
