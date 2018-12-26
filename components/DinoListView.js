@@ -23,7 +23,7 @@ export default class DinoListView extends Component {
       activeId: null,
       activeItem: null,
       modalVisible: false,
-      items: this.populateDinosaurs(this.props.allDinosaurs)
+      items: this.populateDinosaurs(this.props.everySingleDinosaur)
     };
     this.setModalVisible = this.setModalVisible.bind(this);
   }
