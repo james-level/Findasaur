@@ -18,6 +18,7 @@ export default class DinoListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dinosaurClicked: "",
       dinosaurTyped: "",
       dinosaurViewVisible: false,
       isLoading: false,
@@ -28,6 +29,8 @@ export default class DinoListView extends Component {
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
+    this.updateClickedDinosaur = this.updateClickedDinosaur.bind(this);
+    this.closeDinosaurView = this.closeDinosaurView.bind(this);
   }
 
   setModalVisible(visible) {
@@ -35,9 +38,21 @@ export default class DinoListView extends Component {
     this.setState({modalVisible: visible});
   }
 
+  updateClickedDinosaur(i){
+  console.log("DINO", i);
+  }
+
   toggleDinosaurView() {
-    console.log("HELLLLLLLLLL");
-    this.setState({dinosaurViewVisible: !this.state.dinosaurViewVisible});
+    this.setState({
+      dinosaurViewVisible: !this.state.dinosaurViewVisible
+    });
+  }
+
+  closeDinosaurView(){
+    this.setState({
+      dinosaurViewVisible: false
+    });
+
   }
 
   capitaliseDiet(diet){
@@ -56,6 +71,10 @@ export default class DinoListView extends Component {
     )
   }
 
+  returnClickedDinosaur(){
+    return this.state.clickedDinosaur;
+  }
+
   addPrecedingDash(diet){
     if (diet){
       return "- ";
@@ -64,7 +83,10 @@ export default class DinoListView extends Component {
 
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur) =>
-      <Text onPress={this.toggleDinosaurView} style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
+      <TouchableOpacity onPress={this.updateClickedDinosaur(i)} key={((new Date).getTime() + Math.random())}>
+      <Text style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
+      </TouchableOpacity>
+
     )
   }
 
@@ -92,8 +114,6 @@ export default class DinoListView extends Component {
  }
 
   populateDinosaurs(dinosaurs){
-
-    console.log("DINOS TO RENDER", dinosaurs);
 
     return new _.times(dinosaurs.length, (i) => ({
       id: i,
@@ -136,8 +156,6 @@ export default class DinoListView extends Component {
   }
 
   renderItem = (o, i) => {
-
-
     return (
       <View
         style={{
@@ -276,8 +294,6 @@ export default class DinoListView extends Component {
             </TouchableOpacity>
           )}
 
-
-
         </View>
 
         <View style={{ flex: 1, height, width }}>
@@ -377,7 +393,7 @@ export default class DinoListView extends Component {
         onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
         placeholder="Search for a dinosaur by name"
         renderItem={({ dinosaur }) => (
-          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}       ` })}>
+          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
           </TouchableOpacity>
         )}
       />
@@ -451,17 +467,11 @@ export default class DinoListView extends Component {
             <View style={DinoListViewStyle.infoModal}>
 
                 <ScrollView>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
-                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> {this.returnClickedDinosaur()} </Text>
 
                   <TouchableHighlight
                     onPress={() => {
-                      this.toggleDinosaurView(!this.state.dinosaurViewVisible);
+                      this.closeDinosaurView();
                     }}>
                   <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
                   </TouchableHighlight>
