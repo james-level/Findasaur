@@ -11,6 +11,7 @@ import AutoHeightImage from 'react-native-auto-height-image';
 const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
+import Autocomplete from 'react-native-autocomplete-input';
 
 export default class DinoListView extends Component {
 
@@ -27,6 +28,7 @@ export default class DinoListView extends Component {
   }
 
   setModalVisible(visible) {
+    console.log("DINOSAURS", this.state.items);
     this.setState({modalVisible: visible});
   }
 
@@ -37,6 +39,11 @@ export default class DinoListView extends Component {
     else {
       return;
     }
+  }
+
+  buildDinosaurNameList(){
+    this.state.items.map(dinosaur => dinosaur.name
+    )
   }
 
   addPrecedingDash(diet){
@@ -231,7 +238,7 @@ export default class DinoListView extends Component {
                     {this.capitaliseDiet(this.state.activeItem.diet)}
                   </Text>
               </Text>
-              
+
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}

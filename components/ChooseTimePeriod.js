@@ -145,7 +145,6 @@ export default class ChooseTimePeriod extends Component {
       var latest_date = this.state.viewableItems[0].item.latest_date;
       this.getDinosaursForPeriod(earliest_date, latest_date);
     })
-
   }
 
   toggleDinosaurListView(){

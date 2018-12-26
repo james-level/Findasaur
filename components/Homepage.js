@@ -55,9 +55,7 @@ export default class Homepage extends React.Component {
 
     return (
 
-
       <SafeAreaView style={HomepageStyle.container}>
-
 
       {/*<ImageBackground
         source={require('../assets/Dino_images/foliage.png')}
