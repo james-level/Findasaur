@@ -373,15 +373,13 @@ export default class DinoListView extends Component {
           </TouchableOpacity>
         )}
       />
-      <View style={{backgroundColor: 'white'}}>
+      <ScrollView style={{backgroundColor: 'white'}}>
         {dinosaurs.length > 0 ? (
           this.renderMatches(dinosaurs)
         ) : (
-          <Text>
-            Search for a dinosaur by name
-          </Text>
+          null
         )}
-      </View>
+      </ScrollView>
     </View>
 
         <View>
