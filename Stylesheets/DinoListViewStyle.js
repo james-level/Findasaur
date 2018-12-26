@@ -7,36 +7,6 @@ const DinoListViewStyle = StyleSheet.create({
     textAlignVertical: 'center',
     textAlign: 'center'
   },
-  infoModal:{
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  infoModalHeading:{
-    color: 'limegreen',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 50,
-    fontSize: 30,
-    backgroundColor: 'transparent',
-  },
-  infoModalBody:{
-    color: 'limegreen',
-    paddingTop: 50,
-    fontSize: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-  },
-  infoModalText: {
-    fontSize: 17,
-    color: 'white',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
-  },
   renderItem: {
 
     justifyContent: 'center',
