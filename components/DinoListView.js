@@ -18,6 +18,7 @@ export default class DinoListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dinosaurTyped: "",
       isLoading: false,
       activeId: null,
       activeItem: null,
@@ -42,7 +43,9 @@ export default class DinoListView extends Component {
   }
 
   buildDinosaurNameList(){
-    this.state.items.map(dinosaur => dinosaur.name
+    dinosaurs = this.state.items;
+
+    return this.state.items.map(dinosaur => dinosaur.name
     )
   }
 
@@ -63,6 +66,17 @@ export default class DinoListView extends Component {
       return 'black';
     }
   }
+
+  findDinosaur(query) {
+   if (query === '') {
+     return [];
+   }
+
+   const dinosaurs = this.buildDinosaurNameList();
+   const regex = new RegExp(`${query.trim()}`, 'i');
+   console.log(dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0));
+   return dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0);
+ }
 
   populateDinosaurs(dinosaurs){
 
@@ -160,6 +174,10 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
+    console.log("LIST RETURN", this.buildDinosaurNameList());
+    const query = this.state.dinosaurTyped;
+    const dinosaurs = this.findDinosaur(query);
+    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
     const ListEmptyComponent = () => (
       <View
@@ -334,6 +352,35 @@ export default class DinoListView extends Component {
             paginationItemPadSize={3}
           />
         </View>
+
+
+        <View>
+      <Autocomplete
+        autoCapitalize="none"
+        autoCorrect={false}
+
+        data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
+        defaultValue={query}
+        onChangeText={text => this.setState({ query: text })}
+        placeholder="Search for a dinosaur by name"
+        renderItem={({ title, release_date }) => (
+          <TouchableOpacity onPress={() => this.setState({ query: title })}>
+            <Text style={styles.itemText}>
+              {title} ({release_date.split('-')[0]})
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+      <View style={styles.descriptionContainer}>
+        {films.length > 0 ? (
+          AutocompleteExample.renderFilm(films[0])
+        ) : (
+          <Text style={styles.infoText}>
+            Search for a dinosaur by name
+          </Text>
+        )}
+      </View>
+    </View>
 
         <View>
           <Modal
