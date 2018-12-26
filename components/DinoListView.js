@@ -19,6 +19,7 @@ export default class DinoListView extends Component {
     super(props);
     this.state = {
       dinosaurTyped: "",
+      dinosaurViewVisible: false,
       isLoading: false,
       activeId: null,
       activeItem: null,
@@ -26,11 +27,17 @@ export default class DinoListView extends Component {
       items: this.populateDinosaurs(this.props.everySingleDinosaur)
     };
     this.setModalVisible = this.setModalVisible.bind(this);
+    this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
   }
 
   setModalVisible(visible) {
     console.log("DINOSAURS", this.state.items);
     this.setState({modalVisible: visible});
+  }
+
+  toggleDinosaurView() {
+    console.log("HELLLLLLLLLL");
+    this.setState({dinosaurViewVisible: !this.state.dinosaurViewVisible});
   }
 
   capitaliseDiet(diet){
@@ -57,7 +64,7 @@ export default class DinoListView extends Component {
 
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur) =>
-      <Text style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
+      <Text onPress={this.toggleDinosaurView} style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
     )
   }
 
@@ -425,6 +432,48 @@ export default class DinoListView extends Component {
               </View>
             </Modal>
           </View>
+
+          /* Modal for individual dinosaur view */
+          <View>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.dinosaurViewVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+            }}>
+            <View>
+
+          <LinearGradient
+          colors={['black', '#1e932d']}
+          style={{ padding: 25 }}>
+
+            <View style={DinoListViewStyle.infoModal}>
+
+                <ScrollView>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+                  <Text> HHHHHHHHHHHHHHHHH</Text>
+
+                  <TouchableHighlight
+                    onPress={() => {
+                      this.toggleDinosaurView(!this.state.dinosaurViewVisible);
+                    }}>
+                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+                  </TouchableHighlight>
+                  </ScrollView>
+                </View>
+                </LinearGradient>
+              </View>
+            </Modal>
+          </View>
+
+          /* End of modal for individual dinosaur view */
+
 
       </View>
     );
