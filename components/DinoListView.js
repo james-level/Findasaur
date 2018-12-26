@@ -360,26 +360,27 @@ export default class DinoListView extends Component {
         </View>
 
 
-        <View style={{position: 'relative', top: '-40%'}}>
+        <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15}}>
       <Autocomplete
         autoCapitalize="none"
         autoCorrect={false}
+        containerStyle={{width: 250}}
         data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
         defaultValue={query}
         onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
         placeholder="Search for a dinosaur by name"
         renderItem={({ dinosaur }) => (
-          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: dinosaur })}>
+          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}       ` })}>
           </TouchableOpacity>
         )}
       />
-      <ScrollView style={{backgroundColor: 'white'}}>
+      <View style={{backgroundColor: 'white', paddingLeft: 10, paddingRight: 10}}>
         {dinosaurs.length > 0 ? (
           this.renderMatches(dinosaurs)
         ) : (
-          null
+          <Text> </Text>
         )}
-      </ScrollView>
+      </View>
     </View>
 
         <View>
