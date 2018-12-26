@@ -361,21 +361,21 @@ export default class DinoListView extends Component {
 
         data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
         defaultValue={query}
-        onChangeText={text => this.setState({ query: text })}
+        onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
         placeholder="Search for a dinosaur by name"
-        renderItem={({ title, release_date }) => (
-          <TouchableOpacity onPress={() => this.setState({ query: title })}>
-            <Text style={styles.itemText}>
-              {title} ({release_date.split('-')[0]})
+        renderItem={({ dinosaur }) => (
+          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: dinosaur })}>
+            <Text>
+              {dinosaur}
             </Text>
           </TouchableOpacity>
         )}
       />
-      <View style={styles.descriptionContainer}>
-        {films.length > 0 ? (
-          AutocompleteExample.renderFilm(films[0])
+      <View>
+        {dinosaurs.length > 0 ? (
+          this.setModalVisible()
         ) : (
-          <Text style={styles.infoText}>
+          <Text>
             Search for a dinosaur by name
           </Text>
         )}
