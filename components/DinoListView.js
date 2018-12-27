@@ -355,7 +355,7 @@ export default class DinoListView extends Component {
             }}
           >
 
-{/* This below icon (ios-globe-outline) is currently linked to 'delete' need to redirect to a AMP view (of all dinos)*/}
+{/* This below icon (ios-globe-outline) is currently linked to 'delete' need to redirect to a MAP view (of all dinos)*/}
             <Ionicons
               name={'ios-globe-outline'}
               size={25}
