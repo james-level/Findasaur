@@ -36,8 +36,8 @@ export default class DinoListView extends Component {
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
   }
 
-  retrieveInitialImageLink(){
-    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+  retrieveInitialImageLink(dinosaur){
+    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
 
     axios.get(imageUrl).then( (response) => {
 
@@ -46,7 +46,7 @@ export default class DinoListView extends Component {
         this.retrieveImageUrl(response.data)
 
         })
-    }).catch(function(error){
+    .catch(function(error){
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
@@ -57,18 +57,21 @@ export default class DinoListView extends Component {
   }
 
   retrieveImageUrl(imageObject){
-    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${imageObject}&prop=imageinfo&iiprop=url&format=json&origin=*`
+    var object = this.props.getImageAddress(imageObject);
+    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
 
     axios.get(imgUrl).then( (response) => {
 
       console.log("IMG TWO RESP", response.data);
 
         this.setState({
-          searchedDinosaurImage:
+          searchedDinosaurImage: this.props.handleImageUrl(response.data)
+        }, function(){
+          this.setState({searchDataLoading: false})
         })
 
         })
-    }).catch(function(error){
+    .catch(function(error){
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
@@ -92,7 +95,7 @@ export default class DinoListView extends Component {
       })
 
         })
-    }).catch(function(error){
+    .catch(function(error){
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
@@ -129,7 +132,7 @@ export default class DinoListView extends Component {
         this.setState({
           searchedDinosaurData: dinosaur,
         },
-        function(){ this.setState({searchDataLoading: false})
+        function(){ this.retrieveDescription(this.state.clickedDinosaur)
         console.log("SEAR", this.state.searchDataLoading);
       })
       }
@@ -346,10 +349,11 @@ export default class DinoListView extends Component {
                   color: 'rgba(0,0,0,.4)',
                   textAlign: 'center',
                   fontWeight: '400',
-                  fontSize: 15
+                  fontSize: 15,
+                  margin: 15
                 }}
               >
-                Pick a dinosaur!
+                Pick a dinosaur! If you can't find the dinosaur you're looking for, type its name into the search bar!
               </Text>
             </View>
           )}
