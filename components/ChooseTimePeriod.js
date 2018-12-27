@@ -18,6 +18,7 @@ export default class ChooseTimePeriod extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      slicedDinosaurs: null,
       imagesLoading: false,
       images: [],
       dinosaurDescriptions: [],
@@ -196,8 +197,8 @@ export default class ChooseTimePeriod extends Component {
     objects.forEach((object) => {
       if (object.query.pages["-1"].imageinfo === undefined) {
         // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
-         /* newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg') */
-         objects.pop(object);
+         newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg');
+         // objects.pop(object);
       }
       else {
         const url = object.query.pages["-1"].imageinfo[0].url;
@@ -224,31 +225,35 @@ export default class ChooseTimePeriod extends Component {
     var upperDinosaurIndex = lowerDinosaurIndex + 20;
     var dinosaurs = this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex);
 
-    Promise.all(dinosaurs.map((dinosaur) => {
-      const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
-      return this.retrieveWikiDescription(url);
-    }))
-    .then(() => {
-      /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
-      /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
-      Promise.all(dinosaurs.map((dinosaur) => {
-        const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
-        return this.retrieveImageFileName(imageUrl)
+    this.setState({slicedDinosaurs: dinosaurs}, function(){
+
+      Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
+        const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+        return this.retrieveWikiDescription(url);
       }))
-      .then((images) => {
-        const imageObject = images;
-        const imgAddress = this.getImageAddress(imageObject);
-        Promise.all(imgAddress.map((object) => {
-          const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
-          return this.retrieveImage(imgUrl);
+      .then(() => {
+        /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
+        /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
+        Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
+          const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+          return this.retrieveImageFileName(imageUrl)
         }))
-        .then((imageObject) => {
-          this.addImageToState(imageObject);
+        .then((images) => {
+          const imageObject = images;
+          const imgAddress = this.getImageAddress(imageObject);
+          Promise.all(imgAddress.map((object) => {
+            const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+            return this.retrieveImage(imgUrl);
+          }))
+          .then((imageObject) => {
+            this.addImageToState(imageObject);
+          })
         })
       })
-    })
-    .catch((err) => {
-      console.error(err);
+      .catch((err) => {
+        console.error(err);
+      })
+
     })
   }
 
@@ -428,7 +433,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions.slice(lowerDinosaurIndex, upperDinosaurIndex)} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex)} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }

@@ -129,6 +129,7 @@ export default class DinoListView extends Component {
 }
 
   returnImageFromStored(){
+    console.log("IMAGES", this.props.images);
     return this.props.images[0][this.state.activeItem.index];
   }
 
@@ -200,7 +201,7 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
-    console.log("LIST RETURN", this.buildDinosaurNameList());
+
     const query = this.state.dinosaurTyped;
     const dinosaurs = this.findDinosaur(query);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
