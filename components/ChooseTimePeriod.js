@@ -28,6 +28,7 @@ export default class ChooseTimePeriod extends Component {
       carnivores: null,
       omnivores: null,
       imagesLoaded: false,
+      backClicked: false,
       items: [
 
         {
@@ -121,6 +122,7 @@ export default class ChooseTimePeriod extends Component {
     this.retrieveImagesAndDescriptions = this.retrieveImagesAndDescriptions.bind(this);
     this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
     this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
+    this.returnToErasPage = this.returnToErasPage.bind(this);
   }
 
   componentDidMount(){
@@ -257,6 +259,12 @@ export default class ChooseTimePeriod extends Component {
     })
   }
 
+  returnToErasPage(){
+    this.state({
+      backClicked: true
+    })
+  }
+
   getDinosaursForPeriod(earliest_date, latest_date){
 
     var self = this;
@@ -361,7 +369,7 @@ export default class ChooseTimePeriod extends Component {
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
 
-    if (this.state.imagesLoaded === false){
+    if (this.state.imagesLoaded === false || this.state.backClicked){
 
       const NavBar = Platform.OS === 'ios' ? NavBarIOSLight : NavBarAndroidLight
 
@@ -433,7 +441,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }
