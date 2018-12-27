@@ -291,6 +291,7 @@ export default class DinoListView extends Component {
           flex: 4,
           // height:40,
           margin: 5,
+          marginTop: 70,
           justifyContent: 'center',
           alignItems: 'center'
         }}
@@ -377,8 +378,8 @@ export default class DinoListView extends Component {
     return (
       <View style={[s.container]}>
 
-
         <View style={s.innerContainer}>
+
           {!this.state.activeItem && (
             <View
               style={{
@@ -387,12 +388,6 @@ export default class DinoListView extends Component {
                 flex: 1
               }}
             >
-            <TouchableHighlight
-              onPress={() => {
-                this.props.returnToErasPage();
-              }}>
-            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-            </TouchableHighlight>
               <Text
                 style={{
                   textAlignVertical: 'center',
@@ -543,6 +538,13 @@ export default class DinoListView extends Component {
         )}
       </View>
     </View>
+
+    <TouchableHighlight
+      onPress={() => {
+        this.props.returnToErasPage();
+      }}>
+    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10}}/>
+    </TouchableHighlight>
 
         <View>
           <Modal
