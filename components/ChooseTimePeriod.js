@@ -141,7 +141,16 @@ export default class ChooseTimePeriod extends Component {
 
     this.setState({
 
-      imagesLoading: true
+      imagesLoading: true,
+      backClicked: false,
+      images: [],
+      dinosaurDescriptions: [],
+      dinosaurs: null,
+      diets: null,
+      herbivores: null,
+      carnivores: null,
+      omnivores: null,
+      imagesLoaded: false
 
     }, function(){
       var earliest_date = this.state.viewableItems[0].item.earliest_date;
@@ -260,7 +269,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   returnToErasPage(){
-    this.state({
+    this.setState({
       backClicked: true
     })
   }

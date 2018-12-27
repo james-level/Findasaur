@@ -387,6 +387,12 @@ export default class DinoListView extends Component {
                 flex: 1
               }}
             >
+            <TouchableHighlight
+              onPress={() => {
+                this.props.returnToErasPage();
+              }}>
+            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+            </TouchableHighlight>
               <Text
                 style={{
                   textAlignVertical: 'center',
