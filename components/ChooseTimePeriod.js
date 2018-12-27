@@ -381,7 +381,7 @@ export default class ChooseTimePeriod extends Component {
         {
             this.state.imagesLoading ? (
               <View style={{backgroundColor: 'black', top: '-20%'}}>
-                < BallIndicator count={7} size={50} color={'green'} style={{backgroundColor: 'black'}} />
+                < BallIndicator count={7} size={50} color={'limegreen'} style={{backgroundColor: 'black'}} />
               </View>
         ) : null
       }
