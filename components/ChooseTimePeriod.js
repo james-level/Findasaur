@@ -386,7 +386,7 @@ export default class ChooseTimePeriod extends Component {
           horizontal
           dotOnPress={(o) => console.log(' clicked: ', o)}
           hideEmptyDots
-            pagingEnabled
+          pagingEnabled
           startDotIconFamily="Ionicons"
           startDotIconName="ios-arrow-back"
           startDotIconColor="#66CD00"
@@ -397,7 +397,6 @@ export default class ChooseTimePeriod extends Component {
           endDotIconColor="#66CD00"
           dotIconName="ios-close"
             hideEmptyDots
-
           dotEmptyHide
           dotIconColorActive="#66CD00"
           dotIconColorNotActive="#66CD00"
@@ -405,14 +404,12 @@ export default class ChooseTimePeriod extends Component {
           dotIconSizeActive={15}
           /*
            *  DotIconSizeNotActive={10}
-
            */
           listRef={this.refs}// To allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
           paginationVisibleItems={this.state.viewableItems}// Needs to track what the user sees
           paginationItems={this.state.items}// Pass the same list as data
           paginationItemPadSize={2}
         />
-
 
         </View>
 

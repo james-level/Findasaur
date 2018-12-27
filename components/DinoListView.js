@@ -171,21 +171,20 @@ export default class DinoListView extends Component {
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: 'limegreen', borderRadius: 10 }
+              ? { backgroundColor: 'black', borderRadius: 10 }
               : { backgroundColor: 'black' }
           ]}
         >
-        <Image style={s.fossil} source={require('../assets/icons/fossil.png')}/>
+        <Image style={s.fossil} source={require('../assets/icons/footprint.png')}/>
 
           <Text
             style={[
               s.name2,
               this.state.activeId === o.item.id
                 ? { color: 'limegreen' }
-                : { color: '#ffffff' }
+                : { color: 'white' }
             ]}
           >
-
             {o.item.name ? o.item.name : 'no name attribute'}
           </Text>
 
