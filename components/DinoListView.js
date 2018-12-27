@@ -83,7 +83,7 @@ export default class DinoListView extends Component {
 
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur, i) =>
-      <TouchableOpacity onPress={this.updateClickedDinosaur(i)} key={((new Date).getTime() + Math.random())}>
+      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaur}, function(){ this.toggleDinosaurView() })} key={((new Date).getTime() + Math.random())}>
       <Text style={{color: 'black', fontSize: 16}} key={((new Date).getTime() + Math.random())}>{dinosaur}</Text>
       </TouchableOpacity>
 
