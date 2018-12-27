@@ -3,6 +3,7 @@ import ImageBackground from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import { LinearGradient } from 'expo';
 import _ from 'lodash';
 import { MockRobotsList } from './FakerMocks';
@@ -25,21 +26,25 @@ export default class DinoListView extends Component {
       activeId: null,
       activeItem: null,
       modalVisible: false,
-      items: this.populateDinosaurs(this.props.allDinosaurs)
+      items: this.populateDinosaurs(this.props.allDinosaurs),
+      searchDataLoading: false
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
+    this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
   }
 
   setModalVisible(visible) {
-    console.log("DINOSAURS", this.state.items);
     this.setState({modalVisible: visible});
   }
 
   toggleDinosaurView() {
     this.setState({
-      dinosaurViewVisible: !this.state.dinosaurViewVisible
+      dinosaurViewVisible: !this.state.dinosaurViewVisible,
+      searchDataLoading: true
+    }, function(){
+      this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
     });
   }
 
@@ -47,7 +52,20 @@ export default class DinoListView extends Component {
     this.setState({
       dinosaurViewVisible: false
     });
+  }
 
+  retrieveSearchedDinosaurData(dinosaur){
+    console.log("DINOSAURS", this.props.everySingleDinosaur);
+    for (dinosaur of this.props.everySingleDinosaur){
+      if (dinosaur.name == this.state.clickedDinosaur){
+        this.setState({
+          searchedDinosaurData: dinosaur,
+        },
+        function(){ this.setState({searchDataLoading: false})
+        console.log("SEAR", this.state.searchDataLoading);
+      })
+      }
+    }
   }
 
   capitaliseDiet(diet){
@@ -201,6 +219,8 @@ export default class DinoListView extends Component {
     this.setState({ viewableItems });
 
   render() {
+
+    const self = this;
 
     const query = this.state.dinosaurTyped;
     const dinosaurs = this.findDinosaur(query);
@@ -446,6 +466,9 @@ export default class DinoListView extends Component {
           </View>
 
           /* Modal for individual dinosaur view */
+          {
+            self.state.searchedDinosaurData ? (
+
           <View>
           <Modal
             animationType="slide"
@@ -463,7 +486,16 @@ export default class DinoListView extends Component {
             <View style={DinoListViewStyle.infoModal}>
 
                 <ScrollView>
-                  <Text> {this.returnClickedDinosaur()} </Text>
+
+                {
+                  self.state.searchDataLoading ? (
+                    < BallIndicator count={7} size={50} color={'green'} style={{backgroundColor: 'black'}} />
+                ) :
+
+                  <Text> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
+
+
+              }
 
                   <TouchableHighlight
                     onPress={() => {
@@ -477,6 +509,9 @@ export default class DinoListView extends Component {
               </View>
             </Modal>
           </View>
+          
+        ) : null
+      }
 
           /* End of modal for individual dinosaur view */
 
