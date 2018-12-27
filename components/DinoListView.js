@@ -13,6 +13,7 @@ const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
 import Autocomplete from 'react-native-autocomplete-input';
+import axios from 'axios';
 
 export default class DinoListView extends Component {
 
@@ -33,6 +34,73 @@ export default class DinoListView extends Component {
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
+  }
+
+  retrieveInitialImageLink(){
+    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+
+    axios.get(imageUrl).then( (response) => {
+
+      console.log("IMG one RESP", response.data);
+
+        this.retrieveImageUrl(response.data)
+
+        })
+    }).catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  retrieveImageUrl(imageObject){
+    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${imageObject}&prop=imageinfo&iiprop=url&format=json&origin=*`
+
+    axios.get(imgUrl).then( (response) => {
+
+      console.log("IMG TWO RESP", response.data);
+
+        this.setState({
+          searchedDinosaurImage:
+        })
+
+        })
+    }).catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  retrieveDescription(dinosaur){
+    var self = this;
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+    axios.get(url).then( (response) => {
+
+      console.log("DESC RESP", response.data);
+
+      this.setState({
+        searchedDinosaurDescription: response.data
+      }, function(){
+        this.retrieveInitialImageLink(dinosaur);
+      })
+
+        })
+    }).catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+
   }
 
   setModalVisible(visible) {
@@ -509,7 +577,7 @@ export default class DinoListView extends Component {
               </View>
             </Modal>
           </View>
-          
+
         ) : null
       }
 
