@@ -181,18 +181,21 @@ export default class DinoListView extends Component {
 
   getDescriptionText(object) {
     const newArray = [];
-    for (i = 0; i < object.length; i++) {
-      const pageNumber = Object.keys(object[i].query.pages);
-      newArray.push(object[i].query.pages[pageNumber].extract);
-    };
-    return newArray;
+      const pageNumber = Object.keys(object.query.pages)[0];
+      if (object.query.pages[`${pageNumber}`].extract){
+      newArray.push(object.query.pages[`${pageNumber}`].extract);
+    }
+    if (newArray.length === 0){
+      return "Unfortunately Wikipedia records are partial or incomplete for certain dinosaurs."
+    }
+    else {
+      return newArray;
+    }
   }
 
   renderDescriptionElements(object){
-    return this.getDescriptionText(object).map((item) =>
 
-      <Text>{item}</Text>
-    )
+    return this.getDescriptionText(object);
   }
 
   renderMatches(dinosaurs){
@@ -202,7 +205,7 @@ export default class DinoListView extends Component {
       </TouchableOpacity>
 
     )
-  }w
+  }
 
   getDietTextColor(diet){
     if (diet === "carnivore"){
@@ -602,7 +605,7 @@ export default class DinoListView extends Component {
 
                   <Text> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
-                    <Text> {this.renderDescriptionElements(this.state.searchedDinosaurDescription)}  </Text>
+                  <Text>  {this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
 
