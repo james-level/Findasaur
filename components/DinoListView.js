@@ -605,7 +605,9 @@ export default class DinoListView extends Component {
 
                 {
                   self.state.searchDataLoading ? (
-                    < BallIndicator count={7} size={50} color={'green'} style={{backgroundColor: 'black'}} />
+                    <View style={{height: 200}}>
+                      < BallIndicator count={7} size={65} color={'green'} style={{backgroundColor: 'transparent'}} />
+                    </View>
                 ) :
 
                 <View style={{alignItems: "center"}}>
