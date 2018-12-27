@@ -578,8 +578,17 @@ export default class DinoListView extends Component {
                     < BallIndicator count={7} size={50} color={'green'} style={{backgroundColor: 'black'}} />
                 ) :
 
+                <View style={{alignItems: "center"}}>
+                <AutoHeightImage
+                  width={300}
+                  source={{uri: `${this.state.searchedDinosaurImage}`}}
+                />
+
                   <Text> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
+                    <Text> {this.state.searchedDinosaurDescription.query.pages[0].extract}  </Text>
+
+                </View>
 
               }
 
