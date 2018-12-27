@@ -197,7 +197,7 @@ export default class DinoListView extends Component {
       newArray.push(object.query.pages[`${pageNumber}`].extract);
     }
     if (newArray.length === 0){
-      return "Unfortunately Wikipedia records are partial or incomplete for certain dinosaurs."
+      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
     }
     else {
       return newArray;
@@ -624,9 +624,9 @@ export default class DinoListView extends Component {
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
-                  <Text style={DinoListViewStyle.infoModalText}> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
+                  <Text style={DinoListViewStyle.infoModalText}>{this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
-                  <Text style={DinoListViewStyle.infoModalText}>  {this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+                  <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
 
