@@ -57,7 +57,7 @@ export default class DinoListView extends Component {
   }
 
   retrieveImageUrl(imageObject){
-    var object = this.props.getImageAddress(imageObject);
+    var object = this.getImageAddress(imageObject);
     console.log("OBJECT IMAGE", object);
     const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
 
@@ -84,6 +84,7 @@ export default class DinoListView extends Component {
   }
 
   handleImageUrl(object) {
+    console.log("OBEJC IMG", object);
       if (object.query.pages["-1"].imageinfo === undefined) {
         // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
          return 'https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg';
@@ -94,6 +95,16 @@ export default class DinoListView extends Component {
         return url;
       }
   }
+
+  getImageAddress(object) {
+    const pageNumber = Object.keys(object.query.pages)[0];
+    if (object.query.pages[`${pageNumber}`].pageimage){
+      return object.query.pages[`${pageNumber}`].pageimage;
+    }
+      else {
+        return [];
+      }
+    }
 
   retrieveDescription(dinosaur){
     var self = this;
