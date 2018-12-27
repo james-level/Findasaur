@@ -26,11 +26,9 @@ export default class DinoListView extends Component {
       isLoading: false,
       activeId: null,
       activeItem: null,
-      modalVisible: false,
       items: this.populateDinosaurs(this.props.allDinosaurs),
       searchDataLoading: false
     };
-    this.setModalVisible = this.setModalVisible.bind(this);
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
@@ -128,11 +126,6 @@ export default class DinoListView extends Component {
     "Please check your internet connection and try again later"
     )
     })
-
-  }
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
   }
 
   toggleDinosaurView() {
@@ -414,7 +407,7 @@ export default class DinoListView extends Component {
          width={300}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
-              <Text onPress={() => { this.setModalVisible(true) }}>
+              <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
                   <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>
                     {this.capitaliseDiet(this.state.activeItem.diet)}
@@ -546,48 +539,6 @@ export default class DinoListView extends Component {
     <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10}}/>
     </TouchableHighlight>
 
-        <View>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
-            <View>
-
-          <LinearGradient
-          colors={['black', '#1e932d']}
-          style={{ padding: 25 }}>
-
-            <View style={DinoListViewStyle.infoModal}>
-
-                <ScrollView>
-                  <Text style= {[DinoListViewStyle.infoModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
-                    <View style={{alignItems: "center"}}>
-                      <Image source={require('../assets/Dino_images/friendlydino.gif')} style={{height: 150, width: 225}}/>
-                    </View>
-                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur, an app by<Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears.</Text><Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>They can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative.</Text></Text></Text>
-
-                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur looks to educate users on various dinosaurs from a range of eras. It utilises the Wikipedia API to provide information relating to aspects of each speciment, such as diet and location (of fossil finds)</Text>
-
-                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur is based on an exisitng webproject (Findasaurus), however the conversion to ReactNative is soley ours. Icons provided by 'FlatIcons'. This app is an not-for-profit project.</Text>
-
-                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
-                  <Text style= {[DinoListViewStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
-
-                  <TouchableHighlight
-                    onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-                  </TouchableHighlight>
-                  </ScrollView>
-                </View>
-                </LinearGradient>
-              </View>
-            </Modal>
-          </View>
 
           /* Modal for individual dinosaur view */
           {
