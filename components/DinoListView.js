@@ -25,21 +25,16 @@ export default class DinoListView extends Component {
       activeId: null,
       activeItem: null,
       modalVisible: false,
-      items: this.populateDinosaurs(this.props.everySingleDinosaur)
+      items: this.populateDinosaurs(this.props.allDinosaurs)
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
-    this.updateClickedDinosaur = this.updateClickedDinosaur.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
   }
 
   setModalVisible(visible) {
     console.log("DINOSAURS", this.state.items);
     this.setState({modalVisible: visible});
-  }
-
-  updateClickedDinosaur(i){
-  console.log("DINO", i);
   }
 
   toggleDinosaurView() {
@@ -65,9 +60,9 @@ export default class DinoListView extends Component {
   }
 
   buildDinosaurNameList(){
-    dinosaurs = this.state.items;
+    dinosaurs = this.props.everySingleDinosaur;
 
-    return this.state.items.map(dinosaur => dinosaur.name
+    return dinosaurs.map(dinosaur => dinosaur.name
     )
   }
 
@@ -88,7 +83,7 @@ export default class DinoListView extends Component {
       </TouchableOpacity>
 
     )
-  }
+  }w
 
   getDietTextColor(diet){
     if (diet === "carnivore"){
