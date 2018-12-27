@@ -179,6 +179,22 @@ export default class DinoListView extends Component {
     }
   }
 
+  getDescriptionText(object) {
+    const newArray = [];
+    for (i = 0; i < object.length; i++) {
+      const pageNumber = Object.keys(object[i].query.pages);
+      newArray.push(object[i].query.pages[pageNumber].extract);
+    };
+    return newArray;
+  }
+
+  renderDescriptionElements(object){
+    return this.getDescriptionText(object).map((item) =>
+
+      <Text>{item}</Text>
+    )
+  }
+
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur, i) =>
       <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaur}, function(){ this.toggleDinosaurView() })} key={((new Date).getTime() + Math.random())}>
@@ -586,7 +602,7 @@ export default class DinoListView extends Component {
 
                   <Text> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
-                    <Text> {this.state.searchedDinosaurDescription.query.pages[0].extract}  </Text>
+                    <Text> {this.renderDescriptionElements(this.state.searchedDinosaurDescription)}  </Text>
 
                 </View>
 
