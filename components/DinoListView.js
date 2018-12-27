@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageBackground from 'react-native';
 import FitImage from 'react-native-fit-image';
-import { Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import { LinearGradient } from 'expo';
@@ -58,6 +58,7 @@ export default class DinoListView extends Component {
 
   retrieveImageUrl(imageObject){
     var object = this.props.getImageAddress(imageObject);
+    console.log("OBJECT IMAGE", object);
     const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
 
     axios.get(imgUrl).then( (response) => {
@@ -65,9 +66,10 @@ export default class DinoListView extends Component {
       console.log("IMG TWO RESP", response.data);
 
         this.setState({
-          searchedDinosaurImage: this.props.handleImageUrl(response.data)
+          searchedDinosaurImage: this.handleImageUrl(response.data)
         }, function(){
           this.setState({searchDataLoading: false})
+          console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
         })
 
         })
@@ -81,9 +83,21 @@ export default class DinoListView extends Component {
     })
   }
 
+  handleImageUrl(object) {
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
+         return 'https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg';
+         // objects.pop(object);
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        return url;
+      }
+  }
+
   retrieveDescription(dinosaur){
     var self = this;
-    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
     axios.get(url).then( (response) => {
 
       console.log("DESC RESP", response.data);
@@ -133,7 +147,7 @@ export default class DinoListView extends Component {
           searchedDinosaurData: dinosaur,
         },
         function(){ this.retrieveDescription(this.state.clickedDinosaur)
-        console.log("SEAR", this.state.searchDataLoading);
+        console.log("SEAR", this.state.clickedDinosaur);
       })
       }
     }
