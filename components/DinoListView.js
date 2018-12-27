@@ -603,9 +603,9 @@ export default class DinoListView extends Component {
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
-                  <Text> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
+                  <Text style={DinoListViewStyle.infoModalText}> {this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
-                  <Text>  {this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+                  <Text style={DinoListViewStyle.infoModalText}>  {this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
 
