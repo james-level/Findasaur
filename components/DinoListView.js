@@ -298,21 +298,20 @@ export default class DinoListView extends Component {
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: 'limegreen' }
+              ? { backgroundColor: 'black', borderRadius: 10 }
               : { backgroundColor: 'black' }
           ]}
         >
-        <Image style={s.fossil} source={require('../assets/icons/fossil.png')}/>
+        <Image style={s.fossil} source={require('../assets/icons/footprint.png')}/>
 
           <Text
             style={[
               s.name2,
               this.state.activeId === o.item.id
                 ? { color: 'limegreen' }
-                : { color: '#ffffff' }
+                : { color: 'white' }
             ]}
           >
-
             {o.item.name ? o.item.name : 'no name attribute'}
           </Text>
 
@@ -467,7 +466,7 @@ export default class DinoListView extends Component {
             <Ionicons
               name={'ios-refresh-outline'}
               size={25}
-              color="rgba(0,0,0,0.5)"
+              color="limegreen"
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -485,27 +484,32 @@ export default class DinoListView extends Component {
               backgroundColor: 'transparent'
             }}
           >
+
+{/* This below icon (ios-globe-outline) is currently linked to 'delete' need to redirect to a MAP view (of all dinos)*/}
             <Ionicons
-              name={'ios-trash-outline'}
+              name={'ios-globe-outline'}
               size={25}
-              color="rgba(0,0,0,0.5)"
+              color="limegreen"
             />
           </TouchableOpacity>
 
+{/* PAGINATION 'DOTS' ACROSS BOTTOM OF DINO-LIST PAGE, */}
           <Pagination
             horizontal
-            // debugMode
-            // dotSwapAxis
-            // dotPositionSwap
-            listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
-            dotIconNameNotActive={'account-outline'}
-            dotIconNameEmpty={'account-off'}
-            dotIconNameActive={'account-settings'}
-            dotTextHide
-            dotIconSizeNotActive={20}
-            dotIconSizeActive={27}
-            dotIconSizeEmpty={27}
-            //iconColorhasNotSeen={"red"}
+            debugMode={true}
+            listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list
+            endDotIconFamily={'MaterialIcons'}
+            dotIconNameActive={'checkbox-blank-circle'}
+            dotIconColorActive={'limegreen'}
+            dotIconNameNotActive={'checkbox-blank-circle-outline'}
+            dotIconColorNotActive={'limegreen'}
+            dotIconNameEmpty={'close'}
+            dotTextHide={true}
+            dotTextColor={'limegreen'}
+            dotIconSizeNotActive={15}
+            dotIconSizeActive={15}
+            dotIconSizeEmpty={15}
+            dotColorhasNotSeen={"red"}
             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
             paginationItems={this.state.items} //pass the same list as data
             paginationItemPadSize={3}
@@ -513,7 +517,8 @@ export default class DinoListView extends Component {
         </View>
 
 
-        <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15}}>
+{/* SEARCH BAR Section */}
+        <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15 }}>
       <Autocomplete
         autoCapitalize="none"
         autoCorrect={false}
@@ -627,7 +632,8 @@ const s = StyleSheet.create({
     width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'limegreen',
+    backgroundColor: '#131f1f',
+    // This is the grey background on top 1/2 of the screen
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20
   },
