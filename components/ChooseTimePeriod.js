@@ -141,28 +141,33 @@ export default class ChooseTimePeriod extends Component {
 
     var self = this;
 
-    setTimeout(function(){
+    self.setState({
+      imagesLoading: true
+    }, function(){
 
-      self.setState({
+      setTimeout(function(){
 
-        imagesLoading: true,
-        backClicked: false,
-        images: [],
-        dinosaurDescriptions: [],
-        dinosaurs: null,
-        diets: null,
-        herbivores: null,
-        carnivores: null,
-        omnivores: null,
-        imagesLoaded: false
+        self.setState({
 
-      }, function(){
-        var earliest_date = self.state.viewableItems[0].item.earliest_date;
-        var latest_date = self.state.viewableItems[0].item.latest_date;
-        self.getDinosaursForPeriod(earliest_date, latest_date);
-      })
+          backClicked: false,
+          images: [],
+          dinosaurDescriptions: [],
+          dinosaurs: null,
+          diets: null,
+          herbivores: null,
+          carnivores: null,
+          omnivores: null,
+          imagesLoaded: false
 
-    }, 850);
+        }, function(){
+          var earliest_date = self.state.viewableItems[0].item.earliest_date;
+          var latest_date = self.state.viewableItems[0].item.latest_date;
+          self.getDinosaursForPeriod(earliest_date, latest_date);
+        })
+
+      }, 850);
+
+    })
   }
 
   toggleDinosaurListView(){
