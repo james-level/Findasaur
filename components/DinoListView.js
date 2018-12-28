@@ -148,8 +148,9 @@ export default class DinoListView extends Component {
   }
 
   retrieveSearchedDinosaurData(dinosaur){
-    console.log("DINOSAURS", this.props.everySingleDinosaur);
     for (dinosaur of this.props.everySingleDinosaur){
+      console.log("DINOSAUR NAME", dinosaur.name);
+      console.log("STATE NAME", this.state.clickedDinosaur);
       if (dinosaur.name == this.state.clickedDinosaur){
         this.setState({
           searchedDinosaurData: dinosaur,
@@ -170,7 +171,7 @@ export default class DinoListView extends Component {
     }
   }
 
-  buildDinosaurNameList(){
+  buildDinosaurNameAndDietList(){
     dinosaurs = this.props.everySingleDinosaur;
 
     return dinosaurs.map(dinosaur => {
@@ -180,6 +181,13 @@ export default class DinoListView extends Component {
         		return  `${dinosaur.name} (${dinosaur.diet})`;
         	}
         }
+    )
+  }
+
+  buildDinosaurNameList(){
+    dinosaurs = this.props.everySingleDinosaur;
+
+    return dinosaurs.map(dinosaur => dinosaur.name
     )
   }
 
@@ -219,10 +227,10 @@ export default class DinoListView extends Component {
     return this.getDescriptionText(object);
   }
 
-  renderMatches(dinosaurs){
-    return dinosaurs.map((dinosaur, i) =>
-      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaur}, function(){ this.toggleDinosaurView() })} key={i}>
-      <Text style={{color: 'black', fontSize: 16}} key={i}>{dinosaur}</Text>
+  renderMatches(dinosaurs, dinosaursAndDiets){
+    return dinosaursAndDiets.map((dinosaurAndDiet, i) =>
+      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ this.toggleDinosaurView() })} key={i}>
+      <Text style={{color: 'black', fontSize: 16}} key={i}>{dinosaurAndDiet}</Text>
       </TouchableOpacity>
 
     )
@@ -240,12 +248,18 @@ export default class DinoListView extends Component {
     }
   }
 
-  findDinosaur(query) {
+  findDinosaur(query, diet) {
    if (query === '') {
      return [];
    }
 
-   const dinosaurs = this.buildDinosaurNameList();
+   if (diet){
+     var dinosaurs = this.buildDinosaurNameAndDietList();
+   }
+   else {
+     var dinosaurs = this.buildDinosaurNameList();
+   }
+
    const regex = new RegExp(`${query.trim()}`, 'i');
    console.log(dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0));
    return dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0);
@@ -348,7 +362,8 @@ export default class DinoListView extends Component {
     const self = this;
 
     const query = this.state.dinosaurTyped;
-    const dinosaurs = this.findDinosaur(query);
+    const dinosaurs = this.findDinosaur(query, false);
+    const dinosaursAndDiets = this.findDinosaur(query, true);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
     const ListEmptyComponent = () => (
@@ -400,14 +415,15 @@ export default class DinoListView extends Component {
               <Text
                 style={{
                   textAlignVertical: 'center',
-                  color: 'rgba(0,0,0,.4)',
+                  color: 'white',
                   textAlign: 'center',
                   fontWeight: '400',
-                  fontSize: 15,
-                  margin: 15
+                  fontSize: 25,
+                  fontFamily: 'PoiretOne-Regular',
+                  margin: 30
                 }}
               >
-                Pick a dinosaur! If you can't find the dinosaur you're looking for, type its name into the search bar!
+                Pick a dinosaur! If you can't find the one you're looking for, type its name into the search bar!
               </Text>
             </View>
           )}
@@ -549,7 +565,7 @@ export default class DinoListView extends Component {
               />
               <View style={{backgroundColor: 'white', paddingLeft: 10, paddingRight: 10}}>
                 {dinosaurs.length > 0 ? (
-                  this.renderMatches(dinosaurs)
+                  this.renderMatches(dinosaurs, dinosaursAndDiets)
                 ) : (
                   <Text> </Text>
                 )}

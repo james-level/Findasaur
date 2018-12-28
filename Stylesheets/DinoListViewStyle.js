@@ -36,11 +36,11 @@ const DinoListViewStyle = StyleSheet.create({
   },
 
   infoModalText: {
-    // fontSize: 17,
-    // color: 'white',
-    // paddingLeft: 20,
-    // paddingRight: 20,
-    // paddingTop: 10,
+    fontSize: 17,
+    color: 'white',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
   },
 
   renderItem: {
