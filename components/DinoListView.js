@@ -149,14 +149,11 @@ export default class DinoListView extends Component {
 
   retrieveSearchedDinosaurData(dinosaur){
     for (dinosaur of this.props.everySingleDinosaur){
-      console.log("DINOSAUR NAME", dinosaur.name);
-      console.log("STATE NAME", this.state.clickedDinosaur);
       if (dinosaur.name == this.state.clickedDinosaur){
         this.setState({
           searchedDinosaurData: dinosaur,
         },
         function(){ this.retrieveDescription(this.state.clickedDinosaur)
-        console.log("SEAR", this.state.clickedDinosaur);
       })
       }
     }
@@ -248,8 +245,15 @@ export default class DinoListView extends Component {
     }
   }
 
+  removeNonAlphanumeric(string){
+    return string.replace(/\W/g, '');
+  }
+
   findDinosaur(query, diet) {
-   if (query === '') {
+
+  var sanitizedQuery = this.removeNonAlphanumeric(query);
+
+   if (sanitizedQuery === '') {
      return [];
    }
 
@@ -260,8 +264,7 @@ export default class DinoListView extends Component {
      var dinosaurs = this.buildDinosaurNameList();
    }
 
-   const regex = new RegExp(`${query.trim()}`, 'i');
-   console.log(dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0));
+   const regex = new RegExp(`${sanitizedQuery.trim()}`, 'i');
    return dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0);
  }
 
@@ -642,7 +645,6 @@ export default class DinoListView extends Component {
       }
 
           /* End of modal for individual dinosaur view */
-
 
       </View>
     );
