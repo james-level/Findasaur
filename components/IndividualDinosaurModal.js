@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import {StyleSheet} from 'react-native';
-import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
-import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
+import { ScrollView, Image, TouchableHighlight, Text, TouchableOpacity, View, Modal } from 'react-native';
+import IndividualDinosaurModalStyle from '../Stylesheets/IndividualDinosaurModalStyle.js';
+import { BallIndicator } from 'react-native-indicators';
+import { LinearGradient } from 'expo';
 
 export default class IndividualDinosaurModal extends Component {
   render() {
+
     return (
       <View>
       <Modal
@@ -20,7 +22,7 @@ export default class IndividualDinosaurModal extends Component {
       colors={['black', '#1e932d']}
       style={{ padding: 25 }}>
 
-        <View style={DinoListViewStyle.infoModal}>
+        <View style={IndividualDinosaurModalStyle.infoModal}>
 
             <ScrollView>
 
@@ -37,9 +39,9 @@ export default class IndividualDinosaurModal extends Component {
               source={{uri: `${this.props.searchedDinosaurImage}`}}
             />
 
-              <Text style={DinoListViewStyle.infoModalText}>{this.props.returnClickedDinosaur} {this.props.searchedDinosaurData.diet}  </Text>
+              <Text style={DinoListViewStyle.infoModalText}>{this.props.returnClickedDinosaur()} {this.props.searchedDinosaurData.diet}  </Text>
 
-              <Text style={DinoListViewStyle.infoModalText}>{this.props.renderDescriptionElements} </Text>
+        
 
             </View>
 

@@ -602,8 +602,8 @@ export default class DinoListView extends Component {
 
           closeDinosaurView={this.closeDinosaurView()}
           dinosaurViewVisible={this.state.dinosaurViewVisible}
-          renderDescriptionElements={this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
-          returnClickedDinosaur={this.returnClickedDinosaur()}
+      
+          returnClickedDinosaur={this.state.clickedDinosaur}
           searchDataLoading={this.state.searchDataLoading}
           searchedDinosaurImage={this.state.searchedDinosaurImage}
           searchedDinosaurData={this.state.searchedDinosaurData}
