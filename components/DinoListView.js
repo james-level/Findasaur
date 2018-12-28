@@ -139,7 +139,8 @@ export default class DinoListView extends Component {
 
   closeDinosaurView(){
     this.setState({
-      dinosaurViewVisible: false
+      dinosaurViewVisible: false,
+      dinosaurTyped: ""
     });
   }
 
@@ -566,13 +567,20 @@ export default class DinoListView extends Component {
                   </TouchableOpacity>
                 )}
               />
-              <View style={{backgroundColor: 'white', paddingLeft: 10, paddingRight: 10}}>
-                {dinosaurs.length > 0 ? (
-                  this.renderMatches(dinosaurs, dinosaursAndDiets)
+
+                {dinosaurs.length > 12 ? (
+                  <View style={{backgroundColor: 'white', height: 230, paddingLeft: 10}}>
+                  <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
+                  {this.renderMatches(dinosaurs, dinosaursAndDiets)}
+                  </ScrollView>
+                  </View>
                 ) : (
-                  <Text> </Text>
+                  <View style={{backgroundColor: 'white', paddingLeft: 10}}>
+                  <ScrollView>
+                  {this.renderMatches(dinosaurs, dinosaursAndDiets)}
+                  </ScrollView>
+                  </View>
                 )}
-              </View>
             </View>
         {/* End of SEARCH BAR Section */}
 
