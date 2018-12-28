@@ -12,6 +12,7 @@ import AutoHeightImage from 'react-native-auto-height-image';
 const { width, height } = Dimensions.get('window');
 const ITEM_HEIGHT = 100;
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
+import IndividualDinosaurModal from './IndividualDinosaurModal.js';
 import Autocomplete from 'react-native-autocomplete-input';
 import axios from 'axios';
 
@@ -597,57 +598,17 @@ export default class DinoListView extends Component {
           {
             self.state.searchedDinosaurData ? (
 
-          <View>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.dinosaurViewVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
-            <View>
+          <IndividualDinosaurModal
 
-          <LinearGradient
-          colors={['black', '#1e932d']}
-          style={{ padding: 25 }}>
+          closeDinosaurView={this.closeDinosaurView()}
+          dinosaurViewVisible={this.state.dinosaurViewVisible}
+          renderDescriptionElements={this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
+          returnClickedDinosaur={this.returnClickedDinosaur()}
+          searchDataLoading={this.state.searchDataLoading}
+          searchedDinosaurImage={this.state.searchedDinosaurImage}
+          searchedDinosaurData={this.state.searchedDinosaurData}
 
-            <View style={DinoListViewStyle.infoModal}>
-
-                <ScrollView>
-
-                {
-                  self.state.searchDataLoading ? (
-                    <View style={{height: 200}}>
-                      < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
-                    </View>
-                ) :
-
-                <View style={{alignItems: "center"}}>
-                <AutoHeightImage
-                  width={300}
-                  source={{uri: `${this.state.searchedDinosaurImage}`}}
-                />
-
-                  <Text style={DinoListViewStyle.infoModalText}>{this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
-
-                  <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
-
-                </View>
-
-              }
-
-                  <TouchableHighlight
-                    onPress={() => {
-                      this.closeDinosaurView();
-                    }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-                  </TouchableHighlight>
-                  </ScrollView>
-                </View>
-                </LinearGradient>
-              </View>
-            </Modal>
-          </View>
+          />
 
         ) : null
       }
