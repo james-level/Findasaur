@@ -143,6 +143,10 @@ export default class DinoListView extends Component {
     });
   }
 
+  searchBarPlaceholderText(){
+    return `Search ${this.props.eraName} dinosaurs`
+  }
+
   retrieveSearchedDinosaurData(dinosaur){
     console.log("DINOSAURS", this.props.everySingleDinosaur);
     for (dinosaur of this.props.everySingleDinosaur){
@@ -517,7 +521,9 @@ export default class DinoListView extends Component {
         data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
         defaultValue={query}
         onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
-        placeholder="Search for a dinosaur by name"
+        placeholder={this.searchBarPlaceholderText()}
+        placeholderTextColor="black"
+        placeholderTextFontFamily='PoiretOne-Regular'
         renderItem={({ dinosaur }) => (
           <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
           </TouchableOpacity>

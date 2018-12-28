@@ -450,7 +450,7 @@ export default class ChooseTimePeriod extends Component {
 
         return (
 
-          <DinoListView returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView eraName={this.state.viewableItems[0].item.title} returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} omnivores={this.state.omnivores} diets={this.state.diets} />
         )
       }
   }
