@@ -143,6 +143,7 @@ export default class ChooseTimePeriod extends Component {
 
     self.setState({
       imagesLoading: true
+      
     }, function(){
 
       setTimeout(function(){

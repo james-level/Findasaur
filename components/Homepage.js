@@ -3,6 +3,7 @@ import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/ric
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Linking, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
+import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
@@ -107,7 +108,21 @@ export default class Homepage extends React.Component {
 
         {
             this.state.fontLoaded ? (
-            <AwesomeButtonRick textColor='black' backgroundColor='#66CD00' type="anchor" onPress={this.handleButtonClick}>Explore</AwesomeButtonRick>
+              <Button
+              onPress={this.handleButtonClick}
+      textStyle={{fontSize: 25, textShadowColor: 'white', textShadowOffset: {width: -5, height: 5}, textShadowRadius: 25, color: 'black', fontWeight: "700", fontFamily: "PoiretOne-Regular"}}
+      title="Explore"
+      titleStyle={{ fontFamily: "PoiretOne-Regular" }}
+      buttonStyle={{
+        backgroundColor: "limegreen",
+        width: 175,
+        height: 55,
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 20
+      }}
+      containerStyle={{ marginTop: 20 }}
+    />
           ) : null
         }
         </View>
