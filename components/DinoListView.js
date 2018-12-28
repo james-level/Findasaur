@@ -173,7 +173,20 @@ export default class DinoListView extends Component {
   buildDinosaurNameList(){
     dinosaurs = this.props.everySingleDinosaur;
 
-    return dinosaurs.map(dinosaur => dinosaur.name
+    return dinosaurs.map(dinosaur => {
+        	if (!dinosaur.diet){
+        		return `${dinosaur.name} (diet unknown)`;
+        	} else {
+        		return  `${dinosaur.name} (${dinosaur.diet})`;
+        	}
+        }
+    )
+  }
+
+  buildDinosaurDietList(){
+    dinosaurs = this.props.everySingleDinosaur;
+
+    return dinosaurs.map(dinosaur => dinosaur.diet
     )
   }
 
@@ -516,32 +529,34 @@ export default class DinoListView extends Component {
           />
         </View>
 
+        {/* SEARCH BAR Section */}
+                <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15 }}>
+              <Autocomplete
+                autoCapitalize="none"
+                autoCorrect={false}
+                containerStyle={{width: 300}}
+                data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
+                defaultValue={query}
+                inputContainerStyle={{flex: 1}}
+                onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
+                placeholder={this.searchBarPlaceholderText()}
+                placeholderTextColor="grey"
+                placeholderTextFontFamily='PoiretOne-Regular'
+                renderItem={({ dinosaur }) => (
+                  <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
+                  </TouchableOpacity>
+                )}
+              />
+              <View style={{backgroundColor: 'white', paddingLeft: 10, paddingRight: 10}}>
+                {dinosaurs.length > 0 ? (
+                  this.renderMatches(dinosaurs)
+                ) : (
+                  <Text> </Text>
+                )}
+              </View>
+            </View>
+        {/* End of SEARCH BAR Section */}
 
-{/* SEARCH BAR Section */}
-        <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15 }}>
-      <Autocomplete
-        autoCapitalize="none"
-        autoCorrect={false}
-        containerStyle={{width: 250}}
-        data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
-        defaultValue={query}
-        onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
-        placeholder={this.searchBarPlaceholderText()}
-        placeholderTextColor="black"
-        placeholderTextFontFamily='PoiretOne-Regular'
-        renderItem={({ dinosaur }) => (
-          <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
-          </TouchableOpacity>
-        )}
-      />
-      <View style={{backgroundColor: 'white', paddingLeft: 10, paddingRight: 10}}>
-        {dinosaurs.length > 0 ? (
-          this.renderMatches(dinosaurs)
-        ) : (
-          <Text> </Text>
-        )}
-      </View>
-    </View>
 
     <TouchableHighlight
       onPress={() => {

@@ -143,7 +143,7 @@ export default class ChooseTimePeriod extends Component {
 
     self.setState({
       imagesLoading: true
-      
+
     }, function(){
 
       setTimeout(function(){
@@ -383,7 +383,6 @@ export default class ChooseTimePeriod extends Component {
     earliest_date={item.earliest_date}
     latest_date={item.latest_date}
   />);
-
 
   _keyExtractor = (item, index) => item.id.toString()
   // REQUIRED for ReactNativePagination to work correctly
