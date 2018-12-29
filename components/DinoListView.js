@@ -234,6 +234,16 @@ export default class DinoListView extends Component {
     )
   }
 
+  getDietImage(diet){
+    switch(diet) {
+
+    case "carnivore": return require("../assets/icons/carnivore.png");
+    case "omnivore": return require("../assets/icons/omnivore.png");
+    case "herbivore": return require("../assets/icons/herbivore.png");
+
+  }
+  }
+
   getDietTextColor(diet){
     if (diet === "carnivore"){
       return 'red';
@@ -630,8 +640,8 @@ export default class DinoListView extends Component {
 
                 <View style={DinoListViewStyle.modalHeader}>
 
-                <Text style={{color: 'white', padding: 5, fontSize: 20}}>'{this.state.searchedLocation}', {this.convertSecondsToCalendarDateForOutputText()}: (Hardcoded) Light rain starting in the evening.</Text>
-                <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 20, height: 20}}/>
+                <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
+                <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
 
                 </View>
 
