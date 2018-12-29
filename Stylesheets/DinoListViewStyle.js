@@ -34,6 +34,13 @@ const DinoListViewStyle = StyleSheet.create({
     // flexDirection: 'row',
     // backgroundColor: 'transparent',
   },
+  infoModalHeader: {
+    fontSize: 22,
+    color: 'white',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+  },
 
   infoModalText: {
     fontSize: 17,

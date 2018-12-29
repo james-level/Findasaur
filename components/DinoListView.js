@@ -427,7 +427,7 @@ export default class DinoListView extends Component {
                   margin: 30
                 }}
               >
-                Pick a dinosaur! If you can't find the one you're looking for, type its name into the search bar!
+                Pick a dinosaur from the {this.props.eraName} period! If you can't find the one you're looking for, type its name into the search bar!
               </Text>
             </View>
           )}
@@ -628,7 +628,7 @@ export default class DinoListView extends Component {
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
-                  <Text style={DinoListViewStyle.infoModalText}>{this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
+                  <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
 
                   <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
