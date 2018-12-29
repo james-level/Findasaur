@@ -412,7 +412,7 @@ export default class DinoListView extends Component {
     case "Mononykus": return require("../assets/human_size_comparison_images/Mononykus.png");
     case "Mussaurus": return require("../assets/human_size_comparison_images/Mussaurus.png");
     case "Muttaburrasaurus": return require("../assets/human_size_comparison_images/Muttaburrasaurus.png");
-    case "Nanschiungosaurus": return require("../assets/human_size_comparison_images/Nanschiungosaurus.png");
+    case "Nanshiungosaurus": return require("../assets/human_size_comparison_images/Nanshiungosaurus.png");
     case "Nedoceratops": return require("../assets/human_size_comparison_images/Nedoceratops.png");
     case "Nemegtosaurus": return require("../assets/human_size_comparison_images/Nemegtosaurus.png");
     case "Neovenator": return require("../assets/human_size_comparison_images/Neovenator.png");
@@ -443,7 +443,7 @@ export default class DinoListView extends Component {
     case "Pelicanimimus": return require("../assets/human_size_comparison_images/Pelicanimimus.png");
     case "Pentaceratops": return require("../assets/human_size_comparison_images/Pentaceratops.png");
     case "Piatnitzkysaurus": return require("../assets/human_size_comparison_images/Piatnitzkysaurus.png");
-    case "Pinocosaurus": return require("../assets/human_size_comparison_images/Pinocosaurus.png");
+    case "Pinacosaurus": return require("../assets/human_size_comparison_images/Pinacosaurus.png");
     case "Plateosaurus": return require("../assets/human_size_comparison_images/Plateosaurus.png");
     case "Podokesaurus": return require("../assets/human_size_comparison_images/Podokesaurus.png");
     case "Poekilopleuron": return require("../assets/human_size_comparison_images/Poekilopleuron.png");
@@ -500,7 +500,7 @@ export default class DinoListView extends Component {
     case "Tarbosaurus": return require("../assets/human_size_comparison_images/Tarbosaurus.png");
     case "Tarchia": return require("../assets/human_size_comparison_images/Tarchia.png");
     case "Telmatosaurus": return require("../assets/human_size_comparison_images/Telmatosaurus.png");
-    case "Tenotosaurus": return require("../assets/human_size_comparison_images/Tenotosaurus.png");
+    case "Tenontosaurus": return require("../assets/human_size_comparison_images/Tenontosaurus.png");
     case "Thecodontosaurus": return require("../assets/human_size_comparison_images/Thecodontosaurus.png");
     case "Thescelosaurus": return require("../assets/human_size_comparison_images/Thescelosaurus.png");
     case "Torosaurus": return require("../assets/human_size_comparison_images/Torosaurus.png");
@@ -953,7 +953,7 @@ export default class DinoListView extends Component {
 
                 }
 
-                <Image source={this.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+                <Image source={this.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
