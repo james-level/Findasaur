@@ -238,6 +238,9 @@ export default class DinoListView extends Component {
     switch(diet) {
 
     case "carnivore": return require("../assets/icons/carnivore.png");
+    case "carnivore, piscivore": return require("../assets/icons/carnivore.png");
+    case "carnivore, omnivore": return require("../assets/icons/omnivore.png");
+    case "herbivore, omnivore": return require("../assets/icons/omnivore.png");
     case "omnivore": return require("../assets/icons/omnivore.png");
     case "herbivore": return require("../assets/icons/herbivore.png");
 
@@ -437,7 +440,7 @@ export default class DinoListView extends Component {
                   margin: 30
                 }}
               >
-                Pick a dinosaur from the {this.props.eraName} period! If you can't find the one you're looking for, type its name into the search bar!
+                Pick a dinosaur from the {this.props.eraName} period! Type its name into the search bar if you can't find the one you're looking for!
               </Text>
             </View>
           )}
@@ -638,18 +641,28 @@ export default class DinoListView extends Component {
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
-                <View style={DinoListViewStyle.modalHeader}>
+                {
+                  this.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
 
+                    <View style={DinoListViewStyle.modalHeader}>
+
+                    <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
+                    <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+                    </View>
+                ) :
+
+                <View style={DinoListViewStyle.modalHeader}>
                 <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
                 <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+                </View>
+
+                }
+
+                <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
 
-                  <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
-
-                </View>
-
-              }
+            }
 
                   <TouchableHighlight
                     onPress={() => {
