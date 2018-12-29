@@ -628,7 +628,12 @@ export default class DinoListView extends Component {
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
-                  <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()} {this.state.searchedDinosaurData.diet}  </Text>
+                <View style={DinoListViewStyle.modalHeader}>
+
+                <Text style={{color: 'white', padding: 5, fontSize: 20}}>'{this.state.searchedLocation}', {this.convertSecondsToCalendarDateForOutputText()}: (Hardcoded) Light rain starting in the evening.</Text>
+                <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 20, height: 20}}/>
+
+                </View>
 
                   <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
