@@ -658,6 +658,8 @@ export default class DinoListView extends Component {
 
                 }
 
+                <Image source={require('../assets/human_size_comparison_images/Pachyrhinosaurus.png')}/>
+
                 <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
