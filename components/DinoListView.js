@@ -34,206 +34,6 @@ export default class DinoListView extends Component {
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
   }
 
-  retrieveInitialImageLink(dinosaur){
-    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
-
-    axios.get(imageUrl).then( (response) => {
-
-      console.log("IMG one RESP", response.data);
-
-        this.retrieveImageUrl(response.data)
-
-        })
-    .catch(function(error){
-      console.log(error);
-      console.log("Error fetching dinosaur data.");
-      Alert.alert(
-    'Could not load data for dinosaur',
-    "Please check your internet connection and try again later"
-    )
-    })
-  }
-
-  retrieveImageUrl(imageObject){
-    var object = this.getImageAddress(imageObject);
-    console.log("OBJECT IMAGE", object);
-    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
-
-    axios.get(imgUrl).then( (response) => {
-
-      console.log("IMG TWO RESP", response.data);
-
-        this.setState({
-          searchedDinosaurImage: this.handleImageUrl(response.data)
-        }, function(){
-          this.setState({searchDataLoading: false})
-          console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
-        })
-
-        })
-    .catch(function(error){
-      console.log(error);
-      console.log("Error fetching dinosaur data.");
-      Alert.alert(
-    'Could not load data for dinosaur',
-    "Please check your internet connection and try again later"
-    )
-    })
-  }
-
-  handleImageUrl(object) {
-    console.log("OBEJC IMG", object);
-      if (object.query.pages["-1"].imageinfo === undefined) {
-        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
-         return 'https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg';
-         // objects.pop(object);
-      }
-      else {
-        const url = object.query.pages["-1"].imageinfo[0].url;
-        return url;
-      }
-  }
-
-  getImageAddress(object) {
-    const pageNumber = Object.keys(object.query.pages)[0];
-    if (object.query.pages[`${pageNumber}`].pageimage){
-      return object.query.pages[`${pageNumber}`].pageimage;
-    }
-      else {
-        return [];
-      }
-    }
-
-  retrieveDescription(dinosaur){
-    var self = this;
-    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
-    axios.get(url).then( (response) => {
-
-      console.log("DESC RESP", response.data);
-
-      this.setState({
-        searchedDinosaurDescription: response.data
-      }, function(){
-        this.retrieveInitialImageLink(dinosaur);
-      })
-
-        })
-    .catch(function(error){
-      console.log(error);
-      console.log("Error fetching dinosaur data.");
-      Alert.alert(
-    'Could not load data for dinosaur',
-    "Please check your internet connection and try again later"
-    )
-    })
-  }
-
-  toggleDinosaurView() {
-    this.setState({
-      dinosaurViewVisible: !this.state.dinosaurViewVisible,
-      searchDataLoading: true
-    }, function(){
-      this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
-    });
-  }
-
-  closeDinosaurView(){
-    this.setState({
-      dinosaurViewVisible: false,
-      dinosaurTyped: ""
-    });
-  }
-
-  searchBarPlaceholderText(){
-    return `Search ${this.props.eraName} dinosaurs`
-  }
-
-  retrieveSearchedDinosaurData(dinosaur){
-    for (dinosaur of this.props.everySingleDinosaur){
-      if (dinosaur.name == this.state.clickedDinosaur){
-        this.setState({
-          searchedDinosaurData: dinosaur,
-        },
-        function(){ this.retrieveDescription(this.state.clickedDinosaur)
-      })
-      }
-    }
-  }
-
-  capitaliseDiet(diet){
-    if (diet){
-    return diet.charAt(0).toUpperCase() + diet.slice(1);
-  }
-    else {
-      return;
-    }
-  }
-
-  buildDinosaurNameAndDietList(){
-    dinosaurs = this.props.everySingleDinosaur;
-
-    return dinosaurs.map(dinosaur => {
-        	if (!dinosaur.diet){
-        		return `${dinosaur.name} (diet unknown)`;
-        	} else {
-        		return  `${dinosaur.name} (${dinosaur.diet})`;
-        	}
-        }
-    )
-  }
-
-  buildDinosaurNameList(){
-    dinosaurs = this.props.everySingleDinosaur;
-
-    return dinosaurs.map(dinosaur => dinosaur.name
-    )
-  }
-
-  buildDinosaurDietList(){
-    dinosaurs = this.props.everySingleDinosaur;
-
-    return dinosaurs.map(dinosaur => dinosaur.diet
-    )
-  }
-
-  returnClickedDinosaur(){
-    return this.state.clickedDinosaur;
-  }
-
-  addPrecedingDash(diet){
-    if (diet){
-      return "- ";
-    }
-  }
-
-  getDescriptionText(object) {
-    const newArray = [];
-      const pageNumber = Object.keys(object.query.pages)[0];
-      if (object.query.pages[`${pageNumber}`].extract){
-      newArray.push(object.query.pages[`${pageNumber}`].extract);
-    }
-    if (newArray.length === 0){
-      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
-    }
-    else {
-      return newArray;
-    }
-  }
-
-  renderDescriptionElements(object){
-
-    return this.getDescriptionText(object);
-  }
-
-  renderMatches(dinosaurs, dinosaursAndDiets){
-    return dinosaursAndDiets.map((dinosaurAndDiet, i) =>
-      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ this.toggleDinosaurView() })} key={i}>
-      <Text style={{color: 'black', fontSize: 16}} key={i}>{dinosaurAndDiet}</Text>
-      </TouchableOpacity>
-
-    )
-  }
-
   findSizeComparisonImage(dinosaur){
     switch(dinosaur) {
 
@@ -529,6 +329,205 @@ export default class DinoListView extends Component {
   }
   }
 
+  retrieveInitialImageLink(dinosaur){
+    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
+
+    axios.get(imageUrl).then( (response) => {
+
+      console.log("IMG one RESP", response.data);
+
+        this.retrieveImageUrl(response.data)
+
+        })
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  retrieveImageUrl(imageObject){
+    var object = this.getImageAddress(imageObject);
+    console.log("OBJECT IMAGE", object);
+    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+
+    axios.get(imgUrl).then( (response) => {
+
+      console.log("IMG TWO RESP", response.data);
+
+        this.setState({
+          searchedDinosaurImage: this.handleImageUrl(response.data)
+        }, function(){
+          this.setState({searchDataLoading: false})
+          console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
+        })
+
+        })
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  handleImageUrl(object) {
+    console.log("OBEJC IMG", object);
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
+         return 'https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg';
+         // objects.pop(object);
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        return url;
+      }
+  }
+
+  getImageAddress(object) {
+    const pageNumber = Object.keys(object.query.pages)[0];
+    if (object.query.pages[`${pageNumber}`].pageimage){
+      return object.query.pages[`${pageNumber}`].pageimage;
+    }
+      else {
+        return [];
+      }
+    }
+
+  retrieveDescription(dinosaur){
+    var self = this;
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+    axios.get(url).then( (response) => {
+
+      console.log("DESC RESP", response.data);
+
+      this.setState({
+        searchedDinosaurDescription: response.data
+      }, function(){
+        this.retrieveInitialImageLink(dinosaur);
+      })
+
+        })
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  toggleDinosaurView() {
+    this.setState({
+      dinosaurViewVisible: !this.state.dinosaurViewVisible,
+      searchDataLoading: true
+    }, function(){
+      this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
+    });
+  }
+
+  closeDinosaurView(){
+    this.setState({
+      dinosaurViewVisible: false,
+      dinosaurTyped: ""
+    });
+  }
+
+  searchBarPlaceholderText(){
+    return `Search ${this.props.eraName} dinosaurs`
+  }
+
+  retrieveSearchedDinosaurData(dinosaur){
+    for (dinosaur of this.props.everySingleDinosaur){
+      if (dinosaur.name == this.state.clickedDinosaur){
+        this.setState({
+          searchedDinosaurData: dinosaur,
+        },
+        function(){ this.retrieveDescription(this.state.clickedDinosaur)
+      })
+      }
+    }
+  }
+
+  capitaliseDiet(diet){
+    if (diet){
+    return diet.charAt(0).toUpperCase() + diet.slice(1);
+  }
+    else {
+      return;
+    }
+  }
+
+  buildDinosaurNameAndDietList(dinosaurs){
+
+    return dinosaurs.map(dinosaur => {
+        	if (!dinosaur.diet){
+        		return `${dinosaur.name} (diet unknown)`;
+        	} else {
+        		return  `${dinosaur.name} (${dinosaur.diet})`;
+        	}
+        }
+    )
+  }
+
+  buildDinosaurNameList(){
+    dinosaurs = this.props.everySingleDinosaur;
+
+    return dinosaurs.map(dinosaur => dinosaur.name
+    )
+  }
+
+  buildDinosaurDietList(){
+    dinosaurs = this.props.everySingleDinosaur;
+
+    return dinosaurs.map(dinosaur => dinosaur.diet
+    )
+  }
+
+  returnClickedDinosaur(){
+    return this.state.clickedDinosaur;
+  }
+
+  addPrecedingDash(diet){
+    if (diet){
+      return "- ";
+    }
+  }
+
+  getDescriptionText(object) {
+    const newArray = [];
+      const pageNumber = Object.keys(object.query.pages)[0];
+      if (object.query.pages[`${pageNumber}`].extract){
+      newArray.push(object.query.pages[`${pageNumber}`].extract);
+    }
+    if (newArray.length === 0){
+      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
+    }
+    else {
+      return newArray;
+    }
+  }
+
+  renderDescriptionElements(object){
+
+    return this.getDescriptionText(object);
+  }
+
+  renderMatches(dinosaurs, dinosaursAndDiets){
+    return dinosaursAndDiets.map((dinosaurAndDiet, i) =>
+      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i].name}, function(){ this.toggleDinosaurView() })} key={i}>
+      <Text style={{color: 'black', fontSize: 16}} key={i}>{dinosaurAndDiet}</Text>
+      </TouchableOpacity>
+
+    )
+  }
+
   getDietImage(diet){
     switch(diet) {
 
@@ -567,14 +566,14 @@ export default class DinoListView extends Component {
    }
 
    if (diet){
-     var dinosaurs = this.buildDinosaurNameAndDietList();
+     var dinosaurs = this.props.everySingleDinosaur;
    }
    else {
-     var dinosaurs = this.buildDinosaurNameList();
+     var dinosaurs = this.props.everySingleDinosaur;
    }
 
    const regex = new RegExp(`${sanitizedQuery.trim()}`, 'i');
-   return dinosaurs.filter(dinosaur => dinosaur.search(regex) >= 0);
+   return dinosaurs.filter(dinosaur => dinosaur.name.search(regex) >= 0);
  }
 
   populateDinosaurs(dinosaurs){
@@ -675,7 +674,7 @@ export default class DinoListView extends Component {
 
     const query = this.state.dinosaurTyped;
     const dinosaurs = this.findDinosaur(query, false);
-    const dinosaursAndDiets = this.findDinosaur(query, true);
+    const dinosaursAndDiets = this.buildDinosaurNameAndDietList(this.findDinosaur(query, true));
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
     const ListEmptyComponent = () => (
