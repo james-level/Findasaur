@@ -953,7 +953,7 @@ export default class DinoListView extends Component {
 
                 }
 
-                <Image source={this.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+                <Image style={{marginTop:20}} source={this.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
