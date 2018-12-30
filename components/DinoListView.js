@@ -81,7 +81,7 @@ export default class DinoListView extends Component {
   handleImageUrl(object) {
       if (object.query.pages["-1"].imageinfo === undefined) {
         // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
-         return 'https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg';
+         return 'https://www.buttonmuseum.org/sites/default/files/CA-no-dinosaurs-button_busy_beaver_button_museum.png';
          // objects.pop(object);
       }
       else {
@@ -435,7 +435,7 @@ export default class DinoListView extends Component {
 
 
             <AutoHeightImage
-         width={300}
+         width={285}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
               <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>

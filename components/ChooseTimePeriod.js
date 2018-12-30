@@ -220,7 +220,7 @@ export default class ChooseTimePeriod extends Component {
     objects.forEach((object) => {
       if (object.query.pages["-1"].imageinfo === undefined) {
         // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
-         newArray.push('https://st2.depositphotos.com/7857468/12366/v/950/depositphotos_123667514-stock-illustration-cartoon-cute-dinosaur.jpg');
+         newArray.push('https://www.buttonmuseum.org/sites/default/files/CA-no-dinosaurs-button_busy_beaver_button_museum.png');
          // objects.pop(object);
       }
       else {
@@ -251,21 +251,21 @@ export default class ChooseTimePeriod extends Component {
     this.setState({slicedDinosaurs: dinosaurs}, function(){
 
       Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
-        const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+        var url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
         return this.retrieveWikiDescription(url);
       }))
       .then(() => {
         /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
         /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
         Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
-          const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
+          var imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
           return this.retrieveImageFileName(imageUrl)
         }))
         .then((images) => {
-          const imageObject = images;
-          const imgAddress = this.getImageAddress(imageObject);
+          var imageObject = images;
+          var imgAddress = this.getImageAddress(imageObject);
           Promise.all(imgAddress.map((object) => {
-            const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+            var imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
             return this.retrieveImage(imgUrl);
           }))
           .then((imageObject) => {
