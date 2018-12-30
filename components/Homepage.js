@@ -111,8 +111,6 @@ export default class Homepage extends React.Component {
         backgroundColor: "limegreen",
         width: 175,
         height: 55,
-        borderColor: "white",
-        borderWidth: 1,
         borderRadius: 20
       }}
       containerStyle={{ marginTop: 20 }}
