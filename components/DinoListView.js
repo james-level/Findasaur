@@ -429,10 +429,9 @@ export default class DinoListView extends Component {
 
           {this.state.activeItem && (
             <TouchableOpacity
-              onPress={() => this.setItemAsActive(this.state.activeItem)}
+              onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
               style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
-
 
             <AutoHeightImage
          width={285}
@@ -629,13 +628,13 @@ export default class DinoListView extends Component {
                     <View style={DinoListViewStyle.modalHeader}>
 
                     <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
-                    <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+                    <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 78, height: 24, marginTop: 10, marginRight: 20}}/>
                     </View>
                 ) :
 
                 <View style={DinoListViewStyle.modalHeader}>
                 <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
-                <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+                <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 39, height: 26, marginTop: 10, marginRight: 20}}/>
                 </View>
 
                 }
