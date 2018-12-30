@@ -229,19 +229,6 @@ export default class DinoListView extends Component {
     )
   }
 
-  getDietImage(diet){
-    switch(diet) {
-
-    case "carnivore": return require("../assets/icons/carnivore.png");
-    case "carnivore, piscivore": return require("../assets/icons/carnivore.png");
-    case "carnivore, omnivore": return require("../assets/icons/omnivore.png");
-    case "herbivore, omnivore": return require("../assets/icons/omnivore.png");
-    case "omnivore": return require("../assets/icons/omnivore.png");
-    case "herbivore": return require("../assets/icons/herbivore.png");
-
-  }
-  }
-
   getDietTextColor(diet){
     if (diet === "carnivore"){
       return 'red';
@@ -637,18 +624,18 @@ export default class DinoListView extends Component {
                 />
 
                 {
-                  this.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
+                  ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
 
                     <View style={DinoListViewStyle.modalHeader}>
 
                     <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
-                    <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+                    <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
                     </View>
                 ) :
 
                 <View style={DinoListViewStyle.modalHeader}>
                 <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
-                <Image source={ this.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+                <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
 
                 }

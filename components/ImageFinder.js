@@ -1,3 +1,16 @@
+export function getDietImage(diet){
+  switch(diet) {
+
+  case "carnivore": return require("../assets/icons/carnivore.png");
+  case "carnivore, piscivore": return require("../assets/icons/carnivore.png");
+  case "carnivore, omnivore": return require("../assets/icons/omnivore.png");
+  case "herbivore, omnivore": return require("../assets/icons/omnivore.png");
+  case "omnivore": return require("../assets/icons/omnivore.png");
+  case "herbivore": return require("../assets/icons/herbivore.png");
+
+}
+}
+
 export function findSizeComparisonImage(dinosaur) {
 
   switch(dinosaur) {
