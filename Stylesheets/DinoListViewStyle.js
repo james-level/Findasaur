@@ -55,7 +55,8 @@ const DinoListViewStyle = StyleSheet.create({
 
   modalPronunciation: {
     fontSize: 16,
-    color: 'white',
+    fontWeight: 'bold',
+    color: 'green',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
