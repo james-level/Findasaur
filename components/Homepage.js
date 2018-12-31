@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
 import InfoModal from './InfoModal.js';
+import ExploreButton from './ExploreButton.js';
 
 export default class Homepage extends React.Component {
 
@@ -101,30 +102,12 @@ export default class Homepage extends React.Component {
         )}
        />
 
-      <View style={HomepageStyle.content2}>
-        {
-            this.state.fontLoaded ? (
-              <Button
-              onPress={this.handleButtonClick}
-      textStyle={{fontSize: 25, textShadowColor: 'white', textShadowOffset: {width: -5, height: 5}, textShadowRadius: 25, color: 'black', fontWeight: "700", fontFamily: "PoiretOne-Regular"}}
-      title="Explore"
-      titleStyle={{ fontFamily: "PoiretOne-Regular" }}
-      buttonStyle={{
-        backgroundColor: "limegreen",
-        width: 175,
-        height: 55,
-        borderRadius: 20
-      }}
-      containerStyle={{ marginTop: 20 }}
-    />
-          ) : null
-        }
-      </View>
+      <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
 
 
-{/* 'ABOUT/INFO' MODAL SECTION*/}
+    {/* 'ABOUT/INFO' MODAL SECTION*/}
 
-<InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
+  <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
     {/*</ImageBackground>*/}
   </SafeAreaView>
