@@ -7,6 +7,7 @@ import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
+import InfoModal from './InfoModal.js';
 
 export default class Homepage extends React.Component {
 
@@ -18,6 +19,7 @@ export default class Homepage extends React.Component {
       modalVisible: false
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.setModalVisible = this.setModalVisible.bind(this);
   }
 
   async componentDidMount() {
@@ -33,8 +35,8 @@ export default class Homepage extends React.Component {
       buttonClicked: !this.state.buttonClicked
     })
   }
-    setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+    setModalVisible() {
+    this.setState({modalVisible: !this.state.modalVisible});
   }
 
   render() {
@@ -121,56 +123,9 @@ export default class Homepage extends React.Component {
 
 
 {/* 'ABOUT/INFO' MODAL SECTION*/}
-        <View>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
-            <View>
 
-          <LinearGradient
-          colors={['black', '#1e932d']}
-          style={{ padding: 25 }}>
+<InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
-            <View style={HomepageStyle.infoModal}>
-
-                <ScrollView>
-                  <Text style= {[HomepageStyle.infoModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
-                    <View style={{alignItems: "center"}}>
-                      <Image source={require('../assets/Dino_images/friendlydino.gif')} style={{height: 150, width: 225}}/>
-                    </View>
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur - an app from 'LevelApps' (<Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text><Text style={{fontSize: 17, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>, Stephen Rooney</Text> &<Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears </Text>).<Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}> These three creators can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: 'limegreen'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative</Text>. All three are potentailly available to hire for your team or project.</Text></Text>
-
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur looks to educate users about prehistoric animals. It utilises a Wikipedia API to provide information relating to aspects of various dinosaur species, providing data on diet and the location of fossil finds.</Text>
-
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>The concept behind Findasaur is based on an exisitng web app/project ('Findasaurus'), however the conversion to ReactNative is soley that of James, Stephen and David. The various in-app icons are provided by 'FlatIcons' and 'IonIcons'. Findasoar is a profit free project. If you have enjoyed it and want to help - please donate to Wikipedia, the data providers 🦕 </Text>
-
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur</Text>
-                  <Text style= {[HomepageStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
-
-                  <TouchableHighlight
-                    onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-                  </TouchableHighlight>
-                </ScrollView>
-              </View>
-            </LinearGradient>
-          </View>
-        </Modal>
-
-{/* 'INFO' (OR LAUNCH MODAL) BUTTON */}
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-            }}>
-              <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
-        </TouchableHighlight>
-      </View>
     {/*</ImageBackground>*/}
   </SafeAreaView>
 
