@@ -18,15 +18,6 @@ const HomepageStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  content2: {
-    width: '100%',
-    backgroundColor: 'black',
-    height: 100,
-    marginBottom: 20,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   contentText: {
     color: 'limegreen',
     paddingTop: 50,

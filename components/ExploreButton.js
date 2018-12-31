@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements';
 import { View } from 'react-native';
-import HomepageStyle from '../Stylesheets/HomepageStyle.js';
+import ExploreButtonContainerStyle from '../Stylesheets/ExploreButtonContainerStyle.js';
 
 export default class ExploreButton extends Component {
   render() {
     return (
 
-      <View style={HomepageStyle.content2}>
+      <View style={ExploreButtonContainerStyle.content}>
         {
             this.props.fontLoaded ? (
               <Button
