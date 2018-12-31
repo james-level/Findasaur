@@ -467,8 +467,8 @@ class NaturalHistoryMuseumScraper:
             timer.setTimeout(self.print_meaning(dinosaur), 1000)
 
 
-        def pronunciations(self):
-            dinosaur_names = [
+    def pronunciations(self):
+        dinosaur_names = [
                "Aardonyx",
                "Abelisaurus",
                "Achelousaurus",
@@ -758,9 +758,9 @@ class NaturalHistoryMuseumScraper:
                "Zalmoxes",
                "Zephyrosaurus"
                ]
-            timer = Timer()
-            for dinosaur in dinosaur_names:
-                timer.setTimeout(self.print_pronunciation(dinosaur), 1000)
+        timer = Timer()
+        for dinosaur in dinosaur_names:
+            timer.setTimeout(self.print_pronunciation(dinosaur), 1000)
 
 
 if __name__ == '__main__':
