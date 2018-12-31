@@ -617,6 +617,12 @@ export default class DinoListView extends Component {
                 ) :
 
                 <View style={{alignItems: "center"}}>
+                <TouchableHighlight
+                  onPress={() => {
+                    this.closeDinosaurView();
+                  }}>
+                <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10}}/>
+                </TouchableHighlight>
                 <AutoHeightImage
                   width={300}
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
@@ -646,13 +652,6 @@ export default class DinoListView extends Component {
                 </View>
 
             }
-
-                  <TouchableHighlight
-                    onPress={() => {
-                      this.closeDinosaurView();
-                    }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-                  </TouchableHighlight>
                   </ScrollView>
                 </View>
                 </LinearGradient>
