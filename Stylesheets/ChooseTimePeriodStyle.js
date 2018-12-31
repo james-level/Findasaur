@@ -5,7 +5,7 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     flex: 1,
     width: '100%',
     padding: 0,
-    margin: 0
+    margin: 0,
   }
 });
 
