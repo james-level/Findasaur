@@ -73,8 +73,10 @@ class NaturalHistoryMuseumScraper:
 
 
     def __request_url(self, url):
+        print(url)
         try:
             self.__random_agent()
+            print(self.__random_agent())
             response = requests.get(url, headers={'User-Agent': self.__random_agent()}, proxies={'http': self.proxy,
                                                                                                  'https': self.proxy})
             response.raise_for_status()
@@ -92,17 +94,41 @@ class NaturalHistoryMuseumScraper:
         return meaning
 
     def scrape_dinosaur_name_meanings(self, dinosaur_name):
-        url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name + '.html'
+        url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name[0].lower() + dinosaur_name[1:] + '.html'
         response = self.__request_url(url)
         meaning = self.extract_json_data(response)
         if meaning is not None:
+            return meaning.text
         else:
-            return ""
+            return meaning
 
-        return meaning.text
+        return meaning
 
     def print_meaning(self, dinosaur):
-        print(dinosaur + self.scrape_dinosaur_name_meanings(dinosaur))
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
+        meaning = self.scrape_dinosaur_name_meanings(dinosaur)
+        if meaning is not None:
+            print(dinosaur + meaning)
+            return
 
     def meanings(self):
         dinosaur_names = [
@@ -397,7 +423,7 @@ class NaturalHistoryMuseumScraper:
            ]
         timer = Timer()
         for dinosaur in dinosaur_names:
-            timer.setTimeout(self.print_meaning(dinosaur), 3000)
+            timer.setTimeout(self.print_meaning(dinosaur), 10000)
 
 if __name__ == '__main__':
     scraper = NaturalHistoryMuseumScraper()
