@@ -642,10 +642,18 @@ export default class DinoListView extends Component {
 
                 }
 
+                {
+
+                  Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
+
                 <View style={DinoListViewStyle.modalHeader}>
-                <Text style={DinoListViewStyle.modalPronunciation}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())}</Text>
+                <Text style={DinoListViewStyle.modalPronunciation}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
                 </View>
-                
+
+              ) : null
+
+              }
+
                 <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
