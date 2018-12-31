@@ -1,8 +1,35 @@
 from random import choice
 import json
-
 import requests
 from bs4 import BeautifulSoup
+import threading
+from functools import wraps
+
+
+def delay(delay=0.):
+    def wrap(f):
+        @wraps(f)
+        def delayed(*args, **kwargs):
+            timer = threading.Timer(delay, f, args=args, kwargs=kwargs)
+            timer.start()
+        return delayed
+    return wrap
+
+
+class Timer():
+    toClearTimer = False
+    def setTimeout(self, fn, time):
+        isInvokationCancelled = False
+        @delay(time)
+        def some_fn():
+                if (self.toClearTimer is False):
+                        fn()
+                else:
+                    print('Invocation cleared.')
+        some_fn()
+        return isInvokationCancelled
+    def setClearTimer(self):
+        self.toClearTimer = True
 
 _user_agents = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
@@ -20,23 +47,19 @@ class NaturalHistoryMuseumScraper:
     def scrape_dinosaur_name_meanings(self, dinosaur_name):
         url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name + '.html'
         r = requests.get(url)
-        soup = BeautifulSoup(r.content)
+        soup = BeautifulSoup(r.content, features="html.parser")
         meaning = soup.find('dd', class_="dinosaur--meaning")
         if meaning is not None:
-            print(meaning)
+            print("NOT NONE")
         else:
-            meaning = ""
+            return ""
 
-        return meaning
+        return meaning.text
+
+    def print_meaning(self, dinosaur):
+        print(dinosaur + self.scrape_dinosaur_name_meanings(dinosaur))
 
     def meanings(self):
-        for dinosaur in self.dinosaur_names_array:
-            self.scrape_dinosaur_name_meanings(dinosaur)
-
-    if __name__ == '__main__':
-	self.meanings()
-
-    def dinosaur_names_array(self):
         dinosaur_names = [
            "Aardonyx",
            "Abelisaurus",
@@ -79,7 +102,7 @@ class NaturalHistoryMuseumScraper:
            "Bagaceratops",
            "Bambiraptor",
            "Barapasaurus",
-           "Barosaurus",,
+           "Barosaurus",
            "Baryonyx",
            "Becklespinax",
            "Beipiaosaurus",
@@ -87,7 +110,7 @@ class NaturalHistoryMuseumScraper:
            "Borogovia",
            "Brachiosaurus",
            "Brachylophosaurus",
-           "Brachytrachelopan,
+           "Brachytrachelopan",
            "Buitreraptor",
            "Camarasaurus",
            "Camptosaurus",
@@ -113,7 +136,7 @@ class NaturalHistoryMuseumScraper:
            "Compsognathus",
            "Conchoraptor",
            "Confuciusornis",
-           "Corythosaurus",,
+           "Corythosaurus",
            "Cryolophosaurus",
            "Dacentrurus",
            "Daspletosaurus",
@@ -258,7 +281,7 @@ class NaturalHistoryMuseumScraper:
            "Protoceratop",
            "Protohadro",
            "Psittacosauru",
-           "Quaesitosauru",,
+           "Quaesitosauru",
            "Rebbachisauru",
            "Rhabdodo",
            "Rhoetosauru",
@@ -287,18 +310,18 @@ class NaturalHistoryMuseumScraper:
            "Sinovenator",
            "Sinraptor",
            "Sonidosaurus",
-           "Spinosaurus,
+           "Spinosaurus",
            "Staurikosaurus",
            "Stegoceras",
            "Stegosaurus",
            "Stenopelix",
            "Struthiomimus",
-           "Struthiosaurus",,
+           "Struthiosaurus",
            "Styracosaurus",
            "Suchomimus",
            "Supersaurus",
            "Talarurus",
-           "Tarbosaurus,
+           "Tarbosaurus",
            "Tarchia",
            "Telmatosaurus",
            "Tenontosaurus",
@@ -327,5 +350,10 @@ class NaturalHistoryMuseumScraper:
            "Zalmoxes",
            "Zephyrosaurus"
            ]
+        timer = Timer()
+        for dinosaur in dinosaur_names:
+            timer.setTimeout(self.print_meaning(dinosaur), 3000)
 
-         return dinosaur_names
+if __name__ == '__main__':
+    scraper = NaturalHistoryMuseumScraper()
+    scraper.meanings()
