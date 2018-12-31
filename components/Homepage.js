@@ -9,6 +9,7 @@ import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
 import InfoModal from './InfoModal.js';
 import ExploreButton from './ExploreButton.js';
+import HeroImageCarousel from './HeroImageCarousel.js';
 
 export default class Homepage extends React.Component {
 
@@ -41,16 +42,6 @@ export default class Homepage extends React.Component {
   }
 
   render() {
-    const images = [
-    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0001_trex.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0000_triceratops.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0009_carnotaurus.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0006_mosasaurus_0.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0015_ankylosaurus.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0002_stygimoloch.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-05/960x540_0011_blue.png',
-    'http://www.jurassicworld.com/sites/default/files/2018-06/960x540_0004_pteranodon_0.png',
-    ];
 
   if (this.state.buttonClicked === false){
 
@@ -73,34 +64,7 @@ export default class Homepage extends React.Component {
       </View>
 
 {/* 'IMAGE CAROUSEL' SECTION*/}
-    <ImageSlider
-      loopBothSides
-      autoPlayWithInterval={1500}
-      images={images}
-      customSlide={({ index, item, style, width }) => (
-        <View key={index} style={[style, HomepageStyle.customSlide]}>
-          <Image source={{ uri: item }} style={HomepageStyle.customImage} />
-        </View>
-        )}
-
-      customButtons={(position, move) => (
-        <View style={HomepageStyle.buttons}>
-          {images.map((image, index) => {
-            return (
-              <TouchableHighlight
-                key={index}
-                underlayColor="white"
-                onPress={() => move(index)}
-                style={HomepageStyle.button}
-              >
-              <Text>
-              </Text>
-              </TouchableHighlight>
-              );
-            })}
-          </View>
-        )}
-       />
+    <HeroImageCarousel />
 
       <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
 
