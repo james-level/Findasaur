@@ -73,10 +73,8 @@ class NaturalHistoryMuseumScraper:
 
 
     def __request_url(self, url):
-        print(url)
         try:
             self.__random_agent()
-            print(self.__random_agent())
             response = requests.get(url, headers={'User-Agent': self.__random_agent()}, proxies={'http': self.proxy,
                                                                                                  'https': self.proxy})
             response.raise_for_status()
@@ -88,15 +86,21 @@ class NaturalHistoryMuseumScraper:
             return response.text
 
     @staticmethod
-    def extract_json_data(html):
+    def extract_meaning_json_data(html):
         soup = BeautifulSoup(html, 'html.parser')
         meaning = soup.find('dd', class_="dinosaur--meaning")
         return meaning
 
+    @staticmethod
+    def extract_pronunciation_json_data(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        pronunciation = soup.find('dd', class_="dinosaur--pronunciation")
+        return pronunciation
+
     def scrape_dinosaur_name_meanings(self, dinosaur_name):
         url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name[0].lower() + dinosaur_name[1:] + '.html'
         response = self.__request_url(url)
-        meaning = self.extract_json_data(response)
+        meaning = self.extract_meaning_json_data(response)
         if meaning is not None:
             return meaning.text
         else:
@@ -104,30 +108,67 @@ class NaturalHistoryMuseumScraper:
 
         return meaning
 
+    def scrape_dinosaur_name_pronunciations(self, dinosaur_name):
+        url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name[0].lower() + dinosaur_name[1:] + '.html'
+        response = self.__request_url(url)
+        pronunciation = self.extract_pronunciation_json_data(response)
+        if pronunciation is not None:
+            return pronunciation.text
+        else:
+            return pronunciation
+
+        return pronunciation
+
     def print_meaning(self, dinosaur):
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
             return
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
             return
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
             return
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
             return
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
             return
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
         if meaning is not None:
-            print(dinosaur + meaning)
+            print("case " + "'" + dinosaur + "'" + ": return " + meaning + ";")
+            return
+
+    def print_pronunciation(self, dinosaur):
+        pronunciation = self.scrape_dinosaur_name_pronunciations(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            return
+        pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            return
+        pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            return
+        pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            return
+        pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            return
+        pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
+        if pronunciation is not None:
+            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
             return
 
     def meanings(self):
@@ -423,8 +464,308 @@ class NaturalHistoryMuseumScraper:
            ]
         timer = Timer()
         for dinosaur in dinosaur_names:
-            timer.setTimeout(self.print_meaning(dinosaur), 10000)
+            timer.setTimeout(self.print_meaning(dinosaur), 1000)
+
+
+        def pronunciations(self):
+            dinosaur_names = [
+               "Aardonyx",
+               "Abelisaurus",
+               "Achelousaurus",
+               "Achillobator",
+               "Acrocanthosaurus",
+               "Aegyptosaurus",
+               "Afrovenator",
+               "Agilisaurus",
+               "Alamosaurus",
+               "Albertaceratops",
+               "Albertosaurus",
+               "Alectrosaurus",
+               "Alioramus",
+               "Allosaurus",
+               "Alvarezsaurus",
+               "Amargasaurus",
+               "Ammosaurus",
+               "Ampelosaurus",
+               "Amygdalodon",
+               "Anchiceratops",
+               "Anchisaurus",
+               "Ankylosaurus",
+               "Anserimimus",
+               "Antarctosaurus",
+               "Apatosaurus",
+               "Aragosaurus",
+               "Aralosaurus",
+               "Archaeoceratops",
+               "Archaeopteryx",
+               "Archaeornithomimus",
+               "Argentinosaurus",
+               "Arrhinoceratops",
+               "Atlascopcosaurus",
+               "Aucasaurus",
+               "Austrosaurus",
+               "Avaceratops",
+               "Avimimus",
+               "Bactrosaurus",
+               "Bagaceratops",
+               "Bambiraptor",
+               "Barapasaurus",
+               "Barosaurus",
+               "Baryonyx",
+               "Becklespinax",
+               "Beipiaosaurus",
+               "Bellusaurus",
+               "Borogovia",
+               "Brachiosaurus",
+               "Brachylophosaurus",
+               "Brachytrachelopan",
+               "Buitreraptor",
+               "Camarasaurus",
+               "Camptosaurus",
+               "Carcharodontosaurus",
+               "Carnotaurus",
+               "Caudipteryx",
+               "Cedarpelta",
+               "Centrosaurus",
+               "Ceratosaurus",
+               "Cetiosauriscus",
+               "Cetiosaurus",
+               "Chaoyangsaurus",
+               "Chasmosaurus",
+               "Chindesaurus",
+               "Chinshakiangosaurus",
+               "Chirostenotes",
+               "Chubutisaurus",
+               "Chungkingosaurus",
+               "Citipati",
+               "Coelophysis",
+               "Coelurus",
+               "Coloradisaurus",
+               "Compsognathus",
+               "Conchoraptor",
+               "Confuciusornis",
+               "Corythosaurus",
+               "Cryolophosaurus",
+               "Dacentrurus",
+               "Daspletosaurus",
+               "Datousaurus",
+               "Deinocheirus",
+               "Deltadromeus",
+               "Dicraeosaurus",
+               "Dilophosaurus",
+               "Diplodocus",
+               "Dromaeosaurus",
+               "Dromiceiomimus",
+               "Dryosaurus",
+               "Dryptosaurus",
+               "Edmontonia",
+               "Edmontosaurus",
+               "Einiosaurus",
+               "Elaphrosaurus",
+               "Emausaurus",
+               "Eoraptor",
+               "Eotyrannus",
+               "Erketu",
+               "Erlikosaurus",
+               "Euhelopus",
+               "Euoplocephalus",
+               "Europasaurus",
+               "Eustreptospondylus",
+               "Fukuiraptor",
+               "Fukuisauru",
+               "Gallimimus",
+               "Gargoyleosaurus",
+               "Garudimimus",
+               "Gasosaurus",
+               "Gasparinisaura",
+               "Gastonia",
+               "Giganotosaurus",
+               "Gilmoreosaurus",
+               "Giraffatitan",
+               "Gobisaurus",
+               "Gorgosaurus",
+               "Goyocephale",
+               "Gryposaurus",
+               "Guaibasaurus",
+               "Guanlong",
+               "Hadrosaurus",
+               "Hagryphus",
+               "Haplocanthosaurus",
+               "Harpymimus",
+               "Herrerasaurus",
+               "Hesperosaurus",
+               "Heterodontosaurus",
+               "Heyuannia",
+               "Homalocephale",
+               "Huayangosaurus",
+               "Hylaeosaurus",
+               "Hypacrosaurus",
+               "Hypsilophodon",
+               "Iguanodon",
+               "Indosuchus",
+               "Irritator",
+               "Janenschia",
+               "Jaxartosaurus",
+               "Jingshanosaurus",
+               "Jobaria",
+               "Juravenator",
+               "Kentrosaurus",
+               "Khaan",
+               "Kotasaurus",
+               "Kritosaurus",
+               "Lambeosaurus",
+               "Leaellynasaura",
+               "Leptoceratops",
+               "Ligabuesaurus",
+               "Liliensternus",
+               "Lophorhothon",
+               "Lophostropheus",
+               "Lufengosaurus",
+               "Lurdusaurus",
+               "Lycorhinus",
+               "Magyarosaurus",
+               "Maiasaura",
+               "Majungasaurus",
+               "Malawisaurus",
+               "Mamenchisaurus",
+               "Mapusaurus",
+               "Marshosaurus",
+               "Masiakasaurus",
+               "Massospondylus",
+               "Maxakalisaurus",
+               "Megalosaurus",
+               "Melanorosaurus",
+               "Metriacanthosaurus",
+               "Microceratus",
+               "Micropachycephalosaurus",
+               "Microraptor",
+               "Minmi",
+               "Monolophosaurus",
+               "Mononykus",
+               "Mussaurus",
+               "Muttaburrasaurus",
+               "Nanshiungosaurus",
+               "Nedoceratops",
+               "Nemegtosaurus",
+               "Neovenator",
+               "Neuquenosaurus",
+               "Nigersaurus",
+               "Noasaurus",
+               "Nodosaurus",
+               "Nomingia",
+               "Nothronychus",
+               "Nqwebasaurus",
+               "Omeisaurus",
+               "Opisthocoelicaudia",
+               "Ornitholestes",
+               "Ornithomimus",
+               "Orodromeus",
+               "Oryctodromeus",
+               "Othnielia",
+               "Ouranosaurus",
+               "Oviraptor",
+               "Pachycephalosaurus",
+               "Pachyrhinosaurus",
+               "Panoplosaurus",
+               "Pantydraco",
+               "Paralititan",
+               "Parasaurolophus",
+               "Parksosaurus",
+               "Patagosaurus",
+               "Pelicanimimus",
+               "Pentaceratops",
+               "Piatnitzkysauru",
+               "Pinacosauru",
+               "Plateosauru",
+               "Podokesauru",
+               "Poekilopleuro",
+               "Polacanthu",
+               "Prenocephal",
+               "Probactrosauru",
+               "Proceratosauru",
+               "Procompsognathu",
+               "Prosaurolophu",
+               "Protarchaeoptery",
+               "Protoceratop",
+               "Protohadro",
+               "Psittacosauru",
+               "Quaesitosauru",
+               "Rebbachisauru",
+               "Rhabdodo",
+               "Rhoetosauru",
+               "Rincheni",
+               "Riojasauru",
+               "Saichania",
+               "Saltasaurus",
+               "Sarcosaurus",
+               "Saurolophus",
+               "Sauropelta",
+               "Saurophaganax",
+               "Saurornithoides",
+               "Scelidosaurus",
+               "Scutellosaurus",
+               "Secernosaurus",
+               "Segisaurus",
+               "Segnosaurus",
+               "Shanag",
+               "Shantungosaurus",
+               "Shunosaurus",
+               "Shuvuuia",
+               "Silvisaurus",
+               "Sinocalliopteryx",
+               "Sinornithosaurus",
+               "Sinosauropteryx",
+               "Sinovenator",
+               "Sinraptor",
+               "Sonidosaurus",
+               "Spinosaurus",
+               "Staurikosaurus",
+               "Stegoceras",
+               "Stegosaurus",
+               "Stenopelix",
+               "Struthiomimus",
+               "Struthiosaurus",
+               "Styracosaurus",
+               "Suchomimus",
+               "Supersaurus",
+               "Talarurus",
+               "Tarbosaurus",
+               "Tarchia",
+               "Telmatosaurus",
+               "Tenontosaurus",
+               "Thecodontosaurus",
+               "Thescelosaurus",
+               "Torosaurus",
+               "Torvosaurus",
+               "Triceratops",
+               "Troodon",
+               "Tsintaosaurus",
+               "Tuojiangosaurus",
+               "Tylocephale",
+               "Tyrannosaurus",
+               "Unenlagia",
+               "Urbacodon",
+               "Utahraptor",
+               "Valdosaurus",
+               "Velociraptor",
+               "Vulcanodon",
+               "Yandusaurus",
+               "Yangchuanosaurus",
+               "Yimenosaurus",
+               "Yinlong",
+               "Yuanmousaurus",
+               "Yunnanosaurus",
+               "Zalmoxes",
+               "Zephyrosaurus"
+               ]
+            timer = Timer()
+            for dinosaur in dinosaur_names:
+                timer.setTimeout(self.print_pronunciation(dinosaur), 1000)
+
 
 if __name__ == '__main__':
     scraper = NaturalHistoryMuseumScraper()
+    print("Dinosaur name meanings below:")
     scraper.meanings()
+    print("Dinosaur name pronunciations below:")
+    scraper.pronunciations()
