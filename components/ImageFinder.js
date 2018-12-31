@@ -4,9 +4,11 @@ export function getDietImage(diet){
   case "carnivore": return require("../assets/icons/carnivore.png");
   case "carnivore, piscivore": return require("../assets/icons/carnivore.png");
   case "carnivore, omnivore": return require("../assets/icons/omnivore.png");
+  case "piscivore, insectivore": return require("../assets/icons/omnivore.png");
   case "herbivore, omnivore": return require("../assets/icons/omnivore.png");
   case "omnivore": return require("../assets/icons/omnivore.png");
   case "herbivore": return require("../assets/icons/herbivore.png");
+  case undefined: return require("../assets/icons/diet_unknown.png");
 
 }
 }
