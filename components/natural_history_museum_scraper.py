@@ -148,27 +148,27 @@ class NaturalHistoryMuseumScraper:
     def print_pronunciation(self, dinosaur):
         pronunciation = self.scrape_dinosaur_name_pronunciations(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
             return
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
             return
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
             return
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
             return
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'"  + ";")
             return
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
-            print("case " + "''" + dinosaur + "'" + ": return " + pronunciation + ";")
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
             return
 
     def meanings(self):
@@ -765,7 +765,7 @@ class NaturalHistoryMuseumScraper:
 
 if __name__ == '__main__':
     scraper = NaturalHistoryMuseumScraper()
-    print("Dinosaur name meanings below:")
-    scraper.meanings()
     print("Dinosaur name pronunciations below:")
     scraper.pronunciations()
+    print("Dinosaur name meanings below:")
+    scraper.meanings()

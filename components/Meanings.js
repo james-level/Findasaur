@@ -16,7 +16,7 @@ export function getNameMeaning(dinosaur) {
   case 'Alectrosaurus': return 'eagle lizard';
   case 'Alioramus': return 'other [evolutionary] branch';
   case 'Allosaurus': return 'other lizard';
-  case 'Alvarezsaurus': return 'Alvarez\s lizard';
+  case 'Alvarezsaurus': return 'Alvarez\'s lizard';
   case 'Amargasaurus': return 'Amarga lizard';
   case 'Ammosaurus': return 'sand lizard';
   case 'Ampelosaurus': return 'vineyard lizard';
