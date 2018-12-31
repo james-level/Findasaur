@@ -99,7 +99,7 @@ export function getNameMeaning(dinosaur) {
   case 'Eoraptor': return 'early plunderer';
   case 'Eotyrannus': return 'dawn tyrant';
   case 'Erketu': return 'Erketu = Tengri (a Mongolian creator-god)';
-  case 'Erlikosaurus': return 'Erlik''s lizard';
+  case 'Erlikosaurus': return 'Erlik\s lizard';
   case 'Euhelopus': return '1 marsh foot';
   case 'Euoplocephalus': return 'well-armoured head';
   case 'Europasaurus': return 'Europe lizard';

@@ -15,6 +15,8 @@ import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
 import Autocomplete from 'react-native-autocomplete-input';
 import axios from 'axios';
 import * as ImageFinder from './ImageFinder.js'
+import * as Pronunciations from './Pronunciations.js'
+import * as Meanings from './Meanings.js'
 
 export default class DinoListView extends Component {
 
@@ -640,6 +642,10 @@ export default class DinoListView extends Component {
 
                 }
 
+                <View style={DinoListViewStyle.modalHeader}>
+                <Text style={DinoListViewStyle.modalPronunciation}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())}</Text>
+                </View>
+                
                 <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
