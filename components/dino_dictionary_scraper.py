@@ -59,6 +59,7 @@ _user_agents = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6'
 ]
 
+
 class DinoDictionaryScraper:
 
     def __init__(self, user_agents=_user_agents, proxy=None):
@@ -83,3 +84,34 @@ class DinoDictionaryScraper:
             raise requests.RequestException
         else:
             return response.text
+
+    @staticmethod
+    def extract_dinosaur_names_json_data(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        names = soup.find_all('a', attrs={'id':'list'})
+        return names
+
+    def scrape_dinosaur_names(self):
+        url = 'http://www.dinodictionary.com/azdict_index.asp'
+        try:
+            response = self.__request_url(url)
+            names = self.extract_dinosaur_names_json_data(response)
+            list = self.build_dinosaur_name_list(names)
+            if list is not None:
+                return list
+            else:
+                return names
+        except Exception as e:
+            raise e
+
+    def build_dinosaur_name_list(self, data):
+        name_list = []
+        for dinosaur in data:
+            name_list.append(dinosaur.text)
+        return name_list
+
+
+if __name__ == '__main__':
+    scraper = DinoDictionaryScraper()
+    print("Dinosaur names below:")
+    scraper.scrape_dinosaur_names()
