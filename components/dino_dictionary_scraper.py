@@ -91,6 +91,13 @@ class DinoDictionaryScraper:
         names = soup.find_all('a', attrs={'id':'list'})
         return names
 
+    @staticmethod
+    def extract_dino_data_json(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        data = soup.find_all('font')
+        print(data)
+        return data
+
     def scrape_dinosaur_names(self):
         url = 'http://www.dinodictionary.com/azdict_index.asp'
         try:
@@ -110,8 +117,29 @@ class DinoDictionaryScraper:
             name_list.append(dinosaur.text)
         return name_list
 
+    def retrieve_dinosaur_data(self, dinosaur):
+        url = 'http://www.dinodictionary.com/dinos_d.asp#' + dinosaur
+        try:
+            response = self.__request_url(url)
+            data = self.extract_dino_data_json(response)
+            if data is not None:
+                return data
+            else:
+                return
+        except Exception as e:
+            raise e
+
+    def iterative_dino_data_scraper(self):
+        results = []
+        timer = Timer()
+        list = self.scrape_dinosaur_names()
+        for dinosaur in list:
+            timer.setTimeout(result.append(self.retrieve_dinosaur_data(dinosaur)), 1.0)
+        return results
 
 if __name__ == '__main__':
     scraper = DinoDictionaryScraper()
     print("Dinosaur names below:")
     scraper.scrape_dinosaur_names()
+    print("Dinosaur data below:")
+    scraper.iterative_dino_data_scraper()
