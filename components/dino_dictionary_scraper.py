@@ -58,3 +58,28 @@ _user_agents = [
     'Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11',
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6'
 ]
+
+class DinoDictionaryScraper:
+
+    def __init__(self, user_agents=_user_agents, proxy=None):
+        self.user_agents = user_agents
+        self.proxy = proxy
+
+    def __random_agent(self):
+        if self.user_agents and isinstance(self.user_agents, list):
+            return choice(self.user_agents)
+        return choice(_user_agents)
+
+
+    def __request_url(self, url):
+        try:
+            self.__random_agent()
+            response = requests.get(url, headers={'User-Agent': self.__random_agent()}, proxies={'http': self.proxy,
+                                                                                                 'https': self.proxy})
+            response.raise_for_status()
+        except requests.HTTPError:
+                return response.text
+        except requests.RequestException:
+            raise requests.RequestException
+        else:
+            return response.text
