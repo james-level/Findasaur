@@ -17,6 +17,8 @@ import axios from 'axios';
 import * as ImageFinder from './ImageFinder.js'
 import * as Pronunciations from './Pronunciations.js'
 import * as Meanings from './Meanings.js'
+import * as Types from './Types.js'
+import * as Lengths from './Lengths.js'
 
 export default class DinoListView extends Component {
 
@@ -653,6 +655,18 @@ export default class DinoListView extends Component {
               ) : null
 
               }
+
+              {
+
+                Lengths.getLength(this.returnClickedDinosaur()) ? (
+
+              <View style={DinoListViewStyle.modalHeader}>
+              <Text style={DinoListViewStyle.modalPronunciation}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type: {Types.getType(this.returnClickedDinosaur())}</Text>
+              </View>
+
+            ) : null
+
+            }
 
                 <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
