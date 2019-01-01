@@ -109,6 +109,19 @@ class NaturalHistoryMuseumScraper:
         else:
             return
 
+    @staticmethod
+    def extract_type_json_data(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        div = soup.find('div', class_="dinosaur--description-container small-12 medium-12 large-5 columns")
+        if div is None:
+            div = soup.find('div', class_="dinosaur--description-container")
+        if div is not None:
+            type = div.find_all('dd')[0]
+            link = type.find('a')
+            return link
+        else:
+            return
+
     def scrape_dinosaur_name_meanings(self, dinosaur_name):
         url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name[0].lower() + dinosaur_name[1:] + '.html'
         response = self.__request_url(url)
@@ -133,6 +146,15 @@ class NaturalHistoryMuseumScraper:
         length = self.extract_length_json_data(response)
         if length is not None:
             return length
+        else:
+            return
+
+    def scrape_dinosaur_type(self, dinosaur_name):
+        url = 'http://www.nhm.ac.uk/discover/dino-directory/' + dinosaur_name[0].lower() + dinosaur_name[1:] + '.html'
+        response = self.__request_url(url)
+        type = self.extract_type_json_data(response)
+        if type is not None:
+            return type
         else:
             return
 
@@ -204,6 +226,24 @@ class NaturalHistoryMuseumScraper:
         length = self.scrape_dinosaur_length(dinosaur)
         if length is not None:
             print("case " + "'" + dinosaur + "'" + ": return " + "'" + length.text + "'" + ";")
+            return
+
+    def print_type(self, dinosaur):
+        type = self.scrape_dinosaur_type(dinosaur)
+        if type is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + type.text + "'" + ";")
+            return
+        type = self.scrape_dinosaur_length(dinosaur)
+        if type is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + type.text + "'" + ";")
+            return
+        type = self.scrape_dinosaur_length(dinosaur)
+        if type is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + type.text + "'" + ";")
+            return
+        type = self.scrape_dinosaur_length(dinosaur)
+        if type is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + type.text + "'" + ";")
             return
 
     def meanings(self):
@@ -797,7 +837,7 @@ class NaturalHistoryMuseumScraper:
         for dinosaur in dinosaur_names:
             timer.setTimeout(self.print_pronunciation(dinosaur), 1000)
 
-    def lengths(self):
+    def lengths_and_types(self):
         dinosaur_names = [
                "Aardonyx",
                "Abelisaurus",
@@ -1090,13 +1130,15 @@ class NaturalHistoryMuseumScraper:
                ]
         timer = Timer()
         for dinosaur in dinosaur_names:
+            timer.setTimeout(self.print_type(dinosaur), 1000)
+        for dinosaur in dinosaur_names:
             timer.setTimeout(self.print_length(dinosaur), 1000)
 
 
 if __name__ == '__main__':
     scraper = NaturalHistoryMuseumScraper()
-    print("Dinosaur lengths below:")
-    scraper.lengths()
+    print("Dinosaur lengths and types below:")
+    scraper.lengths_and_types()
     print("Dinosaur name pronunciations below:")
     scraper.pronunciations()
     print("Dinosaur name meanings below:")
