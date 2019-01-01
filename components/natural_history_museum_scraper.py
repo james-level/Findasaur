@@ -19,7 +19,7 @@ def delay(delay=0.):
 class Timer():
     toClearTimer = False
     def setTimeout(self, fn, time):
-        isInvokationCancelled = False
+        isInvocationCancelled = False
         @delay(time)
         def some_fn():
                 if (self.toClearTimer is False):
@@ -27,7 +27,7 @@ class Timer():
                 else:
                     print('Invocation cleared.')
         some_fn()
-        return isInvokationCancelled
+        return isInvocationCancelled
     def setClearTimer(self):
         self.toClearTimer = True
 
