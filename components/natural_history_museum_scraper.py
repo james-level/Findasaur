@@ -132,11 +132,9 @@ class NaturalHistoryMuseumScraper:
         response = self.__request_url(url)
         length = self.extract_length_json_data(response)
         if length is not None:
-            print(length.text)
-            return length.text
+            return length
         else:
-            print("Unknown")
-            return "Unknown"
+            return
 
     def print_meaning(self, dinosaur):
         meaning = self.scrape_dinosaur_name_meanings(dinosaur)
@@ -188,6 +186,24 @@ class NaturalHistoryMuseumScraper:
         pronunciation = self.scrape_dinosaur_name_meanings(dinosaur)
         if pronunciation is not None:
             print("case " + "'" + dinosaur + "'" + ": return " + "'" + pronunciation + "'" + ";")
+            return
+
+    def print_length(self, dinosaur):
+        length = self.scrape_dinosaur_length(dinosaur)
+        if length is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + length.text + "'" + ";")
+            return
+        length = self.scrape_dinosaur_length(dinosaur)
+        if length is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + length.text + "'" + ";")
+            return
+        length = self.scrape_dinosaur_length(dinosaur)
+        if length is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + length.text + "'" + ";")
+            return
+        length = self.scrape_dinosaur_length(dinosaur)
+        if length is not None:
+            print("case " + "'" + dinosaur + "'" + ": return " + "'" + length.text + "'" + ";")
             return
 
     def meanings(self):
@@ -1074,7 +1090,7 @@ class NaturalHistoryMuseumScraper:
                ]
         timer = Timer()
         for dinosaur in dinosaur_names:
-            timer.setTimeout(self.scrape_dinosaur_length(dinosaur), 1.0)
+            timer.setTimeout(self.print_length(dinosaur), 1000)
 
 
 if __name__ == '__main__':
