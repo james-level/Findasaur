@@ -7,6 +7,7 @@ import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Button } from 'react-native-elements';
 import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 
 const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
@@ -180,6 +181,22 @@ export default class TimePeriodPage extends Component {
               </TouchableHighlight>
 
       </View>
+
+      <Button
+        onPress={this.props.handleButtonClick}
+        textStyle={{fontSize: 18, textShadowColor: 'white', textShadowOffset: {width: -5, height: 5}, textShadowRadius: 25, color: 'black', fontWeight: "700", fontFamily: "PoiretOne-Regular"}}
+        title="Read more"
+        titleStyle={{ fontFamily: "PoiretOne-Regular" }}
+        buttonStyle={{
+          backgroundColor: "limegreen",
+          width: 160,
+          height: 60,
+          borderRadius: 20,
+          marginTop: 100,
+          marginLeft: '30%'
+        }}
+        containerStyle={{ marginTop: 20 }}
+      />
 
     </View>
     );
