@@ -52,6 +52,9 @@ export default class DinoListView extends Component {
         dinos.push(dinosaur);
         console.log("DINOS AFTER", dinos);
         AsyncStorage.setItem('favios', JSON.stringify(dinos));
+        Alert.alert(
+               `Successfully added ${dinosaur} to your favourites!`
+            )
   })}
     catch (error) {
       console.log(error);
