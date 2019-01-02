@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 import FavouriteModal from './FavouriteModal.js';
@@ -59,7 +59,7 @@ export default class Favourites extends Component {
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.props.favouriteModalVisible}
+          visible={this.props.favouritesVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
@@ -89,8 +89,7 @@ export default class Favourites extends Component {
 
         </ScrollView>
 
-        <FavouriteModal clickedFavourite={this.state.clickedFavourite} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
-
+        <FavouriteModal clickedFavourite={this.state.clickedFavourite} favouriteModalVisible={this.state.favouriteModalVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
 
             </View>
           </LinearGradient>
