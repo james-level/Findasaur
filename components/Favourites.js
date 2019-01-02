@@ -19,7 +19,7 @@ export default class Favourites extends Component {
   }
 
   retrieveFavourites(){
-      AsyncStorage.getItem('favios').then((value) => {
+      AsyncStorage.getItem('favvs').then((value) => {
         this.setState({
           favourites: value
         })
@@ -35,7 +35,7 @@ export default class Favourites extends Component {
 
     return favourites.map((favourite, i) =>
       <View key={i} style={FavouritesStyle.modalHeader}>
-        <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite} </Text>
+        <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite.name} </Text>
       </View>
     )
   }

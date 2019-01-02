@@ -41,23 +41,25 @@ export default class DinoListView extends Component {
   }
 
   addDinosaurToFavourites = async() => {
-    var dinosaur = this.returnClickedDinosaur()
-    var pronunciation = Pronunciations.getPronunciation(dinosaur)
-    var meaning = Meanings.getPronunciation(dinosaur)
-    var length = Lengths.getLength(dinosaur)
-    var type = Types.getType(dinosaur)
+    var name = this.returnClickedDinosaur()
+    var pronunciation = Pronunciations.getPronunciation(name)
+    var meaning = Meanings.getNameMeaning(name)
+    var length = Lengths.getLength(name)
+    var type = Types.getType(name)
     var diet = ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)
     var image = this.state.searchedDinosaurImage
+
+    var dinosaur = {name: name, pronunciation: pronunciation, meaning: meaning, length: length, type: type, diet: diet, image: image}
     console.log("DINOSAUR", dinosaur);
 
     try {
-      AsyncStorage.getItem('favios').then((dinosaurs) => {
+      AsyncStorage.getItem('favvs').then((dinosaurs) => {
         console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
         console.log("DINOS BEFORE", dinos);
         dinos.push(dinosaur);
         console.log("DINOS AFTER", dinos);
-        AsyncStorage.setItem('favios', JSON.stringify(dinos));
+        AsyncStorage.setItem('favvs', JSON.stringify(dinos));
         Alert.alert(
                `Successfully added ${dinosaur} to your favourites!`
             )
