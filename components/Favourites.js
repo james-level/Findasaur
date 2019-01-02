@@ -14,9 +14,16 @@ export default class Favourites extends Component {
     };
   }
 
+  componentDidMount(){
+    this.retrieveFavourites()
+  }
+
   retrieveFavourites(){
       AsyncStorage.getItem('dinosaur').then((value) => {
-        return JSON.parse(value)
+        console.log(value);
+        this.setState({
+          favourite: value
+        })
       }).catch((error) => {
         var text = <Text style={{color: 'white'}}> {JSON.parse(value)} </Text>
         console.log(error)
@@ -46,9 +53,19 @@ export default class Favourites extends Component {
         style={{ padding: 25 }}>
 
           <View style={InfoModalStyle.infoModal}>
+            <ScrollView>
 
-          <Text> {this.retrieveFavourites()} </Text>
+            <Text style={InfoModalStyle.infoModalHeader}> Favourites </Text>
 
+          {
+            this.state.favourite ? (
+              <View style={InfoModalStyle.modalHeader}>
+              <Text style={InfoModalStyle.modalFavourite}> {this.state.favourite} </Text>
+              </View>
+             ) : null
+        }
+
+        </ScrollView>
 
             </View>
           </LinearGradient>
