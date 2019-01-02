@@ -10,6 +10,7 @@ import ChooseTimePeriod from './ChooseTimePeriod.js';
 import InfoModal from './InfoModal.js';
 import ExploreButton from './ExploreButton.js';
 import HeroImageCarousel from './HeroImageCarousel.js';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class Homepage extends React.Component {
 
@@ -81,6 +82,13 @@ export default class Homepage extends React.Component {
               this.setModalVisible();
               }}>
                 <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              this.setModalVisible();
+              }}>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
           </TouchableHighlight>
 
   </SafeAreaView>

@@ -19,6 +19,7 @@ import * as Pronunciations from './Pronunciations.js'
 import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
+import { AsyncStorage } from "react-native"
 
 export default class DinoListView extends Component {
 
@@ -37,6 +38,14 @@ export default class DinoListView extends Component {
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
+  }
+
+  addDinosaurToFavourites = async() => {
+    try {
+      await AsyncStorage.setItem('dinosaur', this.returnClickedDinosaur());
+    } catch (error) {
+      // Error saving data
+    }
   }
 
   retrieveInitialImageLink(dinosaur){
@@ -622,6 +631,13 @@ export default class DinoListView extends Component {
                 ) :
 
                 <View style={{alignItems: "center"}}>
+                <TouchableHighlight
+                  onPress={() => {
+                    this.addDinosaurToFavourites();
+                    }}>
+                      <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+                </TouchableHighlight>
+
                 <AutoHeightImage
                   width={300}
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
