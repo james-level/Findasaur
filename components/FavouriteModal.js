@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
-import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
+import FavouriteModalStyle from '../Stylesheets/FavouriteModalStyle.js';
 import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
 import AutoHeightImage from 'react-native-auto-height-image';
 import * as ImageFinder from './ImageFinder.js'
@@ -31,7 +31,7 @@ export default class FavouriteModal extends Component {
       colors={['black', '#1e932d']}
       style={{ padding: 25 }}>
 
-        <View style={DinoListViewStyle.infoModal}>
+        <View style={FavouriteModalStyle.infoModal}>
 
         {
 
@@ -49,15 +49,15 @@ export default class FavouriteModal extends Component {
             {
                 ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/omnivore.png") ? (
 
-                <View style={DinoListViewStyle.modalHeader}>
+                <View style={FavouriteModalStyle.modalHeader}>
 
-                <Text style={DinoListViewStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
+                <Text style={FavouriteModalStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
                 <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
             ) :
 
-            <View style={DinoListViewStyle.modalHeader}>
-            <Text style={DinoListViewStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={FavouriteModalStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
             <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
             </View>
 
@@ -67,8 +67,8 @@ export default class FavouriteModal extends Component {
 
               this.props.clickedFavourite.pronunciation ? (
 
-            <View style={DinoListViewStyle.modalHeader}>
-            <Text style={DinoListViewStyle.modalPronunciation}>{this.props.clickedFavourite.pronunciation} | {this.props.clickedFavourite.meaning}</Text>
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={FavouriteModalStyle.modalPronunciation}>{this.props.clickedFavourite.pronunciation} | {this.props.clickedFavourite.meaning}</Text>
             </View>
 
           ) : null
@@ -79,8 +79,8 @@ export default class FavouriteModal extends Component {
 
             this.props.clickedFavourite.length ? (
 
-          <View style={DinoListViewStyle.modalHeader}>
-          <Text style={DinoListViewStyle.modalPronunciation}>Length: {this.props.clickedFavourite.length} | Type: {this.props.clickedFavourite.type}</Text>
+          <View style={FavouriteModalStyle.modalHeader}>
+          <Text style={FavouriteModalStyle.modalPronunciation}>Length: {this.props.clickedFavourite.length} | Type: {this.props.clickedFavourite.type}</Text>
           </View>
 
         ) : null
@@ -89,7 +89,7 @@ export default class FavouriteModal extends Component {
 
             <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
 
-            <Text style={DinoListViewStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
+            <Text style={FavouriteModalStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 
             </View>
 
