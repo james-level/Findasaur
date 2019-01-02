@@ -10,12 +10,20 @@ export default class Favourites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favourites: null
+      favourites: null,
+      favouriteModalVisible: false
     };
+    this.toggleFavouriteModal = this.toggleFavouriteModal.bind(this);
   }
 
   componentDidMount(){
     this.retrieveFavourites()
+  }
+
+  toggleFavouriteModal(){
+    this.setState({
+      favouriteModalVisible: !this.state.favouriteModalVisible
+    })
   }
 
   retrieveFavourites(){
@@ -35,7 +43,9 @@ export default class Favourites extends Component {
 
     return favourites.map((favourite, i) =>
       <View key={i} style={FavouritesStyle.modalHeader}>
+      <TouchableOpacity onPress={() => this.setState({clickedFavourite: favourites[i]}, function(){ this.toggleFavouriteModal() })} key={i}>
         <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite.name} </Text>
+      </TouchableOpacity>
       </View>
     )
   }
