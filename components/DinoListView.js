@@ -42,6 +42,12 @@ export default class DinoListView extends Component {
 
   addDinosaurToFavourites = async() => {
     var dinosaur = this.returnClickedDinosaur()
+    var pronunciation = Pronunciations.getPronunciation(dinosaur)
+    var meaning = Meanings.getPronunciation(dinosaur)
+    var length = Lengths.getLength(dinosaur)
+    var type = Types.getType(dinosaur)
+    var diet = ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)
+    var image = this.state.searchedDinosaurImage
     console.log("DINOSAUR", dinosaur);
 
     try {
