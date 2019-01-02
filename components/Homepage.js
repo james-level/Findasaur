@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
 import InfoModal from './InfoModal.js';
+import Favourites from './Favourites.js';
 import ExploreButton from './ExploreButton.js';
 import HeroImageCarousel from './HeroImageCarousel.js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -19,10 +20,12 @@ export default class Homepage extends React.Component {
     this.state = {
       buttonClicked: false,
       fontLoaded: false,
-      modalVisible: false
+      modalVisible: false,
+      favouritesVisible: false
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
+    this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
   }
 
   async componentDidMount() {
@@ -41,6 +44,10 @@ export default class Homepage extends React.Component {
     setModalVisible() {
     this.setState({modalVisible: !this.state.modalVisible});
   }
+
+  setFavouritesVisible() {
+  this.setState({favouritesVisible: !this.state.favouritesVisible});
+}
 
   render() {
 
@@ -74,6 +81,8 @@ export default class Homepage extends React.Component {
 
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
+  <Favourites favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
+
     {/*</ImageBackground>*/}
 
     {/* 'INFO' (OR LAUNCH MODAL) BUTTON */}
@@ -86,7 +95,7 @@ export default class Homepage extends React.Component {
 
           <TouchableHighlight
             onPress={() => {
-              this.setModalVisible();
+              this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
           </TouchableHighlight>

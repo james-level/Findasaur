@@ -1,38 +1,41 @@
 import React, { Component } from 'react'
 import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
+import { AsyncStorage } from "react-native"
 
 import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
 
 export default class Favourites extends Component {
-  render() {
 
-    retrieveFavourites = async () => {
-      try {
-        const value = await AsyncStorage.getItem('dinosaur');
-        if (value !== null) {
-          // We have data!!
-          console.log(value);
-          return value;
-        }
-       } catch (error) {
-         // Error retrieving data
+  constructor(props) {
+    super(props);
+    this.state = {
+      favourite: null
+    };
+  }
+
+  retrieveFavourites(){
+      AsyncStorage.getItem('dinosaur').then((value) => {
+        return JSON.parse(value)
+      }).catch((error) => {
+        var text = <Text style={{color: 'white'}}> {JSON.parse(value)} </Text>
+        console.log(error)
        }
-    }
+     )
+      }
 
-    renderFavourites(){
-      favourite = this.retrieveFavourites();
+  renderFavourites(value){
+    return   <Text> value </Text>
+  }
 
-      return
-      <Text> {favourite} <Text>
-    }
+  render() {
 
     return (
       <View>
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.props.modalVisible}
+          visible={this.props.favouritesVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
@@ -44,7 +47,7 @@ export default class Favourites extends Component {
 
           <View style={InfoModalStyle.infoModal}>
 
-          {this.renderFavourites()}
+          <Text> {this.retrieveFavourites()} </Text>
 
 
             </View>

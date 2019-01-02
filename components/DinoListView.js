@@ -41,10 +41,14 @@ export default class DinoListView extends Component {
   }
 
   addDinosaurToFavourites = async() => {
+    var dinosaur = "me"
     try {
-      await AsyncStorage.setItem('dinosaur', this.returnClickedDinosaur());
+      await AsyncStorage.setItem('dinosaur', JSON.stringify(dinosaur));
+      AsyncStorage.getItem('dinosaur').then((value) => {
+        console.log(value);
+      })
     } catch (error) {
-      // Error saving data
+      console.log(error);
     }
   }
 
