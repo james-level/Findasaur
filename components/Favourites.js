@@ -27,7 +27,7 @@ export default class Favourites extends Component {
   }
 
   retrieveFavourites(){
-      AsyncStorage.getItem('favvs').then((value) => {
+      AsyncStorage.getItem('favourite_dinos').then((value) => {
         this.setState({
           favourites: value
         })
@@ -77,7 +77,7 @@ export default class Favourites extends Component {
           {
             this.state.favourites ? (
               self.renderFavourites()
-             ) : null
+            ) : <Text style={FavouritesStyle.favouritesText}> Your favourites list is currently empty </Text>
         }
 
         <TouchableHighlight
@@ -89,7 +89,7 @@ export default class Favourites extends Component {
 
         </ScrollView>
 
-        <FavouriteModal clickedFavourite={this.state.clickedFavourite} favouriteModalVisible={this.state.favouriteModalVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
+        <FavouriteModal clickedFavourite={this.state.clickedFavourite} favouriteModalVisible={this.state.favouriteModalVisible} toggleFavouriteModal={this.toggleFavouriteModal} fontLoaded={this.state.fontLoaded} />
 
             </View>
           </LinearGradient>

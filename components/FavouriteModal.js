@@ -40,12 +40,6 @@ export default class FavouriteModal extends Component {
             <ScrollView>
 
             <View style={{alignItems: "center"}}>
-            <TouchableHighlight
-              onPress={() => {
-                this.addDinosaurToFavourites();
-                }}>
-                  <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
-            </TouchableHighlight>
 
             <AutoHeightImage
               width={300}
@@ -93,7 +87,7 @@ export default class FavouriteModal extends Component {
 
         }
 
-            <Image style={{marginTop:20}} source={this.props.clickedFavourite.image}/>
+            <Image style={{marginTop:20}} source={this.props.clickedFavourite.comparison_image}/>
 
             <Text style={DinoListViewStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 

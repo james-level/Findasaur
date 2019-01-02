@@ -39,7 +39,14 @@ const FavouritesStyle = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
-
+  favouritesText: {
+    fontSize: 18,
+    color: 'white',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
   modalHeader: {
     flex: 1,
     justifyContent: 'center',
