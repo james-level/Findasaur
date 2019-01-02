@@ -55,13 +55,6 @@ export default class InfoModal extends Component {
         </View>
       </Modal>
 
-{/* 'INFO' (OR LAUNCH MODAL) BUTTON */}
-      <TouchableHighlight
-        onPress={() => {
-          this.props.setModalVisible();
-          }}>
-            <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
-      </TouchableHighlight>
     </View>
     )
   }

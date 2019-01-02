@@ -74,6 +74,15 @@ export default class Homepage extends React.Component {
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
     {/*</ImageBackground>*/}
+
+    {/* 'INFO' (OR LAUNCH MODAL) BUTTON */}
+          <TouchableHighlight
+            onPress={() => {
+              this.setModalVisible();
+              }}>
+                <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+          </TouchableHighlight>
+
   </SafeAreaView>
 
     );
