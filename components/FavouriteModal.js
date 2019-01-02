@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
-
+import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
 import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
+import AutoHeightImage from 'react-native-auto-height-image';
+
 
 export default class FavouriteModal extends Component {
   render() {
+
+    var self = this;
+
     return (
-      {
-        self.state.searchedDinosaurData ? (
+
 
       <View>
       <Modal
         animationType="slide"
         transparent={false}
-        visible={this.state.dinosaurViewVisible}
+        visible={this.props.favouriteModalVisible}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
         }}>
@@ -27,13 +31,6 @@ export default class FavouriteModal extends Component {
         <View style={DinoListViewStyle.infoModal}>
 
             <ScrollView>
-
-            {
-              self.state.searchDataLoading ? (
-                <View style={{height: 200}}>
-                  < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
-                </View>
-            ) :
 
             <View style={{alignItems: "center"}}>
             <TouchableHighlight
@@ -95,11 +92,9 @@ export default class FavouriteModal extends Component {
 
             </View>
 
-        }
-
               <TouchableHighlight
                 onPress={() => {
-                  this.closeDinosaurView();
+                  this.props.toggleFavouriteModal();
                 }}>
               <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
               </TouchableHighlight>
@@ -110,8 +105,7 @@ export default class FavouriteModal extends Component {
         </Modal>
       </View>
 
-    ) : null
-  }
+
     )
   }
 }
