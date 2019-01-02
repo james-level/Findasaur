@@ -47,18 +47,18 @@ export default class FavouriteModal extends Component {
             />
 
             {
-              this.props.clickedFavourite.diet === require("../assets/icons/omnivore.png") ? (
+                ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/omnivore.png") ? (
 
                 <View style={DinoListViewStyle.modalHeader}>
 
                 <Text style={DinoListViewStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
-                <Image source={ this.props.clickedFavourite.diet } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+                <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
             ) :
 
             <View style={DinoListViewStyle.modalHeader}>
             <Text style={DinoListViewStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
-            <Image source={ this.props.clickedFavourite.diet } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+            <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
             </View>
 
             }
@@ -87,7 +87,7 @@ export default class FavouriteModal extends Component {
 
         }
 
-            <Image style={{marginTop:20}} source={this.props.clickedFavourite.comparison_image}/>
+            <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
 
             <Text style={DinoListViewStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 

@@ -47,12 +47,10 @@ export default class DinoListView extends Component {
     var meaning = Meanings.getNameMeaning(name)
     var length = Lengths.getLength(name)
     var type = Types.getType(name)
-    var diet = ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)
-    var comparison_image = ImageFinder.findSizeComparisonImage(name)
+    var diet = this.state.searchedDinosaurData.diet
     var image = this.state.searchedDinosaurImage
-    console.log("Searched images", image);
 
-    var dinosaur = {name: name, comparison_image: comparison_image, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, diet: diet, image: image}
+    var dinosaur = {name: name, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('favourite_dinos').then((dinosaurs) => {
