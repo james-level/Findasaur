@@ -3,7 +3,7 @@ import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } fro
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 
-import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
+import FavouritesStyle from '../Stylesheets/FavouritesStyle.js';
 
 export default class Favourites extends Component {
 
@@ -52,15 +52,15 @@ export default class Favourites extends Component {
         colors={['black', '#1e932d']}
         style={{ padding: 25 }}>
 
-          <View style={InfoModalStyle.infoModal}>
+          <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>
 
-            <Text style={InfoModalStyle.infoModalHeader}> Favourites </Text>
+            <Text style={FavouritesStyle.favouritesModalHeader}> Favourites </Text>
 
           {
             this.state.favourite ? (
-              <View style={InfoModalStyle.modalHeader}>
-              <Text style={InfoModalStyle.modalFavourite}> {this.state.favourite} </Text>
+              <View style={FavouritesStyle.modalHeader}>
+              <Text style={FavouritesStyle.modalFavourite}> {this.state.favourite} </Text>
               </View>
              ) : null
         }
