@@ -24,14 +24,13 @@ export default class Favourites extends Component {
           favourites: value
         })
       }).catch((error) => {
-        var text = <Text style={{color: 'white'}}> {JSON.parse(value)} </Text>
         console.log(error)
        }
      )
       }
 
   renderFavourites(){
-  
+
     var favourites = JSON.parse(this.state.favourites);
 
     return favourites.map((favourite, i) =>
