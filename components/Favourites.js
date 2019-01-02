@@ -20,6 +20,13 @@ export default class Favourites extends Component {
        }
     }
 
+    renderFavourites(){
+      favourite = this.retrieveFavourites();
+
+      return
+      <Text> {favourite} <Text>
+    }
+
     return (
       <View>
         <Modal
@@ -36,6 +43,8 @@ export default class Favourites extends Component {
         style={{ padding: 25 }}>
 
           <View style={InfoModalStyle.infoModal}>
+
+          {this.renderFavourites()}
 
 
             </View>
