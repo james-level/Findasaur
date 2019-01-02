@@ -27,6 +27,12 @@ const HomepageStyle = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'transparent',
 },
+iconsContainer: {
+  flex: 0.1,
+  justifyContent: 'center',
+  flexDirection: 'row',
+  backgroundColor: 'transparent',
+},
   // backgroundImage: {
   //   width: '100%',
   //   height: '100%',
