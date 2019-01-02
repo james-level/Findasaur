@@ -25,6 +25,7 @@ export default class FavouriteModal extends Component {
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
         }}>
+
         <View>
 
       <LinearGradient
@@ -38,6 +39,13 @@ export default class FavouriteModal extends Component {
           this.props.clickedFavourite ? (
 
             <ScrollView>
+
+            <TouchableHighlight
+              onPress={() => {
+                this.props.toggleFavouriteModal();
+              }}>
+            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '92%'}}/>
+            </TouchableHighlight>
 
             <View style={{alignItems: "center"}}>
 
@@ -93,12 +101,6 @@ export default class FavouriteModal extends Component {
 
             </View>
 
-              <TouchableHighlight
-                onPress={() => {
-                  this.props.toggleFavouriteModal();
-                }}>
-              <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-              </TouchableHighlight>
               </ScrollView>
             ) : null
 
@@ -108,8 +110,6 @@ export default class FavouriteModal extends Component {
           </View>
         </Modal>
       </View>
-
-
 
     )
   }
