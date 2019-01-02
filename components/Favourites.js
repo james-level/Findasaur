@@ -19,10 +19,12 @@ export default class Favourites extends Component {
   }
 
   retrieveFavourites(){
-      AsyncStorage.getItem('dinosaur').then((value) => {
+      AsyncStorage.getItem('favios').then((value) => {
         console.log(value);
         this.setState({
           favourite: value
+        }, function(){
+          console.log(this.state.favourite);
         })
       }).catch((error) => {
         var text = <Text style={{color: 'white'}}> {JSON.parse(value)} </Text>
@@ -31,8 +33,10 @@ export default class Favourites extends Component {
      )
       }
 
-  renderFavourites(value){
-    return   <Text> value </Text>
+  renderFavourites(){
+    return  this.state.favourite.map((favourite) =>
+    <Text style={FavouritesStyle.modalFavourite}> {favourite} </Text>
+    )
   }
 
   render() {
@@ -60,10 +64,17 @@ export default class Favourites extends Component {
           {
             this.state.favourite ? (
               <View style={FavouritesStyle.modalHeader}>
-              <Text style={FavouritesStyle.modalFavourite}> {this.state.favourite} </Text>
+              {this.retrieveFavourites()}
               </View>
              ) : null
         }
+
+        <TouchableHighlight
+          onPress={() => {
+            this.props.setFavouritesVisible();
+          }}>
+        <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+        </TouchableHighlight>
 
         </ScrollView>
 
