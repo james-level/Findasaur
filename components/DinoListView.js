@@ -41,17 +41,17 @@ export default class DinoListView extends Component {
   }
 
   addDinosaurToFavourites = async() => {
-    const dinosaur = this.returnClickedDinosaur()
+    var dinosaur = this.returnClickedDinosaur()
     console.log("DINOSAUR", dinosaur);
 
     try {
-      AsyncStorage.getItem('favos').then((dinosaurs) => {
+      AsyncStorage.getItem('favios').then((dinosaurs) => {
         console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
         console.log("DINOS BEFORE", dinos);
         dinos.push(dinosaur);
         console.log("DINOS AFTER", dinos);
-        AsyncStorage.setItem('favos', JSON.stringify(dino));
+        AsyncStorage.setItem('favios', JSON.stringify(dinos));
   })}
     catch (error) {
       console.log(error);
