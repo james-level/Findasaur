@@ -10,7 +10,7 @@ export default class Favourites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favourite: null
+      favourites: null
     };
   }
 
@@ -20,11 +20,8 @@ export default class Favourites extends Component {
 
   retrieveFavourites(){
       AsyncStorage.getItem('favios').then((value) => {
-        console.log(value);
         this.setState({
-          favourite: value
-        }, function(){
-          console.log(this.state.favourite);
+          favourites: value
         })
       }).catch((error) => {
         var text = <Text style={{color: 'white'}}> {JSON.parse(value)} </Text>
@@ -34,12 +31,19 @@ export default class Favourites extends Component {
       }
 
   renderFavourites(){
-    return  this.state.favourite.map((favourite) =>
-    <Text style={FavouritesStyle.modalFavourite}> {favourite} </Text>
+  
+    var favourites = JSON.parse(this.state.favourites);
+
+    return favourites.map((favourite, i) =>
+      <View key={i} style={FavouritesStyle.modalHeader}>
+        <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite} </Text>
+      </View>
     )
   }
 
   render() {
+
+    var self = this;
 
     return (
       <View>
@@ -62,10 +66,8 @@ export default class Favourites extends Component {
             <Text style={FavouritesStyle.favouritesModalHeader}> Favourites </Text>
 
           {
-            this.state.favourite ? (
-              <View style={FavouritesStyle.modalHeader}>
-              {this.retrieveFavourites()}
-              </View>
+            this.state.favourites ? (
+              self.renderFavourites()
              ) : null
         }
 
