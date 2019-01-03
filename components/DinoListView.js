@@ -57,12 +57,20 @@ export default class DinoListView extends Component {
         console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
         console.log("DINOS BEFORE", dinos);
+        var names = dinos.map((dino) => dino.name);
+        if (!names.includes(dinosaur.name)){
         dinos.push(dinosaur);
         console.log("DINOS AFTER", dinos);
         AsyncStorage.setItem('favourite_dinos', JSON.stringify(dinos));
         Alert.alert(
                `Successfully added ${dinosaur.name} to your favourites!`
             )
+          }
+          else {
+            Alert.alert(
+                   `${dinosaur.name} is already in your favourites!`
+                )
+          }
   })}
     catch (error) {
       console.log(error);
