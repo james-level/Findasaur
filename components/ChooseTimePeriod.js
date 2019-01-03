@@ -35,36 +35,36 @@ export default class ChooseTimePeriod extends Component {
           id: 0,
           index: 0,
           key: 0,
-          title: "Middle Triassic",
+          title: "Late Cretaceous",
           color: '#000000',
-          description: "247 to 237 million years ago",
+          description: "66 to 100 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 237,
-          latest_date: 247
+          earliest_date: 66,
+          latest_date: 100
         },
 
         {
           id: 1,
           index: 1,
           key: 1,
-          title: "Late Triassic",
+          title: "Early Cretaceous",
           color: '#000000',
-          description: "237 to 201 million years ago",
+          description: "100 to 145 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 201,
-          latest_date: 237
+          earliest_date: 100,
+          latest_date: 145
         },
 
         {
           id: 2,
           index: 2,
           key: 2,
-          title: "Early Jurassic",
+          title: "Late Jurassic",
           color: '#000000',
-          description: "174 to 201 million years ago",
+          description: "145 to 163 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 174,
-          latest_date: 201
+          earliest_date: 145,
+          latest_date: 163
         },
 
         {
@@ -83,36 +83,36 @@ export default class ChooseTimePeriod extends Component {
           id: 4,
           index: 4,
           key: 4,
-          title: "Late Jurassic",
+          title: "Early Jurassic",
           color: '#000000',
-          description: "145 to 163 million years ago",
+          description: "174 to 201 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 145,
-          latest_date: 163
+          earliest_date: 174,
+          latest_date: 201
         },
 
         {
           id: 5,
           index: 5,
           key: 5,
-          title: "Early Cretaceous",
+          title: "Late Triassic",
           color: '#000000',
-          description: "100 to 145 million years ago",
+          description: "237 to 201 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 100,
-          latest_date: 145
+          earliest_date: 201,
+          latest_date: 237
         },
 
         {
           id: 6,
           index: 6,
           key: 6,
-          title: "Late Cretaceous",
+          title: "Middle Triassic",
           color: '#000000',
-          description: "66 to 100 million years ago",
+          description: "247 to 237 million years ago",
           image: faker.internet.avatar(),
-          earliest_date: 66,
-          latest_date: 100
+          earliest_date: 237,
+          latest_date: 247
         },
       ]
     };
