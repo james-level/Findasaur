@@ -53,7 +53,7 @@ export default class DinoListView extends Component {
     var dinosaur = {name: name, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
-      AsyncStorage.getItem('fave_dinos').then((dinosaurs) => {
+      AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
         console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
         console.log("DINOS BEFORE", dinos);
@@ -62,7 +62,7 @@ export default class DinoListView extends Component {
           var names = dinos.map((dino) => dino.name);
           if (!names.includes(dinosaur.name)){
           dinos.push(dinosaur);
-          AsyncStorage.setItem('fave_dinos', JSON.stringify(dinos));
+          AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           Alert.alert(
                  `Successfully added ${dinosaur.name} to your favourites!`
               )
@@ -75,7 +75,7 @@ export default class DinoListView extends Component {
       }
         else {
           dinos.push(dinosaur);
-          AsyncStorage.setItem('fave_dinos', JSON.stringify(dinos));
+          AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           Alert.alert(
                  `Successfully added ${dinosaur.name} to your favourites!`
               )
