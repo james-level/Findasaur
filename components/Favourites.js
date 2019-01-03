@@ -28,13 +28,16 @@ export default class Favourites extends Component {
   }
 
   deleteFavourite(dinoToDelete){
-    AsyncStorage.getItem('favourite_dinos').then((dinos) => {
+    AsyncStorage.getItem('fave_dinos').then((dinos) => {
       console.log("DINOS", dinos);
-      var modifiedDinosaurs = JSON.parse(dinos).splice(dinos.indexOf((dinosaur) => dinosaur.name === dinoToDelete.name), 1)
+      var dinos = dinos;
+      var modifiedDinosaurs = JSON.parse(dinos).splice(JSON.parse(dinos).indexOf((dinosaur) => dinosaur.name === dinoToDelete.name), 1)
       console.log("Dinosaurs after deletion", dinos);
-      Alert.alert(
-             `${dinoToDelete.name} has been deleted from your favourites.`
-          )
+      AsyncStorage.setItem('fave_dinos', dinos);
+
+        Alert.alert(
+               `${dinoToDelete.name} has been deleted from your favourites.`
+            )
     }).catch((error) => {
       console.log(error)
   }
@@ -42,7 +45,7 @@ export default class Favourites extends Component {
 }
 
   retrieveFavourites(){
-      AsyncStorage.getItem('favourite_dinos').then((dinos) => {
+      AsyncStorage.getItem('fave_dinos').then((dinos) => {
         this.setState({
           favourites: dinos
         })

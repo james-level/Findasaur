@@ -53,24 +53,34 @@ export default class DinoListView extends Component {
     var dinosaur = {name: name, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
-      AsyncStorage.getItem('favourite_dinos').then((dinosaurs) => {
+      AsyncStorage.getItem('fave_dinos').then((dinosaurs) => {
         console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
         console.log("DINOS BEFORE", dinos);
-        var names = dinos.map((dino) => dino.name);
-        if (!names.includes(dinosaur.name)){
-        dinos.push(dinosaur);
+
+        if (dinos.length > 0){
+          var names = dinos.map((dino) => dino.name);
+          if (!names.includes(dinosaur.name)){
+          dinos.push(dinosaur);
+          AsyncStorage.setItem('fave_dinos', JSON.stringify(dinos));
+          Alert.alert(
+                 `Successfully added ${dinosaur.name} to your favourites!`
+              )
+        }
+        else {
+          Alert.alert(
+                 `${dinosaur.name} is already in your favourites!`
+              )
+        }
+      }
+        else {
+          dinos.push(dinosaur);
+          AsyncStorage.setItem('fave_dinos', JSON.stringify(dinos));
+          Alert.alert(
+                 `Successfully added ${dinosaur.name} to your favourites!`
+              )
+        }
         console.log("DINOS AFTER", dinos);
-        AsyncStorage.setItem('favourite_dinos', JSON.stringify(dinos));
-        Alert.alert(
-               `Successfully added ${dinosaur.name} to your favourites!`
-            )
-          }
-          else {
-            Alert.alert(
-                   `${dinosaur.name} is already in your favourites!`
-                )
-          }
   })}
     catch (error) {
       console.log(error);
