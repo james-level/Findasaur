@@ -485,11 +485,12 @@ export default class DinoListView extends Component {
               style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
 
-
+            <TouchableOpacity onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
             <AutoHeightImage
          width={285}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
+         </TouchableOpacity>
               <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
                   <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>
