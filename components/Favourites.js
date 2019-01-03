@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
+import { Alert, Modal, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 import FavouriteModal from './FavouriteModal.js';
@@ -29,11 +29,14 @@ export default class Favourites extends Component {
 
   deleteFavourite(dinoToDelete){
     AsyncStorage.getItem('favourite_dinos').then((dinos) => {
-      var modifiedDinosaurs = dinos.splice(dinos.findIndex(dinosaur => dinosaur.name === dinoToDelete.name), 1)
-      console.log("Dinosaurs after deletion", modifiedDinosaurs);
+      console.log("DINOS", dinos);
+      var modifiedDinosaurs = JSON.parse(dinos).splice(dinos.indexOf((dinosaur) => dinosaur.name === dinoToDelete.name), 1)
+      console.log("Dinosaurs after deletion", dinos);
+      Alert.alert(
+             `${dinoToDelete.name} has been deleted from your favourites.`
+          )
     }).catch((error) => {
       console.log(error)
-
   }
 )
 }
@@ -57,6 +60,9 @@ export default class Favourites extends Component {
       <View key={i} style={FavouritesStyle.modalHeader}>
       <TouchableOpacity onPress={() => this.setState({clickedFavourite: favourites[i]}, function(){ this.toggleFavouriteModal() })} key={i}>
         <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite.name} </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => this.setState({deletedFavourite: favourites[i]}, function(){ this.deleteFavourite(this.state.deletedFavourite) })} key={Date.now()}>
+        <Text key={Date.now()} style={FavouritesStyle.deleteFavourite}> Delete </Text>
       </TouchableOpacity>
       </View>
     )

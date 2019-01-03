@@ -66,6 +66,15 @@ const FavouritesStyle = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
+  deleteFavourite: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 
 });
 
