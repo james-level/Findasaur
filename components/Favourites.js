@@ -11,7 +11,6 @@ export default class Favourites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favourites: null,
       favouriteModalVisible: false
     };
     this.toggleFavouriteModal = this.toggleFavouriteModal.bind(this);
@@ -36,6 +35,12 @@ export default class Favourites extends Component {
         AsyncStorage.getItem('dinosaur_favourites').then((dinos) => {
           this.setState({
             favourites: dinos
+          }, function(){
+            if (dinos.length === 0){
+              this.setState({
+                favourites: null
+              })
+            }
           })
         }).catch((error) => {
           console.log(error)
@@ -58,6 +63,13 @@ export default class Favourites extends Component {
       AsyncStorage.getItem('dinosaur_favourites').then((dinos) => {
         this.setState({
           favourites: dinos
+        }, function(){
+          if (JSON.parse(dinos).length === 0){
+            this.setState({
+              favourites: null
+            }, function(){
+            })
+          }
         })
       }).catch((error) => {
         console.log(error)
