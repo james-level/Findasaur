@@ -27,10 +27,19 @@ export default class Favourites extends Component {
     })
   }
 
+  deleteFavourite(dinoToDelete){
+    AsyncStorage.getItem('favourite_dinos').then((dinos) => {
+      var modifiedDinosaurs = dinos.splice(dinos.findIndex(dinosaur => dinosaur.name === dinoToDelete.name), 1)
+      console.log("Dinosaurs after deletion", modifiedDinosaurs);
+    }).catch((error) => {
+      console.log(error)
+
+  }
+
   retrieveFavourites(){
-      AsyncStorage.getItem('favourite_dinos').then((value) => {
+      AsyncStorage.getItem('favourite_dinos').then((dinos) => {
         this.setState({
-          favourites: value
+          favourites: dinos
         })
       }).catch((error) => {
         console.log(error)
