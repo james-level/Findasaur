@@ -35,6 +35,8 @@ export default class Favourites extends Component {
       console.log(error)
 
   }
+)
+}
 
   retrieveFavourites(){
       AsyncStorage.getItem('favourite_dinos').then((dinos) => {
