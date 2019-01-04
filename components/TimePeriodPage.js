@@ -191,7 +191,13 @@ export default class TimePeriodPage extends Component {
 
       </View>
 
+      {
+        this.state.eraModalVisible ? (
+
       <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.state.fontLoaded} />
+
+    ) : null
+  }
 
       <View style={TimePeriodStyle.iconsContainer}>
 
@@ -199,7 +205,7 @@ export default class TimePeriodPage extends Component {
         onPress={() => {
           this.setEraModalVisible();
           }}>
-            <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '300%', marginBottom: 10, position: 'relative'}}/>
+            <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '250%', marginBottom: 10, position: 'relative'}}/>
       </TouchableHighlight>
 
       </View>
