@@ -48,10 +48,7 @@ Running the app after all this the map displays!
 
 <b>Miscellaneous:</b>
 
-npm i react-native-modalbox
-
-npm i react-native-circle-slider
-
+react-native-autocomplete-input
 
 <b>For logging (see in Terminal):</b>
 
