@@ -371,6 +371,7 @@ export default class ChooseTimePeriod extends Component {
   _renderItem = ({ item }) => (
 
     <TimePeriodPage
+    imagesLoading={this.state.imagesLoading}
     dinosaurs={this.state.dinosaurs}
     getDinosaursForPeriod={this.getDinosaursForPeriod}
     handleSearchSubmit={this.handleSearchSubmit}

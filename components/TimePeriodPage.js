@@ -205,7 +205,7 @@ export default class TimePeriodPage extends Component {
         onPress={() => {
           this.setEraModalVisible();
           }}>
-            <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '250%', marginBottom: 10, position: 'relative'}}/>
+            <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '350%', marginBottom: 10, position: 'relative'}}/>
       </TouchableHighlight>
 
       </View>
