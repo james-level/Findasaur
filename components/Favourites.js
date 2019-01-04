@@ -26,11 +26,21 @@ export default class Favourites extends Component {
     })
   }
 
+  findDinosaurObject(dinosaurs, name){
+    for (dinosaur of dinosaurs){
+      if (dinosaur.name === name){
+        return dinosaur;
+      }
+    }
+  }
+
   deleteFavourite(dinoToDelete){
     AsyncStorage.getItem('dinosaur_favourites').then((dinos) => {
       var dinos = JSON.parse(dinos);
-      dinos.splice(dinos.indexOf((dinosaur) => dinosaur.name === dinoToDelete.name), 1)
-      console.log("Dinosaurs after deletion", dinos);
+      var dinoObjectToDelete = this.findDinosaurObject(dinos, dinoToDelete.name);
+      var index = dinos.indexOf(dinoObjectToDelete);
+      dinos.splice(index, 1)
+      console.log("Dino to delete", dinoObjectToDelete);
       AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos)).then((dinos) => {
         AsyncStorage.getItem('dinosaur_favourites').then((dinos) => {
           this.setState({
