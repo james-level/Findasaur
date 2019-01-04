@@ -11,7 +11,7 @@ export default class EraModal extends Component {
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.props.modalVisible}
+          visible={this.props.eraModalVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
@@ -42,7 +42,7 @@ export default class EraModal extends Component {
 
                 <TouchableHighlight
                   onPress={() => {
-                    this.props.setModalVisible();
+                    this.props.setEraModalVisible();
                   }}>
                 <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
                 </TouchableHighlight>

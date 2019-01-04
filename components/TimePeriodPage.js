@@ -10,7 +10,7 @@ import axios from 'axios';
 import { Button } from 'react-native-elements';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
-
+import EraModal from './EraModal.js'
 const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
 
 export default class TimePeriodPage extends Component {
@@ -24,7 +24,8 @@ export default class TimePeriodPage extends Component {
     fontLoaded: false,
     dinosaurs: null,
     dietSelected: "herbivores",
-    searchButtonClicked: false
+    searchButtonClicked: false,
+    eraModalVisible: false
   }
 
   this.handleCarnivoreSelection = this.handleCarnivoreSelection.bind(this);
@@ -32,6 +33,7 @@ export default class TimePeriodPage extends Component {
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
   this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+  this.setEraModalVisible = this.setEraModalVisible.bind(this);
 }
 
   retrieveImages(){
@@ -49,6 +51,12 @@ export default class TimePeriodPage extends Component {
       self.setState({
         dinosaurs: response.data
       }, function(){this.retrieveImages()})
+    })
+  }
+
+  setEraModalVisible(){
+    this.setState({
+      eraModalVisible: !this.state.eraModalVisible
     })
   }
 
@@ -183,11 +191,13 @@ export default class TimePeriodPage extends Component {
 
       </View>
 
+      <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.state.fontLoaded} />
+
       <View style={TimePeriodStyle.iconsContainer}>
 
       <TouchableHighlight
         onPress={() => {
-          this.setModalVisible();
+          this.setEraModalVisible();
           }}>
             <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '300%', marginBottom: 10, position: 'relative'}}/>
       </TouchableHighlight>
