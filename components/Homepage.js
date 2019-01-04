@@ -21,11 +21,14 @@ export default class Homepage extends React.Component {
       buttonClicked: false,
       fontLoaded: false,
       modalVisible: false,
-      favouritesVisible: false
+      favouritesVisible: false,
+      mapVisible: false
+
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
     this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
+    this.setMapVisible = this.setMapVisible.bind(this);
   }
 
   async componentDidMount() {
@@ -45,9 +48,12 @@ export default class Homepage extends React.Component {
     this.setState({modalVisible: !this.state.modalVisible});
   }
 
-  setFavouritesVisible() {
-  this.setState({favouritesVisible: !this.state.favouritesVisible});
-}
+    setFavouritesVisible() {
+      this.setState({favouritesVisible: !this.state.favouritesVisible});
+  }
+    setMapVisible() {
+      this.setState({mapVisible: !this.state.mapVisible});
+    }
 
   render() {
 
@@ -77,11 +83,13 @@ export default class Homepage extends React.Component {
       <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
 
 
-    {/* 'ABOUT/INFO' MODAL SECTION*/}
+{/* 'ABOUT/INFO' MODAL SECTION*/}
 
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
   <Favourites favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
+
+  <MapModal mapVisible={this.state.mapVisible} setMapVisible={this.setMapVisible} fontLoaded={this.state.fontLoaded} />
 
     {/*</ImageBackground>*/}
 
@@ -100,6 +108,13 @@ export default class Homepage extends React.Component {
               this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              this.setMapVisible();
+              }}>
+                <Image source={require('../assets/icons/map.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
           </TouchableHighlight>
 
         </View>

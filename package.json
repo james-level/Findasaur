@@ -26,6 +26,7 @@
     "nodemon": "^1.18.5",
     "react": "16.3.1",
     "react-axios": "^2.0.1",
+    "react-google-maps": "^9.4.5",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-animate-loading-button": "^1.0.3",
     "react-native-auto-height-image": "^1.0.5",
