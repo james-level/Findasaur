@@ -64,11 +64,12 @@ export default class Favourites extends Component {
         this.setState({
           favourites: dinos
         }, function(){
+          if (dinos){
           if (JSON.parse(dinos).length === 0){
             this.setState({
               favourites: null
-            }, function(){
             })
+          }
           }
         })
       }).catch((error) => {
