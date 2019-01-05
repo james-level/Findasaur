@@ -441,26 +441,28 @@ export default class ChooseTimePeriod extends Component {
         ) :
 
 
+        /* Icons for home, favourites and era information overlay */
+
         <View style={ChooseTimePeriodStyle.iconsContainer}>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '10%'}}
+        style={{position: 'relative', top: '5%'}}
           onPress={() => {
             this.props.home();
             }}>
-              <Image source={require('../assets/icons/home.png')} style={{height: 40, marginRight: 25, width: 40, position: 'relative'}}/>
+              <Image source={require('../assets/icons/home.png')} style={{height: 40, marginRight: 40, width: 40, position: 'relative'}}/>
         </TouchableHighlight>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '10%'}}
+        style={{position: 'relative', top: '5%'}}
           onPress={() => {
             this.setEraModalVisible();
             }}>
-              <Image source={require('../assets/icons/info.png')} style={{height: 40, marginRight: 25, width: 40, position: 'relative'}}/>
+              <Image source={require('../assets/icons/info.png')} style={{height: 40, marginRight: 40, width: 40, position: 'relative'}}/>
         </TouchableHighlight>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '10%'}}
+        style={{position: 'relative', top: '5%'}}
           onPress={() => {
             this.setEraModalVisible();
             }}>
@@ -468,6 +470,8 @@ export default class ChooseTimePeriod extends Component {
         </TouchableHighlight>
 
         </View>
+
+          /* End of icons */
       }
 
       {

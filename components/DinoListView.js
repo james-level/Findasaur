@@ -670,12 +670,12 @@ export default class DinoListView extends Component {
                     </View>
                 ) :
 
-                <View style={{alignItems: "center"}}>
+                <View style={{alignItems: "center", marginBottom: 15}}>
                 <TouchableHighlight
                   onPress={() => {
                     this.addDinosaurToFavourites();
                     }}>
-                      <Image source={require('../assets/icons/star.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+                      <Image source={require('../assets/icons/star.png')} style={{height: 40, width: 40, marginBottom: 10, position: 'relative'}}/>
                 </TouchableHighlight>
 
                 <AutoHeightImage
