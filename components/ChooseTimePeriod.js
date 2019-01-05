@@ -446,7 +446,7 @@ export default class ChooseTimePeriod extends Component {
         <TouchableHighlight
         style={{position: 'relative', top: '10%'}}
           onPress={() => {
-            this.setEraModalVisible();
+            this.props.home();
             }}>
               <Image source={require('../assets/icons/home.png')} style={{height: 40, marginRight: 25, width: 40, position: 'relative'}}/>
         </TouchableHighlight>
