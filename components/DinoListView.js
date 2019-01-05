@@ -688,13 +688,13 @@ export default class DinoListView extends Component {
 
                     <View style={DinoListViewStyle.modalHeader}>
 
-                    <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
+                    <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
                     <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
                     </View>
                 ) :
 
                 <View style={DinoListViewStyle.modalHeader}>
-                <Text style={DinoListViewStyle.infoModalHeader}>{this.returnClickedDinosaur()}</Text>
+                <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
                 <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
 
@@ -705,7 +705,7 @@ export default class DinoListView extends Component {
                   Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
 
                 <View style={DinoListViewStyle.modalHeader}>
-                <Text style={DinoListViewStyle.modalPronunciation}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
+                <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
                 </View>
 
               ) : null
@@ -717,7 +717,7 @@ export default class DinoListView extends Component {
                 Lengths.getLength(this.returnClickedDinosaur()) ? (
 
               <View style={DinoListViewStyle.modalHeader}>
-              <Text style={DinoListViewStyle.modalPronunciation}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type: {Types.getType(this.returnClickedDinosaur())}</Text>
+              <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type:{Types.getType(this.returnClickedDinosaur())}</Text>
               </View>
 
             ) : null
@@ -726,7 +726,7 @@ export default class DinoListView extends Component {
 
                 <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
-                <Text style={DinoListViewStyle.infoModalText}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+                <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
                 </View>
 
