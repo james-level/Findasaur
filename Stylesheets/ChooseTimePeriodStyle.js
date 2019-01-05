@@ -14,7 +14,7 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     backgroundColor: 'black',
   },
   loadingText: {
-    fontSize: 18,
+    fontSize: 22,
     color: 'white',
     paddingTop: 0,
   },

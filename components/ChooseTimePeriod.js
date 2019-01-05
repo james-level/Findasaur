@@ -421,7 +421,7 @@ export default class ChooseTimePeriod extends Component {
             this.state.imagesLoading ? (
               <View style={{backgroundColor: 'black', top: '0%', height: '100%'}}>
               <View style={{backgroundColor: 'black', top: '0%', height: '90%'}}>
-                < BallIndicator count={7} size={50} color={'limegreen'} style={{backgroundColor: 'black'}} />
+                < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'black'}} />
               </View>
               </View>
         ) :
@@ -441,8 +441,8 @@ export default class ChooseTimePeriod extends Component {
       {
           this.state.imagesLoading ? (
 
-      <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-40%'}}>
-        <Text style={ChooseTimePeriodStyle.loadingText}>{this.state.viewableItems[0].item.title} dinosaurs loading...</Text>
+      <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
+        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.state.viewableItems[0].item.title} dinosaurs loading...</Text>
       </View>
 
     ) : null
@@ -450,6 +450,9 @@ export default class ChooseTimePeriod extends Component {
 
       <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
 
+
+      {
+        !this.state.imagesLoading ? (
 
             <Pagination
         // DotThemeLight
@@ -480,6 +483,10 @@ export default class ChooseTimePeriod extends Component {
           paginationItems={this.state.items}// Pass the same list as data
           paginationItemPadSize={2}
         />
+
+      ) : null
+
+    }
 
         </View>
 
