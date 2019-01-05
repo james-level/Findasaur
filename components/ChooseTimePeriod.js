@@ -111,7 +111,6 @@ export default class ChooseTimePeriod extends Component {
           latest_date: 237,
           other_title: "Late Triassic Era"
         },
-
         {
           id: 6,
           index: 6,

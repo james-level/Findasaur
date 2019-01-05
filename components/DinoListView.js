@@ -675,7 +675,7 @@ export default class DinoListView extends Component {
                   onPress={() => {
                     this.addDinosaurToFavourites();
                     }}>
-                      <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+                      <Image source={require('../assets/icons/star.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
                 </TouchableHighlight>
 
                 <AutoHeightImage
