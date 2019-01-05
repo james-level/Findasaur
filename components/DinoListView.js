@@ -275,7 +275,7 @@ export default class DinoListView extends Component {
   renderMatches(dinosaurs, dinosaursAndDiets){
     return dinosaursAndDiets.map((dinosaurAndDiet, i) =>
       <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i].name}, function(){ this.toggleDinosaurView() })} key={i}>
-      <Text style={{color: 'black', fontSize: 16}} key={i}>{dinosaurAndDiet}</Text>
+      <Text style={{color: 'black', fontSize: 16, paddingTop: 4, paddingBottom: 5, fontFamily: 'PoiretOne-Regular'}} key={i}>{dinosaurAndDiet}</Text>
       </TouchableOpacity>
 
     )
@@ -608,7 +608,7 @@ export default class DinoListView extends Component {
                 inputContainerStyle={{flex: 1}}
                 onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
                 placeholder={this.searchBarPlaceholderText()}
-                placeholderTextColor="grey"
+                placeholderTextColor="white"
                 placeholderTextFontFamily='PoiretOne-Regular'
                 renderItem={({ dinosaur }) => (
                   <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
