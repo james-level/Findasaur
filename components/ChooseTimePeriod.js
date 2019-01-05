@@ -43,7 +43,8 @@ export default class ChooseTimePeriod extends Component {
           description: "66 to 100 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 66,
-          latest_date: 100
+          latest_date: 100,
+          other_title: "Late Cretaceous Era"
         },
 
         {
@@ -55,7 +56,8 @@ export default class ChooseTimePeriod extends Component {
           description: "100 to 145 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 100,
-          latest_date: 145
+          latest_date: 145,
+          other_title: "Early Cretaceous Era"
         },
 
         {
@@ -67,7 +69,8 @@ export default class ChooseTimePeriod extends Component {
           description: "145 to 163 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 145,
-          latest_date: 163
+          latest_date: 163,
+          other_title: "Late Jurassic Era"
         },
 
         {
@@ -79,7 +82,8 @@ export default class ChooseTimePeriod extends Component {
           description: "163 to 174 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 163,
-          latest_date: 174
+          latest_date: 174,
+          other_title: "Middle Jurassic Era"
         },
 
         {
@@ -91,7 +95,8 @@ export default class ChooseTimePeriod extends Component {
           description: "174 to 201 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 174,
-          latest_date: 201
+          latest_date: 201,
+          other_title: "Early Jurassic Era"
         },
 
         {
@@ -103,7 +108,8 @@ export default class ChooseTimePeriod extends Component {
           description: "237 to 201 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 201,
-          latest_date: 237
+          latest_date: 237,
+          other_title: "Late Triassic Era"
         },
 
         {
@@ -115,7 +121,8 @@ export default class ChooseTimePeriod extends Component {
           description: "247 to 237 million years ago",
           image: faker.internet.avatar(),
           earliest_date: 237,
-          latest_date: 247
+          latest_date: 247,
+          other_title: "Middle Triassic Era"
         },
       ]
     };
@@ -140,7 +147,7 @@ export default class ChooseTimePeriod extends Component {
 
   setEraModalVisible(){
     this.setState({
-      eraModalVisible: !this.state.eraModalVisible
+      eraModalVisible: true
     })
   }
 
@@ -400,6 +407,7 @@ export default class ChooseTimePeriod extends Component {
     image={item.image}
     earliest_date={item.earliest_date}
     latest_date={item.latest_date}
+    other_title={item.other_title}
   />);
 
   _keyExtractor = (item, index) => item.id.toString()
@@ -456,9 +464,9 @@ export default class ChooseTimePeriod extends Component {
   }
 
     {
-      this.props.fontLoaded ? (
+      this.props.fontLoaded && this.state.viewableItems ? (
 
-      <EraOverlay closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+      <EraOverlay eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
