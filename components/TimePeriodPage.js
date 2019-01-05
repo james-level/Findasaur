@@ -10,7 +10,6 @@ import axios from 'axios';
 import { Button } from 'react-native-elements';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
-import EraModal from './EraModal.js'
 const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
 
 export default class TimePeriodPage extends Component {

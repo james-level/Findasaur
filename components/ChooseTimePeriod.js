@@ -9,7 +9,7 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
-import EraModal from './EraModal.js'
+import EraOverlay from './EraOverlay.js'
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
@@ -127,6 +127,7 @@ export default class ChooseTimePeriod extends Component {
     this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
     this.returnToErasPage = this.returnToErasPage.bind(this);
     this.setEraModalVisible = this.setEraModalVisible.bind(this);
+    this.closeEraModal = this.closeEraModal.bind(this);
   }
 
   componentDidMount(){
@@ -140,6 +141,12 @@ export default class ChooseTimePeriod extends Component {
   setEraModalVisible(){
     this.setState({
       eraModalVisible: !this.state.eraModalVisible
+    })
+  }
+
+  closeEraModal(){
+    this.setState({
+      eraModalVisible: false
     })
   }
 
@@ -442,14 +449,19 @@ export default class ChooseTimePeriod extends Component {
           this.state.imagesLoading ? (
 
       <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
-        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.state.viewableItems[0].item.title} dinosaurs loading...</Text>
+        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>Finding {this.state.viewableItems[0].item.title} dinosaurs...</Text>
       </View>
 
     ) : null
   }
 
-      <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+    {
+      this.props.fontLoaded ? (
 
+      <EraOverlay closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+  }
 
       {
         !this.state.imagesLoading ? (
