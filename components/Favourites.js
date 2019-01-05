@@ -95,10 +95,10 @@ export default class Favourites extends Component {
     return favourites.map((favourite, i) =>
       <View key={i} style={FavouritesStyle.modalHeader}>
       <TouchableOpacity onPress={() => this.setState({clickedFavourite: favourites[i]}, function(){ this.toggleFavouriteModal() })} key={i}>
-        <Text key={i} style={FavouritesStyle.modalFavourite}> {favourite.name} </Text>
+        <Text key={i} style={[FavouritesStyle.modalFavourite, {fontFamily: 'PoiretOne-Regular'}]}> {favourite.name} </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => this.setState({deletedFavourite: favourites[i]}, function(){ this.deleteFavourite(this.state.deletedFavourite) })} key={Date.now()}>
-        <Text key={Date.now()} style={FavouritesStyle.deleteFavourite}> Delete </Text>
+        <Text key={Date.now()} style={[FavouritesStyle.deleteFavourite, {fontFamily: 'PoiretOne-Regular'}]}> Delete </Text>
       </TouchableOpacity>
       </View>
     )
@@ -117,6 +117,11 @@ export default class Favourites extends Component {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
+
+          {
+            this.props.fontLoaded ? (
+
+
           <View>
 
         <LinearGradient
@@ -126,12 +131,12 @@ export default class Favourites extends Component {
           <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>
 
-            <Text style={FavouritesStyle.favouritesModalHeader}> Favourites </Text>
+            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}> Favourites </Text>
 
           {
             this.state.favourites ? (
               self.renderFavourites()
-            ) : <Text style={FavouritesStyle.favouritesText}> Your favourites list is currently empty </Text>
+            ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}> Your favourites list is currently empty </Text>
         }
 
         <TouchableHighlight
@@ -148,6 +153,11 @@ export default class Favourites extends Component {
             </View>
           </LinearGradient>
         </View>
+
+      ) : null
+
+    }
+
       </Modal>
 
     </View>

@@ -32,7 +32,7 @@ const FavouritesStyle = StyleSheet.create({
     paddingTop: 10,
   },
   favouritesModalHeader: {
-    fontSize: 22,
+    fontSize: 26,
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
@@ -40,7 +40,7 @@ const FavouritesStyle = StyleSheet.create({
     paddingBottom: 10,
   },
   favouritesText: {
-    fontSize: 18,
+    fontSize: 22,
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
@@ -58,7 +58,7 @@ const FavouritesStyle = StyleSheet.create({
   },
 
   modalFavourite: {
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
     color: 'white',
     paddingLeft: 20,
@@ -67,7 +67,7 @@ const FavouritesStyle = StyleSheet.create({
     paddingBottom: 10,
   },
   deleteFavourite: {
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
     color: 'red',
     paddingLeft: 20,
