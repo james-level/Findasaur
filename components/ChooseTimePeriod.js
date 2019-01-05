@@ -446,27 +446,27 @@ export default class ChooseTimePeriod extends Component {
         <View style={ChooseTimePeriodStyle.iconsContainer}>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '5%'}}
+        style={{position: 'relative', top: '0%'}}
           onPress={() => {
             this.props.home();
             }}>
-              <Image source={require('../assets/icons/home.png')} style={{height: 40, marginRight: 40, width: 40, position: 'relative'}}/>
+              <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
         </TouchableHighlight>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '5%'}}
+        style={{position: 'relative', top: '0%'}}
           onPress={() => {
             this.setEraModalVisible();
             }}>
-              <Image source={require('../assets/icons/info.png')} style={{height: 40, marginRight: 40, width: 40, position: 'relative'}}/>
+              <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
         </TouchableHighlight>
 
         <TouchableHighlight
-        style={{position: 'relative', top: '5%'}}
+        style={{position: 'relative', top: '0%'}}
           onPress={() => {
             this.setEraModalVisible();
             }}>
-              <Image source={require('../assets/icons/favourite.png')} style={{height: 40, width: 40, position: 'relative'}}/>
+              <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
         </TouchableHighlight>
 
         </View>

@@ -8,7 +8,7 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     margin: 0,
   },
   iconsContainer: {
-    flex: 2,
+    flex: 0.9,
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: 'black',
