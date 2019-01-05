@@ -266,9 +266,9 @@ export default class ChooseTimePeriod extends Component {
   retrieveImagesAndDescriptions(){
 
     var numberOfDinosaurs = this.state.dinosaurs.length;
-    var lowerIndexLimit = numberOfDinosaurs - 20;
+    var lowerIndexLimit = numberOfDinosaurs - 18;
     var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
-    var upperDinosaurIndex = lowerDinosaurIndex + 20;
+    var upperDinosaurIndex = lowerDinosaurIndex + 18;
     var dinosaurs = this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex);
 
     this.setState({slicedDinosaurs: dinosaurs}, function(){
@@ -537,9 +537,9 @@ export default class ChooseTimePeriod extends Component {
       else {
 
         var numberOfDinosaurs = this.state.dinosaurs.length;
-        var lowerIndexLimit = numberOfDinosaurs - 20;
+        var lowerIndexLimit = numberOfDinosaurs - 18;
         var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
-        var upperDinosaurIndex = lowerDinosaurIndex + 20;
+        var upperDinosaurIndex = lowerDinosaurIndex + 18;
 
         return (
 
