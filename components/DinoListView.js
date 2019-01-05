@@ -386,8 +386,8 @@ export default class DinoListView extends Component {
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? { color: 'limegreen' }
-                : { color: 'white' }
+                ? { color: 'limegreen', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
+                : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
             ]}
           >
             {o.item.name ? o.item.name : 'no name attribute'}
@@ -491,9 +491,9 @@ export default class DinoListView extends Component {
          source={{uri: `${this.returnImageFromStored()}`}}
          />
          </TouchableOpacity>
-              <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+              <Text style={{fontFamily: 'PoiretOne-Regular', fontSize: 20}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
-                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`}}>
+                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20}}>
                     {this.capitaliseDiet(this.state.activeItem.diet)}
                   </Text>
               </Text>
