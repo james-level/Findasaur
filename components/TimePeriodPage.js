@@ -33,7 +33,7 @@ export default class TimePeriodPage extends Component {
   this.handleHerbivoreSelection = this.handleHerbivoreSelection.bind(this);
   this.handleAllDietsSelection = this.handleAllDietsSelection.bind(this);
   this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-  this.setEraModalVisible = this.setEraModalVisible.bind(this);
+
 }
 
   retrieveImages(){
@@ -51,12 +51,6 @@ export default class TimePeriodPage extends Component {
       self.setState({
         dinosaurs: response.data
       }, function(){this.retrieveImages()})
-    })
-  }
-
-  setEraModalVisible(){
-    this.setState({
-      eraModalVisible: !this.state.eraModalVisible
     })
   }
 
@@ -188,25 +182,6 @@ export default class TimePeriodPage extends Component {
                 onPress={this.props.handleSearchSubmit}>
                 <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
               </TouchableHighlight>
-
-      </View>
-
-      {
-        this.state.eraModalVisible ? (
-
-      <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.state.fontLoaded} />
-
-    ) : null
-  }
-
-      <View style={TimePeriodStyle.iconsContainer}>
-
-      <TouchableHighlight
-        onPress={() => {
-          this.setEraModalVisible();
-          }}>
-            <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, marginTop: '350%', marginBottom: 10, position: 'relative'}}/>
-      </TouchableHighlight>
 
       </View>
 

@@ -112,7 +112,7 @@ export default class Homepage extends React.Component {
   else {
 
     return (
-      <ChooseTimePeriod home={this.handleButtonClick}
+      <ChooseTimePeriod home={this.handleButtonClick} fontLoaded={this.state.fontLoaded}
       />
 
     )

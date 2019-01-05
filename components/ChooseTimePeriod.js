@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, TouchableHighlight, Image, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
 import TimePeriodPage from './TimePeriodPage';
 import {Platform} from 'react-native';
@@ -9,6 +9,8 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
+import EraModal from './EraModal.js'
+import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
@@ -19,6 +21,7 @@ export default class ChooseTimePeriod extends Component {
     super(props);
     this.state = {
       slicedDinosaurs: null,
+      eraModalVisible: false,
       imagesLoading: false,
       images: [],
       dinosaurDescriptions: [],
@@ -123,6 +126,7 @@ export default class ChooseTimePeriod extends Component {
     this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
     this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
     this.returnToErasPage = this.returnToErasPage.bind(this);
+    this.setEraModalVisible = this.setEraModalVisible.bind(this);
   }
 
   componentDidMount(){
@@ -131,6 +135,12 @@ export default class ChooseTimePeriod extends Component {
     //        'Swipe to move between time periods!'
     //     )
 
+  }
+
+  setEraModalVisible(){
+    this.setState({
+      eraModalVisible: !this.state.eraModalVisible
+    })
   }
 
   populateDropdown(){
@@ -409,11 +419,37 @@ export default class ChooseTimePeriod extends Component {
         />
         {
             this.state.imagesLoading ? (
-              <View style={{backgroundColor: 'black', top: '-20%'}}>
+              <View style={{backgroundColor: 'black', top: '0%', height: '100%'}}>
+              <View style={{backgroundColor: 'black', top: '0%', height: '90%'}}>
                 < BallIndicator count={7} size={50} color={'limegreen'} style={{backgroundColor: 'black'}} />
               </View>
-        ) : null
+              </View>
+        ) :
+        <View style={ChooseTimePeriodStyle.iconsContainer}>
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '10%'}}
+          onPress={() => {
+            this.setEraModalVisible();
+            }}>
+              <Image source={require('../assets/icons/info.png')} style={{height: 40, width: 40, position: 'relative'}}/>
+        </TouchableHighlight>
+
+        </View>
       }
+
+      {
+          this.state.imagesLoading ? (
+
+      <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-40%'}}>
+        <Text style={ChooseTimePeriodStyle.loadingText}>{this.state.viewableItems[0].item.title} dinosaurs loading...</Text>
+      </View>
+
+    ) : null
+  }
+
+      <EraModal eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+
 
             <Pagination
         // DotThemeLight

@@ -75,12 +75,6 @@ const TimePeriodStyle = StyleSheet.create({
     left: Dimensions.get('window').width*0.6,
 
   },
-  iconsContainer: {
-    flex: 0.1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-  },
 });
 
 export default TimePeriodStyle;

@@ -6,7 +6,18 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     width: '100%',
     padding: 0,
     margin: 0,
-  }
+  },
+  iconsContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+  },
+  loadingText: {
+    fontSize: 18,
+    color: 'white',
+    paddingTop: 0,
+  },
 });
 
 export default ChooseTimePeriodStyle;
