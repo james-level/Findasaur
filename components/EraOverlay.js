@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
-
-import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
+import EraOverlayStyle from '../Stylesheets/EraOverlayStyle.js';
 
 export default class EraOverlay extends Component {
   render() {
@@ -15,8 +14,8 @@ export default class EraOverlay extends Component {
       {
         (hideModal, overlayState) => (
           <Fragment>
-          <Text style={{color: 'limegreen', marginBottom: 10, fontSize: 28, fontFamily: 'PoiretOne-Regular'}}>Late Cretaceous Era</Text>
-            <Text style={{color: 'white', padding: 5, fontSize: 20, fontFamily: 'PoiretOne-Regular'}}>The Late Cretaceous (100.5 to 66 million years ago) is the younger of two epochs into which the Cretaceous period is divided in the geologic timescale. Rock strata from this epoch form the Upper Cretaceous series. The Cretaceous is named after the white limestone known as chalk which occurs widely in northern France and is seen in the white cliffs of south-eastern England, and which dates from this time. </Text>
+          <Text style={EraOverlayStyle.eraOverlayHeader}>Late Cretaceous Era</Text>
+            <Text style={EraOverlayStyle.eraOverlayDescription}>The Late Cretaceous (100.5 to 66 million years ago) is the younger of two epochs into which the Cretaceous period is divided in the geologic timescale. Rock strata from this epoch form the Upper Cretaceous series. The Cretaceous is named after the white limestone known as chalk which occurs widely in northern France and is seen in the white cliffs of south-eastern England, and which dates from this time. </Text>
           </Fragment>
         )
       }
