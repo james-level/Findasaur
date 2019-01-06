@@ -617,13 +617,13 @@ export default class DinoListView extends Component {
               />
 
                 {dinosaurs.length > 5 ? (
-                  <View style={{backgroundColor: 'black', borderWidth: 1, borderColor: 'white', height: 220, paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: 220, paddingLeft: 10}}>
                   <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>
                   </View>
                 ) : (
-                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 1, borderColor: 'white', paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', paddingLeft: 10}}>
                   <ScrollView>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>
