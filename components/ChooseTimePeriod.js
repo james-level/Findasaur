@@ -148,7 +148,9 @@ export default class ChooseTimePeriod extends Component {
   }
 
   setFavouritesVisible() {
-  this.setState({favouritesVisible: !this.state.favouritesVisible});
+  this.setState({favouritesVisible: !this.state.favouritesVisible}, function(){
+    this.renderEraFavouritesPage(this.state.viewableItems[0].item.title)
+  });
 }
 
   setEraModalVisible(){
@@ -205,6 +207,19 @@ export default class ChooseTimePeriod extends Component {
     this.setState({
       imagesLoaded: true
     })
+  }
+
+  renderEraFavouritesPage(era){
+
+    switch(era) {
+    case 'Late Cretaceous': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Early Cretaceous': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Late Jurassic': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Middle Jurassic': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Early Jurassic': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Late Triassic': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+    case 'Middle Triassic': return <EraFavourites era={era} favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+}
   }
 
   addImageToState(imagesObject){
@@ -491,22 +506,14 @@ export default class ChooseTimePeriod extends Component {
     ) : null
   }
 
-    {
-      this.props.fontLoaded && this.state.viewableItems ? (
 
-      <EraOverlay eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+    {
+      this.props.fontLoaded && this.state.viewableItems && this.state.favouritesVisible ? (
+
+        this.renderEraFavouritesPage(this.state.viewableItems[0].item.title)
 
     ) : null
   }
-
-  {
-    this.props.fontLoaded && this.state.viewableItems ? (
-
-    <EraFavourites favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
-
-  ) : null
-}
-
       {
         !this.state.imagesLoading ? (
 

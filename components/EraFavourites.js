@@ -17,7 +17,7 @@ export default class EraFavourites extends Component {
   }
 
   componentDidMount(){
-    this.retrieveFavourites()
+    this.retrieveFavourites(this.props.era)
   }
 
   toggleFavouriteModal(){
@@ -69,13 +69,14 @@ export default class EraFavourites extends Component {
 )
 }
 
-  retrieveFavourites(){
+  retrieveFavourites(era){
       AsyncStorage.getItem('dinosaur_favourites').then((dinos) => {
+        var dinosaurs = JSON.stringify(JSON.parse(dinos).filter(dino => dino.era === era ))
         this.setState({
-          favourites: dinos
+          favourites: dinosaurs
         }, function(){
-          if (dinos){
-          if (JSON.parse(dinos).length === 0){
+          if (dinosaurs){
+          if (JSON.parse(dinosaurs).length === 0){
             this.setState({
               favourites: null
             })
@@ -131,7 +132,7 @@ export default class EraFavourites extends Component {
           <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>
 
-            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}> Favourites </Text>
+            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.props.era} Favourites </Text>
 
           {
             this.state.favourites ? (
