@@ -71,6 +71,10 @@ export default class FavouriteModal extends Component {
 
             }
 
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={FavouriteModalStyle.modalPronunciation}>Lived during the {this.props.clickedFavourite.era}</Text>
+            </View>
+
             {
 
               this.props.clickedFavourite.pronunciation ? (

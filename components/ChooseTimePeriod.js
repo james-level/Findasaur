@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
 import EraOverlay from './EraOverlay.js'
+import EraFavourites from './EraFavourites.js'
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
@@ -32,6 +33,7 @@ export default class ChooseTimePeriod extends Component {
       omnivores: null,
       imagesLoaded: false,
       backClicked: false,
+      favouritesVisible: false,
       items: [
 
         {
@@ -134,6 +136,7 @@ export default class ChooseTimePeriod extends Component {
     this.returnToErasPage = this.returnToErasPage.bind(this);
     this.setEraModalVisible = this.setEraModalVisible.bind(this);
     this.closeEraModal = this.closeEraModal.bind(this);
+    this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
   }
 
   componentDidMount(){
@@ -143,6 +146,10 @@ export default class ChooseTimePeriod extends Component {
     //     )
 
   }
+
+  setFavouritesVisible() {
+  this.setState({favouritesVisible: !this.state.favouritesVisible});
+}
 
   setEraModalVisible(){
     this.setState({
@@ -464,7 +471,7 @@ export default class ChooseTimePeriod extends Component {
         <TouchableHighlight
         style={{position: 'relative', top: '0%'}}
           onPress={() => {
-            this.setEraModalVisible();
+            this.setFavouritesVisible();
             }}>
               <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
         </TouchableHighlight>
@@ -491,6 +498,14 @@ export default class ChooseTimePeriod extends Component {
 
     ) : null
   }
+
+  {
+    this.props.fontLoaded && this.state.viewableItems ? (
+
+    <EraFavourites favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.props.fontLoaded}  />
+
+  ) : null
+}
 
       {
         !this.state.imagesLoading ? (
