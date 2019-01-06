@@ -506,6 +506,14 @@ export default class ChooseTimePeriod extends Component {
     ) : null
   }
 
+  {
+      this.props.fontLoaded && this.state.viewableItems ? (
+
+      <EraOverlay eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+  }
+
 
     {
       this.props.fontLoaded && this.state.viewableItems && this.state.favouritesVisible ? (
