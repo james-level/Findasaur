@@ -660,7 +660,7 @@ export default class DinoListView extends Component {
 
           <LinearGradient
           colors={['black', '#1e932d']}
-          style={{ padding: 25 }}>
+          style={{ padding: 25, height: Dimensions.get('window').height }}>
 
             <View style={DinoListViewStyle.infoModal}>
 
@@ -668,7 +668,7 @@ export default class DinoListView extends Component {
 
                 {
                   self.state.searchDataLoading ? (
-                    <View style={{height: 200}}>
+                    <View style={{height: Dimensions.get('window').height}}>
                       < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
                     </View>
                 ) :
@@ -678,7 +678,7 @@ export default class DinoListView extends Component {
                   onPress={() => {
                     this.addDinosaurToFavourites();
                     }}>
-                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, position: 'relative'}}/>
+                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, marginTop: 7, position: 'relative'}}/>
                 </TouchableHighlight>
 
                 <AutoHeightImage
@@ -727,7 +727,7 @@ export default class DinoListView extends Component {
 
             }
 
-                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: `${ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}`}}/>
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
