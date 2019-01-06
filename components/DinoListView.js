@@ -210,12 +210,12 @@ export default class DinoListView extends Component {
   }
 
   capitaliseDiet(diet){
-    if (diet){
+    if (diet == "carnivore, omnivore" || diet == "carnivore, piscivore" || diet == "piscivore, insectivore" || diet == "herbivore, omnivore"){
+    return "Omnivore";
+  }
+    else if (diet == "carnivore" || diet == "omnivore" || diet == "herbivore"){
     return diet.charAt(0).toUpperCase() + diet.slice(1);
   }
-  if (diet == "carnivore, omnivore" || diet == "carnivore, piscivore" || diet == "piscivore, insectivore" || diet == "herbivore, omnivore"){
-  return "Omnivore";
-}
     else {
       return;
     }
@@ -384,7 +384,7 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black' }
           ]}
         >
-        <Image style={s.fossil} source={require('../assets/icons/footprint.png')}/>
+        <AutoHeightImage width={Dimensions.get('window').width*0.3} source={require('../assets/icons/footprint.png')}/>
 
           <Text
             style={[
@@ -473,7 +473,7 @@ export default class DinoListView extends Component {
                   color: 'white',
                   textAlign: 'center',
                   fontWeight: '400',
-                  fontSize: 25,
+                  fontSize: 22,
                   fontFamily: 'PoiretOne-Regular',
                   margin: 30
                 }}
