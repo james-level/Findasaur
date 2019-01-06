@@ -137,6 +137,8 @@ export default class TimePeriodPage extends Component {
     borderRadius: 0
       }}
   >
+
+
     <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center'}}>
       <Image
         style={TimePeriodStyle.profilePicture}
@@ -176,13 +178,13 @@ export default class TimePeriodPage extends Component {
 }
       </View>
 
-      <View>
-      <TouchableHighlight
-                onPress={this.props.handleSearchSubmit}>
-                <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
-              </TouchableHighlight>
-
+      <View >
+       <TouchableHighlight style={TimePeriodStyle.plusButtonView} onPress={this.props.handleSearchSubmit}>
+        <Image style={TimePeriodStyle.plusButton} source={require('../assets/icons/plus.png')}/>
+       </TouchableHighlight>
       </View>
+
+
 
     </View>
     );

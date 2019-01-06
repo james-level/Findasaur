@@ -65,7 +65,7 @@ export default class DinoListView extends Component {
           dinos.push(dinosaur);
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           Alert.alert(
-                 `Successfully added ${dinosaur.name} to your favourites!`
+                 `${dinosaur.name} added to favourites!`
               )
         }
         else {
@@ -640,11 +640,9 @@ export default class DinoListView extends Component {
       onPress={() => {
         this.props.returnToErasPage();
       }}>
-    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10}}/>
+    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 15}}/>
     </TouchableHighlight>
 
-
-          /* Modal for individual dinosaur view */
           {
             self.state.searchedDinosaurData ? (
 
@@ -750,8 +748,6 @@ export default class DinoListView extends Component {
 
         ) : null
       }
-
-          /* End of modal for individual dinosaur view */
 
       </View>
     );

@@ -135,7 +135,7 @@ export default class EraFavourites extends Component {
             <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.props.era} Favourites </Text>
 
           {
-            this.state.favourites ? (
+            this.state.favourites && this.props.fontLoaded ? (
               self.renderFavourites()
             ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}> Your favourites list is currently empty </Text>
         }
