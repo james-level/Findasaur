@@ -678,11 +678,11 @@ export default class DinoListView extends Component {
                   onPress={() => {
                     this.addDinosaurToFavourites();
                     }}>
-                      <Image source={require('../assets/icons/star.png')} style={{height: 40, width: 40, marginBottom: 10, position: 'relative'}}/>
+                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, position: 'relative'}}/>
                 </TouchableHighlight>
 
                 <AutoHeightImage
-                  width={300}
+                  width={Dimensions.get('window').width*0.7}
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
@@ -727,7 +727,7 @@ export default class DinoListView extends Component {
 
             }
 
-                <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 

@@ -44,13 +44,13 @@ export default class FavouriteModal extends Component {
               onPress={() => {
                 this.props.toggleFavouriteModal();
               }}>
-            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '92%'}}/>
+            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '48%'}}/>
             </TouchableHighlight>
 
             <View style={{alignItems: "center"}}>
 
             <AutoHeightImage
-              width={300}
+              width={Dimensions.get('window').width*0.7}
               source={{uri: `${this.props.clickedFavourite.image}`}}
             />
 
@@ -99,7 +99,7 @@ export default class FavouriteModal extends Component {
 
         }
 
-            <Image style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
+            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
 
             <Text style={FavouriteModalStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 
