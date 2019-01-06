@@ -213,6 +213,9 @@ export default class DinoListView extends Component {
     if (diet){
     return diet.charAt(0).toUpperCase() + diet.slice(1);
   }
+  if (diet == "carnivore, omnivore" || diet == "carnivore, piscivore" || diet == "piscivore, insectivore" || diet == "herbivore, omnivore"){
+  return "Omnivore";
+}
     else {
       return;
     }
@@ -486,19 +489,18 @@ export default class DinoListView extends Component {
               style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
 
-            <TouchableOpacity onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+            <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
             <AutoHeightImage
-         width={285}
+         width={Dimensions.get('window').width*0.65}
          source={{uri: `${this.returnImageFromStored()}`}}
          />
          </TouchableOpacity>
-              <Text style={{fontFamily: 'PoiretOne-Regular', fontSize: 20}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+              <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
-                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20}}>
+                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
                     {this.capitaliseDiet(this.state.activeItem.diet)}
                   </Text>
               </Text>
-
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
@@ -618,7 +620,7 @@ export default class DinoListView extends Component {
               />
 
                 {dinosaurs.length > 5 ? (
-                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: 220, paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: 150, paddingLeft: 10}}>
                   <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>

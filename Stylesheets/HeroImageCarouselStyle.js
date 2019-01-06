@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, ImageBackground } from 'react-native';
 
 const HeroImageCarouselStyle = StyleSheet.create({
 
@@ -25,8 +25,8 @@ const HeroImageCarouselStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   customImage: {
-    width: 375,
-    height: 250,
+    width: Dimensions.get('window').width*0.81,
+    height: Dimensions.get('window').width*0.54
   },
 });
 
