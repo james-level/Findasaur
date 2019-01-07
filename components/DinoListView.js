@@ -682,7 +682,7 @@ export default class DinoListView extends Component {
                 </TouchableHighlight>
 
                 <AutoHeightImage
-                  width={Dimensions.get('window').width*0.7}
+                  width={Dimensions.get('window').width*0.71}
                   source={{uri: `${this.state.searchedDinosaurImage}`}}
                 />
 
