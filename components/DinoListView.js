@@ -497,7 +497,7 @@ export default class DinoListView extends Component {
                   margin: 30
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar. Tap the footprint icons for a preview or click the main image for info.
+                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar. Tap the footprint icons for a preview and click the main image for info.
               </Text>
             </View>
           )}
@@ -511,7 +511,7 @@ export default class DinoListView extends Component {
             {
               this.state.addressBookImageLoading ? (
 
-                <View style={{backgroundColor: 'white', width: width*0.65, height: height*0.35}}>
+                <View style={{backgroundColor: 'black', width: width*0.65, height: height*0.35}}>
                   < BarIndicator count={7} size={40} color={'limegreen'}/>
                 </View>
        ) :
@@ -538,12 +538,22 @@ export default class DinoListView extends Component {
 
       }
 
-              <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
-                {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
-                  <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
-                    {this.capitaliseDiet(this.state.activeItem.diet)}
-                  </Text>
+      {
+        this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+          <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+            {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
+              <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
+                {this.capitaliseDiet(this.state.activeItem.diet)}
               </Text>
+          </Text>
+           ) :
+
+          null
+
+          }
+
+
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
