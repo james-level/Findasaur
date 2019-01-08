@@ -478,7 +478,7 @@ export default class DinoListView extends Component {
                   margin: 30
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar if you can't find the dinosaur you're looking for below. Tap the footprint icons for a preview or click the name/image for more information.
+                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar if you can't find the dinosaur you're looking for below. Tap the footprint icons for a preview or click the name/image for info.
               </Text>
             </View>
           )}
@@ -511,7 +511,7 @@ export default class DinoListView extends Component {
 
         <View style={{ flex: 1, height: height, width}}>
           <FlatList
-          style={{marginBottom: -(height*0.1)}}
+          style={{marginBottom: -(height*0.08)}}
             ListEmptyComponent={ListEmptyComponent}
             //  initialNumToRender={5}
             horizontal

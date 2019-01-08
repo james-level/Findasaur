@@ -32,6 +32,7 @@ iconsContainer: {
   justifyContent: 'center',
   flexDirection: 'row',
   backgroundColor: 'transparent',
+  marginBottom: 10
 },
   // backgroundImage: {
   //   width: '100%',
