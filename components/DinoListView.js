@@ -89,6 +89,7 @@ export default class DinoListView extends Component {
 }
 
   retrieveInitialImageLink(dinosaur){
+    console.log("DINOSAUR NAME", dinosaur);
     const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
 
     axios.get(imageUrl).then( (response) => {
@@ -359,6 +360,11 @@ export default class DinoListView extends Component {
     this.setState({
       activeId: activeItem.index,
       activeItem: activeItem.item
+    }, function(){
+      if (activeItem.index > 17){
+        this.retrieveInitialImageLink(activeItem.item.name);
+        /* ADD IMAGE LOADING METHOD */
+      }
     })
   }
 
@@ -489,10 +495,22 @@ export default class DinoListView extends Component {
             >
 
             <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+
+            {
+              this.state.activeItem.index > 17 ? (
             <AutoHeightImage
          width={Dimensions.get('window').width*0.65}
-         source={{uri: `${this.returnImageFromStored()}`}}
+         source={{uri: `${this.state.searchedDinosaurImage}`}}
          />
+
+       ) :
+
+       <AutoHeightImage
+    width={Dimensions.get('window').width*0.65}
+    source={{uri: `${this.returnImageFromStored()}`}}/>
+
+     }
+
          </TouchableOpacity>
               <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
