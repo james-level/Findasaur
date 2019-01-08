@@ -367,7 +367,7 @@ export default class DinoListView extends Component {
     return (
       <View
         style={{
-          flex: 2,
+          flex: 1,
           // height:40,
           margin: 5,
           marginTop: 25,
@@ -380,8 +380,8 @@ export default class DinoListView extends Component {
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: 'black', borderRadius: 10 }
-              : { backgroundColor: 'black' }
+              ? { backgroundColor: 'black', borderRadius: 10, marginBottom: 0 }
+              : { backgroundColor: 'black', marginBottom: 0 }
           ]}
         >
         <AutoHeightImage width={Dimensions.get('window').width*0.25} source={require('../assets/icons/footprint.png')}/>
@@ -509,8 +509,9 @@ export default class DinoListView extends Component {
 
         </View>
 
-        <View style={{ flex: 1, height, width}}>
+        <View style={{ flex: 1, height: height, width}}>
           <FlatList
+          style={{marginBottom: -(height*0.1)}}
             ListEmptyComponent={ListEmptyComponent}
             //  initialNumToRender={5}
             horizontal
@@ -531,50 +532,6 @@ export default class DinoListView extends Component {
             renderItem={this.renderItem}
             onViewableItemsChanged={this.onViewableItemsChanged}
           />
-          <TouchableOpacity
-            onPress={() => this.clearList()}
-            style={{
-              position: 'absolute',
-              backgroundColor: 'ff5b5f',
-              right: 35,
-              top: 0,
-              margin: 10,
-              zIndex: 3,
-              height: 35,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'transparent'
-            }}
-          >
-            <Ionicons
-              name={'ios-refresh-outline'}
-              size={25}
-              color="limegreen"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.clearList()}
-            style={{
-              position: 'absolute',
-              backgroundColor: 'ff5b5f',
-              right: 0,
-              top: 0,
-              margin: 10,
-              zIndex: 3,
-              height: 35,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'transparent'
-            }}
-          >
-
-{/* This below icon (ios-globe-outline) is currently linked to 'delete' need to redirect to a MAP view (of all dinos)*/}
-            <Ionicons
-              name={'ios-globe-outline'}
-              size={25}
-              color="limegreen"
-            />
-          </TouchableOpacity>
 
 {/* PAGINATION 'DOTS' ACROSS BOTTOM OF DINO-LIST PAGE, */}
           <Pagination
@@ -726,7 +683,7 @@ export default class DinoListView extends Component {
 
             }
 
-                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+            <Image style={{marginTop:20, width: Dimensions.get('window').width*0.8}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
@@ -766,14 +723,14 @@ const s = StyleSheet.create({
     backgroundColor: 'black'
   },
   innerContainer: {
-    flex: 1,
+    flex: 1.17,
     position: 'relative',
     top: height*0.15,
     height,
     width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#131f1f',
+    backgroundColor: 'black',
     // This is the grey background on top 1/2 of the screen
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
