@@ -384,7 +384,7 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black' }
           ]}
         >
-        <AutoHeightImage width={Dimensions.get('window').width*0.3} source={require('../assets/icons/footprint.png')}/>
+        <AutoHeightImage width={Dimensions.get('window').width*0.35} source={require('../assets/icons/footprint.png')}/>
 
           <Text
             style={[
@@ -769,7 +769,7 @@ const s = StyleSheet.create({
   innerContainer: {
     flex: 0.8,
     position: 'relative',
-    top: height*0.13,
+    top: height*0.15,
     height,
     width,
     justifyContent: 'center',
