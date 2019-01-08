@@ -643,7 +643,7 @@ export default class DinoListView extends Component {
       onPress={() => {
         this.props.returnToErasPage();
       }}>
-    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10}}/>
+    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
     </TouchableHighlight>
 
 
