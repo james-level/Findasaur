@@ -225,7 +225,7 @@ export default class DinoListView extends Component {
   }
 
   capitaliseDiet(diet){
-    if (diet == "carnivore, omnivore" || diet == "carnivore, piscivore" || diet == "piscivore, insectivore" || diet == "herbivore, omnivore"){
+    if (diet == "carnivore, omnivore" || diet == "carnivore, insectivore" || diet == "carnivore, piscivore" || diet == "piscivore, insectivore" || diet == "herbivore, omnivore"){
     return "Omnivore";
   }
     else if (diet == "carnivore" || diet == "omnivore" || diet == "herbivore"){
@@ -324,10 +324,10 @@ export default class DinoListView extends Component {
    }
 
    if (diet){
-     var dinosaurs = this.props.everySingleDinosaur;
+     var dinosaurs = this.props.allDinosaurs.concat(this.props.everySingleDinosaur);
    }
    else {
-     var dinosaurs = this.props.everySingleDinosaur;
+     var dinosaurs = this.props.allDinosaurs.concat(this.props.everySingleDinosaur);
    }
 
    const regex = new RegExp(`${sanitizedQuery.trim()}`, 'i');
