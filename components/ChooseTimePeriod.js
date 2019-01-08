@@ -55,7 +55,7 @@ export default class ChooseTimePeriod extends Component {
           key: 1,
           title: "Early Cretaceous",
           color: '#000000',
-          description: "The Early Cretaceous (geochronological name) or the Lower Cretaceous (chronostratigraphic name), is the earlier or lower of the two major divisions of the Cretaceous. It is usually considered to stretch from 146 million to 100 million years ago. During this time many new types of dinosaurs appeared or came into prominence, including ceratopsians, spinosaurids, carcharodontosaurids and coelurosaurs, while survivors from the Late Jurassic continued. Angiosperms (flowering plants) appeared for the first time during the Early Cretaceous. This time also saw the evolution of the first members of the Neornithes (modern birds).",
+          description: "The Early Cretaceous (geochronological name) or the Lower Cretaceous (chronostratigraphic name) is usually considered to stretch from 146 million to 100 million years ago. It saw many new types of dinosaurs appear or come into prominence, while survivors from the Late Jurassic continued. Angiosperms (flowering plants) first appeared during the Early Cretaceous. This time also saw the evolution of the first members of the Neornithes (modern birds).",
           image: faker.internet.avatar(),
           earliest_date: 100,
           latest_date: 145,
