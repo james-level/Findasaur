@@ -198,7 +198,7 @@ export default class ChooseTimePeriod extends Component {
           self.getDinosaursForPeriod(earliest_date, latest_date);
         })
 
-      }, 850);
+      }, 1000);
 
     })
   }

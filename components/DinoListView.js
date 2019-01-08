@@ -22,6 +22,7 @@ import * as Lengths from './Lengths.js'
 import { AsyncStorage } from "react-native"
 
 export default class DinoListView extends Component {
+  _isMounted = false;
 
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ export default class DinoListView extends Component {
       isLoading: false,
       activeId: null,
       activeItem: null,
-      items: this.populateDinosaurs(this.props.allDinosaurs.concat(this.props.everySingleDinosaur)),
+      items: null,
       searchDataLoading: false
     };
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
@@ -88,6 +89,14 @@ export default class DinoListView extends Component {
     }
 }
 
+  componentDidMount(){
+    this.setState({
+      items: this.populateDinosaurs(this.props.allDinosaurs.concat(this.props.everySingleDinosaur))
+    }, function(){
+      this._isMounted = true;
+    })
+  }
+
   retrieveInitialImageLink(dinosaur){
     console.log("DINOSAUR NAME", dinosaur);
     const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
@@ -97,6 +106,7 @@ export default class DinoListView extends Component {
         this.retrieveImageUrl(response.data)
 
         })
+
     .catch(function(error){
       console.log(error);
       console.log("Error fetching dinosaur data.");
@@ -117,7 +127,10 @@ export default class DinoListView extends Component {
         this.setState({
           searchedDinosaurImage: this.handleImageUrl(response.data)
         }, function(){
-          this.setState({searchDataLoading: false})
+          this.setState({
+            searchDataLoading: false,
+            addressBookImageLoading: false
+          })
           console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
         })
 
@@ -356,16 +369,20 @@ export default class DinoListView extends Component {
   };
 
   setItemAsActive(activeItem) {
+      if (this._isMounted) {
     this.setState({ scrollToItemRef: activeItem });
     this.setState({
       activeId: activeItem.index,
       activeItem: activeItem.item
     }, function(){
-      if (activeItem.index > 17){
-        this.retrieveInitialImageLink(activeItem.item.name);
-        /* ADD IMAGE LOADING METHOD */
+      if (this._isMounted) {
+        this.setState({addressBookImageLoading: true}, function(){
+          /* IMAGE LOADING METHOD TO RETRIEVE IMAGE FOR DINOSAURS (CURRENTLY ALL; ORIGINALLY JUST 18) */
+          this.retrieveInitialImageLink(activeItem.item.name);
+        })
       }
     })
+  }
   }
 
   renderItem = (o, i) => {
@@ -399,9 +416,8 @@ export default class DinoListView extends Component {
                 : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
             ]}
           >
-            {o.item.name ? o.item.name : 'no name attribute'}
+            {o.item.name ? o.item.name : 'Unknown'}
           </Text>
-
         </TouchableOpacity>
       </View>
     );
@@ -489,27 +505,39 @@ export default class DinoListView extends Component {
           )}
 
           {this.state.activeItem && (
+
             <TouchableOpacity
-              onPress={() => this.setItemAsActive(this.state.activeItem)}
+              onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
               style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
 
             <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
             {
-              this.state.activeItem.index > 17 ? (
-            <AutoHeightImage
-         width={Dimensions.get('window').width*0.65}
-         source={{uri: `${this.state.searchedDinosaurImage}`}}
-         />
+              this.state.addressBookImageLoading ? (
 
+                <View style={{backgroundColor: 'white', width: width*0.65, height: height*0.35}}>
+                  < BarIndicator count={7} size={40} color={'limegreen'}/>
+                </View>
        ) :
 
-       <AutoHeightImage
-    width={Dimensions.get('window').width*0.65}
-    source={{uri: `${this.returnImageFromStored()}`}}/>
+      null
 
      }
+
+     {
+       this.state.searchedDinosaurImage && !this.state.searchDataLoading ? (
+
+         <AutoHeightImage
+           width={Dimensions.get('window').width*0.65}
+           source={{uri: `${this.state.searchedDinosaurImage}`}}
+           />
+
+      ) :
+
+      null
+
+      }
 
          </TouchableOpacity>
               <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
@@ -551,6 +579,8 @@ export default class DinoListView extends Component {
           />
 
 {/* PAGINATION 'DOTS' ACROSS BOTTOM OF DINO-LIST PAGE, */}
+        {
+          this.state.items ? (
           <Pagination
             horizontal
             debugMode={true}
@@ -571,6 +601,8 @@ export default class DinoListView extends Component {
             paginationItems={this.state.items} //pass the same list as data
             paginationItemPadSize={3}
           />
+        ) : null
+      }
         </View>
 
         {/* SEARCH BAR Section */}
