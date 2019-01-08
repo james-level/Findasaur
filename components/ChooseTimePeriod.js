@@ -292,6 +292,7 @@ export default class ChooseTimePeriod extends Component {
     var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
     var upperDinosaurIndex = lowerDinosaurIndex + 18;
     var dinosaurs = this.state.dinosaurs.slice(lowerDinosaurIndex, upperDinosaurIndex);
+    var modifiedDinosaurs = this.state.dinosaurs.splice(lowerDinosaurIndex, 18)
 
     this.setState({slicedDinosaurs: dinosaurs}, function(){
 

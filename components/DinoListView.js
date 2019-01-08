@@ -32,7 +32,7 @@ export default class DinoListView extends Component {
       isLoading: false,
       activeId: null,
       activeItem: null,
-      items: this.populateDinosaurs(this.props.allDinosaurs),
+      items: this.populateDinosaurs(this.props.allDinosaurs.concat(this.props.everySingleDinosaur)),
       searchDataLoading: false
     };
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
@@ -281,7 +281,6 @@ export default class DinoListView extends Component {
       <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i].name}, function(){ this.toggleDinosaurView() })} key={i}>
       <Text style={{color: 'white', fontSize: 16, paddingTop: 10, paddingBottom: 10, fontFamily: 'PoiretOne-Regular'}} key={i}>{dinosaurAndDiet}</Text>
       </TouchableOpacity>
-
     )
   }
 
