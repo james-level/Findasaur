@@ -478,7 +478,7 @@ export default class DinoListView extends Component {
                   margin: 30
                 }}
               >
-                Pick a dinosaur from the {this.props.eraName} period! Type its name into the search bar if you can't find the one you're looking for!
+                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar if you can't find the dinosaur you're looking for below. Tap the footprint icons for a preview or click the name/image for more information.
               </Text>
             </View>
           )}
@@ -623,9 +623,9 @@ export default class DinoListView extends Component {
                 <ScrollView>
 
                 {
-                  self.state.searchDataLoading ? (
+                  self.state.searchDataLoading && self.props.fontLoaded ? (
                     <View style={{height: Dimensions.get('window').height}}>
-                      < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                      < BallIndicator count={7} size={65} color={'indigo'} style={{backgroundColor: 'transparent'}} />
                     </View>
                 ) :
 
