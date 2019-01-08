@@ -625,7 +625,7 @@ export default class DinoListView extends Component {
                 {
                   self.state.searchDataLoading && self.props.fontLoaded ? (
                     <View style={{height: Dimensions.get('window').height}}>
-                      < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                      < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
                     </View>
                 ) :
 
