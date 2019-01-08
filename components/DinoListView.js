@@ -601,7 +601,7 @@ export default class DinoListView extends Component {
         </View>
 
         {/* SEARCH BAR Section */}
-                <View style={{position: 'absolute', top: '55%', marginLeft: 15, marginRight: 15 }}>
+                <View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
               <Autocomplete
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -620,7 +620,7 @@ export default class DinoListView extends Component {
               />
 
                 {dinosaurs.length > 5 ? (
-                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: 150, paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: height*0.42, paddingLeft: 10}}>
                   <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>
@@ -767,7 +767,9 @@ const s = StyleSheet.create({
     backgroundColor: 'black'
   },
   innerContainer: {
-    flex: 1,
+    flex: 0.8,
+    position: 'relative',
+    top: height*0.13,
     height,
     width,
     justifyContent: 'center',
@@ -775,6 +777,8 @@ const s = StyleSheet.create({
     backgroundColor: '#131f1f',
     // This is the grey background on top 1/2 of the screen
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    borderBottomRightRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20
   },
 });
