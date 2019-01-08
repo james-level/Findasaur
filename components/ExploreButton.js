@@ -14,7 +14,7 @@ export default class ExploreButton extends Component {
             this.props.fontLoaded ? (
               <Button
                 onPress={this.props.handleButtonClick}
-                textStyle={{fontSize: 25, textShadowColor: 'white', textShadowOffset: {width: -5, height: 5}, textShadowRadius: 25, color: 'black', fontWeight: "700", fontFamily: "PoiretOne-Regular"}}
+                textStyle={{fontSize: 25, color: 'black', fontWeight: "700", fontFamily: "PoiretOne-Regular"}}
                 title="Explore"
                 titleStyle={{ fontFamily: "PoiretOne-Regular" }}
                 buttonStyle={{

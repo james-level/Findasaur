@@ -125,7 +125,8 @@ export default class DinoListView extends Component {
     axios.get(imgUrl).then( (response) => {
 
         this.setState({
-          searchedDinosaurImage: this.handleImageUrl(response.data)
+          searchedDinosaurImage: this.handleImageUrl(response.data),
+          addressBookImage: this.handleImageUrl(response.data)
         }, function(){
           this.setState({
             searchDataLoading: false,
@@ -212,7 +213,7 @@ export default class DinoListView extends Component {
   }
 
   retrieveSearchedDinosaurData(dinosaur){
-    for (dinosaur of this.props.everySingleDinosaur){
+    for (dinosaur of this.state.items){
       if (dinosaur.name == this.state.clickedDinosaur){
         this.setState({
           searchedDinosaurData: dinosaur,
@@ -373,14 +374,11 @@ export default class DinoListView extends Component {
     this.setState({ scrollToItemRef: activeItem });
     this.setState({
       activeId: activeItem.index,
-      activeItem: activeItem.item
+      activeItem: activeItem.item,
+      addressBookImageLoading: true
     }, function(){
-      if (this._isMounted) {
-        this.setState({addressBookImageLoading: true}, function(){
           /* IMAGE LOADING METHOD TO RETRIEVE IMAGE FOR DINOSAURS (CURRENTLY ALL; ORIGINALLY JUST 18) */
           this.retrieveInitialImageLink(activeItem.item.name);
-        })
-      }
     })
   }
   }
@@ -494,12 +492,12 @@ export default class DinoListView extends Component {
                   color: 'white',
                   textAlign: 'center',
                   fontWeight: '400',
-                  fontSize: 22,
+                  fontSize: 21,
                   fontFamily: 'PoiretOne-Regular',
                   margin: 30
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar if you can't find the dinosaur you're looking for below. Tap the footprint icons for a preview or click the name/image for info.
+                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar. Tap the footprint icons for a preview or click the main image for info.
               </Text>
             </View>
           )}
@@ -510,9 +508,6 @@ export default class DinoListView extends Component {
               onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
               style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
-
-            <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
-
             {
               this.state.addressBookImageLoading ? (
 
@@ -526,12 +521,16 @@ export default class DinoListView extends Component {
      }
 
      {
-       this.state.searchedDinosaurImage && !this.state.searchDataLoading ? (
+       this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+         <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
          <AutoHeightImage
            width={Dimensions.get('window').width*0.65}
-           source={{uri: `${this.state.searchedDinosaurImage}`}}
+           source={{uri: `${this.state.addressBookImage}`}}
            />
+
+          </TouchableOpacity>
 
       ) :
 
@@ -539,7 +538,6 @@ export default class DinoListView extends Component {
 
       }
 
-         </TouchableOpacity>
               <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
                 {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
                   <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
