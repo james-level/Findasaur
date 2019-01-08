@@ -367,12 +367,12 @@ export default class DinoListView extends Component {
     return (
       <View
         style={{
-          flex: 4,
+          flex: 2,
           // height:40,
           margin: 5,
-          marginTop: 70,
+          marginTop: 25,
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <TouchableOpacity
@@ -384,7 +384,7 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black' }
           ]}
         >
-        <AutoHeightImage width={Dimensions.get('window').width*0.35} source={require('../assets/icons/footprint.png')}/>
+        <AutoHeightImage width={Dimensions.get('window').width*0.25} source={require('../assets/icons/footprint.png')}/>
 
           <Text
             style={[
@@ -509,12 +509,11 @@ export default class DinoListView extends Component {
 
         </View>
 
-        <View style={{ flex: 1, height, width }}>
+        <View style={{ flex: 1, height, width}}>
           <FlatList
             ListEmptyComponent={ListEmptyComponent}
             //  initialNumToRender={5}
             horizontal
-
             ref={r => (this.refs = r)}
             getItemLayout={(data, index) => ({
               length: ITEM_HEIGHT,
@@ -727,7 +726,7 @@ export default class DinoListView extends Component {
 
             }
 
-                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: `${ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}`}}/>
+                <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
@@ -767,7 +766,7 @@ const s = StyleSheet.create({
     backgroundColor: 'black'
   },
   innerContainer: {
-    flex: 0.8,
+    flex: 1,
     position: 'relative',
     top: height*0.15,
     height,
