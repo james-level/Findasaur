@@ -117,6 +117,20 @@ export default class DinoListView extends Component {
     })
   }
 
+  processImageDimensions(){
+    var uri = this.state.addressBookImage;
+
+    Image.getSize(uri, (width, height) => {this.setState({width, height},
+
+      function(){
+
+        
+
+      }
+
+    )});
+  }
+
   retrieveImageUrl(imageObject){
     var object = this.getImageAddress(imageObject);
     console.log("OBJECT IMAGE", object);
@@ -129,8 +143,9 @@ export default class DinoListView extends Component {
           addressBookImage: this.handleImageUrl(response.data)
         }, function(){
           this.setState({
-            searchDataLoading: false,
-            addressBookImageLoading: false
+            searchDataLoading: false
+          }, function(){
+            this.processImageDimensions()
           })
           console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
         })
