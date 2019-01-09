@@ -140,7 +140,7 @@ export default class DinoListView extends Component {
     }
     }
 
-    else if (this.state.width > Dimensions.get('window').width){
+    else if (this.state.width > Dimensions.get('window').width*0.93){
 
       var width = Dimensions.get('window').width*0.90;
       var height = width / aspectRatio;
@@ -374,7 +374,7 @@ export default class DinoListView extends Component {
       return 'green';
     }
     else {
-      return 'white';
+      return 'skyblue';
     }
   }
 
