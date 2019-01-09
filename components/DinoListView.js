@@ -592,11 +592,13 @@ export default class DinoListView extends Component {
 
          <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
+         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight, borderWidth: 1, borderTopRightRadius: 35, borderBottomLeftRadius: 35, borderBottomRightRadius: 35, borderTopLeftRadius: 35}}>
          <Image
            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
            source={{uri: `${this.state.addressBookImage}`}}
            onLoad={this.onAddressBookImageLoad}
            />
+           </View>
 
           </TouchableOpacity>
 
