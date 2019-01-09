@@ -371,7 +371,7 @@ export default class DinoListView extends Component {
       return 'red';
     }
     if (diet === "herbivore"){
-      return 'green';
+      return 'limegreen';
     }
     else {
       return 'skyblue';
@@ -592,7 +592,7 @@ export default class DinoListView extends Component {
 
          <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
-         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight, borderWidth: 1, borderTopRightRadius: 35, borderBottomLeftRadius: 35, borderBottomRightRadius: 35, borderTopLeftRadius: 35}}>
+         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
          <Image
            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
            source={{uri: `${this.state.addressBookImage}`}}
