@@ -39,6 +39,9 @@ export default class DinoListView extends Component {
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.retrieveSearchedDinosaurData = this.retrieveSearchedDinosaurData.bind(this);
+    this.onAddressBookImageLoad = this.onAddressBookImageLoad.bind(this);
+    this.processImageDimensions = this.processImageDimensions.bind(this);
+    this.calculateImageDimensions = this.calculateImageDimensions.bind(this);
   }
 
   addDinosaurToFavourites = async() => {
@@ -117,6 +120,12 @@ export default class DinoListView extends Component {
     })
   }
 
+  onAddressBookImageLoad(){
+    this.setState({
+      addressBookImageLoading: false
+    })
+  }
+
   calculateImageDimensions(){
     var aspectRatio = this.state.width / this.state.height
 
@@ -127,9 +136,9 @@ export default class DinoListView extends Component {
       addressBookImageHeight: height,
       addressBookImageWidth: width
     },
-    this.setState({
-      addressBookImageLoading: false
-    })
+    function(){
+      this.onAddressBookImageLoad()
+    }
   )
   }
 
@@ -559,6 +568,7 @@ export default class DinoListView extends Component {
          <Image
            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
            source={{uri: `${this.state.addressBookImage}`}}
+           onLoad={this.onAddressBookImageLoad}
            />
 
           </TouchableOpacity>
