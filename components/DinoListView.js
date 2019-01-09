@@ -127,17 +127,46 @@ export default class DinoListView extends Component {
   }
 
   calculateImageDimensions(){
-    var aspectRatio = this.state.width / this.state.height
+    var aspectRatio = this.state.width / this.state.height;
 
-    var height = Dimensions.get('window').height*0.30;
-    var width = height * aspectRatio;
+    if (this.state.height > Dimensions.get('window').height*0.55){
+
+      var height = Dimensions.get('window').width*0.55;
+      var width = height * aspectRatio;
+
+      if (width > Dimensions.get('window').width){
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+    }
+    }
+
+    else if (this.state.width > Dimensions.get('window').width){
+
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+
+      if (height > Dimensions.get('window').height*0.55){
+        var height = Dimensions.get('window').height*0.55;
+        var width = height * aspectRatio;
+      }
+    }
+
+    else {
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+
+      if (height > Dimensions.get('window').height*0.55){
+        var height = Dimensions.get('window').height*0.55;
+        var width = height * aspectRatio;
+      }
+    }
 
     this.setState({
       addressBookImageHeight: height,
       addressBookImageWidth: width
     },
     function(){
-      this.onAddressBookImageLoad()
+      this.onAddressBookImageLoad();
     }
   )
   }
@@ -307,9 +336,7 @@ export default class DinoListView extends Component {
   }
 
   addPrecedingDash(diet){
-    if (diet){
       return "- ";
-    }
   }
 
   getDescriptionText(object) {
