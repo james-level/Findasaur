@@ -117,6 +117,22 @@ export default class DinoListView extends Component {
     })
   }
 
+  calculateImageDimensions(){
+    var aspectRatio = this.state.width / this.state.height
+
+    var height = Dimensions.get('window').height*0.30;
+    var width = height * aspectRatio;
+
+    this.setState({
+      addressBookImageHeight: height,
+      addressBookImageWidth: width
+    },
+    this.setState({
+      addressBookImageLoading: false
+    })
+  )
+  }
+
   processImageDimensions(){
     var uri = this.state.addressBookImage;
 
@@ -124,7 +140,7 @@ export default class DinoListView extends Component {
 
       function(){
 
-        
+        this.calculateImageDimensions();
 
       }
 
@@ -540,8 +556,8 @@ export default class DinoListView extends Component {
 
          <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
-         <AutoHeightImage
-           width={Dimensions.get('window').width*0.65}
+         <Image
+           style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
            source={{uri: `${this.state.addressBookImage}`}}
            />
 
