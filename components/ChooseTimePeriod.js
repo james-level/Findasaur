@@ -571,14 +571,6 @@ export default class ChooseTimePeriod extends Component {
     ) : null
   }
 
-  <View>
-  <TouchableHighlight
-            onPress={this.props.handleSearchSubmit}>
-            <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
-          </TouchableHighlight>
-
-  </View>
-
 
     {
       this.props.fontLoaded && this.state.viewableItems && this.state.favouritesVisible ? (
