@@ -75,6 +75,15 @@ const TimePeriodStyle = StyleSheet.create({
     left: Dimensions.get('window').width*0.6,
 
   },
+  plusButtonView: {
+    width: Dimensions.get('window').width*0.2,
+    height: Dimensions.get('window').width*0.2,
+
+    position: 'absolute',
+    top: -Dimensions.get('window').height*0.11,
+    left: Dimensions.get('window').width*0.6,
+
+  },
 });
 
 export default TimePeriodStyle;

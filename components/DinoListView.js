@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageBackground from 'react-native';
 import FitImage from 'react-native-fit-image';
-import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal, Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import { LinearGradient } from 'expo';
@@ -705,13 +705,13 @@ export default class DinoListView extends Component {
               />
 
                 {dinosaurs.length > 5 ? (
-                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', height: height*0.42, paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.42, paddingLeft: 10}}>
                   <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>
                   </View>
                 ) : (
-                  <View style={{backgroundColor: 'black', borderTopWidth: 0, borderWidth: 0.5, borderColor: 'white', paddingLeft: 10}}>
+                  <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', paddingLeft: 10}}>
                   <ScrollView>
                   {this.renderMatches(dinosaurs, dinosaursAndDiets)}
                   </ScrollView>
@@ -728,8 +728,6 @@ export default class DinoListView extends Component {
     <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
     </TouchableHighlight>
 
-
-          /* Modal for individual dinosaur view */
           {
             self.state.searchedDinosaurData ? (
 
@@ -835,8 +833,6 @@ export default class DinoListView extends Component {
 
         ) : null
       }
-
-          /* End of modal for individual dinosaur view */
 
       </View>
     );

@@ -178,6 +178,7 @@ export default class TimePeriodPage extends Component {
 
       <View>
       <TouchableHighlight
+                style={TimePeriodStyle.plusButtonView}
                 onPress={this.props.handleSearchSubmit}>
                 <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
               </TouchableHighlight>

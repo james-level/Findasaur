@@ -15,6 +15,7 @@ import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
+import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -525,6 +526,14 @@ export default class ChooseTimePeriod extends Component {
 
     ) : null
   }
+
+  <View>
+  <TouchableHighlight
+            onPress={this.props.handleSearchSubmit}>
+            <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
+          </TouchableHighlight>
+
+  </View>
 
 
     {
