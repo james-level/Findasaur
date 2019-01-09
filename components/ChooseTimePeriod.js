@@ -475,48 +475,81 @@ export default class ChooseTimePeriod extends Component {
                 < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'black'}} />
               </View>
               </View>
-        ) :
-
-
-        /* Icons for home, favourites and era information overlay */
-
-        <View style={ChooseTimePeriodStyle.iconsContainer}>
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-          onPress={() => {
-            this.props.home();
-            }}>
-              <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-          onPress={() => {
-            this.handleSearchSubmit();
-            }}>
-              <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-          onPress={() => {
-            this.setEraModalVisible();
-            }}>
-              <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-          onPress={() => {
-            this.setFavouritesVisible();
-            }}>
-              <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-        </View>
+        ) : null
 
           /* End of icons */
+      }
+
+      {
+        Platform.OS != 'ios' ? (
+
+          /* Icons for home, favourites and era information overlay */
+
+          <View style={ChooseTimePeriodStyle.iconsContainer}>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.props.home();
+              }}>
+                <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.handleSearchSubmit();
+              }}>
+                <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setEraModalVisible();
+              }}>
+                <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setFavouritesVisible();
+              }}>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          </View>
+
+        ) :   /* Icons for home, favourites and era information overlay */
+
+          <View style={ChooseTimePeriodStyle.iconsContainer}>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.props.home();
+              }}>
+                <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setEraModalVisible();
+              }}>
+                <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setFavouritesVisible();
+              }}>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          </View>
       }
 
       {

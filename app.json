@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dino",
     "description": "",
-    "slug": "weather2app",
+    "slug": "findasaur",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
@@ -25,7 +25,7 @@
       "supportsTablet": true
     },
     "android": {
-     "package": "com.weather2.weather2wed"
+     "package": "com.levelapps.findasaur"
    }
   }
 }
