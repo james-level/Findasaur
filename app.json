@@ -8,13 +8,12 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "./assets/diplodocus.png",
     "splash": {
-      "image": "",
+      "image": "./assets/Dino_images/transparent_dinos/veloc.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-
     "updates": {
       "fallbackToCacheTimeout": 0
     },
