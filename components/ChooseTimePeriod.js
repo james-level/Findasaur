@@ -198,7 +198,7 @@ export default class ChooseTimePeriod extends Component {
           self.getDinosaursForPeriod(earliest_date, latest_date);
         })
 
-      }, 1000);
+      }, 2000);
 
     })
   }
@@ -296,6 +296,16 @@ export default class ChooseTimePeriod extends Component {
 
     this.setState({slicedDinosaurs: dinosaurs}, function(){
 
+      this.setState({
+        imagesLoading: false
+      }, function(){
+        this.toggleDinosaurListView();
+      })
+
+      /* Next chunk of code currently unusued as we are no longer pre-populating the address book with 18 images */
+
+      if (1 > 2){
+
       Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
         var url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur.name}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
         return this.retrieveWikiDescription(url);
@@ -322,6 +332,7 @@ export default class ChooseTimePeriod extends Component {
       .catch((err) => {
         console.error(err);
       })
+    }
 
     })
   }

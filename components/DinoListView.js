@@ -232,7 +232,7 @@ export default class DinoListView extends Component {
     return diet.charAt(0).toUpperCase() + diet.slice(1);
   }
     else {
-      return;
+      return "Diet unknown"
     }
   }
 
@@ -307,7 +307,7 @@ export default class DinoListView extends Component {
       return 'green';
     }
     else {
-      return 'black';
+      return 'white';
     }
   }
 
@@ -511,8 +511,8 @@ export default class DinoListView extends Component {
             {
               this.state.addressBookImageLoading ? (
 
-                <View style={{backgroundColor: 'black', width: width*0.65, height: height*0.35}}>
-                  < BarIndicator count={7} size={40} color={'limegreen'}/>
+                <View style={{backgroundColor: 'black', width: width*0.35, height: height*0.35}}>
+                  < DotIndicator Indicator count={5} size={10} color={'limegreen'}/>
                 </View>
        ) :
 
@@ -523,7 +523,7 @@ export default class DinoListView extends Component {
      {
        this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
 
-         <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+         <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
          <AutoHeightImage
            width={Dimensions.get('window').width*0.65}
@@ -541,12 +541,14 @@ export default class DinoListView extends Component {
       {
         this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
 
-          <Text style={{color: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 5}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+          <View style={{backgroundColor: 'black', alignItems: 'center', width: Dimensions.get('window').width*0.95}}>
+          <Text style={{color: 'white', backgroundColor: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 0}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
             {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
-              <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
+              <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, backgroundColor: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
                 {this.capitaliseDiet(this.state.activeItem.diet)}
               </Text>
           </Text>
+          </View>
            ) :
 
           null
@@ -740,11 +742,11 @@ export default class DinoListView extends Component {
 
             }
 
-            <Image style={{marginTop:20, width: Dimensions.get('window').width*0.8}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
 
-                </View>
+              </View>
 
             }
 

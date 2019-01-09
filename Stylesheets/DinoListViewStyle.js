@@ -92,7 +92,7 @@ const DinoListViewStyle = StyleSheet.create({
     shadowOpacity: 0.8
   },
   activeItem: {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     // rgba(255,255,255,1)
   },
   name: {
