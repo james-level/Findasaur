@@ -13,6 +13,11 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'black',
   },
+  plusContainer: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'orange',
+  },
   loadingText: {
     fontSize: 22,
     color: 'white',

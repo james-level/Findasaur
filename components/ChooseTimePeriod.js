@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, TouchableHighlight, Image, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Alert, TouchableHighlight, Image, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 import faker from 'faker';
 import TimePeriodPage from './TimePeriodPage';
 import {Platform} from 'react-native';
@@ -456,6 +456,8 @@ export default class ChooseTimePeriod extends Component {
     return (
 
       <View style={[ ChooseTimePeriodStyle.container ]}>
+
+
       {/*  <NavBar home={this.props.home}/> */}
         <FlatList
             ref={r => this.refs = r}
@@ -491,6 +493,14 @@ export default class ChooseTimePeriod extends Component {
         <TouchableHighlight
         style={{position: 'relative', top: '0%'}}
           onPress={() => {
+            this.handleSearchSubmit();
+            }}>
+              <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
+          onPress={() => {
             this.setEraModalVisible();
             }}>
               <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
@@ -518,6 +528,7 @@ export default class ChooseTimePeriod extends Component {
 
     ) : null
   }
+
 
   {
       this.props.fontLoaded && this.state.viewableItems ? (

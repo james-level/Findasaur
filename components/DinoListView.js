@@ -174,6 +174,8 @@ export default class DinoListView extends Component {
   processImageDimensions(){
     var uri = this.state.addressBookImage;
 
+    try{
+
     Image.getSize(uri, (width, height) => {this.setState({width, height},
 
       function(){
@@ -182,7 +184,17 @@ export default class DinoListView extends Component {
 
       }
 
-    )});
+    )})
+
+  }
+
+    catch (error) {
+      console.log(error);
+      Alert.alert(
+    'Could not load image.',
+    "The image might be of an incompatible format."
+    )
+    }
   }
 
   retrieveImageUrl(imageObject){
@@ -690,7 +702,7 @@ export default class DinoListView extends Component {
               <Autocomplete
                 autoCapitalize="none"
                 autoCorrect={false}
-                containerStyle={{width: 300}}
+                containerStyle={{width: Dimensions.get('window').width*0.71}}
                 data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
                 defaultValue={query}
                 inputContainerStyle={{flex: 1}}

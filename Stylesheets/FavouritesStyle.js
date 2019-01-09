@@ -59,7 +59,6 @@ const FavouritesStyle = StyleSheet.create({
 
   modalFavourite: {
     fontSize: 22,
-    fontWeight: 'bold',
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
@@ -68,7 +67,6 @@ const FavouritesStyle = StyleSheet.create({
   },
   deleteFavourite: {
     fontSize: 22,
-    fontWeight: 'bold',
     color: 'red',
     paddingLeft: 20,
     paddingRight: 20,

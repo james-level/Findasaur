@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Button } from 'react-native-elements';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
-import { Dimensions, Image, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Platform, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 const darkColor = 'black', lightColor = 'white', { width, height } = Dimensions.get('window');
 
 export default class TimePeriodPage extends Component {
@@ -176,14 +176,21 @@ export default class TimePeriodPage extends Component {
 }
       </View>
 
+      {
+
+      Platform.OS === 'ios' ? (
+
       <View>
       <TouchableHighlight
                 style={TimePeriodStyle.plusButtonView}
                 onPress={this.props.handleSearchSubmit}>
                 <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
               </TouchableHighlight>
-
       </View>
+
+    ) : null
+
+  }
 
     </View>
     );
