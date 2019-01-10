@@ -11,7 +11,7 @@ const AboutModalStyle = StyleSheet.create({
     color: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 150,
     fontSize: 30,
     backgroundColor: 'transparent',
   },
