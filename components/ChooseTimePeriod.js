@@ -224,13 +224,11 @@ export default class ChooseTimePeriod extends Component {
           // self.getDinosaursForPeriod(earliest_date, latest_date);
         })
 
-      }, 2000);
-
+      }, 1000);
     })
   }
 
   setClickedDinosaur(dinosaur){
-    console.log("DINO clicked", dinosaur);
     this.setState({
       clickedDinosaur: dinosaur,
       searchOverlayVisible: !this.state.searchOverlayVisible
@@ -311,7 +309,6 @@ export default class ChooseTimePeriod extends Component {
       images:  [...this.state.images, this.handleImageUrl(imagesObject)]
     }, function(){
       console.log(`added ${imagesObject} to state array`);
-
         this.setState({
           imagesLoading: false
         }, function(){
