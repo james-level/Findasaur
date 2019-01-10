@@ -158,8 +158,6 @@ export default class TimePeriodPage extends Component {
     borderRightColor: 'transparent',
     borderBottomColor: 'black'}}>
 
-
-
     </View>
     {
 
