@@ -72,7 +72,7 @@ const TimePeriodStyle = StyleSheet.create({
 
     position: 'absolute',
     top: -Dimensions.get('window').height*0.11,
-    left: Dimensions.get('window').width*0.6,
+    left: Dimensions.get('window').width*0.1,
 
   },
   plusButtonView: {

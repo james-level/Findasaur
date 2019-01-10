@@ -7,6 +7,7 @@ import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import  Bounceable  from 'react-native-bounceable';
 import { Button } from 'react-native-elements';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import { Dimensions, Image, Platform, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
@@ -158,6 +159,7 @@ export default class TimePeriodPage extends Component {
     borderRightColor: 'transparent',
     borderBottomColor: 'black'}}>
 
+
     </View>
     {
 
@@ -174,20 +176,33 @@ export default class TimePeriodPage extends Component {
 }
       </View>
 
-      {
 
-      Platform.OS === 'ios' ? (
+
+
 
       <View>
       <TouchableHighlight
                 onPress={this.props.handleSearchSubmit}>
-                <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
+
+                <Button
+                  onPress={this.props.handleSearchSubmit}
+                  textStyle={{fontSize: 25, color: 'black', fontFamily: "PoiretOne-Regular"}}
+                  title="Explore"
+                  titleStyle={{ fontFamily: "PoiretOne-Regular" }}
+                  buttonStyle={{
+                    backgroundColor: "limegreen",
+                    width: 175,
+                    height: 55,
+                    borderRadius: 20
+                  }}
+                  containerStyle={{ marginTop: 20 }}
+                />
               </TouchableHighlight>
       </View>
 
-    ) : null
 
-  }
+
+
 
     </View>
     );
