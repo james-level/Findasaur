@@ -209,7 +209,8 @@ const androidStyles = {
   container: {
     flex: 1,
     zIndex: 1,
-    overflow: 'visible'
+    overflow: 'visible',
+    backgroundColor: 'black'
   },
   inputContainer: {
     ...border,
@@ -226,7 +227,8 @@ const androidStyles = {
 
 const iosStyles = {
   container: {
-    zIndex: 1
+    zIndex: 1,
+    backgroundColor: 'black'
   },
   inputContainer: {
     ...border,

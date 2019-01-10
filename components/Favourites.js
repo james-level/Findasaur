@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Modal, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
+import { Alert, Modal,Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 import FavouriteModal from './FavouriteModal.js';
@@ -125,18 +125,18 @@ export default class Favourites extends Component {
           <View>
 
         <LinearGradient
-        colors={['black', '#1e932d']}
-        style={{ padding: 25 }}>
+        colors={['#1D976C', '#93F9B9']}
+        style={{  height: Dimensions.get('window').height, padding: 25 }}>
 
           <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>
 
-            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}> Favourites </Text>
+            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs: </Text>
 
           {
             this.state.favourites ? (
               self.renderFavourites()
-            ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}> Your favourites list is currently empty </Text>
+            ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}>Oh no! Your favourites are currently empty. Find dinosaurs in the app and click the ⭐️ to add them to this list. </Text>
         }
 
         <TouchableHighlight

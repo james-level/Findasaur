@@ -30,7 +30,7 @@ export default class FavouriteModal extends Component {
 
       <LinearGradient
       colors={['black', '#1e932d']}
-      style={{ padding: 25 }}>
+      style={{ height: Dimensions.get('window').height, padding: 25}}>
 
         <View style={FavouriteModalStyle.infoModal}>
 
@@ -44,7 +44,7 @@ export default class FavouriteModal extends Component {
               onPress={() => {
                 this.props.toggleFavouriteModal();
               }}>
-            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '48%'}}/>
+            <Image source={require('../assets/icons/back.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '48%'}}/>
             </TouchableHighlight>
 
             <View style={{alignItems: "center"}}>
@@ -99,7 +99,14 @@ export default class FavouriteModal extends Component {
 
         }
 
+        {
+
+        ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name) ? (
+
             <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
+
+          ) : null
+        }
 
             <Text style={FavouriteModalStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 

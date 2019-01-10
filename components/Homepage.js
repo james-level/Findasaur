@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
 import InfoModal from './InfoModal.js';
+import AboutModal from './AboutModal.js';
 import Favourites from './Favourites.js';
 import ExploreButton from './ExploreButton.js';
 import HeroImageCarousel from './HeroImageCarousel.js';
@@ -21,11 +22,13 @@ export default class Homepage extends React.Component {
       buttonClicked: false,
       fontLoaded: false,
       modalVisible: false,
-      favouritesVisible: false
+      favouritesVisible: false,
+      aboutModalVisible: false
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
     this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
+    this.setAboutModalVisible = this.setAboutModalVisible.bind(this);
   }
 
   async componentDidMount() {
@@ -35,19 +38,23 @@ export default class Homepage extends React.Component {
    });
     this.setState({ fontLoaded: true });
   }
-
     handleButtonClick(){
       this.setState({
       buttonClicked: !this.state.buttonClicked
     })
   }
-    setModalVisible() {
+
+  setModalVisible() {
     this.setState({modalVisible: !this.state.modalVisible});
   }
 
   setFavouritesVisible() {
   this.setState({favouritesVisible: !this.state.favouritesVisible});
-}
+  }
+
+  setAboutModalVisible() {
+  this.setState({aboutModalVisible: !this.state.aboutModalVisible});
+  }
 
   render() {
 
@@ -55,12 +62,6 @@ export default class Homepage extends React.Component {
 
     return (
       <SafeAreaView style={HomepageStyle.container}>
-
-{/* 'HOME PAGE BACKGROUBND IMAGE' SECTION*/}
-    {/*<ImageBackground
-      source={require('../assets/Dino_images/foliage.png')}
-      style={HomepageStyle.backgroundImage}
-    >*/}
 
 {/* 'APP TITLE' SECTION*/}
       <View style={HomepageStyle.content1}>
@@ -77,29 +78,40 @@ export default class Homepage extends React.Component {
       <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
 
 
-    {/* 'ABOUT/INFO' MODAL SECTION*/}
-
+{/* 'INFO' MODAL SECTION*/}
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
 
+{/* 'FAVOURITE' MODAL SECTION*/}
   <Favourites favouritesVisible={this.state.favouritesVisible} setFavouritesVisible={this.setFavouritesVisible} fontLoaded={this.state.fontLoaded} />
 
-    {/*</ImageBackground>*/}
+{/* 'ABOUT' MODAL SECTION*/}
+  <AboutModal aboutModalVisible={this.state.aboutModalVisible} setAboutModalVisible={this.setAboutModalVisible} fontLoaded={this.state.fontLoaded} />
 
-    {/* 'INFO' (OR LAUNCH MODAL) BUTTON */}
+
     <View style={HomepageStyle.iconsContainer}>
 
-          <TouchableHighlight
-            onPress={() => {
-              this.setModalVisible();
-              }}>
-                <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
-          </TouchableHighlight>
-
+          {/* USER FAVOURITE MODAL LAUNCH */}
           <TouchableHighlight
             onPress={() => {
               this.setFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          {/* INFO RE APP MODAL LAUNCH  */}
+          <TouchableHighlight
+            onPress={() => {
+              this.setModalVisible();
+              }}>
+                <Image source={require('../assets/icons/info2.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          {/* ABOUT US MODEL LAUNCH */}
+          <TouchableHighlight
+            onPress={() => {
+              this.setAboutModalVisible();
+              }}>
+                <Image source={require('../assets/icons/aboutus.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
           </TouchableHighlight>
 
         </View>
