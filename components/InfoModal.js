@@ -33,7 +33,7 @@ export default class InfoModal extends Component {
                     <Image source={require('../assets/Dino_images/dino.gif')} style={{height: 150, width: 225}}/>
                   </View>
 
-                <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Explore the world of dinosaurs with Findasaur. Search through images and fossil records from the prehistoric eras, read about thier diets and see how big the they were compared to you. 🦖</Text>
+                <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Explore the world of dinosaurs with Findasaur. Search through images and fossil records from prehistoric eras, read about thier diets and see how big the they were compared to you. 🦖</Text>
 
                 <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>The Tech Stuff: Findasaur utilises three Application Programming Iinbterace's (APIs) - Wikipedia, The Paleobiology Database and Google Maps - to fetch dinosaur data. Dinosaurs are  presented in an address book form with each clickable preview image leads to a modal dino-page with more details. Findasaur also features a predictive search bar and the ability to favourite individual dinosaurs by era. Findasaur sourced additional data for 270 dinosaurs from the Natural History Museum website via Python scraping methods.</Text>
 
