@@ -6,7 +6,6 @@ import EraOverlayStyle from '../Stylesheets/EraOverlayStyle.js';
 const { width, height } = Dimensions.get('window');
 import Autocomplete from 'react-native-autocomplete-input';
 
-
 export default class GlobalSearch extends Component {
 
   constructor(props) {
@@ -15,7 +14,6 @@ export default class GlobalSearch extends Component {
   this.state = {
     dinosaurTyped: ""
   }
-
 }
 
   removeNonAlphanumeric(string){

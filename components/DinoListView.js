@@ -795,7 +795,7 @@ export default class DinoListView extends Component {
                 <Image
                   style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
                   source={{uri: `${this.state.addressBookImage}`}}
-            
+
                   />
 
                 ) : null

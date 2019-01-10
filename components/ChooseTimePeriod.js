@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
-import { Dimensions, Alert, TouchableHighlight, Image, AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal, Platform } from 'react-native';
 import faker from 'faker';
+import { LinearGradient } from 'expo';
 import TimePeriodPage from './TimePeriodPage';
-import {Platform} from 'react-native';
 import NavBarAndroidLight from './NavBarAndroidLight'
 import NavBarIOSLight from './NavBarIOSLight'
 import Pagination from 'react-native-pagination';
+import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
+import AutoHeightImage from 'react-native-auto-height-image';
+import Autocomplete from 'react-native-autocomplete-input';
 import EraOverlay from './EraOverlay.js';
 import GlobalSearch from './GlobalSearch.js';
+import * as ImageFinder from './ImageFinder.js'
+import * as Pronunciations from './Pronunciations.js'
+import * as Meanings from './Meanings.js'
+import * as Types from './Types.js'
+import * as Lengths from './Lengths.js'
 import EraFavourites from './EraFavourites.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
@@ -37,6 +45,7 @@ export default class ChooseTimePeriod extends Component {
       imagesLoaded: false,
       backClicked: false,
       favouritesVisible: false,
+      searchedDinosaurData: null,
       items: [
 
         {
@@ -146,6 +155,7 @@ export default class ChooseTimePeriod extends Component {
     this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
     this.setClickedDinosaur = this.setClickedDinosaur.bind(this);
     this.setImagesLoading = this.setImagesLoading.bind(this);
+    this.closeDinosaurView = this.closeDinosaurView.bind(this);
   }
 
   componentDidMount(){
@@ -153,6 +163,142 @@ export default class ChooseTimePeriod extends Component {
       this.getAllDinosaursForGlobalSearch(0, 247)
 
   }
+
+  closeDinosaurView(){
+    this.setState({
+      dinosaurViewVisible: false
+    });
+  }
+
+  retrieveSearchedDinosaurData(dinosaur){
+    console.log("DIOOEIFHEOIF");
+
+        this.setState({
+          searchedDinosaurData: dinosaur
+        },
+        function(){ this.retrieveDescription(this.state.clickedDinosaur)
+      })
+  }
+
+  retrieveDescription(dinosaur){
+    console.log("DINO", dinosaur);
+    var self = this;
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
+    axios.get(url).then( (response) => {
+
+      console.log("DESC RESP", response.data);
+
+      this.setState({
+        searchedDinosaurDescription: response.data
+      }, function(){
+        this.retrieveInitialImageLink(dinosaur);
+      })
+
+        })
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  returnClickedDinosaur(){
+    return this.state.clickedDinosaur;
+  }
+
+  retrieveInitialImageLink(dinosaur){
+    console.log("DINOSAUR NAME", dinosaur);
+    const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
+
+    axios.get(imageUrl).then( (response) => {
+
+        this.retrieveImageUrl(response.data)
+
+        })
+
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  retrieveImageUrl(imageObject){
+    var object = this.getImageAddress(imageObject);
+    console.log("OBJECT IMAGE", object);
+    const imgUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${object}&prop=imageinfo&iiprop=url&format=json&origin=*`
+
+    axios.get(imgUrl).then( (response) => {
+
+        this.setState({
+          searchedDinosaurImage: this.handleImageUrl(response.data),
+          addressBookImage: this.handleImageUrl(response.data),
+          addressBookImageLoading: true
+        }, function(){
+          this.setState({
+            imagesLoading: false
+          }, function(){
+            this.processImageDimensions()
+          })
+          console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
+        })
+        })
+    .catch(function(error){
+      console.log(error);
+      console.log("Error fetching dinosaur data.");
+      Alert.alert(
+    'Could not load data for dinosaur',
+    "Please check your internet connection and try again later"
+    )
+    })
+  }
+
+  getDescriptionText(object) {
+    const newArray = [];
+      const pageNumber = Object.keys(object.query.pages)[0];
+      if (object.query.pages[`${pageNumber}`].extract){
+      newArray.push(object.query.pages[`${pageNumber}`].extract);
+    }
+    if (newArray.length === 0){
+      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
+    }
+    else {
+      return newArray;
+    }
+  }
+
+  renderDescriptionElements(object){
+
+    return this.getDescriptionText(object);
+  }
+
+  handleImageUrl(object) {
+      if (object.query.pages["-1"].imageinfo === undefined) {
+        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
+         return 'https://www.buttonmuseum.org/sites/default/files/CA-no-dinosaurs-button_busy_beaver_button_museum.png';
+         // objects.pop(object);
+      }
+      else {
+        const url = object.query.pages["-1"].imageinfo[0].url;
+        return url;
+      }
+  }
+
+  getImageAddress(object) {
+    const pageNumber = Object.keys(object.query.pages)[0];
+    if (object.query.pages[`${pageNumber}`].pageimage){
+      return object.query.pages[`${pageNumber}`].pageimage;
+    }
+      else {
+        return [];
+      }
+    }
 
   setFavouritesVisible() {
   this.setState({favouritesVisible: !this.state.favouritesVisible}, function(){
@@ -192,10 +338,79 @@ export default class ChooseTimePeriod extends Component {
   setImagesLoading(){
     this.setState({
       imagesLoading: true
+    }, function(){
+        this.handleSearchBarClick();
     })
   }
 
+  calculateImageDimensions(){
+    var aspectRatio = this.state.width / this.state.height;
+
+    if (this.state.height > Dimensions.get('window').height*0.55){
+
+      var height = Dimensions.get('window').width*0.55;
+      var width = height * aspectRatio;
+
+      if (width > Dimensions.get('window').width){
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+    }
+    }
+
+    else if (this.state.width > Dimensions.get('window').width*0.93){
+
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+
+      if (height > Dimensions.get('window').height*0.55){
+        var height = Dimensions.get('window').height*0.55;
+        var width = height * aspectRatio;
+      }
+    }
+
+    else {
+      var width = Dimensions.get('window').width*0.90;
+      var height = width / aspectRatio;
+
+      if (height > Dimensions.get('window').height*0.55){
+        var height = Dimensions.get('window').height*0.55;
+        var width = height * aspectRatio;
+      }
+    }
+
+    this.setState({
+      addressBookImageHeight: height,
+      addressBookImageWidth: width
+    }
+  )
+  }
+
+  processImageDimensions(){
+    var uri = this.state.addressBookImage;
+
+    try{
+
+    Image.getSize(uri, (width, height) => {this.setState({width, height},
+
+      function(){
+
+        this.calculateImageDimensions();
+
+      }
+    )})
+  }
+    catch (error) {
+      console.log(error);
+      Alert.alert(
+    'Could not load image.',
+    "The image might be of an incompatible format."
+    )
+    }
+  }
+
   handleSearchBarClick(){
+
+        console.log("SFEIFOEI");
 
     var self = this;
 
@@ -219,9 +434,8 @@ export default class ChooseTimePeriod extends Component {
           imagesLoaded: false
 
         }, function(){
-          var earliest_date = self.state.viewableItems[0].item.earliest_date;
-          var latest_date = self.state.viewableItems[0].item.latest_date;
-          // self.getDinosaursForPeriod(earliest_date, latest_date);
+
+          this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
         })
 
       }, 1000);
@@ -234,8 +448,6 @@ export default class ChooseTimePeriod extends Component {
       searchOverlayVisible: !this.state.searchOverlayVisible
     }, function(){
       this.setImagesLoading();
-    }, function(){
-      this.handleSearchBarClick();
     });
   }
 
@@ -340,30 +552,7 @@ export default class ChooseTimePeriod extends Component {
       .then((response) => response.json());
   }
 
-  handleImageUrl(objects) {
-    const newArray = [];
-    objects.forEach((object) => {
-      if (object.query.pages["-1"].imageinfo === undefined) {
-        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
-         newArray.push('https://www.buttonmuseum.org/sites/default/files/CA-no-dinosaurs-button_busy_beaver_button_museum.png');
-         // objects.pop(object);
-      }
-      else {
-        const url = object.query.pages["-1"].imageinfo[0].url;
-        newArray.push(url)
-      }
-    })
-    return newArray;
-  }
 
-  getImageAddress(object) {
-    var array = [];
-    for (i = 0; i < object.length; i++) {
-      var pageNumber = Object.keys(object[i].query.pages);
-      array.push(object[i].query.pages[pageNumber].pageimage);
-    };
-    return array;
-  }
 
   retrieveImagesAndDescriptions(){
 
@@ -555,6 +744,8 @@ export default class ChooseTimePeriod extends Component {
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
 
+    var self = this;
+
     if (this.state.imagesLoaded === false || this.state.backClicked){
 
       const NavBar = Platform.OS === 'ios' ? NavBarIOSLight : NavBarAndroidLight
@@ -663,7 +854,6 @@ export default class ChooseTimePeriod extends Component {
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
-
           { this.state.globalSearchDataLoaded ? (
 
           <TouchableHighlight
@@ -762,6 +952,126 @@ export default class ChooseTimePeriod extends Component {
       ) : null
 
     }
+
+    {
+      self.state.searchedDinosaurData ? (
+
+    <View>
+    <Modal
+      animationType="slide"
+      transparent={false}
+      visible={this.state.dinosaurViewVisible}
+      onRequestClose={() => {
+        Alert.alert('Modal has been closed.');
+      }}>
+      <View>
+
+    <LinearGradient
+    colors={['black', '#1e932d']}
+    style={{ padding: 25, height: Dimensions.get('window').height }}>
+
+      <View style={DinoListViewStyle.infoModal}>
+
+          <ScrollView>
+
+          {
+            self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
+              <View style={{height: Dimensions.get('window').height}}>
+                < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+              </View>
+          ) :
+
+          <View style={{alignItems: "center", marginBottom: 15}}>
+          <TouchableHighlight
+            onPress={() => {
+              this.addDinosaurToFavourites();
+              }}>
+                <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, marginTop: 7, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          {
+
+            self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
+
+          <Image
+            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
+            source={{uri: `${this.state.addressBookImage}`}}
+
+            />
+
+          ) : null
+        }
+
+          {
+            ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
+
+              <View style={DinoListViewStyle.modalHeader}>
+
+              <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
+              <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+              </View>
+          ) :
+
+          <View style={DinoListViewStyle.modalHeader}>
+          <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
+          <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+          </View>
+
+          }
+
+          {
+
+            Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
+
+          <View style={DinoListViewStyle.modalHeader}>
+          <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
+          </View>
+
+        ) : null
+
+        }
+
+        {
+
+          Lengths.getLength(this.returnClickedDinosaur()) ? (
+
+        <View style={DinoListViewStyle.modalHeader}>
+        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type:{Types.getType(this.returnClickedDinosaur())}</Text>
+        </View>
+
+      ) : null
+
+      }
+
+      <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+
+      {
+        self.state.searchedDinosaurDescription ? (
+
+          <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+
+        ) : null
+      }
+
+        </View>
+
+      }
+
+            <TouchableHighlight
+              onPress={() => {
+                this.closeDinosaurView();
+              }}>
+            <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+            </TouchableHighlight>
+            </ScrollView>
+          </View>
+          </LinearGradient>
+        </View>
+      </Modal>
+    </View>
+
+  ) : null
+}
 
         </View>
 
