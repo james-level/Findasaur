@@ -62,12 +62,12 @@ export default class GlobalSearch extends Component {
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.searchOverlayVisible} onClose={this.props.closeSearchOverlay} closeOnTouchOutside
       animationType="fadeInUp" containerStyle={{backgroundColor: 'transparent'}}
-      childrenWrapperStyle={{backgroundColor: '#00003f', borderRadius: 15}}
+      childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15}}
       animationDuration={500}>
       {
         (hideModal, overlayState) => (
           <Fragment>
-          <View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
+          <View style={{position: 'absolute', top: -height*0.44, marginLeft: 15, marginRight: 15 }}>
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
@@ -85,8 +85,8 @@ export default class GlobalSearch extends Component {
           )}
         />
 
-          {this.props.dinosaurs.length > 5 ? (
-            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.42, paddingLeft: 10}}>
+          {this.findDinosaur(query).length > 0 ? (
+            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.7, paddingLeft: 10}}>
             <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
             {this.renderMatches(dinosaurs)}
             </ScrollView>
