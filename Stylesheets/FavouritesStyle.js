@@ -36,7 +36,7 @@ const FavouritesStyle = StyleSheet.create({
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 10,
+    paddingTop: 100,
     paddingBottom: 10,
   },
   favouritesText: {

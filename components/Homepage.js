@@ -95,7 +95,7 @@ export default class Homepage extends React.Component {
             onPress={() => {
               this.setFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
           </TouchableHighlight>
 
           {/* INFO RE APP MODAL LAUNCH  */}
