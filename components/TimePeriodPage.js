@@ -7,7 +7,7 @@ import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import  Bounceable  from 'react-native-bounceable';
+import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-elements';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import { Dimensions, Image, Platform, LayoutAnimation, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
@@ -183,20 +183,25 @@ export default class TimePeriodPage extends Component {
       <View>
       <TouchableHighlight
                 onPress={this.props.handleSearchSubmit}>
+                <Animatable.View animation="pulse" iterationCount="infinite" direction="alternate">
+                  <Button
+                    onPress={this.props.handleSearchSubmit}
+                    textStyle={{fontSize: 25, color: 'black', fontFamily: "PoiretOne-Regular"}}
+                    title="Explore"
+                    titleStyle={{ fontFamily: "PoiretOne-Regular" }}
+                    buttonStyle={{
+                      backgroundColor: "limegreen",
+                      width: 175,
+                      height: 55,
+                      borderRadius: 20
+                    }}
+                    containerStyle={{ marginTop: 20 }}
+                    />
+                </Animatable.View>
 
-                <Button
-                  onPress={this.props.handleSearchSubmit}
-                  textStyle={{fontSize: 25, color: 'black', fontFamily: "PoiretOne-Regular"}}
-                  title="Explore"
-                  titleStyle={{ fontFamily: "PoiretOne-Regular" }}
-                  buttonStyle={{
-                    backgroundColor: "limegreen",
-                    width: 175,
-                    height: 55,
-                    borderRadius: 20
-                  }}
-                  containerStyle={{ marginTop: 20 }}
-                />
+
+
+
               </TouchableHighlight>
       </View>
 
