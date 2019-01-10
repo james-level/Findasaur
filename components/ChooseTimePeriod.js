@@ -9,8 +9,9 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
-import EraOverlay from './EraOverlay.js'
-import EraFavourites from './EraFavourites.js'
+import EraOverlay from './EraOverlay.js';
+import GlobalSearch from './GlobalSearch.js';
+import EraFavourites from './EraFavourites.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
@@ -24,6 +25,7 @@ export default class ChooseTimePeriod extends Component {
     this.state = {
       slicedDinosaurs: null,
       eraModalVisible: false,
+      searchOverlayVisible: false,
       imagesLoading: false,
       images: [],
       dinosaurDescriptions: [],
@@ -138,6 +140,8 @@ export default class ChooseTimePeriod extends Component {
     this.setEraModalVisible = this.setEraModalVisible.bind(this);
     this.closeEraModal = this.closeEraModal.bind(this);
     this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
+    this.setSearchOverlayVisible = this.setSearchOverlayVisible.bind(this);
+    this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
   }
 
   componentDidMount(){
@@ -163,6 +167,18 @@ export default class ChooseTimePeriod extends Component {
   closeEraModal(){
     this.setState({
       eraModalVisible: false
+    })
+  }
+
+  setSearchOverlayVisible(){
+    this.setState({
+      searchOverlayVisible: true
+    })
+  }
+
+  closeSearchOverlay(){
+    this.setState({
+      searchOverlayVisible: false
     })
   }
 
@@ -498,6 +514,14 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
+              this.setSearchOverlayVisible();
+              }}>
+                <Image source={require('../assets/icons/search.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
               this.handleSearchSubmit();
               }}>
                 <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
@@ -536,7 +560,7 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.props.home();
+              this.setSearchOverlayVisible();
               }}>
                 <Image source={require('../assets/icons/search.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
@@ -575,6 +599,14 @@ export default class ChooseTimePeriod extends Component {
       this.props.fontLoaded && this.state.viewableItems ? (
 
       <EraOverlay eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+  }
+
+  {
+      this.props.fontLoaded && this.state.viewableItems ? (
+
+      <GlobalSearch eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
