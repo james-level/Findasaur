@@ -186,16 +186,16 @@ export default class TimePeriodPage extends Component {
                 <Animatable.View animation="pulse" iterationCount="infinite" direction="alternate">
                   <Button
                     onPress={this.props.handleSearchSubmit}
-                    textStyle={{fontSize: 25, color: 'black', fontFamily: "PoiretOne-Regular"}}
-                    title="Explore"
+                    textStyle={{fontSize:22, color: 'black', fontFamily: "PoiretOne-Regular"}}
+                    title="VIEW"
                     titleStyle={{ fontFamily: "PoiretOne-Regular" }}
                     buttonStyle={{
                       backgroundColor: "limegreen",
-                      width: 175,
-                      height: 55,
+                      width: 100,
+                      height: Dimensions.get("window").height * 0.1
                       borderRadius: 20
                     }}
-                    containerStyle={{ marginTop: 20 }}
+                    containerStyle={{ marginTop: 0 }}
                     />
                 </Animatable.View>
 
