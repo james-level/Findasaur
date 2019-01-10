@@ -63,7 +63,7 @@ export default class GlobalSearch extends Component {
       <Overlay visible={this.props.searchOverlayVisible} onClose={this.props.closeSearchOverlay} closeOnTouchOutside
       animationType="fadeInUp" containerStyle={{backgroundColor: 'transparent'}}
       childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15}}
-      animationDuration={500}>
+      animationDuration={1000}>
       {
         (hideModal, overlayState) => (
           <Fragment>
