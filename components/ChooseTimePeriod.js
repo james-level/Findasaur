@@ -145,6 +145,7 @@ export default class ChooseTimePeriod extends Component {
     this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
     this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
     this.setClickedDinosaur = this.setClickedDinosaur.bind(this);
+    this.setImagesLoading = this.setImagesLoading.bind(this);
   }
 
   componentDidMount(){
@@ -188,14 +189,18 @@ export default class ChooseTimePeriod extends Component {
     console.log("Populating dropdown with dinosaurs...");
   }
 
+  setImagesLoading(){
+    this.setState({
+      imagesLoading: true
+    })
+  }
+
   handleSearchBarClick(){
 
     var self = this;
 
     self.setState({
-      imagesLoading: true,
-      searchBarDinosaurClicked: true,
-      searchOverlayVisible: !this.state.searchOverlayVisible
+      searchBarDinosaurClicked: true
 
     }, function(){
 
@@ -227,7 +232,10 @@ export default class ChooseTimePeriod extends Component {
   setClickedDinosaur(dinosaur){
     console.log("DINO clicked", dinosaur);
     this.setState({
-      clickedDinosaur: dinosaur
+      clickedDinosaur: dinosaur,
+      searchOverlayVisible: !this.state.searchOverlayVisible
+    }, function(){
+      this.setImagesLoading();
     }, function(){
       this.handleSearchBarClick();
     });
@@ -238,7 +246,8 @@ export default class ChooseTimePeriod extends Component {
     var self = this;
 
     self.setState({
-      imagesLoading: true
+      imagesLoading: true,
+      clickedDinosaur: null
 
     }, function(){
 
