@@ -6,7 +6,6 @@ import EraOverlayStyle from '../Stylesheets/EraOverlayStyle.js';
 const { width, height } = Dimensions.get('window');
 import Autocomplete from 'react-native-autocomplete-input';
 
-
 export default class GlobalSearch extends Component {
 
   constructor(props) {
@@ -15,7 +14,6 @@ export default class GlobalSearch extends Component {
   this.state = {
     dinosaurTyped: ""
   }
-
 }
 
   removeNonAlphanumeric(string){
@@ -47,7 +45,7 @@ export default class GlobalSearch extends Component {
 
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur, i) =>
-      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ console.log("H"); })} key={i}>
+      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ this.props.setClickedDinosaur(dinosaurs[i]) })} key={i}>
       <Text style={{color: 'white', fontSize: 16, paddingTop: 10, paddingBottom: 10, fontFamily: 'PoiretOne-Regular'}} key={i}>{dinosaur}</Text>
       </TouchableOpacity>
     )
