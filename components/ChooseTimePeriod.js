@@ -171,7 +171,6 @@ export default class ChooseTimePeriod extends Component {
   }
 
   retrieveSearchedDinosaurData(dinosaur){
-    console.log("DIOOEIFHEOIF");
 
         this.setState({
           searchedDinosaurData: dinosaur
