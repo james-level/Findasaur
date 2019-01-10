@@ -24,7 +24,8 @@
       "supportsTablet": true
     },
     "android": {
-     "package": "com.levelapps.findasaur"
+     "package": "com.levelapps.findasaur",
+     "versionCode": 2.0
    }
   }
 }
