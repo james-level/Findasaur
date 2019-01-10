@@ -142,13 +142,12 @@ export default class ChooseTimePeriod extends Component {
     this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
     this.setSearchOverlayVisible = this.setSearchOverlayVisible.bind(this);
     this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
+    this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
   }
 
   componentDidMount(){
 
-    // Alert.alert(
-    //        'Swipe to move between time periods!'
-    //     )
+      this.getAllDinosaursForGlobalSearch(0, 247)
 
   }
 
@@ -377,6 +376,30 @@ export default class ChooseTimePeriod extends Component {
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
       }, function(){ this.retrieveImagesAndDescriptions() })
+      })
+  }
+
+  getAllDinosaursForGlobalSearch(earliest_date, latest_date){
+
+    var self = this;
+    // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
+    const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
+
+    axios.get(url).then((response) => {
+
+      self.setState({
+
+        allDinosaursForGlobalSearch: self.filterByGenusName(self.filterDinosaurData(response.data.records))
+
+      }, function(){
+        var names = []
+        for (dinosaur of this.state.allDinosaursForGlobalSearch){
+          names.push(dinosaur.name)
+        }
+        this.setState({
+          allSearchableDinosaurNames: names
+        })
+      })
       })
   }
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { Modal, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import EraOverlayStyle from '../Stylesheets/EraOverlayStyle.js';
