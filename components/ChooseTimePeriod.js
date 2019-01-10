@@ -133,6 +133,7 @@ export default class ChooseTimePeriod extends Component {
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleSearchBarClick = this.handleSearchBarClick.bind(this);
     this.retrieveImagesAndDescriptions = this.retrieveImagesAndDescriptions.bind(this);
     this.toggleDinosaurListView = this.toggleDinosaurListView.bind(this);
     this.saveDescriptionToState = this.saveDescriptionToState.bind(this);
@@ -143,6 +144,7 @@ export default class ChooseTimePeriod extends Component {
     this.setSearchOverlayVisible = this.setSearchOverlayVisible.bind(this);
     this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
     this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
+    this.setClickedDinosaur = this.setClickedDinosaur.bind(this);
   }
 
   componentDidMount(){
@@ -186,6 +188,51 @@ export default class ChooseTimePeriod extends Component {
     console.log("Populating dropdown with dinosaurs...");
   }
 
+  handleSearchBarClick(){
+
+    var self = this;
+
+    self.setState({
+      imagesLoading: true,
+      searchBarDinosaurClicked: true,
+      searchOverlayVisible: !this.state.searchOverlayVisible
+
+    }, function(){
+
+      setTimeout(function(){
+
+        self.setState({
+
+          backClicked: false,
+          images: [],
+          dinosaurDescriptions: [],
+          dinosaurs: null,
+          diets: null,
+          herbivores: null,
+          carnivores: null,
+          omnivores: null,
+          imagesLoaded: false
+
+        }, function(){
+          var earliest_date = self.state.viewableItems[0].item.earliest_date;
+          var latest_date = self.state.viewableItems[0].item.latest_date;
+          // self.getDinosaursForPeriod(earliest_date, latest_date);
+        })
+
+      }, 2000);
+
+    })
+  }
+
+  setClickedDinosaur(dinosaur){
+    console.log("DINO clicked", dinosaur);
+    this.setState({
+      clickedDinosaur: dinosaur
+    }, function(){
+      this.handleSearchBarClick();
+    });
+  }
+
   handleSearchSubmit(){
 
     var self = this;
@@ -225,6 +272,16 @@ export default class ChooseTimePeriod extends Component {
       imagesLoaded: true
     })
   }
+
+  getLoadingScreenMessage(){
+    if (this.state.clickedDinosaur) {
+      return `${this.state.clickedDinosaur} loading...`
+    }
+
+      else {
+        return `Finding ${this.state.viewableItems[0].item.title} dinosaurs...`
+  }
+}
 
   renderEraFavouritesPage(era){
 
@@ -632,7 +689,7 @@ export default class ChooseTimePeriod extends Component {
           this.state.imagesLoading ? (
 
       <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
-        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>Finding {this.state.viewableItems[0].item.title} dinosaurs...</Text>
+        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.getLoadingScreenMessage()}</Text>
       </View>
 
     ) : null
@@ -650,7 +707,7 @@ export default class ChooseTimePeriod extends Component {
   {
       this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
 
-      <GlobalSearch typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
+      <GlobalSearch handleSearchBarClick={this.handleSearchBarClick} typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible}  setClickedDinosaur={this.setClickedDinosaur} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }

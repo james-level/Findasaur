@@ -47,7 +47,7 @@ export default class GlobalSearch extends Component {
 
   renderMatches(dinosaurs){
     return dinosaurs.map((dinosaur, i) =>
-      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ console.log("H"); })} key={i}>
+      <TouchableOpacity onPress={() => this.setState({clickedDinosaur: dinosaurs[i]}, function(){ this.props.setClickedDinosaur(dinosaurs[i]) })} key={i}>
       <Text style={{color: 'white', fontSize: 16, paddingTop: 10, paddingBottom: 10, fontFamily: 'PoiretOne-Regular'}} key={i}>{dinosaur}</Text>
       </TouchableOpacity>
     )
