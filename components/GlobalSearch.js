@@ -42,7 +42,7 @@ export default class GlobalSearch extends Component {
   }
 
   searchBarPlaceholderText(){
-    return `Search for a dinosaur`;
+    return `Enter dinosaur name`;
   }
 
   renderMatches(dinosaurs){

@@ -177,7 +177,8 @@ export default class ChooseTimePeriod extends Component {
 
   closeSearchOverlay(){
     this.setState({
-      searchOverlayVisible: false
+      searchOverlayVisible: false,
+      typedDinosaur: ""
     })
   }
 
@@ -586,14 +587,6 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setSearchOverlayVisible();
-              }}>
-                <Image source={require('../assets/icons/search.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
               this.setEraModalVisible();
               }}>
                 <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
@@ -604,8 +597,33 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
+
+
+          { this.state.globalSearchDataLoaded ? (
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setSearchOverlayVisible();
+              }}>
+                <Image source={require('../assets/icons/search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+        ) :
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
+          onPress={() => {
+            Alert.alert(
+                   "Still loading dinosaur data... Please wait a moment."
+                )
+            }}>
+              <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
+
+      }
 
           </View>
       }
@@ -632,7 +650,7 @@ export default class ChooseTimePeriod extends Component {
   {
       this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
 
-      <GlobalSearch names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
+      <GlobalSearch typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
