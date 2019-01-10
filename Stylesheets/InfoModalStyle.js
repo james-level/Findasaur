@@ -8,7 +8,7 @@ const InfoModalStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   infoModalHeading:{
-    color: 'limegreen',
+    color: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 50,
@@ -16,7 +16,7 @@ const InfoModalStyle = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   infoModalBody:{
-    color: 'limegreen',
+    color: 'black',
     paddingTop: 50,
     fontSize: 20,
     justifyContent: 'center',
@@ -26,14 +26,14 @@ const InfoModalStyle = StyleSheet.create({
   },
   infoModalText: {
     fontSize: 17,
-    color: 'white',
+    color: 'black',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
   },
   infoModalHeader: {
     fontSize: 22,
-    color: 'white',
+    color: 'black',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,

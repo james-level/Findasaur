@@ -103,7 +103,7 @@ export default class Homepage extends React.Component {
             onPress={() => {
               this.setModalVisible();
               }}>
-                <Image source={require('../assets/icons/info.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
+                <Image source={require('../assets/icons/info2.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
           </TouchableHighlight>
 
           {/* ABOUT US MODEL LAUNCH */}
