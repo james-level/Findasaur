@@ -99,7 +99,14 @@ export default class FavouriteModal extends Component {
 
         }
 
+        {
+
+        ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name) ? (
+
             <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
+
+          ) : null
+        }
 
             <Text style={FavouriteModalStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
 
