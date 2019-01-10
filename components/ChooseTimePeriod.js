@@ -9,8 +9,9 @@ import Pagination from 'react-native-pagination';
 import _ from 'lodash';
 import { MockTweetList } from './FakerMocks';
 import axios from 'axios';
-import EraOverlay from './EraOverlay.js'
-import EraFavourites from './EraFavourites.js'
+import EraOverlay from './EraOverlay.js';
+import GlobalSearch from './GlobalSearch.js';
+import EraFavourites from './EraFavourites.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
@@ -24,6 +25,7 @@ export default class ChooseTimePeriod extends Component {
     this.state = {
       slicedDinosaurs: null,
       eraModalVisible: false,
+      searchOverlayVisible: false,
       imagesLoading: false,
       images: [],
       dinosaurDescriptions: [],
@@ -138,13 +140,14 @@ export default class ChooseTimePeriod extends Component {
     this.setEraModalVisible = this.setEraModalVisible.bind(this);
     this.closeEraModal = this.closeEraModal.bind(this);
     this.setFavouritesVisible = this.setFavouritesVisible.bind(this);
+    this.setSearchOverlayVisible = this.setSearchOverlayVisible.bind(this);
+    this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
+    this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
   }
 
   componentDidMount(){
 
-    // Alert.alert(
-    //        'Swipe to move between time periods!'
-    //     )
+      this.getAllDinosaursForGlobalSearch(0, 247)
 
   }
 
@@ -163,6 +166,19 @@ export default class ChooseTimePeriod extends Component {
   closeEraModal(){
     this.setState({
       eraModalVisible: false
+    })
+  }
+
+  setSearchOverlayVisible(){
+    this.setState({
+      searchOverlayVisible: true
+    })
+  }
+
+  closeSearchOverlay(){
+    this.setState({
+      searchOverlayVisible: false,
+      typedDinosaur: ""
     })
   }
 
@@ -334,7 +350,6 @@ export default class ChooseTimePeriod extends Component {
         console.error(err);
       })
     }
-
     })
   }
 
@@ -361,6 +376,34 @@ export default class ChooseTimePeriod extends Component {
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
       }, function(){ this.retrieveImagesAndDescriptions() })
+      })
+  }
+
+  getAllDinosaursForGlobalSearch(earliest_date, latest_date){
+
+    var self = this;
+    // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
+    const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
+
+    axios.get(url).then((response) => {
+
+      self.setState({
+
+        allDinosaursForGlobalSearch: self.filterByGenusName(self.filterDinosaurData(response.data.records))
+
+      }, function(){
+        var names = []
+        for (dinosaur of this.state.allDinosaursForGlobalSearch){
+          names.push(dinosaur.name)
+        }
+        this.setState({
+          allSearchableDinosaurNames: names
+        }, function(){
+          this.setState({
+          globalSearchDataLoaded: true
+        })
+        })
+      })
       })
   }
 
@@ -498,6 +541,14 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
+              this.setSearchOverlayVisible();
+              }}>
+                <Image source={require('../assets/icons/search.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
               this.handleSearchSubmit();
               }}>
                 <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
@@ -546,8 +597,33 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
+
+
+          { this.state.globalSearchDataLoaded ? (
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setSearchOverlayVisible();
+              }}>
+                <Image source={require('../assets/icons/search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+        ) :
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
+          onPress={() => {
+            Alert.alert(
+                   "Still loading dinosaur data... Please wait a moment."
+                )
+            }}>
+              <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
+
+      }
 
           </View>
       }
@@ -567,6 +643,14 @@ export default class ChooseTimePeriod extends Component {
       this.props.fontLoaded && this.state.viewableItems ? (
 
       <EraOverlay eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeEraModal={this.closeEraModal} eraModalVisible={this.state.eraModalVisible} setEraModalVisible={this.setEraModalVisible} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+  }
+
+  {
+      this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
+
+      <GlobalSearch typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
