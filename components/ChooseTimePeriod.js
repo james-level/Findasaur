@@ -38,6 +38,7 @@ export default class ChooseTimePeriod extends Component {
       images: [],
       dinosaurDescriptions: [],
       dinosaurs: null,
+      dinosaurViewVisible: false,
       diets: null,
       herbivores: null,
       carnivores: null,
@@ -156,6 +157,7 @@ export default class ChooseTimePeriod extends Component {
     this.setClickedDinosaur = this.setClickedDinosaur.bind(this);
     this.setImagesLoading = this.setImagesLoading.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
+    this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
   }
 
   componentDidMount(){
@@ -166,14 +168,25 @@ export default class ChooseTimePeriod extends Component {
 
   closeDinosaurView(){
     this.setState({
-      dinosaurViewVisible: false
+      dinosaurViewVisible: false,
+      imagesLoading: false
     });
+  }
+
+  onDinosaurProfilePictureLoad(){
+    this.setState({
+      imagesLoading: false
+    }, function(){
+      console.log("LOADING", this.state.imagesLoading);
+
+    })
   }
 
   retrieveSearchedDinosaurData(dinosaur){
 
         this.setState({
-          searchedDinosaurData: dinosaur
+          searchedDinosaurData: dinosaur,
+          dinosaurViewVisible: true
         },
         function(){ this.retrieveDescription(this.state.clickedDinosaur)
       })
@@ -240,13 +253,11 @@ export default class ChooseTimePeriod extends Component {
           addressBookImage: this.handleImageUrl(response.data),
           addressBookImageLoading: true
         }, function(){
-          this.setState({
-            imagesLoading: false
-          }, function(){
             this.processImageDimensions()
-          })
+          }
+          )
           console.log("STATE SEARCH IMAGE", this.state.searchedDinosaurImage);
-        })
+
         })
     .catch(function(error){
       console.log(error);
@@ -409,8 +420,6 @@ export default class ChooseTimePeriod extends Component {
 
   handleSearchBarClick(){
 
-        console.log("SFEIFOEI");
-
     var self = this;
 
     self.setState({
@@ -430,7 +439,8 @@ export default class ChooseTimePeriod extends Component {
           herbivores: null,
           carnivores: null,
           omnivores: null,
-          imagesLoaded: false
+          imagesLoaded: false,
+          searchedDinosaurImage: null
 
         }, function(){
 
@@ -550,8 +560,6 @@ export default class ChooseTimePeriod extends Component {
     return fetch(url)
       .then((response) => response.json());
   }
-
-
 
   retrieveImagesAndDescriptions(){
 
@@ -773,8 +781,19 @@ export default class ChooseTimePeriod extends Component {
               </View>
         ) : null
 
-          /* End of icons */
       }
+
+        {
+            this.state.imagesLoading ? (
+
+        <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
+          <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.getLoadingScreenMessage()}</Text>
+        </View>
+
+      ) : null
+    }
+
+          /* End of icons */
 
       {
         Platform.OS != 'ios' ? (
@@ -880,16 +899,6 @@ export default class ChooseTimePeriod extends Component {
           </View>
       }
 
-      {
-          this.state.imagesLoading ? (
-
-      <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
-        <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.getLoadingScreenMessage()}</Text>
-      </View>
-
-    ) : null
-  }
-
 
   {
       this.props.fontLoaded && this.state.viewableItems ? (
@@ -992,13 +1001,27 @@ export default class ChooseTimePeriod extends Component {
 
             self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
 
-          <Image
-            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-            source={{uri: `${this.state.addressBookImage}`}}
+              <Image
+                style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
+                source={{uri: `${this.state.addressBookImage}`}}
+                onLoad={this.onDinosaurProfilePictureLoad}
 
-            />
+                />
+
+          ) :
+
+        null
+        }
+
+        {
+          self.state.imagesLoading ? (
+
+            <View style={{height: Dimensions.get('window').height*0.2}}>
+              <DotIndicator count={5} size={10} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+            </View>
 
           ) : null
+
         }
 
           {
@@ -1042,7 +1065,14 @@ export default class ChooseTimePeriod extends Component {
 
       }
 
+      {
+        ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
+
       <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+
+    ) : null
+
+  }
 
       {
         self.state.searchedDinosaurDescription ? (

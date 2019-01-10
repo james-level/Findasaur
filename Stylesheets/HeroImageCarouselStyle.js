@@ -25,7 +25,7 @@ const HeroImageCarouselStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   customImage: {
-    width: Dimensions.get('window').width*0.81,
+    width: Dimensions.get('window').width,
     height: Dimensions.get('window').width*0.54
   },
 });
