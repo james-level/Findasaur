@@ -43,6 +43,7 @@ export default class DinoListView extends Component {
     this.processImageDimensions = this.processImageDimensions.bind(this);
     this.calculateImageDimensions = this.calculateImageDimensions.bind(this);
     this.retrieveImageUrl = this.retrieveImageUrl.bind(this);
+    this.setDinoProfilePictureAsLoaded = this.setDinoProfilePictureAsLoaded.bind(this);
   }
 
   addDinosaurToFavourites = async() => {
@@ -208,7 +209,8 @@ export default class DinoListView extends Component {
 
         this.setState({
           searchedDinosaurImage: this.handleImageUrl(response.data),
-          addressBookImage: this.handleImageUrl(response.data)
+          addressBookImage: this.handleImageUrl(response.data),
+          addressBookImageLoading: true
         }, function(){
           this.setState({
             searchDataLoading: false
@@ -279,7 +281,8 @@ export default class DinoListView extends Component {
   toggleDinosaurView() {
     this.setState({
       dinosaurViewVisible: !this.state.dinosaurViewVisible,
-      searchDataLoading: true
+      searchDataLoading: true,
+      dinoModalProfilePictureLoading: true
     }, function(){
       this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
     });
@@ -379,6 +382,12 @@ export default class DinoListView extends Component {
       <Text style={{color: 'white', fontSize: 16, paddingTop: 10, paddingBottom: 10, fontFamily: 'PoiretOne-Regular'}} key={i}>{dinosaurAndDiet}</Text>
       </TouchableOpacity>
     )
+  }
+
+  setDinoProfilePictureAsLoaded(){
+    this.setState({
+      dinoModalProfilePictureLoading: false
+    })
   }
 
   getDietTextColor(diet){
@@ -610,7 +619,7 @@ export default class DinoListView extends Component {
          <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
          <Image
            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-           source={{uri: `${this.state.searchedDinosaurImage}`}}
+           source={{uri: `${this.state.addressBookImage}`}}
            onLoad={this.onAddressBookImageLoad}
            />
           </View>
@@ -765,7 +774,7 @@ export default class DinoListView extends Component {
                 <ScrollView>
 
                 {
-                  self.state.searchDataLoading && self.props.fontLoaded & !self.state.searchedDinosaurImage ? (
+                  self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
                     <View style={{height: Dimensions.get('window').height}}>
                       < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
                     </View>
@@ -779,10 +788,18 @@ export default class DinoListView extends Component {
                       <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, marginTop: 7, position: 'relative'}}/>
                 </TouchableHighlight>
 
-                <AutoHeightImage
-                  width={Dimensions.get('window').width*0.8}
-                  source={{uri: `${this.state.searchedDinosaurImage}`}}
+                {
+
+                  self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
+
+                <Image
+                  style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
+                  source={{uri: `${this.state.addressBookImage}`}}
+            
                   />
+
+                ) : null
+              }
 
                 {
                   ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
@@ -825,9 +842,15 @@ export default class DinoListView extends Component {
 
             }
 
-            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+
+            {
+              self.state.searchedDinosaurDescription ? (
 
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+
+              ) : null
+            }
 
               </View>
 
