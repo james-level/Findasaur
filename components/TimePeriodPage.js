@@ -192,7 +192,7 @@ export default class TimePeriodPage extends Component {
                     buttonStyle={{
                       backgroundColor: "limegreen",
                       width: 100,
-                      height: Dimensions.get("window").height * 0.1
+                      height: Dimensions.get("window").height * 0.1,
                       borderRadius: 20
                     }}
                     containerStyle={{ marginTop: 0 }}
