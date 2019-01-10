@@ -349,7 +349,6 @@ export default class ChooseTimePeriod extends Component {
         console.error(err);
       })
     }
-
     })
   }
 
@@ -398,6 +397,10 @@ export default class ChooseTimePeriod extends Component {
         }
         this.setState({
           allSearchableDinosaurNames: names
+        }, function(){
+          this.setState({
+          globalSearchDataLoaded: true
+        })
         })
       })
       })
@@ -627,9 +630,9 @@ export default class ChooseTimePeriod extends Component {
   }
 
   {
-      this.props.fontLoaded && this.state.viewableItems ? (
+      this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
 
-      <GlobalSearch eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
+      <GlobalSearch names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
