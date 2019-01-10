@@ -1016,7 +1016,7 @@ export default class ChooseTimePeriod extends Component {
         {
           self.state.imagesLoading ? (
 
-            <View style={{height: Dimensions.get('window').height*0.2}}>
+            <View style={{height: Dimensions.get('window').height*0.12}}>
               <DotIndicator count={5} size={10} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
             </View>
 
