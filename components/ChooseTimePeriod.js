@@ -831,7 +831,7 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setEraModalVisible();
               }}>
-                <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -861,7 +861,7 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setEraModalVisible();
               }}>
-                <Image source={require('../assets/icons/info.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
           <TouchableHighlight
