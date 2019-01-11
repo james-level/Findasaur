@@ -216,6 +216,7 @@ const androidStyles = {
     ...border,
     marginBottom: 0,
     overflow: 'visible',
+    backgroundColor: 'black'
   },
   list: {
     ...border,

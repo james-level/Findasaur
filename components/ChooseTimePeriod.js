@@ -793,12 +793,10 @@ export default class ChooseTimePeriod extends Component {
       ) : null
     }
 
-          /* End of icons */
-
       {
         Platform.OS != 'ios' ? (
 
-          /* Icons for home, favourites and era information overlay */
+
 
           <View style={ChooseTimePeriodStyle.iconsContainer}>
 
@@ -808,14 +806,6 @@ export default class ChooseTimePeriod extends Component {
               this.props.home();
               }}>
                 <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.setSearchOverlayVisible();
-              }}>
-                <Image source={require('../assets/icons/search.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -839,8 +829,32 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, marginRight: 40, position: 'relative'}}/>
           </TouchableHighlight>
+
+          { this.state.globalSearchDataLoaded ? (
+
+            <TouchableHighlight
+            style={{position: 'relative', top: '0%'}}
+              onPress={() => {
+                this.setSearchOverlayVisible();
+                }}>
+                  <Image source={require('../assets/icons/search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+            </TouchableHighlight>
+
+          ) :
+
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              Alert.alert(
+                     "Still loading dinosaur data... Please wait a moment."
+                  )
+              }}>
+                <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
+        }
 
           </View>
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { TouchableOpacity, Modal, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { TouchableOpacity, Modal, Platform, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import EraOverlayStyle from '../Stylesheets/EraOverlayStyle.js';
@@ -58,10 +58,14 @@ export default class GlobalSearch extends Component {
 
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
+
       <Overlay visible={this.props.searchOverlayVisible} onClose={this.props.closeSearchOverlay} closeOnTouchOutside
-      animationType="fadeInUp" containerStyle={{backgroundColor: 'transparent'}}
+      animationType="fadeInUp"
+      containerStyle={{backgroundColor: 'transparent'}}
       childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15}}
       animationDuration={1000}>
+
+
       {
         (hideModal, overlayState) => (
           <Fragment>
@@ -84,7 +88,7 @@ export default class GlobalSearch extends Component {
         />
 
           {this.findDinosaur(query).length > 0 ? (
-            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.7, paddingLeft: 10}}>
+            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.55, paddingLeft: 10}}>
             <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
             {this.renderMatches(dinosaurs)}
             </ScrollView>
