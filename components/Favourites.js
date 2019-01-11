@@ -126,12 +126,17 @@ export default class Favourites extends Component {
 
         <LinearGradient
         colors={['#1D976C', '#93F9B9']}
-        style={{  height: Dimensions.get('window').height, padding: 25 }}>
+        style={{ height: Dimensions.get('window').height, padding: 25 }}>
 
           <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>
 
+
             <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs: </Text>
+
+            <View style={{alignItems: "center"}}>
+              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 100, width: 200, padding:20 }}/>
+            </View>
 
           {
             this.state.favourites ? (
