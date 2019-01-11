@@ -9,8 +9,8 @@ export default class EraOverlay extends Component {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.eraModalVisible} onClose={this.props.closeEraModal} closeOnTouchOutside
-      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(8, 10, 37, 0.78)'}}
-      childrenWrapperStyle={{backgroundColor: '#00003f', borderRadius: 15}}
+      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.8)'}}
+      childrenWrapperStyle={{backgroundColor: 'black', borderRadius: 15}}
       animationDuration={500}>
       {
         (hideModal, overlayState) => (

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 const FavouritesStyle = StyleSheet.create({
   favouritesModal:{

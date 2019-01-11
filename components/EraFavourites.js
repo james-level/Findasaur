@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Modal, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
+import { Alert, Modal, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 import FavouriteModal from './FavouriteModal.js';
@@ -127,7 +127,7 @@ export default class EraFavourites extends Component {
 
         <LinearGradient
         colors={['black', '#1e932d']}
-        style={{ padding: 25 }}>
+        style={{ height: Dimensions.get('window').height, padding: 25 }}>
 
           <View style={FavouritesStyle.favouritesModal}>
             <ScrollView>

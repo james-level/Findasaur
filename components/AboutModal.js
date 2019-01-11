@@ -28,27 +28,27 @@ export default class AboutModal extends Component {
 
               <ScrollView>
 
-                <Text style= {[AboutModalStyle.aboutModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps by DJS</Text>
+                <Text style= {[AboutModalStyle.aboutModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
 
                 <View style={{alignItems: "center"}}>
                   <Image source={require('../assets/coffee.gif')} style={{height: 150, width: 225, padding:100 }}/>
                 </View>
 
-                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur is another app from 'LevelApps':- <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text>,
+                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur, another app from those talented guys at 'LevelApps' - <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text>,
                 <Text style={{fontSize: 18, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears</Text><Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}></Text> & <Text style={{fontSize: 17, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>Stephen Rooney.</Text>
-                {"\n"}{"\n"}<Text>These three creative developers can usually be found in an Edinburgh cafe, trying to figure out <Text style={{fontSize: 18, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative</Text>.{"\n"}
-                {"\n"}All are potentailly available to hire for your team or project.</Text></Text>
+                {"\n"}{"\n"}<Text>These three creative developers can usually be found lurking in Edinburgh cafes, trying to figure out all things <Text style={{fontSize: 18, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative</Text>.{"\n"}
+                {"\n"}Stephen, James and David are all (potentially) available for hire for your team or project.</Text></Text>
 
                 <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>See more of their work in the <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://play.google.com/store/apps/developer?id=LevelApps+by+DJS')}>Google Play Store</Text></Text>
 
-                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>LevelApp by DJS</Text>
+                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
                 <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
 
                 <TouchableHighlight
                   onPress={() => {
                     this.props.setAboutModalVisible();
                   }}>
-                <Image source={require('../assets/icons/back.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+                <Image source={require('../assets/icons/aboutback.png')} style={{height: 40, width: 40, marginBottom: 5, marginLeft: '45%'}}/>
                 </TouchableHighlight>
 
               </ScrollView>
