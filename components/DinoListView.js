@@ -842,7 +842,7 @@ export default class DinoListView extends Component {
 
             }
 
-            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
             {
               self.state.searchedDinosaurDescription ? (

@@ -666,6 +666,15 @@ export default class ChooseTimePeriod extends Component {
       })
   }
 
+  retrieveDinosaurFromName(name){
+    for (dinosaur of this.state.allDinosaursForGlobalSearch){
+      if (dinosaur.name === name)
+      {
+        return dinosaur
+      }
+    }
+  }
+
  filterDinosaurData(dinosaurs) {
     const newArray = [];
 
@@ -829,6 +838,7 @@ export default class ChooseTimePeriod extends Component {
             onPress={() => {
               this.setFavouritesVisible();
               }}>
+
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, marginRight: 40, position: 'relative'}}/>
           </TouchableHighlight>
 
@@ -1039,21 +1049,30 @@ export default class ChooseTimePeriod extends Component {
         }
 
           {
-            ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
+            this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
 
               <View style={DinoListViewStyle.modalHeader}>
 
               <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-              <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+              <Image source={ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
               </View>
-          ) :
+          ) : null
+
+        }
+
+          {
+
+            this.state.clickedDinosaur && !ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
 
           <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-          <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+          <Image source={ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
           </View>
+        ) : null
 
-          }
+      }
+
+
 
           {
 
@@ -1082,7 +1101,7 @@ export default class ChooseTimePeriod extends Component {
       {
         ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
-      <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={{uri: ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}}/>
+      <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
     ) : null
 
