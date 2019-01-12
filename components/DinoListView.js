@@ -842,7 +842,14 @@ export default class DinoListView extends Component {
 
             }
 
+            {
+              ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
+
             <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+
+          ) : null
+
+        }
 
             {
               self.state.searchedDinosaurDescription ? (
