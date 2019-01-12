@@ -139,7 +139,8 @@ export default class ChooseTimePeriod extends Component {
           latest_date: 247,
           other_title: "Middle Triassic Era"
         },
-      ]
+      ],
+      clickedDinoAlreadyFavourite: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -160,6 +161,7 @@ export default class ChooseTimePeriod extends Component {
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
     this.addDinosaurToFavourites = this.addDinosaurToFavourites.bind(this);
+    this.checkFavouriteStatus = this.checkFavouriteStatus.bind(this);
   }
 
   componentDidMount(){
@@ -184,6 +186,39 @@ export default class ChooseTimePeriod extends Component {
     })
   }
 
+  checkFavouriteStatus(clickedDinosaur) {
+    try {
+      AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
+        const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
+
+        if (dinos.length > 0){
+          var names = dinos.map((dino) => dino.name);
+
+          if (names.includes(clickedDinosaur)){
+            this.setState({clickedDinoAlreadyFavourite: true}, function(){
+              this.setImagesLoading()
+            });
+          }
+          else {
+            this.setState({clickedDinoAlreadyFavourite: false},
+            function(){
+              this.setImagesLoading();
+            });
+          }
+        }
+        else {
+          this.setState({clickedDinoAlreadyFavourite: false}, function(){
+            this.setImagesLoading();
+          });
+        }
+      }
+    )
+    }
+      catch (error) {
+        console.log(error);
+    }
+    }
+
   addDinosaurToFavourites = async() => {
     var name = this.returnClickedDinosaur()
     var pronunciation = Pronunciations.getPronunciation(name)
@@ -199,10 +234,7 @@ export default class ChooseTimePeriod extends Component {
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
-        console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
         const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
-        console.log("DINOS BEFORE", dinos);
-
         if (dinos.length > 0){
           var names = dinos.map((dino) => dino.name);
           if (!names.includes(dinosaur.name)){
@@ -508,7 +540,7 @@ export default class ChooseTimePeriod extends Component {
       clickedDinosaur: dinosaur,
       searchOverlayVisible: !this.state.searchOverlayVisible
     }, function(){
-      this.setImagesLoading();
+      this.checkFavouriteStatus(this.state.clickedDinosaur);
     });
   }
 
@@ -1067,7 +1099,7 @@ export default class ChooseTimePeriod extends Component {
 
           <View style={{alignItems: "center", marginBottom: 15}}>
 
-          {this.state.newFavouriteAdded ? (
+          {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
 
           <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
           <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
