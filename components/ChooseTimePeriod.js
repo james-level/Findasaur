@@ -21,6 +21,7 @@ import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import EraFavourites from './EraFavourites.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
+import { AsyncStorage } from "react-native"
 import DinoListView from './DinoListView.js';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
@@ -158,6 +159,7 @@ export default class ChooseTimePeriod extends Component {
     this.setImagesLoading = this.setImagesLoading.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
+    this.addDinosaurToFavourites = this.addDinosaurToFavourites.bind(this);
   }
 
   componentDidMount(){
@@ -181,6 +183,56 @@ export default class ChooseTimePeriod extends Component {
 
     })
   }
+
+  addDinosaurToFavourites = async() => {
+    var name = this.returnClickedDinosaur()
+    var pronunciation = Pronunciations.getPronunciation(name)
+    var description = this.renderDescriptionElements(this.state.searchedDinosaurDescription)
+    var meaning = Meanings.getNameMeaning(name)
+    var length = Lengths.getLength(name)
+    var type = Types.getType(name)
+    var diet = this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet
+    var image = this.state.addressBookImage
+    var era = this.state.viewableItems[0].item.title
+
+    var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+
+    try {
+      AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
+        console.log("DINOSAURS ARRAY?", JSON.parse(dinosaurs));
+        const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
+        console.log("DINOS BEFORE", dinos);
+
+        if (dinos.length > 0){
+          var names = dinos.map((dino) => dino.name);
+          if (!names.includes(dinosaur.name)){
+          dinos.push(dinosaur);
+          AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
+          this.setState({newFavouriteAdded: true}, function(){
+            Alert.alert(
+                   `Successfully added ${dinosaur.name} to your favourites!`
+                )
+          })
+        }
+        else {
+          Alert.alert(
+                 `${dinosaur.name} is already in your favourites!`
+              )
+        }
+      }
+        else {
+          dinos.push(dinosaur);
+          AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
+          Alert.alert(
+                 `Successfully added ${dinosaur.name} to your favourites!`
+              )
+        }
+        console.log("DINOS AFTER", dinos);
+  })}
+    catch (error) {
+      console.log(error);
+    }
+}
 
   retrieveSearchedDinosaurData(dinosaur){
 
@@ -1014,12 +1066,30 @@ export default class ChooseTimePeriod extends Component {
           ) :
 
           <View style={{alignItems: "center", marginBottom: 15}}>
+
+          {this.state.newFavouriteAdded ? (
+
+          <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+          <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
           <TouchableHighlight
             onPress={() => {
               this.addDinosaurToFavourites();
               }}>
-                <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, marginTop: 7, position: 'relative'}}/>
+                <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
           </TouchableHighlight>
+          </View>
+
+        ) :
+        <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+        <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Add to Favourites</Text>
+        <TouchableHighlight
+          onPress={() => {
+            this.addDinosaurToFavourites();
+            }}>
+              <Image source={require('../assets/icons/grey_star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
+        </TouchableHighlight>
+        </View>
+      }
 
           {
 
