@@ -259,7 +259,7 @@ export default class ChooseTimePeriod extends Component {
 
               })
 
-            }, 3000)})
+            }, 4000)})
             // Alert.alert(
             //        `Successfully added ${dinosaur.name} to your favourites!`
             //     )
