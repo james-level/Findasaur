@@ -177,7 +177,8 @@ export default class ChooseTimePeriod extends Component {
   closeDinosaurView(){
     this.setState({
       dinosaurViewVisible: false,
-      imagesLoading: false
+      imagesLoading: false,
+      newFavouriteAdded: false
     });
   }
 
@@ -258,7 +259,7 @@ export default class ChooseTimePeriod extends Component {
 
               })
 
-            }, 2500)})
+            }, 3000)})
             // Alert.alert(
             //        `Successfully added ${dinosaur.name} to your favourites!`
             //     )
