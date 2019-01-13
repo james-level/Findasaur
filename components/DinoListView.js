@@ -34,7 +34,8 @@ export default class DinoListView extends Component {
       activeId: null,
       activeItem: null,
       items: null,
-      searchDataLoading: false
+      searchDataLoading: false,
+      newFavouriteAdded: false
     };
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
@@ -45,6 +46,32 @@ export default class DinoListView extends Component {
     this.retrieveImageUrl = this.retrieveImageUrl.bind(this);
     this.setDinoProfilePictureAsLoaded = this.setDinoProfilePictureAsLoaded.bind(this);
   }
+
+  checkFavouriteStatus(clickedDinosaur) {
+    try {
+      AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
+        const dinos = dinosaurs ? JSON.parse(dinosaurs) : [];
+
+        if (dinos.length > 0){
+          var names = dinos.map((dino) => dino.name);
+
+          if (names.includes(clickedDinosaur)){
+            this.setState({clickedDinoAlreadyFavourite: true});
+          }
+          else {
+            this.setState({clickedDinoAlreadyFavourite: false});
+          }
+        }
+        else {
+          this.setState({clickedDinoAlreadyFavourite: false});
+        }
+      }
+    )
+    }
+      catch (error) {
+        console.log(error);
+    }
+    }
 
   addDinosaurToFavourites = async() => {
     var name = this.returnClickedDinosaur()
@@ -70,9 +97,11 @@ export default class DinoListView extends Component {
           if (!names.includes(dinosaur.name)){
           dinos.push(dinosaur);
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
-          Alert.alert(
-                 `Successfully added ${dinosaur.name} to your favourites!`
-              )
+          this.setState({newFavouriteAdded: true}, function(){
+            Alert.alert(
+                   `Successfully added ${dinosaur.name} to your favourites!`
+                )
+          })
         }
         else {
           Alert.alert(
@@ -103,6 +132,7 @@ export default class DinoListView extends Component {
   }
 
   retrieveInitialImageLink(dinosaur){
+    this.checkFavouriteStatus(this.state.clickedDinosaur)
     console.log("DINOSAUR NAME", dinosaur);
     const imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur}&format=json&prop=pageimages&origin=*`
 
@@ -781,12 +811,30 @@ export default class DinoListView extends Component {
                 ) :
 
                 <View style={{alignItems: "center", marginBottom: 15}}>
+                
+                {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
+
+                <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+                <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
                 <TouchableHighlight
                   onPress={() => {
                     this.addDinosaurToFavourites();
                     }}>
-                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginBottom: 10, marginTop: 7, position: 'relative'}}/>
+                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
                 </TouchableHighlight>
+                </View>
+
+              ) :
+              <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+              <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Add to Favourites</Text>
+              <TouchableHighlight
+                onPress={() => {
+                  this.addDinosaurToFavourites();
+                  }}>
+                    <Image source={require('../assets/icons/grey_star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
+              </TouchableHighlight>
+              </View>
+            }
 
                 {
 
