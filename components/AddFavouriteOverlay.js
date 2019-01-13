@@ -17,8 +17,8 @@ export default class AddFavouriteOverlay extends Component {
         (hideModal, overlayState) => (
           <Fragment>
           <AutoHeightImage width={Dimensions.get('window').width*0.7} style={{borderRadius: 20}} source={require('../assets/dancingstar.gif')}/>
-          <View style={{backgroundColor: 'indigo', borderRadius: 20}}>
-          <Text style={FavouriteAnimationOverlayStyle.favouriteOverlayDescription}>New Findasaur favourite added! Looks like you're coming up on a full set!</Text>
+          <View style={{backgroundColor: 'black', borderRadius: 5, marginTop: 5}}>
+          <Text style={FavouriteAnimationOverlayStyle.favouriteOverlayDescription}>New Findasaur favourite added - looks like you're coming up on a full set!</Text>
           </View>
           </Fragment>
         )

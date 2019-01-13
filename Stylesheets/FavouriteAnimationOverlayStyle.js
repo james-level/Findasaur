@@ -8,7 +8,7 @@ const FavouriteAnimationOverlayStyle = StyleSheet.create({
     fontFamily: 'PoiretOne-Regular',
   },
   favouriteOverlayDescription: {
-    color: 'white',
+    color: 'limegreen',
     padding: 5,
     fontSize: 20,
     fontFamily: 'PoiretOne-Regular'
