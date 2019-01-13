@@ -321,7 +321,8 @@ export default class DinoListView extends Component {
   closeDinosaurView(){
     this.setState({
       dinosaurViewVisible: false,
-      dinosaurTyped: ""
+      dinosaurTyped: "",
+      newFavouriteAdded: false
     });
   }
 
@@ -811,7 +812,7 @@ export default class DinoListView extends Component {
                 ) :
 
                 <View style={{alignItems: "center", marginBottom: 15}}>
-                
+
                 {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
 
                 <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
