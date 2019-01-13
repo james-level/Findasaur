@@ -13,6 +13,7 @@ import axios from 'axios';
 import AutoHeightImage from 'react-native-auto-height-image';
 import Autocomplete from 'react-native-autocomplete-input';
 import EraOverlay from './EraOverlay.js';
+import AddFavouriteOverlay from './AddFavouriteOverlay.js';
 import GlobalSearch from './GlobalSearch.js';
 import * as ImageFinder from './ImageFinder.js'
 import * as Pronunciations from './Pronunciations.js'
@@ -34,6 +35,7 @@ export default class ChooseTimePeriod extends Component {
     this.state = {
       slicedDinosaurs: null,
       eraModalVisible: false,
+      animatedFavouriteOverlayVisible: false,
       searchOverlayVisible: false,
       imagesLoading: false,
       images: [],
@@ -162,6 +164,8 @@ export default class ChooseTimePeriod extends Component {
     this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
     this.addDinosaurToFavourites = this.addDinosaurToFavourites.bind(this);
     this.checkFavouriteStatus = this.checkFavouriteStatus.bind(this);
+    this.setFavouriteAnimationOverlayVisible = this.setFavouriteAnimationOverlayVisible.bind(this);
+    this.closeFavouriteAnimationOverlay = this.closeFavouriteAnimationOverlay.bind(this);
   }
 
   componentDidMount(){
@@ -230,6 +234,8 @@ export default class ChooseTimePeriod extends Component {
     var image = this.state.addressBookImage
     var era = this.state.viewableItems[0].item.title
 
+    var self = this;
+
     var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
@@ -241,10 +247,23 @@ export default class ChooseTimePeriod extends Component {
           dinos.push(dinosaur);
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           this.setState({newFavouriteAdded: true}, function(){
-            Alert.alert(
-                   `Successfully added ${dinosaur.name} to your favourites!`
-                )
-          })
+            this.setState({
+              animatedFavouriteOverlayVisible: true
+            }, function(){
+            setTimeout(function(){
+
+              self.setState({
+
+                animatedFavouriteOverlayVisible: false
+
+              })
+
+            }, 2500)})
+            // Alert.alert(
+            //        `Successfully added ${dinosaur.name} to your favourites!`
+            //     )
+          }
+        )
         }
         else {
           Alert.alert(
@@ -409,6 +428,18 @@ export default class ChooseTimePeriod extends Component {
   closeEraModal(){
     this.setState({
       eraModalVisible: false
+    })
+  }
+
+  setFavouriteAnimationOverlayVisible(){
+    this.setState({
+      animatedFavouriteOverlayVisible: true
+    })
+  }
+
+  closeFavouriteAnimationOverlay(){
+    this.setState({
+      animatedFavouriteOverlayVisible: false
     })
   }
 
@@ -1137,6 +1168,14 @@ export default class ChooseTimePeriod extends Component {
           ) :
 
         null
+        }
+
+        {
+            this.props.fontLoaded && this.state.viewableItems ? (
+
+            <AddFavouriteOverlay closeFavouriteOverlay={this.closeFavouriteAnimationOverlay} favouriteOverlayVisible={this.state.animatedFavouriteOverlayVisible} setFavouriteOverlayVisible={this.setFavouriteAnimationOverlayVisible} fontLoaded={this.props.fontLoaded} />
+
+          ) : null
         }
 
         {
