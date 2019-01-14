@@ -921,7 +921,7 @@ export default class DinoListView extends Component {
 
         {this.returnClickedDinosaur() != null ? (
 
-          <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
+          <FossilMap mappedDinosaur={this.state.searchedDinosaurData} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
 
         ) : null
 

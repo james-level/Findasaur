@@ -1270,7 +1270,7 @@ export default class ChooseTimePeriod extends Component {
 
     {this.returnClickedDinosaur() != null ? (
 
-      <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
+      <FossilMap mappedDinosaur={this.retrieveDinosaurFromName(this.state.clickedDinosaur)} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
 
     ) : null
 
