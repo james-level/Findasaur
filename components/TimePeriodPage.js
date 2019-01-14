@@ -166,30 +166,29 @@ export default class TimePeriodPage extends Component {
 
       this.state.fontLoaded ? (
     <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}
-    <TouchableHighlight
-    style={{position: 'relative', top: '0%' }}
-      onPress={() => {
-        this.props.setEraModalVisible();
-        }}>
-        <Image
-        source={require('../assets/icons/infowhite.png')}
-        style={{height: 25, width: 25, position: 'relative', marginLeft: 10}}/>
-    </TouchableHighlight>
+
+      <TouchableHighlight
+        style={{position: 'relative', top: '0%' }}
+        onPress={() => {
+          this.props.setEraModalVisible();
+          }}>
+          <Image
+          source={require('../assets/icons/infowhite.png')}
+          style={{height: 25, width: 25, position: 'relative', marginLeft: 10}}/>
+      </TouchableHighlight>
 
     </Text>
-  ) : null
-  }
-
-
-  {
-    this.state.fontLoaded ? (
-  <Text style={[TimePeriodStyle.eraDescriptionText, {display: 'none', fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
-  ) : null
-}
-      </View>
+        ) : null
+      }
 
       {
+      this.state.fontLoaded ? (
 
+        <Text style={[TimePeriodStyle.eraDescriptionText, {display: 'none', fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
+      ) : null
+      }
+      </View>
+      {
       Platform.OS === 'ios' ? (
 
       <View>
