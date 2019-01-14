@@ -24,9 +24,11 @@ import EraFavourites from './EraFavourites.js';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import { AsyncStorage } from "react-native"
 import DinoListView from './DinoListView.js';
+import MapView from 'react-native-maps';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
+import FossilMap from './FossilMap.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -142,7 +144,8 @@ export default class ChooseTimePeriod extends Component {
           other_title: "Middle Triassic Era"
         },
       ],
-      clickedDinoAlreadyFavourite: false
+      clickedDinoAlreadyFavourite: false,
+      fossilMapVisible: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -166,6 +169,8 @@ export default class ChooseTimePeriod extends Component {
     this.checkFavouriteStatus = this.checkFavouriteStatus.bind(this);
     this.setFavouriteAnimationOverlayVisible = this.setFavouriteAnimationOverlayVisible.bind(this);
     this.closeFavouriteAnimationOverlay = this.closeFavouriteAnimationOverlay.bind(this);
+    this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
+    this.closeFossilMap = this.closeFossilMap.bind(this);
   }
 
   componentDidMount(){
@@ -259,7 +264,7 @@ export default class ChooseTimePeriod extends Component {
 
               })
 
-            }, 4000)})
+            }, 6000)})
             // Alert.alert(
             //        `Successfully added ${dinosaur.name} to your favourites!`
             //     )
@@ -429,6 +434,18 @@ export default class ChooseTimePeriod extends Component {
   closeEraModal(){
     this.setState({
       eraModalVisible: false
+    })
+  }
+
+  setFossilMapVisible(){
+    this.setState({
+      fossilMapVisible: true
+    })
+  }
+
+  closeFossilMap(){
+    this.setState({
+      fossilMapVisible: false
     })
   }
 
@@ -978,7 +995,7 @@ export default class ChooseTimePeriod extends Component {
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
               Alert.alert(
-                     "Still loading dinosaur data... Please wait a moment."
+                     "Loading dinosaur data... Please wait a moment"
                   )
               }}>
                 <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
@@ -1032,7 +1049,7 @@ export default class ChooseTimePeriod extends Component {
         style={{position: 'relative', top: '0%'}}
           onPress={() => {
             Alert.alert(
-                   "Still loading dinosaur data... Please wait a moment."
+                   "Loading dinosaur data... Please wait a moment"
                 )
             }}>
               <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
@@ -1127,7 +1144,7 @@ export default class ChooseTimePeriod extends Component {
           <ScrollView>
 
           {
-            self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
+            this.state.searchDataLoading || !this.state.searchedDinosaurImage ? (
               <View style={{height: Dimensions.get('window').height}}>
                 < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
               </View>
@@ -1208,7 +1225,7 @@ export default class ChooseTimePeriod extends Component {
 
           {
 
-            this.state.clickedDinosaur && !ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
+            this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/omnivore.png") ? (
 
           <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
@@ -1218,7 +1235,9 @@ export default class ChooseTimePeriod extends Component {
 
       }
 
-
+          <View style={DinoListViewStyle.modalHeader}>
+          <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
+          </View>
 
           {
 
@@ -1248,6 +1267,14 @@ export default class ChooseTimePeriod extends Component {
         ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
       <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+
+    ) : null
+
+  }
+
+    {this.returnClickedDinosaur() != null ? (
+
+      <FossilMap mappedDinosaur={this.retrieveDinosaurFromName(this.state.clickedDinosaur)} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
 
     ) : null
 
