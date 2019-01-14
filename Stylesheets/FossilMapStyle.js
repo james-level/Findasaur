@@ -9,7 +9,7 @@ const FossilMapStyle = StyleSheet.create({
     width: Dimensions.get('window').width*0.8
   },
   fossilMapDescription: {
-    color: 'black',
+    color: 'white',
     padding: 5,
     fontSize: 20,
     fontFamily: 'PoiretOne-Regular'

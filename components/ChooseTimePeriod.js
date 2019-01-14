@@ -1140,7 +1140,7 @@ export default class ChooseTimePeriod extends Component {
           <ScrollView>
 
           {
-            self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
+            this.state.searchDataLoading || !this.state.searchedDinosaurImage ? (
               <View style={{height: Dimensions.get('window').height}}>
                 < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
               </View>
@@ -1268,9 +1268,9 @@ export default class ChooseTimePeriod extends Component {
 
   }
 
-    {this.returnClickedDinosaur() ? (
+    {this.returnClickedDinosaur() != null ? (
 
-      <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.returnClickedDinosaur()} />
+      <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
 
     ) : null
 

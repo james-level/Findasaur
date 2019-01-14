@@ -6,6 +6,11 @@ import FossilMapStyle from '../Stylesheets/FossilMapStyle.js';
 import MapView from 'react-native-maps';
 
 export default class FossilMap extends Component {
+
+  returnDinosaur(){
+    return "Fossil finds for " + this.props.dinosaur
+  }
+
   render() {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
@@ -16,8 +21,8 @@ export default class FossilMap extends Component {
       {
         (hideModal, overlayState) => (
           <Fragment>
-          <View style={{backgroundColor: 'white', borderRadius: 5, marginTop: 5, borderWidth: 2, borderColor: 'black'}}>
-          <Text style={FossilMapStyle.fossilMapDescription}>Fossil finds for {this.props.dinosaur}</Text>
+          <View style={{backgroundColor: 'green', borderRadius: 5, marginTop: 5, marginBottom: 10, borderWidth: 2, borderColor: 'green'}}>
+          <Text style={FossilMapStyle.fossilMapDescription}>{this.returnDinosaur()}</Text>
           </View>
               <MapView style={FossilMapStyle.map}
               scrollEnabled={true}
