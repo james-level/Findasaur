@@ -63,7 +63,7 @@ export default class TimePeriodPage extends Component {
     case 3: return require("../assets/era_images/midJrsc.png");
     case 2: return require("../assets/era_images/lateJrsc.png");
     case 1: return require("../assets/era_images/lateCrtcs.png");
-    case 0: return require("../assets/era_images/earlyCrtcs.png");
+    case 0: return require("../assets/era_images/earlyCrtcs3.png");
   }
   }
 
