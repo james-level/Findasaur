@@ -1078,18 +1078,18 @@ export default class ChooseTimePeriod extends Component {
           hideEmptyDots
           pagingEnabled
           startDotIconFamily="Ionicons"
-          startDotIconName="ios-arrow-back"
+          startDotIconName="md-arrow-round-back"
           startDotIconColor="#66CD00"
           startDotIconSize={30}
           endDotIconSize={30}
           endDotIconFamily="Ionicons"
-          endDotIconName="ios-arrow-forward"
+          endDotIconName="md-arrow-round-forward"
           endDotIconColor="#66CD00"
           dotIconName="ios-close"
             hideEmptyDots
           dotEmptyHide
-          dotIconColorActive="#66CD00"
-          dotIconColorNotActive="#66CD00"
+          dotIconColorActive="limegreen"
+          dotIconColorNotActive="limegreen"
           // DotIconColorEmpty={"blue"}
           dotIconSizeActive={15}
           /*

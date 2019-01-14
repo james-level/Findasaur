@@ -395,7 +395,7 @@ export default class DinoListView extends Component {
       newArray.push(object.query.pages[`${pageNumber}`].extract);
     }
     if (newArray.length === 0){
-      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
+      return "Sorry, for some dinosaurs (such as this one) records are partial, incomplete or non-existent. Therefore Findasaur can't provide a description, needless to say it was probably not the kind of thing you would want to meet in a dark alley on a dark night..."
     }
     else {
       return newArray;
@@ -535,16 +535,16 @@ export default class DinoListView extends Component {
                   justifyContent: 'flex-start',
                   color: 'limegreen',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 30 }
+                  fontSize: 20 }
                 : { flex: 1,
                   flexDirection: 'row',
                   justifyContent: 'flex-start',
                   color: 'white',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 30 }
+                  fontSize: 20 }
             ]}
           >
-                  <AutoHeightImage width={Dimensions.get('window').width*0.10} source={require('../assets/icons/footprint.png')}/>
+                  <AutoHeightImage width={Dimensions.get('window').width*0.075} source={require('../assets/icons/footprint.png')}/>
             {o.item.name ? o.item.name : 'Unknown'}
           </Text>
         </TouchableOpacity>
@@ -610,22 +610,29 @@ export default class DinoListView extends Component {
             {!this.state.activeItem && (
               <View
                 style={{
-                  flex: 1,
-                  flexDirection: 'row',
                   alignItems: 'center',
+                  flex: 1,
+                  flexDirection: 'column',
+                  marginTop: 50,
+                  marginLeft: 20,
+                  marginRight: 20,
+                  marginBottom: 0,
                 }}
               >
               <Text
                 style={{
                   color: 'white',
-                  textAlign: 'center',
                   fontWeight: '400',
-                  fontSize: 21,
+                  fontSize: 25,
                   fontFamily: 'PoiretOne-Regular',
-                  margin: 20
+                  textAlign: 'center',
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs & tap for more info.
+                <Image
+                style={{width: 20, height: 20 }}
+                source={require('../assets/icons/scroll.png')}
+                />
+               Scroll through the {this.props.eraName} dinosaurs; tap on a name for more information.
               </Text>
             </View>
           )}
@@ -948,6 +955,10 @@ const s = StyleSheet.create({
     paddingBottom:0,
     marginTop: 0,
     marginBottom: 0,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
   innerContainer: {
     flex: 0.2,
