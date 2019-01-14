@@ -54,21 +54,8 @@ const FavouriteModalStyle = StyleSheet.create({
 
   activeItem: {
     backgroundColor: 'white',
-    // rgba(255,255,255,1)
   },
 
-  name2: {
-    position: 'absolute',
-    bottom: -14,
-    left: 0,
-    right: 0,
-    backgroundColor: 'black',
-    fontSize: 12,
-    width: 150,
-    textAlign: 'center',
-    fontWeight: '600',
-    marginBottom: 20
-  }
 });
 
 export default FavouriteModalStyle;

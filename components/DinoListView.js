@@ -530,8 +530,18 @@ export default class DinoListView extends Component {
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? { color: 'limegreen', fontFamily: 'PoiretOne-Regular', fontSize: 30 }
-                : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 30 }
+                ? { flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  color: 'limegreen',
+                  fontFamily: 'PoiretOne-Regular',
+                  fontSize: 30 }
+                : { flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  color: 'white',
+                  fontFamily: 'PoiretOne-Regular',
+                  fontSize: 30 }
             ]}
           >
                   <AutoHeightImage width={Dimensions.get('window').width*0.10} source={require('../assets/icons/footprint.png')}/>
@@ -600,23 +610,22 @@ export default class DinoListView extends Component {
             {!this.state.activeItem && (
               <View
                 style={{
-                  justifyContent: 'center',
+                  flex: 1,
+                  flexDirection: 'row',
                   alignItems: 'center',
-                  flex: 1
                 }}
               >
               <Text
                 style={{
-                  textAlignVertical: 'center',
                   color: 'white',
                   textAlign: 'center',
                   fontWeight: '400',
                   fontSize: 21,
                   fontFamily: 'PoiretOne-Regular',
-                  margin: 30
+                  margin: 20
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar. Tap the footprint icons for a preview and click the main image for info.
+                Scroll through {this.props.eraName} dinosaurs & tap for more info.
               </Text>
             </View>
           )}
@@ -932,26 +941,25 @@ export default class DinoListView extends Component {
 }
 const s = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     flex: 1,
-    height,
-    width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    paddingTop: 0,
+    paddingBottom:0,
+    marginTop: 0,
+    marginBottom: 0,
   },
   innerContainer: {
-    flex: 1.17,
+    flex: 0.2,
+    height: 20,
+    paddingTop: 5,
+    paddingBottom:5,
+    marginTop: 5,
+    marginBottom: 5,
     position: 'relative',
-    top: height*0.15,
-    height,
-    width,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
     // This is the grey background on top 1/2 of the screen
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20
   },
 });

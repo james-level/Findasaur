@@ -63,20 +63,14 @@ const DinoListViewStyle = StyleSheet.create({
   },
   activeItem: {
     backgroundColor: 'black',
-    // rgba(255,255,255,1)
   },
 
   name2: {
-    position: 'relative',
     bottom: -14,
-    left: 0,
-    right: 0,
-    backgroundColor: 'pink',
-    fontSize: 12,
-    width: 150,
-    textAlign: 'left',
-    fontWeight: '600',
-    marginBottom: 20
+    marginBottom: 20,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
 
 });
