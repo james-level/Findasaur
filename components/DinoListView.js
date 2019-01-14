@@ -694,7 +694,7 @@ export default class DinoListView extends Component {
           style={{marginBottom: -(height*0.08)}}
             ListEmptyComponent={ListEmptyComponent}
             //  initialNumToRender={5}
-            horizontal
+            vertical
             ref={r => (this.refs = r)}
             getItemLayout={(data, index) => ({
               length: ITEM_HEIGHT,
@@ -717,7 +717,7 @@ export default class DinoListView extends Component {
         {
           this.state.items ? (
           <Pagination
-            horizontal
+            vertical
             debugMode={true}
             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list
             endDotIconFamily={'MaterialIcons'}
