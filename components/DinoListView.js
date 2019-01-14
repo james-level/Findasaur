@@ -20,6 +20,7 @@ import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import { AsyncStorage } from "react-native"
+import FossilMap from './FossilMap.js';
 
 export default class DinoListView extends Component {
   _isMounted = false;
@@ -35,7 +36,8 @@ export default class DinoListView extends Component {
       activeItem: null,
       items: null,
       searchDataLoading: false,
-      newFavouriteAdded: false
+      newFavouriteAdded: false,
+      fossilMapVisible: false
     };
     this.toggleDinosaurView = this.toggleDinosaurView.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
@@ -45,6 +47,20 @@ export default class DinoListView extends Component {
     this.calculateImageDimensions = this.calculateImageDimensions.bind(this);
     this.retrieveImageUrl = this.retrieveImageUrl.bind(this);
     this.setDinoProfilePictureAsLoaded = this.setDinoProfilePictureAsLoaded.bind(this);
+    this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
+    this.closeFossilMap = this.closeFossilMap.bind(this);
+  }
+
+  setFossilMapVisible(){
+    this.setState({
+      fossilMapVisible: true
+    })
+  }
+
+  closeFossilMap(){
+    this.setState({
+      fossilMapVisible: false
+    })
   }
 
   checkFavouriteStatus(clickedDinosaur) {
@@ -867,6 +883,10 @@ export default class DinoListView extends Component {
 
                 }
 
+                <View style={DinoListViewStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
+                </View>
+
                 {
 
                   Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
@@ -899,6 +919,14 @@ export default class DinoListView extends Component {
           ) : null
 
         }
+
+        {this.returnClickedDinosaur() != null ? (
+
+          <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
+
+        ) : null
+
+      }
 
             {
               self.state.searchedDinosaurDescription ? (
