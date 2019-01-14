@@ -500,7 +500,7 @@ export default class DinoListView extends Component {
       addressBookImageLoading: true
     }, function(){
           /* IMAGE LOADING METHOD TO RETRIEVE IMAGE FOR DINOSAURS (CURRENTLY ALL; ORIGINALLY JUST 18) */
-          this.retrieveInitialImageLink(activeItem.item.name);
+          this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })
     })
   }
   }
@@ -615,6 +615,7 @@ export default class DinoListView extends Component {
               <View
                 style={{
                   alignItems: 'center',
+                  backgroundColor: 'black',
                   flex: 1,
                   flexDirection: 'column',
                   marginTop: 50,
@@ -623,6 +624,12 @@ export default class DinoListView extends Component {
                   marginBottom: 0,
                 }}
               >
+              <TouchableHighlight
+                onPress={() => {
+                  this.props.returnToErasPage();
+                }}>
+              <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+              </TouchableHighlight>
               <Text
                 style={{
                   color: 'white',
@@ -640,65 +647,36 @@ export default class DinoListView extends Component {
 
           {this.state.activeItem && (
 
-            <TouchableOpacity
-              onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
-              style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
+            <View
+              style={{
+                alignItems: 'center',
+                backgroundColor: 'black',
+                flex: 1,
+                flexDirection: 'column',
+                marginTop: 50,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 0,
+              }}
             >
-            {
-              this.state.addressBookImageLoading ? (
-
-                <View style={{backgroundColor: 'black', width: width*0.35, height: height*0.35}}>
-                  < DotIndicator Indicator count={5} size={10} color={'limegreen'}/>
-                </View>
-       ) :
-
-      null
-
-     }
-
-     {
-       this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
-
-         <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
-
-         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight}}>
-         <Image
-           style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-           source={{uri: `${this.state.addressBookImage}`}}
-           onLoad={this.onAddressBookImageLoad}
-           />
+            <TouchableHighlight
+              onPress={() => {
+                this.props.returnToErasPage();
+              }}>
+            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+            </TouchableHighlight>
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: '400',
+                fontSize: 20,
+                fontFamily: 'PoiretOne-Regular',
+                textAlign: 'center',
+              }}
+            >
+             Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
+            </Text>
           </View>
-
-          </TouchableOpacity>
-
-      ) :
-
-      null
-
-      }
-
-      {
-        this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
-
-          <View style={{backgroundColor: 'black', alignItems: 'center', width: Dimensions.get('window').width*0.95}}>
-          <Text style={{color: 'white', backgroundColor: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 0}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
-            {this.state.activeItem.name} {this.addPrecedingDash(this.state.activeItem.diet)}
-              <Text style = {{color: `${this.getDietTextColor(this.state.activeItem.diet)}`, backgroundColor: 'black', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingRight: 5}}>
-                {this.capitaliseDiet(this.state.activeItem.diet)}
-              </Text>
-          </Text>
-          </View>
-           ) :
-
-          null
-
-          }
-
-
-              {/*<Text style={[s.name, { color: '#fff' }]}>
-                {_.get(this.state.activeItem, 'name', 'No Default')}
-              </Text>*/}
-            </TouchableOpacity>
           )}
 
         </View>
@@ -797,13 +775,6 @@ export default class DinoListView extends Component {
             </View>*/}
         {/* End of SEARCH BAR Section */}
 
-
-    <TouchableHighlight
-      onPress={() => {
-        this.props.returnToErasPage();
-      }}>
-    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
-    </TouchableHighlight>
 
           {
             self.state.searchedDinosaurData ? (

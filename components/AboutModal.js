@@ -39,7 +39,7 @@ export default class AboutModal extends Component {
                 {"\n"}{"\n"}<Text>These three creative developers can usually be found lurking in Edinburgh cafes, trying to figure out all things <Text style={{fontSize: 18, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://www.reactnative.com')}>ReactNative</Text>.{"\n"}
                 {"\n"}Stephen, James and David are all (potentially) available for hire for your team or project.</Text></Text>
 
-                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>See more of their work in the <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://play.google.com/store/apps/developer?id=LevelApps+by+DJS')}>Google Play Store</Text></Text>
+                <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>See more of their work in the <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://play.google.com/store/apps/developer?id=LevelApps+by+DJS')}>Google Play Store</Text>or click thier names above to visit thier GitHubs.</Text>
 
                 <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
                 <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>January 2019</Text>
