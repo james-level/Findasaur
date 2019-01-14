@@ -88,13 +88,13 @@ export default class GlobalSearch extends Component {
         />
 
           {this.findDinosaur(query).length > 0 ? (
-            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.55, paddingLeft: 10}}>
+            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'black', height: height*0.55, paddingLeft: 10}}>
             <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
             {this.renderMatches(dinosaurs)}
             </ScrollView>
             </View>
           ) : (
-            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', paddingLeft: 10}}>
+            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'black', paddingLeft: 10}}>
             <ScrollView>
             {this.renderMatches(dinosaurs)}
             </ScrollView>

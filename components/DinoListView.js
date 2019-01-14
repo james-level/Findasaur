@@ -162,7 +162,7 @@ export default class DinoListView extends Component {
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
-    'Could not load data for dinosaur',
+    'Could not load dinosaur data 🦕',
     "Please check your internet connection and try again later"
     )
     })
@@ -318,7 +318,7 @@ export default class DinoListView extends Component {
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
-    'Could not load data for dinosaur',
+    'Could not load dinosaur data 🦖',
     "Please check your internet connection and try again later"
     )
     })
@@ -560,11 +560,13 @@ export default class DinoListView extends Component {
                   flexDirection: 'column',
                   color: 'white',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 20 }
+                  fontSize: 20,
+                  paddingLeft: 10,
+                  }
             ]}
           >
                   <AutoHeightImage
-                  width={ Dimensions.get('window').width*0.075 }
+                  width={ Dimensions.get('window').width*0.065 }
                   source={ require('../assets/icons/footprint.png')}
                   />
             {o.item.name ? o.item.name : 'Unknown'}
@@ -646,7 +648,16 @@ export default class DinoListView extends Component {
                 onPress={() => {
                   this.props.returnToErasPage();
                 }}>
-              <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+                <Text
+                  style={{
+                    color: 'limegreen',
+                    fontWeight: '600',
+                    fontSize: 20,
+                    fontFamily: 'PoiretOne-Regular',
+                    textAlign: 'center',
+                  }}
+                >BACK{"\n"}
+               </Text>
               </TouchableHighlight>
               <Text
                 style={{
@@ -659,13 +670,12 @@ export default class DinoListView extends Component {
               >
                Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
               </Text>
-              <Image source={require('../assets/icons/scrolldown.gif')} style={{height: 50, width: 50, marginTop: 15}}/>
+              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
             </View>
           )}
 
 
           {this.state.activeItem && (
-
             <View
               style={{
                 alignItems: 'center',
@@ -682,7 +692,16 @@ export default class DinoListView extends Component {
               onPress={() => {
                 this.props.returnToErasPage();
               }}>
-            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+              <Text
+                style={{
+                  color: 'limegreen',
+                  fontWeight: '600',
+                  fontSize: 20,
+                  fontFamily: 'PoiretOne-Regular',
+                  textAlign: 'center',
+                }}
+              >BACK{"\n"}
+             </Text>
             </TouchableHighlight>
             <Text
               style={{
@@ -695,6 +714,7 @@ export default class DinoListView extends Component {
             >
              Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
             </Text>
+            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
           </View>
           )}
 
