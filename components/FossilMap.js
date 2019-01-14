@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Modal, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { Modal, Alert, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import FossilMapStyle from '../Stylesheets/FossilMapStyle.js';
@@ -12,7 +12,7 @@ export default class FossilMap extends Component {
   }
 
   fossilsToMap(){
-    if (this.props.mappedDinosaur.coords.length > 1){
+    if (this.props.mappedDinosaur.coords[0][0]){
       return this.props.mappedDinosaur.coords.map( (coord, i) =>
 
           <MapView.Marker key={i}
@@ -20,28 +20,56 @@ export default class FossilMap extends Component {
                               latitude: coord[0],
                               longitude: coord[1]
                             }}
-                            title={"Fossil find"}
-                            pinColor={'limegreen'}
-                            description={`${this.props.dinosaur} fossil found here`}
+                            title={`${this.props.dinosaur}`}
+                            pinColor={'red'}
+                            description={"Fossil found here"}
                             />
         )
       }
-      else if (this.props.mappedDinosaur.coords.length === 1) {
+      else if (!this.props.mappedDinosaur.coords[0][0]) {
+
         return
-        <MapView.Marker key={i}
+        <MapView.Marker
                           coordinate={{
                             latitude: this.props.mappedDinosaur.coords[0],
                             longitude: this.props.mappedDinosaur.coords[1]
                           }}
-                          title={"Fossil find"}
-                          pinColor={'limegreen'}
+                          title={`${this.props.dinosaur}`}
+                          pinColor={'red'}
                           description={`${this.props.dinosaur} fossil found here`}
                           />
       }
   }
 
+  returnDefaultLatitude(){
+    if (this.props.mappedDinosaur.coords[0][0]){
+      return this.props.mappedDinosaur.coords[0][0]
+    }
+
+    else if (!this.props.mappedDinosaur.coords[0][0]){
+      return this.props.mappedDinosaur.coords[0]
+    }
+
+  }
+
+  returnDefaultLongitude(){
+    if (this.props.mappedDinosaur.coords[0][0]){
+      return this.props.mappedDinosaur.coords[0][1]
+    }
+
+    else if (!this.props.mappedDinosaur.coords[0][0]){
+      return this.props.mappedDinosaur.coords[1]
+    }
+
+    else {
+      return Alert.alert(
+      'No fossils have been found for this dinosaur'
+      )
+    }
+  }
+
   render() {
-    console.log("DINOSOAOSO", this.props.mappedDinosaur);
+    console.log("mapped DINO", this.props.mappedDinosaur.coords);
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
@@ -60,21 +88,21 @@ export default class FossilMap extends Component {
               zoomEnabled={true}
               zoomControlEnabled={true}
               region={{
-                latitude: 23.5505,
-                longitude: 46.6333,
+                latitude: this.returnDefaultLatitude() - 1,
+                longitude: this.returnDefaultLongitude() - 1,
                 latitudeDelta: 100,
                 longitudeDelta: 100
               }}
               >
               <MapView.Marker
-                coordinate={{
-                  latitude: 23.5505,
-                  longitude: 46.6333
-                }}
-                pinColor={'limegreen'}
-                title={`${this.props.dinosaur}`}
-                description={"Fossil found here."}
-                />
+                                coordinate={{
+                                  latitude: this.returnDefaultLatitude(),
+                                  longitude: this.returnDefaultLongitude()
+                                }}
+                                title={`${this.props.dinosaur}`}
+                                pinColor={'red'}
+                                description={`${this.props.dinosaur} fossil found here`}
+                                />
                {this.fossilsToMap()}
             </MapView>
           </Fragment>
