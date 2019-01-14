@@ -692,14 +692,14 @@ export default class DinoListView extends Component {
                 textAlign: 'center',
               }}
             >
-             Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
+             Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
             </Text>
           </View>
           )}
 
         </View>
 
-        <View style={{ flex: 1, height: height, width}}>
+        <View style={{ flex: 1, height: height, width, marginTop: 50}}>
           <FlatList
           style={{marginBottom: -(height*0.08)}}
             ListEmptyComponent={ListEmptyComponent}
@@ -730,6 +730,7 @@ export default class DinoListView extends Component {
             vertical
             debugMode={true}
             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list
+            /*
             startDotIconFamily="Ionicons"
             startDotIconName="md-arrow-round-down"
             startDotIconColor="black"
@@ -750,6 +751,7 @@ export default class DinoListView extends Component {
             dotIconSizeNotActive={15}
             dotIconSizeActive={15}
             dotIconSizeEmpty={15}
+            */
             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
             paginationItems={this.state.items} //pass the same list as data
             paginationItemPadSize={3}
