@@ -144,7 +144,7 @@ export default class EraFavourites extends Component {
           onPress={() => {
             this.props.setFavouritesVisible();
           }}>
-        <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 3, marginTop: 30, marginLeft: '50%'}}/>
+        <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 3, marginTop: 30, marginLeft: '50%'}}/>
         </TouchableHighlight>
 
         </ScrollView>

@@ -526,16 +526,15 @@ export default class DinoListView extends Component {
               : { backgroundColor: 'black', marginBottom: 0 }
           ]}
         >
-        <AutoHeightImage width={Dimensions.get('window').width*0.25} source={require('../assets/icons/footprint.png')}/>
-
           <Text
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? { color: 'limegreen', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
-                : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
+                ? { color: 'limegreen', fontFamily: 'PoiretOne-Regular', fontSize: 30 }
+                : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 30 }
             ]}
           >
+                  <AutoHeightImage width={Dimensions.get('window').width*0.10} source={require('../assets/icons/footprint.png')}/>
             {o.item.name ? o.item.name : 'Unknown'}
           </Text>
         </TouchableOpacity>
@@ -596,18 +595,16 @@ export default class DinoListView extends Component {
       </View>
     );
     return (
-      <View style={[s.container]}>
-
-        <View style={s.innerContainer}>
-
-          {!this.state.activeItem && (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1
-              }}
-            >
+       <View style={[s.container]}>
+          <View style={s.innerContainer}>
+            {!this.state.activeItem && (
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1
+                }}
+              >
               <Text
                 style={{
                   textAlignVertical: 'center',
@@ -623,6 +620,7 @@ export default class DinoListView extends Component {
               </Text>
             </View>
           )}
+
 
           {this.state.activeItem && (
 
@@ -713,7 +711,7 @@ export default class DinoListView extends Component {
             onViewableItemsChanged={this.onViewableItemsChanged}
           />
 
-{/* PAGINATION 'DOTS' ACROSS BOTTOM OF DINO-LIST PAGE, */}
+{/* PAGINATION 'DOTS' ACROSS BOTTOM/TO RIGHT OF DINO-LIST PAGE, */}
         {
           this.state.items ? (
           <Pagination
@@ -726,7 +724,7 @@ export default class DinoListView extends Component {
             dotIconNameNotActive={'checkbox-blank-circle-outline'}
             dotIconColorNotActive={'limegreen'}
             dotIconNameEmpty={'close'}
-            dotTextHide={true}
+            dotTextHide={false}
             dotTextColor={'limegreen'}
             dotIconSizeNotActive={15}
             dotIconSizeActive={15}
@@ -741,7 +739,7 @@ export default class DinoListView extends Component {
         </View>
 
         {/* SEARCH BAR Section */}
-                <View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
+              {/*<View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
               <Autocomplete
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -772,7 +770,7 @@ export default class DinoListView extends Component {
                   </ScrollView>
                   </View>
                 )}
-            </View>
+            </View>*/}
         {/* End of SEARCH BAR Section */}
 
 
@@ -780,7 +778,7 @@ export default class DinoListView extends Component {
       onPress={() => {
         this.props.returnToErasPage();
       }}>
-    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+    <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
     </TouchableHighlight>
 
           {
@@ -916,7 +914,7 @@ export default class DinoListView extends Component {
                     onPress={() => {
                       this.closeDinosaurView();
                     }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+                  <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
                   </TouchableHighlight>
                   </ScrollView>
                 </View>

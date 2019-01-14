@@ -26,7 +26,7 @@ const FavouritesStyle = StyleSheet.create({
   },
   favouritesModalText: {
     fontSize: 17,
-    color: 'white',
+    color: 'black',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
@@ -52,7 +52,7 @@ const FavouritesStyle = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     padding: 0,
-    backgroundColor: 'indigo',
+    backgroundColor: 'transparent',
     borderRadius: 5,
     marginTop: 20
   },
