@@ -659,6 +659,7 @@ export default class DinoListView extends Component {
               >
                Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
               </Text>
+              <Image source={require('../assets/icons/scrolldown.gif')} style={{height: 50, width: 50, marginTop: 15}}/>
             </View>
           )}
 
