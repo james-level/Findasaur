@@ -174,7 +174,7 @@ export default class ChooseTimePeriod extends Component {
     this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
     this.closeFossilMap = this.closeFossilMap.bind(this);
     this.setGlobalFossilMapVisible = this.setGlobalFossilMapVisible.bind(this);
-    this.closeGlobalFossilMap = this.closeFossilMap.bind(this);
+    this.closeGlobalFossilMap = this.closeGlobalFossilMap.bind(this);
   }
 
   componentDidMount(){
