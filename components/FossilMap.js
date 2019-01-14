@@ -15,7 +15,7 @@ export default class FossilMap extends Component {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
-      animationType="fadeInUp" containerStyle={{backgroundColor: 'transparent'}}
+      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'center', alignItems:'center'}}
       childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15, height: Dimensions.get('window').height*0.8, width: Dimensions.get('window').width*0.8}}
       animationDuration={500}>
       {

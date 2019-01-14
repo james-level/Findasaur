@@ -6,7 +6,9 @@ const FossilMapStyle = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'transparent',
     height: Dimensions.get('window').height*0.8,
-    width: Dimensions.get('window').width*0.8
+    width: Dimensions.get('window').width*0.8,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   fossilMapDescription: {
     color: 'white',
