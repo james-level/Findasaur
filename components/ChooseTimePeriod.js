@@ -29,6 +29,7 @@ import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanInd
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
 import FossilMap from './FossilMap.js';
+import GlobalFossilMap from './GlobalFossilMap.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -145,7 +146,8 @@ export default class ChooseTimePeriod extends Component {
         },
       ],
       clickedDinoAlreadyFavourite: false,
-      fossilMapVisible: false
+      fossilMapVisible: false,
+      globalFossilMapVisible: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -171,6 +173,8 @@ export default class ChooseTimePeriod extends Component {
     this.closeFavouriteAnimationOverlay = this.closeFavouriteAnimationOverlay.bind(this);
     this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
     this.closeFossilMap = this.closeFossilMap.bind(this);
+    this.setGlobalFossilMapVisible = this.setGlobalFossilMapVisible.bind(this);
+    this.closeGlobalFossilMap = this.closeGlobalFossilMap.bind(this);
   }
 
   componentDidMount(){
@@ -446,6 +450,18 @@ export default class ChooseTimePeriod extends Component {
   closeFossilMap(){
     this.setState({
       fossilMapVisible: false
+    })
+  }
+
+  setGlobalFossilMapVisible(){
+    this.setState({
+      globalFossilMapVisible: true
+    })
+  }
+
+  closeGlobalFossilMap(){
+    this.setState({
+      globalFossilMapVisible: false
     })
   }
 
@@ -940,10 +956,17 @@ export default class ChooseTimePeriod extends Component {
       ) : null
     }
 
+    {
+      this.state.globalSearchDataLoaded ? (
+
+      <GlobalFossilMap globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
+
+    ) : null
+
+    }
+
       {
         Platform.OS != 'ios' ? (
-
-
 
           <View style={ChooseTimePeriodStyle.iconsContainer}>
 
@@ -1021,18 +1044,35 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setEraModalVisible();
-              }}>
-                <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          {/*<TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
               this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>*/}
+          </TouchableHighlight>
+
+          { this.state.globalSearchDataLoaded ? (
+
+            <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setGlobalFossilMapVisible();
+              }}>
+                  <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+            </TouchableHighlight>
+
+        ) :
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              Alert.alert(
+                     "Loading dinosaur data... Please wait a moment"
+                  )
+              }}>
+              <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
+
+      }
+
 
           { this.state.globalSearchDataLoaded ? (
 
@@ -1273,7 +1313,8 @@ export default class ChooseTimePeriod extends Component {
 
   }
 
-    {this.returnClickedDinosaur() != null ? (
+    {
+      this.returnClickedDinosaur() != null ? (
 
       <FossilMap mappedDinosaur={this.retrieveDinosaurFromName(this.state.clickedDinosaur)} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
 
