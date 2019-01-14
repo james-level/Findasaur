@@ -1,15 +1,18 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
 
 const FossilMapStyle = StyleSheet.create({
   map: {
-    position: 'absolute',
     borderRadius: 15,
     borderWidth: 1,
     borderColor: 'transparent',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
+    height: Dimensions.get('window').height*0.8,
+    width: Dimensions.get('window').width*0.8
+  },
+  fossilMapDescription: {
+    color: 'black',
+    padding: 5,
+    fontSize: 20,
+    fontFamily: 'PoiretOne-Regular'
   },
 });
 

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Modal, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { Modal, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import FossilMapStyle from '../Stylesheets/FossilMapStyle.js';
+import MapView from 'react-native-maps';
 
 export default class FossilMap extends Component {
   render() {
@@ -15,18 +16,22 @@ export default class FossilMap extends Component {
       {
         (hideModal, overlayState) => (
           <Fragment>
+          <View style={{backgroundColor: 'white', borderRadius: 5, marginTop: 5, borderWidth: 2, borderColor: 'black'}}>
+          <Text style={FossilMapStyle.fossilMapDescription}>Fossil finds for {this.props.dinosaur}</Text>
+          </View>
               <MapView style={FossilMapStyle.map}
               scrollEnabled={true}
               toolbarEnabled={false}
               zoomEnabled={true}
               zoomControlEnabled={true}
               region={{
-                latitude: 0,
-                longitude: 0,
-                latitudeDelta: 0.1,
-                longitudeDelta: 0.1
+                latitude: 23.5505,
+                longitude: 46.6333,
+                latitudeDelta: 40,
+                longitudeDelta: 40
               }}
               >
+            </MapView>
           </Fragment>
         )
       }

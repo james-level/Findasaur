@@ -28,6 +28,7 @@ import MapView from 'react-native-maps';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
+import FossilMap from './FossilMap.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -143,7 +144,8 @@ export default class ChooseTimePeriod extends Component {
           other_title: "Middle Triassic Era"
         },
       ],
-      clickedDinoAlreadyFavourite: false
+      clickedDinoAlreadyFavourite: false,
+      fossilMapVisible: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -167,6 +169,8 @@ export default class ChooseTimePeriod extends Component {
     this.checkFavouriteStatus = this.checkFavouriteStatus.bind(this);
     this.setFavouriteAnimationOverlayVisible = this.setFavouriteAnimationOverlayVisible.bind(this);
     this.closeFavouriteAnimationOverlay = this.closeFavouriteAnimationOverlay.bind(this);
+    this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
+    this.closeFossilMap = this.closeFossilMap.bind(this);
   }
 
   componentDidMount(){
@@ -430,6 +434,18 @@ export default class ChooseTimePeriod extends Component {
   closeEraModal(){
     this.setState({
       eraModalVisible: false
+    })
+  }
+
+  setFossilMapVisible(){
+    this.setState({
+      fossilMapVisible: true
+    })
+  }
+
+  closeFossilMap(){
+    this.setState({
+      fossilMapVisible: false
     })
   }
 
@@ -1215,7 +1231,9 @@ export default class ChooseTimePeriod extends Component {
 
       }
 
-
+          <View style={DinoListViewStyle.modalHeader}>
+          <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
+          </View>
 
           {
 
@@ -1245,6 +1263,14 @@ export default class ChooseTimePeriod extends Component {
         ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
       <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+
+    ) : null
+
+  }
+
+    {this.returnClickedDinosaur() ? (
+
+      <FossilMap fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.returnClickedDinosaur()} />
 
     ) : null
 
