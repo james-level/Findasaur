@@ -1043,18 +1043,35 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setGlobalFossilMapVisible();
-              }}>
-                <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
               this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
+
+          { this.state.globalSearchDataLoaded ? (
+
+            <TouchableHighlight
+            style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setGlobalFossilMapVisible();
+              }}>
+                  <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+            </TouchableHighlight>
+
+        ) :
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              Alert.alert(
+                     "Loading dinosaur data... Please wait a moment"
+                  )
+              }}>
+              <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
+
+      }
+
 
           { this.state.globalSearchDataLoaded ? (
 
