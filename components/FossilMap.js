@@ -36,7 +36,7 @@ export default class FossilMap extends Component {
                           }}
                           title={`${this.props.mappedDinosaur.name}`}
                           pinColor={'limegreen'}
-                          description={`${this.props.dinosaur} fossil found here`}
+                          description={"Fossil found here"}
                           />
       }
   }
@@ -102,11 +102,11 @@ export default class FossilMap extends Component {
                                 }}
                                 title={`${this.props.mappedDinosaur.name}`}
                                 pinColor={'limegreen'}
-                                description={`${this.props.mappedDinosaur.name} fossil found here`}
+                                description={"Fossil found here"}
                                 />
                {this.fossilsToMap()}
             </MapView>
-          
+
           </Fragment>
         )
       }
