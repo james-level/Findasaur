@@ -12,6 +12,7 @@ export default class GlobalFossilMap extends Component {
   }
 
   fossilsForAllDinosaurs(){
+
     return this.props.allDinosaurs.map( (dinosaur) =>
     this.fossilsToMap(dinosaur)
 

@@ -1068,7 +1068,7 @@ export default class ChooseTimePeriod extends Component {
                      "Loading dinosaur data... Please wait a moment"
                   )
               }}>
-              <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+              <Image source={require('../assets/globegrey.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
         </TouchableHighlight>
 
       }
