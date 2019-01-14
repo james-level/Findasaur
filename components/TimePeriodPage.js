@@ -137,7 +137,8 @@ export default class TimePeriodPage extends Component {
     borderRadius: 0
       }}
   >
-    <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center'}}>
+
+    <View style={{marginTop: 0, flexDirection: 'column', alignItems: 'center'}}>
       <Image
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
@@ -159,10 +160,23 @@ export default class TimePeriodPage extends Component {
     borderBottomColor: 'black'}}>
 
     </View>
+
+
     {
 
       this.state.fontLoaded ? (
-    <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
+    <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}
+    <TouchableHighlight
+    style={{position: 'relative', top: '0%' }}
+      onPress={() => {
+        this.props.setEraModalVisible();
+        }}>
+        <Image
+        source={require('../assets/icons/infowhite.png')}
+        style={{height: 25, width: 25, position: 'relative', marginLeft: 10}}/>
+    </TouchableHighlight>
+
+    </Text>
   ) : null
   }
 

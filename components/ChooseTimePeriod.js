@@ -873,6 +873,7 @@ export default class ChooseTimePeriod extends Component {
   _renderItem = ({ item }) => (
 
     <TimePeriodPage
+    setEraModalVisible={this.setEraModalVisible}
     imagesLoading={this.state.imagesLoading}
     dinosaurs={this.state.dinosaurs}
     getDinosaursForPeriod={this.getDinosaursForPeriod}
