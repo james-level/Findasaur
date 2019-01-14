@@ -2,13 +2,13 @@ import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-nativ
 
 const FossilMapStyle = StyleSheet.create({
   map: {
-    borderRadius: 15,
-    borderWidth: 1,
     borderColor: 'transparent',
-    height: Dimensions.get('window').height*0.8,
-    width: Dimensions.get('window').width*0.8,
+    height: Dimensions.get('window').height*0.9,
+    width: Dimensions.get('window').width,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
   },
   fossilMapDescription: {
     color: 'white',

@@ -21,7 +21,7 @@ export default class FossilMap extends Component {
                               longitude: coord[1]
                             }}
                             title={`${this.props.mappedDinosaur.name}`}
-                            pinColor={'green'}
+                            pinColor={'limegreen'}
                             description={"Fossil found here"}
                             />
         )
@@ -35,7 +35,7 @@ export default class FossilMap extends Component {
                             longitude: this.props.mappedDinosaur.coords[1]
                           }}
                           title={`${this.props.mappedDinosaur.name}`}
-                          pinColor={'green'}
+                          pinColor={'limegreen'}
                           description={`${this.props.dinosaur} fossil found here`}
                           />
       }
@@ -72,15 +72,17 @@ export default class FossilMap extends Component {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
-      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'center', alignItems:'center'}}
-      childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15, height: Dimensions.get('window').height*0.8, width: Dimensions.get('window').width*0.8}}
+      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.9)', justifyContent: 'center', alignItems:'center', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
+      childrenWrapperStyle={{position: 'absolute', top: 0, backgroundColor: 'transparent', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       animationDuration={500}>
       {
         (hideModal, overlayState) => (
           <Fragment>
+          {/*
           <View style={{backgroundColor: 'green', borderRadius: 5, marginTop: 5, marginBottom: 10, borderWidth: 2, borderColor: 'green'}}>
           <Text style={FossilMapStyle.fossilMapDescription}>{this.returnDinosaur()}</Text>
           </View>
+          */}
               <MapView style={FossilMapStyle.map}
               scrollEnabled={true}
               toolbarEnabled={false}
@@ -99,11 +101,12 @@ export default class FossilMap extends Component {
                                   longitude: this.returnDefaultLongitude()
                                 }}
                                 title={`${this.props.mappedDinosaur.name}`}
-                                pinColor={'green'}
+                                pinColor={'limegreen'}
                                 description={`${this.props.mappedDinosaur.name} fossil found here`}
                                 />
                {this.fossilsToMap()}
             </MapView>
+          
           </Fragment>
         )
       }

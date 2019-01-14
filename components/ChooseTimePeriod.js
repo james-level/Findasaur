@@ -991,7 +991,7 @@ export default class ChooseTimePeriod extends Component {
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
               Alert.alert(
-                     "Still loading dinosaur data... Please wait a moment."
+                     "Loading dinosaur data... Please wait a moment"
                   )
               }}>
                 <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
@@ -1045,7 +1045,7 @@ export default class ChooseTimePeriod extends Component {
         style={{position: 'relative', top: '0%'}}
           onPress={() => {
             Alert.alert(
-                   "Still loading dinosaur data... Please wait a moment."
+                   "Loading dinosaur data... Please wait a moment"
                 )
             }}>
               <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
