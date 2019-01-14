@@ -1204,7 +1204,7 @@ export default class ChooseTimePeriod extends Component {
 
           {
 
-            this.state.clickedDinosaur && !ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
+            this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/omnivore.png") ? (
 
           <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
