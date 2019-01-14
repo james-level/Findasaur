@@ -18,7 +18,7 @@ const HeroImageCarousel = () => (
 
   <ImageSlider
   loopBothSides
-  autoPlayWithInterval={1500}
+  autoPlayWithInterval={2400}
   images={images}
   customSlide={({ index, item, style, width }) => (
     <View key={index} style={[style, HeroImageCarouselStyle.customSlide]}>

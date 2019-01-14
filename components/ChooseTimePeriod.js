@@ -29,6 +29,7 @@ import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanInd
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
 import FossilMap from './FossilMap.js';
+import GlobalFossilMap from './GlobalFossilMap.js';
 
 export default class ChooseTimePeriod extends Component {
 
@@ -145,7 +146,8 @@ export default class ChooseTimePeriod extends Component {
         },
       ],
       clickedDinoAlreadyFavourite: false,
-      fossilMapVisible: false
+      fossilMapVisible: false,
+      globalFossilMapVisible: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -171,6 +173,8 @@ export default class ChooseTimePeriod extends Component {
     this.closeFavouriteAnimationOverlay = this.closeFavouriteAnimationOverlay.bind(this);
     this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
     this.closeFossilMap = this.closeFossilMap.bind(this);
+    this.setGlobalFossilMapVisible = this.setGlobalFossilMapVisible.bind(this);
+    this.closeGlobalFossilMap = this.closeFossilMap.bind(this);
   }
 
   componentDidMount(){
@@ -446,6 +450,18 @@ export default class ChooseTimePeriod extends Component {
   closeFossilMap(){
     this.setState({
       fossilMapVisible: false
+    })
+  }
+
+  setGlobalFossilMapVisible(){
+    this.setState({
+      globalFossilMapVisible: true
+    })
+  }
+
+  closeGlobalFossilMap(){
+    this.setState({
+      globalFossilMapVisible: false
     })
   }
 
@@ -1272,13 +1288,23 @@ export default class ChooseTimePeriod extends Component {
 
   }
 
-    {this.returnClickedDinosaur() != null ? (
+    {
+      this.returnClickedDinosaur() != null ? (
 
       <FossilMap mappedDinosaur={this.retrieveDinosaurFromName(this.state.clickedDinosaur)} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.clickedDinosaur} />
 
     ) : null
 
   }
+
+    {
+      this.state.allDinosaursForGlobalSearch ? (
+
+      <GlobalFossilMap allDinosaurs={this.state.allDinosaursForGlobalSearch} globalFossilMapVisible={this.state.globalFossilMapVisible} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
+
+    ) : null
+
+    }
 
       {
         self.state.searchedDinosaurDescription ? (

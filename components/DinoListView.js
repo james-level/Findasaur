@@ -657,7 +657,7 @@ export default class DinoListView extends Component {
                   textAlign: 'center',
                 }}
               >
-               Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
+               Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
               </Text>
             </View>
           )}
