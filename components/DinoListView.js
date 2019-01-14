@@ -20,6 +20,7 @@ import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import { AsyncStorage } from "react-native"
+import MapView from 'react-native-maps';
 
 export default class DinoListView extends Component {
   _isMounted = false;
