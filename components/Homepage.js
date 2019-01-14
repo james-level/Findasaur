@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, View, Linking, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
-import { Font, LinearGradient  } from 'expo';
+import { Font, Asset, LinearGradient  } from 'expo';
 import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
@@ -36,6 +36,9 @@ export default class Homepage extends React.Component {
   await Font.loadAsync({
      'PoiretOne-Regular': require('../assets/fonts/PoiretOne-Regular.ttf'),
    });
+   await Asset.loadAsync([
+        require('../assets/dancingstar.gif'),
+      ]);
     this.setState({ fontLoaded: true });
   }
     handleButtonClick(){

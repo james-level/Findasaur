@@ -880,7 +880,6 @@ export default class DinoListView extends Component {
                 <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
                 <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
-
                 }
 
                 <View style={DinoListViewStyle.modalHeader}>
