@@ -11,32 +11,39 @@ export default class GlobalFossilMap extends Component {
     return this.props.mappedDinosaur.name + " fossils"
   }
 
-  fossilsToMap(){
-    if (this.props.mappedDinosaur.coords[0][0]){
-      return this.props.mappedDinosaur.coords.map( (coord, i) =>
+  fossilsForAllDinosaurs(){
+    return this.props.allDinosaurs.map( (dinosaur) =>
+    this.fossilsToMap(dinosaur)
+
+  )
+  }
+
+  fossilsToMap(mappedDinosaur){
+    if (mappedDinosaur.coords[0][0]){
+      return mappedDinosaur.coords.map( (coord, i) =>
 
           <MapView.Marker key={i}
                             coordinate={{
                               latitude: coord[0],
                               longitude: coord[1]
                             }}
-                            title={`${this.props.mappedDinosaur.name}`}
+                            title={`${mappedDinosaur.name}`}
                             pinColor={'limegreen'}
                             description={"Fossil found here"}
                             />
         )
       }
-      else if (!this.props.mappedDinosaur.coords[0][0]) {
+      else if (!mappedDinosaur.coords[0][0]) {
 
         return
         <MapView.Marker
                           coordinate={{
-                            latitude: this.props.mappedDinosaur.coords[0],
-                            longitude: this.props.mappedDinosaur.coords[1]
+                            latitude: mappedDinosaur.coords[0],
+                            longitude: mappedDinosaur.coords[1]
                           }}
-                          title={`${this.props.mappedDinosaur.name}`}
+                          title={`${mappedDinosaur.name}`}
                           pinColor={'limegreen'}
-                          description={`${this.props.dinosaur} fossil found here`}
+                          description={`${mappedDinosaur.name} fossil found here`}
                           />
       }
   }
@@ -71,7 +78,7 @@ export default class GlobalFossilMap extends Component {
   render() {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
-      <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
+      <Overlay visible={this.props.globalFossilMapVisible} onClose={this.props.closeGlobalFossilMap} closeOnTouchOutside
       animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.9)', justifyContent: 'center', alignItems:'center', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       childrenWrapperStyle={{position: 'absolute', top: 0, backgroundColor: 'transparent', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       animationDuration={500}>
@@ -89,23 +96,24 @@ export default class GlobalFossilMap extends Component {
               zoomEnabled={true}
               zoomControlEnabled={true}
               region={{
-                latitude: this.returnDefaultLatitude() - 1,
-                longitude: this.returnDefaultLongitude() - 1,
-                latitudeDelta: 50,
-                longitudeDelta: 50
+                latitude: 25,
+                longitude: 25,
+                latitudeDelta: 150,
+                longitudeDelta: 150
               }}
               >
               <MapView.Marker
                                 coordinate={{
-                                  latitude: this.returnDefaultLatitude(),
-                                  longitude: this.returnDefaultLongitude()
+                                  latitude: 25,
+                                  longitude: 25
                                 }}
-                                title={`${this.props.mappedDinosaur.name}`}
+                                title={"Default location"}
                                 pinColor={'limegreen'}
-                                description={`${this.props.mappedDinosaur.name} fossil found here`}
+                                description={"Not fossil - just default"}
                                 />
-               {this.fossilsToMap()}
+                                {this.fossilsForAllDinosaurs()}
             </MapView>
+
 
           </Fragment>
         )

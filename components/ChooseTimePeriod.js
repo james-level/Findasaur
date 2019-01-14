@@ -955,10 +955,17 @@ export default class ChooseTimePeriod extends Component {
       ) : null
     }
 
+    {
+      this.state.globalSearchDataLoaded ? (
+
+      <GlobalFossilMap globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
+
+    ) : null
+
+    }
+
       {
         Platform.OS != 'ios' ? (
-
-
 
           <View style={ChooseTimePeriodStyle.iconsContainer}>
 
@@ -1036,9 +1043,9 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setEraModalVisible();
+              this.setGlobalFossilMapVisible();
               }}>
-                <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -1296,15 +1303,6 @@ export default class ChooseTimePeriod extends Component {
     ) : null
 
   }
-
-    {
-      this.state.allDinosaursForGlobalSearch ? (
-
-      <GlobalFossilMap allDinosaurs={this.state.allDinosaursForGlobalSearch} globalFossilMapVisible={this.state.globalFossilMapVisible} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
-
-    ) : null
-
-    }
 
       {
         self.state.searchedDinosaurDescription ? (
