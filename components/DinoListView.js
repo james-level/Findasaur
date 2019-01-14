@@ -352,7 +352,9 @@ export default class DinoListView extends Component {
         this.setState({
           searchedDinosaurData: dinosaur,
         },
-        function(){ this.retrieveDescription(this.state.clickedDinosaur)
+        function(){
+          console.log("Searched dinosaur data", this.state.searchedDinosaurData);
+          this.retrieveDescription(this.state.clickedDinosaur)
       })
       }
     }
@@ -487,7 +489,7 @@ export default class DinoListView extends Component {
         'Other'
       ]),
       email: 'Ha',
-      locations: dinosaurs[i].coords,
+      coords: dinosaurs[i].coords,
       diet: dinosaurs[i].diet
   }))
 }
@@ -919,7 +921,7 @@ export default class DinoListView extends Component {
 
         }
 
-        {this.returnClickedDinosaur() != null ? (
+        {this.state.searchedDinosaurData != null ? (
 
           <FossilMap mappedDinosaur={this.state.searchedDinosaurData} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
 

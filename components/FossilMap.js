@@ -8,7 +8,7 @@ import MapView from 'react-native-maps';
 export default class FossilMap extends Component {
 
   returnDinosaur(){
-    return "Fossil finds for " + this.props.dinosaur
+    return this.props.mappedDinosaur.name + " fossils"
   }
 
   fossilsToMap(){
@@ -20,8 +20,8 @@ export default class FossilMap extends Component {
                               latitude: coord[0],
                               longitude: coord[1]
                             }}
-                            title={`${this.props.dinosaur}`}
-                            pinColor={'red'}
+                            title={`${this.props.mappedDinosaur.name}`}
+                            pinColor={'green'}
                             description={"Fossil found here"}
                             />
         )
@@ -34,8 +34,8 @@ export default class FossilMap extends Component {
                             latitude: this.props.mappedDinosaur.coords[0],
                             longitude: this.props.mappedDinosaur.coords[1]
                           }}
-                          title={`${this.props.dinosaur}`}
-                          pinColor={'red'}
+                          title={`${this.props.mappedDinosaur.name}`}
+                          pinColor={'green'}
                           description={`${this.props.dinosaur} fossil found here`}
                           />
       }
@@ -69,7 +69,6 @@ export default class FossilMap extends Component {
   }
 
   render() {
-    console.log("mapped DINO", this.props.mappedDinosaur.coords);
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
@@ -90,8 +89,8 @@ export default class FossilMap extends Component {
               region={{
                 latitude: this.returnDefaultLatitude() - 1,
                 longitude: this.returnDefaultLongitude() - 1,
-                latitudeDelta: 100,
-                longitudeDelta: 100
+                latitudeDelta: 50,
+                longitudeDelta: 50
               }}
               >
               <MapView.Marker
@@ -99,9 +98,9 @@ export default class FossilMap extends Component {
                                   latitude: this.returnDefaultLatitude(),
                                   longitude: this.returnDefaultLongitude()
                                 }}
-                                title={`${this.props.dinosaur}`}
-                                pinColor={'red'}
-                                description={`${this.props.dinosaur} fossil found here`}
+                                title={`${this.props.mappedDinosaur.name}`}
+                                pinColor={'green'}
+                                description={`${this.props.mappedDinosaur.name} fossil found here`}
                                 />
                {this.fossilsToMap()}
             </MapView>

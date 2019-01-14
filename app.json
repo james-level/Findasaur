@@ -10,9 +10,9 @@
     "orientation": "portrait",
     "icon": "./assets/diplodocus.png",
     "splash": {
-      "image": "./assets/Dino_images/transparent_dinos/veloc.png",
+      "image": "./assets/Dino_images/transparent_dinos/triceratops.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
