@@ -4,13 +4,13 @@ const EraOverlayStyle = StyleSheet.create({
   eraOverlayHeader: {
     color: 'limegreen',
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 25,
     fontFamily: 'PoiretOne-Regular',
   },
   eraOverlayDescription: {
     color: 'white',
     padding: 5,
-    fontSize: 17,
+    fontSize: 20,
     fontFamily: 'PoiretOne-Regular'
   },
 });

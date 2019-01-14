@@ -57,13 +57,13 @@ export default class TimePeriodPage extends Component {
 
     switch(index) {
 
-    case 6: return require("../assets/era_images/middle_triassic2.png");
-    case 5: return require("../assets/era_images/middle_triassic.png");
-    case 4: return require("../assets/era_images/early_jurassic.png");
-    case 3: return require("../assets/era_images/mid_jurassic.png");
-    case 2: return require("../assets/era_images/late_jurassic.png");
-    case 1: return require("../assets/era_images/early_cretaceous.png");
-    case 0: return require("../assets/era_images/late_cretaceous.png");
+    case 6: return require("../assets/era_images/midTrsc2.png");
+    case 5: return require("../assets/era_images/midTrsc.png");
+    case 4: return require("../assets/era_images/earlyJrsc.png");
+    case 3: return require("../assets/era_images/midJrsc.png");
+    case 2: return require("../assets/era_images/lateJrsc.png");
+    case 1: return require("../assets/era_images/lateCrtcs.png");
+    case 0: return require("../assets/era_images/earlyCrtcs3.png");
   }
   }
 
@@ -137,7 +137,8 @@ export default class TimePeriodPage extends Component {
     borderRadius: 0
       }}
   >
-    <View style={{marginTop: 5, flexDirection: 'column', alignItems: 'center'}}>
+
+    <View style={{marginTop: 0, flexDirection: 'column', alignItems: 'center'}}>
       <Image
         style={TimePeriodStyle.profilePicture}
         source={ this.eraImage(id) }
@@ -159,23 +160,35 @@ export default class TimePeriodPage extends Component {
     borderBottomColor: 'black'}}>
 
     </View>
+
+
     {
 
       this.state.fontLoaded ? (
-    <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}</Text>
-  ) : null
-  }
+    <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}
 
+      <TouchableHighlight
+        style={{position: 'relative', top: '0%' }}
+        onPress={() => {
+          this.props.setEraModalVisible();
+          }}>
+          <Image
+          source={require('../assets/icons/infowhite.png')}
+          style={{height: 25, width: 25, position: 'relative', marginLeft: 10}}/>
+      </TouchableHighlight>
 
-  {
-    this.state.fontLoaded ? (
-  <Text style={[TimePeriodStyle.eraDescriptionText, {display: 'none', fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
-  ) : null
-}
-      </View>
+    </Text>
+        ) : null
+      }
 
       {
+      this.state.fontLoaded ? (
 
+        <Text style={[TimePeriodStyle.eraDescriptionText, {display: 'none', fontFamily: 'PoiretOne-Regular'}]}>{description}</Text>
+      ) : null
+      }
+      </View>
+      {
       Platform.OS === 'ios' ? (
 
       <View>
