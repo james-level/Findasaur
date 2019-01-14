@@ -522,7 +522,7 @@ export default class DinoListView extends Component {
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: 'black', borderRadius: 10, marginBottom: 0 }
+              ? { backgroundColor: 'black', borderRadius: 5, marginBottom: 0 }
               : { backgroundColor: 'black', marginBottom: 0 }
           ]}
         >
@@ -530,21 +530,25 @@ export default class DinoListView extends Component {
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? { flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
+                ? {
+                  flex: 0.9,
                   color: 'limegreen',
+                  flexDirection: 'row',
+                  backgroundColor: 'black',
+                  flex: 1,
                   fontFamily: 'PoiretOne-Regular',
                   fontSize: 20 }
                 : { flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
+                  flexDirection: 'column',
                   color: 'white',
                   fontFamily: 'PoiretOne-Regular',
                   fontSize: 20 }
             ]}
           >
-                  <AutoHeightImage width={Dimensions.get('window').width*0.075} source={require('../assets/icons/footprint.png')}/>
+                  <AutoHeightImage
+                  width={ Dimensions.get('window').width*0.075 }
+                  source={ require('../assets/icons/footprint.png')}
+                  />
             {o.item.name ? o.item.name : 'Unknown'}
           </Text>
         </TouchableOpacity>
@@ -614,8 +618,8 @@ export default class DinoListView extends Component {
                   flex: 1,
                   flexDirection: 'column',
                   marginTop: 50,
-                  marginLeft: 20,
-                  marginRight: 20,
+                  marginLeft: 10,
+                  marginRight: 10,
                   marginBottom: 0,
                 }}
               >
@@ -623,16 +627,12 @@ export default class DinoListView extends Component {
                 style={{
                   color: 'white',
                   fontWeight: '400',
-                  fontSize: 25,
+                  fontSize: 20,
                   fontFamily: 'PoiretOne-Regular',
                   textAlign: 'center',
                 }}
               >
-                <Image
-                style={{width: 20, height: 20 }}
-                source={require('../assets/icons/scroll.png')}
-                />
-               Scroll through the {this.props.eraName} dinosaurs; tap on a name for more information.
+               Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
               </Text>
             </View>
           )}
@@ -661,7 +661,7 @@ export default class DinoListView extends Component {
 
          <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
-         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
+         <View style={{width: this.state.addressBookImageWidth, overflow: 'hidden', height: this.state.addressBookImageHeight}}>
          <Image
            style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
            source={{uri: `${this.state.addressBookImage}`}}
@@ -734,18 +734,26 @@ export default class DinoListView extends Component {
             vertical
             debugMode={true}
             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list
-            endDotIconFamily={'MaterialIcons'}
+            startDotIconFamily="Ionicons"
+            startDotIconName="md-arrow-round-down"
+            startDotIconColor="black"
+            startDotIconSize={25}
+
+            endDotIconFamily="Ionicons"
+            endDotIconName="md-arrow-round-up"
+            endDotIconColor="black"
+            endDotIconSize={25}
+
             dotIconNameActive={'checkbox-blank-circle'}
-            dotIconColorActive={'limegreen'}
+            dotIconColorActive={'black'}
             dotIconNameNotActive={'checkbox-blank-circle-outline'}
-            dotIconColorNotActive={'limegreen'}
-            dotIconNameEmpty={'close'}
-            dotTextHide={false}
-            dotTextColor={'limegreen'}
+            dotIconColorNotActive={'black'}
+            dotIconNameEmpty={'black'}
+            dotTextHide={true}
+            dotTextColor={'black'}
             dotIconSizeNotActive={15}
             dotIconSizeActive={15}
             dotIconSizeEmpty={15}
-            dotColorhasNotSeen={"red"}
             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
             paginationItems={this.state.items} //pass the same list as data
             paginationItemPadSize={3}
@@ -794,7 +802,7 @@ export default class DinoListView extends Component {
       onPress={() => {
         this.props.returnToErasPage();
       }}>
-    <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
     </TouchableHighlight>
 
           {
