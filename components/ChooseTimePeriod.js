@@ -971,14 +971,14 @@ export default class ChooseTimePeriod extends Component {
               <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
-          <TouchableHighlight
+          {/*<TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
               this.setFavouritesVisible();
               }}>
 
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, marginRight: 40, position: 'relative'}}/>
-          </TouchableHighlight>
+          </TouchableHighlight>*/}
 
           { this.state.globalSearchDataLoaded ? (
 
@@ -1026,13 +1026,13 @@ export default class ChooseTimePeriod extends Component {
                 <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
-          <TouchableHighlight
+          {/*<TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
               this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
+          </TouchableHighlight>*/}
 
           { this.state.globalSearchDataLoaded ? (
 
