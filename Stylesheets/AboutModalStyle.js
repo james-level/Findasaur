@@ -11,13 +11,13 @@ const AboutModalStyle = StyleSheet.create({
     color: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 75,
+    paddingTop: 40,
     fontSize: 30,
     backgroundColor: 'transparent',
   },
   aboutModalBody:{
     color: 'black',
-    paddingTop: 50,
+    paddingTop: 25,
     fontSize: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,7 +47,8 @@ const AboutModalStyle = StyleSheet.create({
     padding: 0,
     backgroundColor: 'indigo',
     borderRadius: 5,
-    marginTop: 20
+    marginTop: 20,
+    paddingLeft: 20,
   },
 
   modalFavourite: {

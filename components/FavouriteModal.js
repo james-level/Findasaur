@@ -133,6 +133,13 @@ export default class FavouriteModal extends Component {
 
             </View>
 
+            <TouchableHighlight
+              onPress={() => {
+                this.props.toggleFavouriteModal();
+              }}>
+            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginTop: 20, marginBottom: 20, marginLeft: '48%'}}/>
+            </TouchableHighlight>
+
               </ScrollView>
             ) : null
 

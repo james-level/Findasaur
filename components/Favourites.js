@@ -135,7 +135,7 @@ export default class Favourites extends Component {
             <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs: </Text>
 
             <View style={{alignItems: "center"}}>
-              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 100, width: 200, padding:20 }}/>
+              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 100, width: 200, padding:50, alignItems: 'center' }}/>
             </View>
 
           {
