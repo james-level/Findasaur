@@ -4,55 +4,31 @@ const FavouriteModalStyle = StyleSheet.create({
 
   infoModalHeader: {
     fontSize: 22,
-    color: 'white',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
+    color: 'pink',
   },
 
   modalHeader: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    padding: 0,
-    backgroundColor: 'indigo',
-    borderRadius: 5,
-    marginTop: 20
+    backgroundColor: 'blue',
+
   },
 
   modalPronunciation: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
+    color: 'yellow',
+
   },
 
   infoModalText: {
     fontSize: 17,
-    color: 'white',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
+    color: 'red',
   },
 
   renderItem: {
-
-    borderRadius: 5,
-    borderWidth: 0,
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    shadowRadius: 6,
-    shadowOpacity: 0.8
   },
 
   activeItem: {
-    backgroundColor: 'white',
+    backgroundColor: 'green',
   },
 
 });
