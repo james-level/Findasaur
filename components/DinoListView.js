@@ -527,12 +527,11 @@ export default class DinoListView extends Component {
     return (
       <View
         style={{
-          flex: 1,
-          // height:40,
           margin: 5,
           marginTop: 25,
-          justifyContent: 'center',
-          alignItems: 'center',
+          flex: 1,
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
         }}
       >
         <TouchableOpacity
@@ -549,24 +548,29 @@ export default class DinoListView extends Component {
               s.name2,
               this.state.activeId === o.item.id
                 ? {
-                  flex: 0.9,
-                  color: 'limegreen',
-                  flexDirection: 'row',
-                  backgroundColor: 'black',
                   flex: 1,
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 20 }
-                : { flex: 1,
-                  flexDirection: 'column',
+                  fontSize: 23,
+                  color: 'limegreen',
+                  marginLeft: 20,
+                  paddingLeft: 30,
+                  }
+                : {
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  fontFamily: 'PoiretOne-Regular',
+                  fontSize: 23,
                   color: 'white',
-                  fontFamily: 'PoiretOne-Regular',
-                  fontSize: 20,
-                  paddingLeft: 10,
+                  marginLeft: 20,
+                  paddingLeft: 30,
                   }
             ]}
           >
                   <AutoHeightImage
-                  width={ Dimensions.get('window').width*0.065 }
+                  width={ Dimensions.get('window').width*0.060 }
                   source={ require('../assets/icons/footprint.png')}
                   />
             {o.item.name ? o.item.name : 'Unknown'}
@@ -668,7 +672,7 @@ export default class DinoListView extends Component {
                   textAlign: 'center',
                 }}
               >
-               Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
+               Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
               </Text>
               <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
             </View>
@@ -712,7 +716,7 @@ export default class DinoListView extends Component {
                 textAlign: 'center',
               }}
             >
-             Scroll through the {this.props.eraName} dinosaurs & tap a name for more info
+             Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
             </Text>
             <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
           </View>
@@ -850,7 +854,7 @@ export default class DinoListView extends Component {
                 {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
 
                 <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-                <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
+                <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'yellow', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
                 <TouchableHighlight
                   onPress={() => {
                     this.addDinosaurToFavourites();
@@ -858,7 +862,7 @@ export default class DinoListView extends Component {
                       <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
                 </TouchableHighlight>
                 </View>
-
+/* Results Modal, ADD TO FAVE's section */
               ) :
               <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
               <Text
@@ -866,7 +870,7 @@ export default class DinoListView extends Component {
                   paddingTop: 15,
                   fontSize: 22,
                   marginRight: 15,
-                  color: 'white',
+                  color: 'limegreen',
                   fontFamily: 'PoiretOne-Regular',
                   padding: 10,
                   paddingTop: 20 }}
@@ -932,11 +936,13 @@ export default class DinoListView extends Component {
                 </View>
 
                 {
-/* Results Modal, Dino Pronunciation */
+/* Results Modal, Dino Pronunciation & Meaning (text) */
               Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
 
                 <View style={DinoListViewStyle.modalHeader}>
-                  <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronunciation: {Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}
+                  <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronunciation: {Pronunciations.getPronunciation(this.returnClickedDinosaur())}
+                  </Text>
+                  <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Meaning: {Meanings.getNameMeaning(this.returnClickedDinosaur())}
                   </Text>
                 </View>
 
