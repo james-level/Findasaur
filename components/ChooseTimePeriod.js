@@ -1177,7 +1177,7 @@ export default class ChooseTimePeriod extends Component {
       <View>
 
     <LinearGradient
-    colors={['black', '#1e932d']}
+    colors={['black', 'black']}
     style={{ padding: 25, height: Dimensions.get('window').height }}>
 
       <View style={DinoListViewStyle.infoModal}>
@@ -1196,7 +1196,7 @@ export default class ChooseTimePeriod extends Component {
           {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
 
           <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-          <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
+          <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'yellow', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
           <TouchableHighlight
             onPress={() => {
               this.addDinosaurToFavourites();
@@ -1204,15 +1204,33 @@ export default class ChooseTimePeriod extends Component {
                 <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
           </TouchableHighlight>
           </View>
-
+/* Results Modal, ADD TO FAVE's section */
         ) :
         <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-        <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Add to Favourites</Text>
+        <Text
+          style={{
+            paddingTop: 15,
+            fontSize: 22,
+            marginRight: 15,
+            color: 'limegreen',
+            fontFamily: 'PoiretOne-Regular',
+            padding: 10,
+            paddingTop: 20 }}
+            >Add to Favourites
+        </Text>
         <TouchableHighlight
           onPress={() => {
             this.addDinosaurToFavourites();
             }}>
-              <Image source={require('../assets/icons/grey_star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
+              <Image
+              source={require('../assets/icons/grey_star.png')} style={{
+                height: 30,
+                width: 30,
+                marginRight: 7,
+                marginBottom: 10,
+                marginTop: 10,
+                position: 'relative'
+            }}/>
         </TouchableHighlight>
         </View>
       }
@@ -1221,20 +1239,17 @@ export default class ChooseTimePeriod extends Component {
 
             self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
 
-              <Image
+/* Results Modal, Dino image */
+            <Image
                 style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
                 source={{uri: `${this.state.addressBookImage}`}}
-                onLoad={this.onDinosaurProfilePictureLoad}
+            />
 
-                />
+            ) : null
+            }
 
-          ) :
-
-        null
-        }
-
-        {
-            this.props.fontLoaded && this.state.viewableItems ? (
+            {
+              ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
 
             <AddFavouriteOverlay closeFavouriteOverlay={this.closeFavouriteAnimationOverlay} favouriteOverlayVisible={this.state.animatedFavouriteOverlayVisible} setFavouriteOverlayVisible={this.setFavouriteAnimationOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
@@ -1255,11 +1270,12 @@ export default class ChooseTimePeriod extends Component {
           {
             this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
 
-              <View style={DinoListViewStyle.modalHeader}>
+/* Results Modal, Dino image */
+            <View style={DinoListViewStyle.modalHeader}>
+              <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}
+              </Text>
+            </View>
 
-              <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-              <Image source={ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
-              </View>
           ) : null
 
         }
@@ -1268,25 +1284,36 @@ export default class ChooseTimePeriod extends Component {
 
             this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/omnivore.png") ? (
 
-          <View style={DinoListViewStyle.modalHeader}>
-          <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-          <Image source={ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
-          </View>
+/* Results Modal, Dino name */
+      <View style={DinoListViewStyle.modalHeader}>
+          <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Name: {this.returnClickedDinosaur()}
+          </Text>
+      </View>
         ) : null
+        }
 
+/* Results Modal, Dino diet icon */
+      <View style={DinoListViewStyle.modalHeader}>
+        <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}>Diet:  <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{ }}/>
+        </Text>
+      </View>
       }
 
-          <View style={DinoListViewStyle.modalHeader}>
-          <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
-          </View>
-
+{/* Results Modal, Fossil Map Link*/}
+      <View style={DinoListViewStyle.modalHeader}>
+        <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: 🌎<Image source={"./assets/icons/fossil.png"} style={{width: 30, height: 30 }}/>
+        </Text>
+      </View>
           {
+/* Results Modal, Dino Pronunciation & Meaning (text) */
+      Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
 
-            Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
-
-          <View style={DinoListViewStyle.modalHeader}>
-          <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
-          </View>
+      <View style={DinoListViewStyle.modalHeader}>
+        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronunciation: {Pronunciations.getPronunciation(this.returnClickedDinosaur())}
+        </Text>
+        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Meaning: {Meanings.getNameMeaning(this.returnClickedDinosaur())}
+        </Text>
+      </View>
 
         ) : null
 
@@ -1294,10 +1321,15 @@ export default class ChooseTimePeriod extends Component {
 
         {
 
-          Lengths.getLength(this.returnClickedDinosaur()) ? (
+/* Results Modal, Dino Length & Type (Text)*/
+    Lengths.getLength(this.returnClickedDinosaur()) ? (
 
         <View style={DinoListViewStyle.modalHeader}>
-        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type:{Types.getType(this.returnClickedDinosaur())}</Text>
+          <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())}
+          </Text>{"\n"}
+          <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Type:
+          {Types.getType(this.returnClickedDinosaur())}
+          </Text>
         </View>
 
       ) : null
@@ -1307,7 +1339,7 @@ export default class ChooseTimePeriod extends Component {
       {
         ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
-      <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
+      <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
     ) : null
 
@@ -1325,7 +1357,11 @@ export default class ChooseTimePeriod extends Component {
       {
         self.state.searchedDinosaurDescription ? (
 
-          <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
+/* Results Modal, Dino Description */
+    <View style={DinoListViewStyle.modalHeader}>
+      <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>Description: {this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
+      </Text>
+    </View>
 
         ) : null
       }

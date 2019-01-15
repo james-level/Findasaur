@@ -529,6 +529,7 @@ export default class DinoListView extends Component {
         style={{
           margin: 5,
           marginTop: 25,
+          marginBottom: 10,
           flex: 1,
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
@@ -926,7 +927,6 @@ export default class DinoListView extends Component {
                 <View style={DinoListViewStyle.modalHeader}>
                   <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}>Diet:  <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{ }}/>
                   </Text>
-
                 </View>
 
 {/* Results Modal, Fossil Map Link*/}
@@ -934,7 +934,6 @@ export default class DinoListView extends Component {
                   <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: 🌎<Image source={"./assets/icons/fossil.png"} style={{width: 30, height: 30 }}/>
                   </Text>
                 </View>
-
                 {
 /* Results Modal, Dino Pronunciation & Meaning (text) */
               Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
