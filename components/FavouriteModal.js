@@ -29,7 +29,7 @@ export default class FavouriteModal extends Component {
         <View>
 
       <LinearGradient
-      colors={['black', '#1e932d']}
+      colors={['black', 'black']}
       style={{ height: Dimensions.get('window').height, padding: 25}}>
 
         <View style={FavouriteModalStyle.infoModal}>
@@ -44,13 +44,13 @@ export default class FavouriteModal extends Component {
               onPress={() => {
                 this.props.toggleFavouriteModal();
               }}>
-            <Image source={require('../assets/icons/back.png')} style={{height: 25, width: 25, marginTop: 10, marginBottom: 10, marginLeft: '48%'}}/>
+            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginTop: 20, marginBottom: 20, marginLeft: '48%'}}/>
             </TouchableHighlight>
 
-            <View style={{alignItems: "center"}}>
+            <View style={{alignItems: "center", marginBottom: 15}}>
 
             <AutoHeightImage
-              width={Dimensions.get('window').width*0.7}
+              width={Dimensions.get('window').width*0.9}
               source={{uri: `${this.props.clickedFavourite.image}`}}
             />
 
@@ -64,23 +64,40 @@ export default class FavouriteModal extends Component {
                 </View>
             ) :
 
+/* Faves Modal, Fave Dino name */
             <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={FavouriteModalStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
-            <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+              <Text style={[FavouriteModalStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Name: {this.props.clickedFavourite.name}
+              </Text>
             </View>
-
             }
 
+/* Faves Modal, Fave Dino diet icon */
             <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={FavouriteModalStyle.modalPronunciation}>Lived during the {this.props.clickedFavourite.era}</Text>
+              <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}>Diet:
+                <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet)} style={{}}/>
+              </Text>
+            </View>
+
+{/* Faves Modal, Fossil Map Link*/}
+            <View style={FavouriteModalStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: 🌎<Image source={"./assets/icons/globesmall.png"} style={{width: 30, height: 30 }}/>
+                </Text>
+              </View>
+
+/* Faves Modal, Dino-Era (text) */
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Lived during the {this.props.clickedFavourite.era}</Text>
             </View>
 
             {
-
+/* Faves Modal, Dino Pronunciation & Meaning (text) */
               this.props.clickedFavourite.pronunciation ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={FavouriteModalStyle.modalPronunciation}>{this.props.clickedFavourite.pronunciation} | {this.props.clickedFavourite.meaning}</Text>
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronounced: '{this.props.clickedFavourite.pronunciation}'
+            </Text>
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Meaning: {this.props.clickedFavourite.meaning}
+            </Text>
             </View>
 
           ) : null
@@ -88,11 +105,14 @@ export default class FavouriteModal extends Component {
           }
 
           {
-
+/* Faves Modal, Dino Length & Type (Text)*/
             this.props.clickedFavourite.length ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
-          <Text style={FavouriteModalStyle.modalPronunciation}>Length: {this.props.clickedFavourite.length} | Type: {this.props.clickedFavourite.type}</Text>
+          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Length: {this.props.clickedFavourite.length}
+          </Text>
+          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Type: {this.props.clickedFavourite.type}
+          </Text>
           </View>
 
         ) : null
@@ -103,12 +123,13 @@ export default class FavouriteModal extends Component {
 
         ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name) ? (
 
-            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
+            <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
 
           ) : null
         }
-
-            <Text style={FavouriteModalStyle.infoModalText}>{this.props.clickedFavourite.description} </Text>
+/* Results Modal, Dino Description */
+            <Text style={[FavouriteModalStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>Description: {this.props.clickedFavourite.description}
+              </Text>
 
             </View>
 

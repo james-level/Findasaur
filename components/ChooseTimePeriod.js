@@ -1375,7 +1375,7 @@ export default class ChooseTimePeriod extends Component {
               onPress={() => {
                 this.closeDinosaurView();
               }}>
-            <Image source={require('../assets/icons/back.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
             </TouchableHighlight>
             </ScrollView>
           </View>
