@@ -13,6 +13,9 @@ Download Genymotion (trial) and Virtual Box. Paste SDK tools link (from clipboar
 
 expo start
 
+<b>Create APK file (also to see most recently built version of app in Expo app): </b>
+
+expo build:android
 
 <b>Start react native:</b>
 
