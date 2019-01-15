@@ -40,8 +40,7 @@ const FavouriteModalStyle = StyleSheet.create({
   },
 
   renderItem: {
-    justifyContent: 'center',
-    alignItems: 'center',
+
     borderRadius: 5,
     borderWidth: 0,
     shadowOffset: {

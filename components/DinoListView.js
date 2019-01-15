@@ -831,7 +831,7 @@ export default class DinoListView extends Component {
             <View>
 
           <LinearGradient
-          colors={['black', '#1e932d']}
+          colors={['black', 'black']}
           style={{ padding: 25, height: Dimensions.get('window').height }}>
 
             <View style={DinoListViewStyle.infoModal}>
@@ -861,12 +861,30 @@ export default class DinoListView extends Component {
 
               ) :
               <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-              <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Add to Favourites</Text>
+              <Text
+                style={{
+                  paddingTop: 15,
+                  fontSize: 22,
+                  marginRight: 15,
+                  color: 'white',
+                  fontFamily: 'PoiretOne-Regular',
+                  padding: 10,
+                  paddingTop: 20 }}
+                  >Add to Favourites
+              </Text>
               <TouchableHighlight
                 onPress={() => {
                   this.addDinosaurToFavourites();
                   }}>
-                    <Image source={require('../assets/icons/grey_star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
+                    <Image
+                    source={require('../assets/icons/grey_star.png')} style={{
+                      height: 30,
+                      width: 30,
+                      marginRight: 7,
+                      marginBottom: 10,
+                      marginTop: 10,
+                      position: 'relative'
+                  }}/>
               </TouchableHighlight>
               </View>
             }
@@ -888,20 +906,20 @@ export default class DinoListView extends Component {
                   ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
 
                     <View style={DinoListViewStyle.modalHeader}>
-
-                    <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-                    <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
+                      <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
+                        <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
                     </View>
                 ) :
 
                 <View style={DinoListViewStyle.modalHeader}>
-                <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-                <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
+                  <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Name: {this.returnClickedDinosaur()}</Text>
+                    <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
                 }
 
                 <View style={DinoListViewStyle.modalHeader}>
-                <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
+                  <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View fossil locations 🌎</Text>
+                    <Image source={"./assets/icons/fossil.png"} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
                 </View>
 
                 {
@@ -961,7 +979,7 @@ export default class DinoListView extends Component {
                     onPress={() => {
                       this.closeDinosaurView();
                     }}>
-                  <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+                  <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
                   </TouchableHighlight>
                   </ScrollView>
                 </View>

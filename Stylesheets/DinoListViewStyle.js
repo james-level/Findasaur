@@ -10,9 +10,6 @@ const DinoListViewStyle = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 10,
     paddingBottom: 10,
-    textShadowColor: 'black',
-    textShadowOffset: {width: -5, height: 5},
-    textShadowRadius: 25
   },
 
   modalHeader: {
@@ -20,22 +17,27 @@ const DinoListViewStyle = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     padding: 0,
-    backgroundColor: 'indigo',
+    backgroundColor: 'black',
     borderRadius: 5,
     marginTop: 20
   },
 
   modalPronunciation: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 24,
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
     paddingBottom: 10,
-    textShadowColor: 'black',
-    textShadowOffset: {width: -5, height: 5},
-    textShadowRadius: 25,
+  },
+
+  modalMapLink: {
+    fontSize: 24,
+    color: 'limegreen',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
 
   infoModalText: {
