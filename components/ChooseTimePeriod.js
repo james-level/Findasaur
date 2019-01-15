@@ -31,6 +31,7 @@ import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
 import FossilMap from './FossilMap.js';
 import GlobalFossilMap from './GlobalFossilMap.js';
 
+
 export default class ChooseTimePeriod extends Component {
 
   constructor(props) {
@@ -1374,7 +1375,7 @@ export default class ChooseTimePeriod extends Component {
               onPress={() => {
                 this.closeDinosaurView();
               }}>
-            <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+            <Image source={require('../assets/icons/back.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
             </TouchableHighlight>
             </ScrollView>
           </View>
