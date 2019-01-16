@@ -35,7 +35,7 @@ export default class InfoModal extends Component {
 
               <ScrollView>
 
-                <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Explore the world of dinosaurs with Findasaur. Search through images and globally mapped fossil records from seven prehistoric eras, discover dinosaur diets and compare their size to you. 🦖</Text>
+                <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>Explore the world of dinosaurs with Findasaur. Search through images and globally mapped fossil records from seven prehistoric eras, discover dinosaur diets and see how their size compares to yours. 🦖</Text>
 
                 <Text style= {[InfoModalStyle.infoModalText, { fontFamily: 'PoiretOne-Regular'}]}>The tech stuff: Findasaur utilises three APIs - Wikipedia, The Paleobiology Database and Google Maps (with additional data from the British Natural History Museum via a Python scraping method) - to fetch and display dino data. The dinos are presented in an address book format with each clickable preview leads to a modal dino page with full info. Findasaur also features a predictive search bar and the ability to favourite individual dinosaurs.</Text>
 
