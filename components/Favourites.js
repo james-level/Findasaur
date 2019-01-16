@@ -98,7 +98,7 @@ export default class Favourites extends Component {
         <Text key={i} style={[FavouritesStyle.modalFavourite, {fontFamily: 'PoiretOne-Regular'}]}> {favourite.name} </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => this.setState({deletedFavourite: favourites[i]}, function(){ this.deleteFavourite(this.state.deletedFavourite) })} key={Date.now()}>
-        <Text key={Date.now()} style={[FavouritesStyle.deleteFavourite, {fontFamily: 'PoiretOne-Regular'}]}> Delete </Text>
+      <Image source={require('../assets/icons/garbage.png')} style={{width: 20, height: 20}} />
       </TouchableOpacity>
       </View>
     )
@@ -129,13 +129,20 @@ export default class Favourites extends Component {
         style={{ height: Dimensions.get('window').height, padding: 25 }}>
 
           <View style={FavouritesStyle.favouritesModal}>
+          <TouchableHighlight
+          style={{alignItems: 'center', paddingTop: 15, paddingBottom: 25}}
+            onPress={() => {
+              this.props.setFavouritesVisible();
+            }}>
+          <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25}}/>
+          </TouchableHighlight>
             <ScrollView>
 
 
-            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs: </Text>
+            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs</Text>
 
             <View style={{alignItems: "center"}}>
-              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 100, width: 200, padding:50, alignItems: 'center' }}/>
+              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 60, width: 120, alignItems: 'center' }}/>
             </View>
 
           {

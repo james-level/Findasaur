@@ -3,8 +3,8 @@
 const FavouritesStyle = StyleSheet.create({
   favouritesModal:{
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'transparent',
   },
   favouritesModalHeading:{
@@ -31,8 +31,7 @@ const FavouritesStyle = StyleSheet.create({
     color: 'black',
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    paddingTop: 50,
+    alignItems: 'flex-start'
   },
   favouritesText: {
     fontSize: 22,
@@ -44,10 +43,8 @@ const FavouritesStyle = StyleSheet.create({
   modalHeader: {
     flex: 1,
     justifyContent: 'center',
-    flexDirection: 'column',
-    padding: 0,
+    flexDirection: 'row',
     backgroundColor: 'transparent',
-    borderRadius: 5,
     marginTop: 30
   },
 
