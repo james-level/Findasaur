@@ -15,11 +15,11 @@ const FavouritesStyle = StyleSheet.create({
   },
   favouritesModalText: {
     fontSize: 17,
-    color: 'black',
+    color: 'white',
   },
   favouritesModalHeader: {
     fontSize: 26,
-    color: 'black',
+    color: 'limegreen',
     marginBottom: 20
   },
   favouritesText: {
@@ -39,17 +39,9 @@ const FavouritesStyle = StyleSheet.create({
 
   modalFavourite: {
     fontSize: 22,
-    color: 'black',
+    color: 'white',
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
-  deleteFavourite: {
-    fontSize: 22,
-    color: 'red',
-    flex: 1,
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
     alignItems: 'flex-start',
   },
 

@@ -94,12 +94,15 @@ export default class Homepage extends React.Component {
     <View style={HomepageStyle.iconsContainer}>
 
           {/* USER FAVOURITE MODAL LAUNCH */}
+          {/*
           <TouchableHighlight
             onPress={() => {
               this.setFavouritesVisible();
               }}>
                 <Image source={require('../assets/icons/favourite.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
           </TouchableHighlight>
+
+          /*}
 
           {/* INFO RE APP MODAL LAUNCH  */}
           <TouchableHighlight
@@ -114,7 +117,7 @@ export default class Homepage extends React.Component {
             onPress={() => {
               this.setAboutModalVisible();
               }}>
-                <Image source={require('../assets/icons/aboutus.png')} style={{height: 25, width: 25, marginBottom: 10, marginRight: 20, position: 'relative'}}/>
+                <Image source={require('../assets/icons/aboutus.png')} style={{height: 25, width: 25, marginBottom: 10,  position: 'relative'}}/>
           </TouchableHighlight>
 
         </View>

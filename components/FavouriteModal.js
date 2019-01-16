@@ -72,8 +72,14 @@ export default class FavouriteModal extends Component {
 
       <View>
 
+      {
+        this.props.clickedFavourite ? (
+
         <FossilMap mappedDinosaur={this.props.clickedFavourite} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} />
 
+      ) : null
+
+    }
 
       <Modal
         animationType="slide"

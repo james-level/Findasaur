@@ -21,6 +21,7 @@ import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import EraFavourites from './EraFavourites.js';
+import Favourites from './Favourites.js'
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import { AsyncStorage } from "react-native"
 import DinoListView from './DinoListView.js';
@@ -39,6 +40,7 @@ export default class ChooseTimePeriod extends Component {
     this.state = {
       slicedDinosaurs: null,
       eraModalVisible: false,
+      favouritesVisible: false,
       animatedFavouriteOverlayVisible: false,
       searchOverlayVisible: false,
       imagesLoading: false,
@@ -148,7 +150,8 @@ export default class ChooseTimePeriod extends Component {
       ],
       clickedDinoAlreadyFavourite: false,
       fossilMapVisible: false,
-      globalFossilMapVisible: false
+      globalFossilMapVisible: false,
+      globalFavouritesVisible: false
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -176,6 +179,7 @@ export default class ChooseTimePeriod extends Component {
     this.closeFossilMap = this.closeFossilMap.bind(this);
     this.setGlobalFossilMapVisible = this.setGlobalFossilMapVisible.bind(this);
     this.closeGlobalFossilMap = this.closeGlobalFossilMap.bind(this);
+    this.setGlobalFavouritesVisible = this.setGlobalFavouritesVisible.bind(this);
   }
 
   componentDidMount(){
@@ -430,6 +434,10 @@ export default class ChooseTimePeriod extends Component {
     this.renderEraFavouritesPage(this.state.viewableItems[0].item.title)
   });
 }
+
+  setGlobalFavouritesVisible(){
+    this.setState({globalFavouritesVisible: !this.state.globalFavouritesVisible});
+  }
 
   setEraModalVisible(){
     this.setState({
@@ -1043,6 +1051,14 @@ export default class ChooseTimePeriod extends Component {
                 <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
+          <TouchableHighlight
+          style={{position: 'relative', top: '0%'}}
+            onPress={() => {
+              this.setGlobalFavouritesVisible();
+              }}>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+          </TouchableHighlight>
+
           {/*<TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
@@ -1075,6 +1091,14 @@ export default class ChooseTimePeriod extends Component {
 
       }
 
+      {
+        this.props.fontLoaded && this.state.globalFavouritesVisible ? (
+
+      <Favourites favouritesVisible={this.state.globalFavouritesVisible} setFavouritesVisible={this.setGlobalFavouritesVisible} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+
+  }
 
           { this.state.globalSearchDataLoaded ? (
 
@@ -1128,6 +1152,7 @@ export default class ChooseTimePeriod extends Component {
 
     ) : null
   }
+
       {
         !this.state.imagesLoading ? (
 
