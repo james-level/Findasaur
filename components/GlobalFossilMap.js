@@ -3,7 +3,7 @@ import { Modal, TouchableOpacity, Alert, Dimensions, View, Text, ScrollView, Lin
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import FossilMapStyle from '../Stylesheets/FossilMapStyle.js';
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 export default class GlobalFossilMap extends Component {
 
@@ -77,6 +77,7 @@ export default class GlobalFossilMap extends Component {
   }
 
   render() {
+
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.globalFossilMapVisible} onClose={this.props.closeGlobalFossilMap} closeOnTouchOutside

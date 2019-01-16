@@ -661,6 +661,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   getLoadingScreenMessage(){
+
     if (this.state.clickedDinosaur) {
       return `${this.state.clickedDinosaur} loading...`
     }
