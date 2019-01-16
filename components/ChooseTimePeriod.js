@@ -215,19 +215,19 @@ export default class ChooseTimePeriod extends Component {
 
           if (names.includes(clickedDinosaur)){
             this.setState({clickedDinoAlreadyFavourite: true}, function(){
-              this.setImagesLoading()
+              this.handleSearchBarClick()
             });
           }
           else {
             this.setState({clickedDinoAlreadyFavourite: false},
             function(){
-              this.setImagesLoading();
+              this.handleSearchBarClick();
             });
           }
         }
         else {
           this.setState({clickedDinoAlreadyFavourite: false}, function(){
-            this.setImagesLoading();
+            this.handleSearchBarClick();
           });
         }
       }
@@ -508,7 +508,7 @@ export default class ChooseTimePeriod extends Component {
     this.setState({
       imagesLoading: true
     }, function(){
-        this.handleSearchBarClick();
+        this.checkFavouriteStatus(this.state.clickedDinosaur);
     })
   }
 
@@ -615,7 +615,7 @@ export default class ChooseTimePeriod extends Component {
       clickedDinosaur: dinosaur,
       searchOverlayVisible: !this.state.searchOverlayVisible
     }, function(){
-      this.checkFavouriteStatus(this.state.clickedDinosaur);
+      this.setImagesLoading()
     });
   }
 
@@ -1269,19 +1269,19 @@ export default class ChooseTimePeriod extends Component {
 /* Results Modal, Dino image */
             <Image
                 style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-                source={{uri: `${this.state.addressBookImage}`}}
+                source={{uri: `${this.state.addressBookImage}`}} onLoad={this.onDinosaurProfilePictureLoad}
             />
 
             ) : null
             }
 
             {
-              ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
+             this.props.fontLoaded && this.state.viewableItems ? (
 
-            <AddFavouriteOverlay closeFavouriteOverlay={this.closeFavouriteAnimationOverlay} favouriteOverlayVisible={this.state.animatedFavouriteOverlayVisible} setFavouriteOverlayVisible={this.setFavouriteAnimationOverlayVisible} fontLoaded={this.props.fontLoaded} />
+             <AddFavouriteOverlay closeFavouriteOverlay={this.closeFavouriteAnimationOverlay} favouriteOverlayVisible={this.state.animatedFavouriteOverlayVisible} setFavouriteOverlayVisible={this.setFavouriteAnimationOverlayVisible} fontLoaded={this.props.fontLoaded} />
 
-          ) : null
-        }
+           ) : null
+         }
 
         {
           self.state.imagesLoading ? (
@@ -1328,7 +1328,7 @@ export default class ChooseTimePeriod extends Component {
 
 {/* Results Modal, Fossil Map Link*/}
       <View style={DinoListViewStyle.modalHeader}>
-        <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: 🌎<Image source={"./assets/icons/fossil.png"} style={{width: 30, height: 30 }}/>
+        <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: <Image source={require("../assets/icons/fossil.png")} style={{width: 30, height: 30 }}/>
         </Text>
       </View>
           {
