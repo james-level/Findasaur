@@ -92,7 +92,7 @@ export default class GlobalFossilMap extends Component {
 
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
-      <Overlay visible={this.props.globalFossilMapVisible} onClose={this.props.closeGlobalFossilMap} closeOnTouchOutside
+      <Overlay visible={this.props.globalFossilMapVisible}
       animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.9)', justifyContent: 'center', alignItems:'center', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       childrenWrapperStyle={{position: 'absolute', top: 0, backgroundColor: 'transparent', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       animationDuration={500}>

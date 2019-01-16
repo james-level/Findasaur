@@ -150,8 +150,10 @@ export default class ChooseTimePeriod extends Component {
       ],
       clickedDinoAlreadyFavourite: false,
       fossilMapVisible: false,
+      globalMapLoading: false,
       globalFossilMapVisible: false,
-      globalFavouritesVisible: false
+      globalMapActive: false,
+      globalFavouritesVisible: false,
     };
 
     this.getDinosaursForPeriod = this.getDinosaursForPeriod.bind(this);
@@ -190,11 +192,17 @@ export default class ChooseTimePeriod extends Component {
   }
 
   closeDinosaurView(){
+    console.log("MAP ACTIVE", this.state.globalMapActive);
     this.setState({
       dinosaurViewVisible: false,
       imagesLoading: false,
-      newFavouriteAdded: false
-    });
+    }, function(){
+      this.setState({
+        globalMapLoading: this.state.globalMapActive === true ? true : false,
+        newFavouriteAdded: false,
+        globalFossilMapVisible: this.state.globalMapActive === true ? true : false
+      });
+    })
   }
 
   onDinosaurProfilePictureLoad(){
@@ -466,13 +474,16 @@ export default class ChooseTimePeriod extends Component {
 
   setGlobalFossilMapVisible(){
     this.setState({
-      globalFossilMapVisible: true
+      globalFossilMapVisible: true,
+      globalMapActive: true
     })
   }
 
   closeGlobalFossilMap(){
     this.setState({
-      globalFossilMapVisible: false
+      globalFossilMapVisible: false,
+      globalMapActive: false,
+      globalMapReloading: false
     })
   }
 
@@ -615,7 +626,8 @@ export default class ChooseTimePeriod extends Component {
     this.setState({
       clickedDinosaur: dinosaur,
       globalFossilMapVisible: false,
-      searchOverlayVisible: false
+      searchOverlayVisible: false,
+      globalMapActive: true
     }, function(){
       this.setImagesLoading()
     });
@@ -673,7 +685,15 @@ export default class ChooseTimePeriod extends Component {
 
   getLoadingScreenMessage(){
 
-    if (this.state.clickedDinosaur) {
+    if (this.state.globalMapLoading === true && this.state.clickedDinosaur) {
+      return "Reloading fossil map..."
+    }
+
+    else if (this.state.globalMapLoading === true) {
+      return "Loading fossil map..."
+    }
+
+    else if (this.state.clickedDinosaur) {
       return `${this.state.clickedDinosaur} loading...`
     }
 
@@ -973,7 +993,7 @@ export default class ChooseTimePeriod extends Component {
             renderItem={this._renderItem}
         />
         {
-            this.state.imagesLoading ? (
+            this.state.imagesLoading || this.state.globalMapLoading ? (
               <View style={{backgroundColor: 'black', top: '0%', height: '100%'}}>
               <View style={{backgroundColor: 'black', top: '0%', height: '90%'}}>
                 < BallIndicator count={7} size={65} color={'limegreen'} style={{backgroundColor: 'black'}} />
@@ -984,7 +1004,7 @@ export default class ChooseTimePeriod extends Component {
       }
 
         {
-            this.state.imagesLoading ? (
+            this.state.imagesLoading || this.state.globalMapLoading ? (
 
         <View style={{backgroundColor: 'black', top: '0%', height: '50%', alignItems: 'center', top: '-45%'}}>
           <Text style={[ChooseTimePeriodStyle.loadingText, {fontFamily: 'PoiretOne-Regular'}]}>{this.getLoadingScreenMessage()}</Text>
