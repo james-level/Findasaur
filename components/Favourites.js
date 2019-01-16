@@ -136,14 +136,12 @@ export default class Favourites extends Component {
             }}>
           <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25}}/>
           </TouchableHighlight>
+          <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs</Text>
+          <View style={{alignItems: "center", height: 60, marginBottom: 15}}>
+            <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 60, width: 120, alignItems: 'center' }}/>
+          </View>
             <ScrollView>
 
-
-            <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs</Text>
-
-            <View style={{alignItems: "center"}}>
-              <Image source={require('../assets//Dino_images/runningdino.gif')} style={{height: 60, width: 120, alignItems: 'center' }}/>
-            </View>
 
           {
             this.state.favourites ? (

@@ -13,15 +13,6 @@ const FavouritesStyle = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: 'transparent',
   },
-  favouritesModalBody:{
-    color: 'limegreen',
-    paddingTop: 50,
-    fontSize: 20,
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: 'transparent',
-  },
   favouritesModalText: {
     fontSize: 17,
     color: 'black',
@@ -29,9 +20,7 @@ const FavouritesStyle = StyleSheet.create({
   favouritesModalHeader: {
     fontSize: 26,
     color: 'black',
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    marginBottom: 20
   },
   favouritesText: {
     fontSize: 22,
