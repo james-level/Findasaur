@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Modal, Alert, Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
+import { Modal, Alert, Dimensions, TouchableOpacity, View, Text, ScrollView, Linking, TouchableHighlight, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import Overlay from 'react-native-modal-overlay';
 import FossilMapStyle from '../Stylesheets/FossilMapStyle.js';
@@ -106,7 +106,21 @@ export default class FossilMap extends Component {
                                 />
                {this.fossilsToMap()}
             </MapView>
-          
+
+            <View style={{
+            height: Dimensions.get('window').height * 0.125,
+            backgroundColor: 'transparent',
+            }}>
+            <TouchableOpacity style={{
+              marginTop: Dimensions.get('window').height * 0.05
+            }}
+            onPress={this.props.closeFossilMap}
+            >
+            <Image source={require('../assets/icons/close.png')} style={{height: 30, width: 30}}/>
+
+            </TouchableOpacity>
+          </View>
+
           </Fragment>
         )
       }

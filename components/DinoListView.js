@@ -116,7 +116,7 @@ export default class DinoListView extends Component {
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           this.setState({newFavouriteAdded: true}, function(){
             Alert.alert(
-                   `Successfully added ${dinosaur.name} to your favourites!`
+                   `${dinosaur.name} added to your favourites!`
                 )
           })
         }
@@ -130,7 +130,7 @@ export default class DinoListView extends Component {
           dinos.push(dinosaur);
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           Alert.alert(
-                 `Successfully added ${dinosaur.name} to your favourites!`
+                 `${dinosaur.name} added to your favourites!`
               )
         }
         console.log("DINOS AFTER", dinos);
