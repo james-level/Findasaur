@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-nativ
 const FossilMapStyle = StyleSheet.create({
   map: {
     borderColor: 'transparent',
-    height: Dimensions.get('window').height*0.9,
+    height: Dimensions.get('window').height*1,
     width: Dimensions.get('window').width,
     justifyContent: 'center',
     alignItems: 'center',
