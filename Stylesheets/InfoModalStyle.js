@@ -5,7 +5,7 @@ const InfoModalStyle = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   infoModalHeading:{
     color: 'black',
