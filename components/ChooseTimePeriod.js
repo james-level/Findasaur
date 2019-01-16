@@ -168,6 +168,7 @@ export default class ChooseTimePeriod extends Component {
     this.closeSearchOverlay = this.closeSearchOverlay.bind(this);
     this.getAllDinosaursForGlobalSearch = this.getAllDinosaursForGlobalSearch.bind(this);
     this.setClickedDinosaur = this.setClickedDinosaur.bind(this);
+    this.setClickedDinosaurViaMap = this.setClickedDinosaurViaMap.bind(this);
     this.setImagesLoading = this.setImagesLoading.bind(this);
     this.closeDinosaurView = this.closeDinosaurView.bind(this);
     this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
@@ -610,6 +611,16 @@ export default class ChooseTimePeriod extends Component {
     })
   }
 
+  setClickedDinosaurViaMap(dinosaur){
+    this.setState({
+      clickedDinosaur: dinosaur,
+      globalFossilMapVisible: false,
+      searchOverlayVisible: false
+    }, function(){
+      this.setImagesLoading()
+    });
+  }
+
   setClickedDinosaur(dinosaur){
     this.setState({
       clickedDinosaur: dinosaur,
@@ -985,7 +996,7 @@ export default class ChooseTimePeriod extends Component {
     {
       this.props.fontLoaded && this.state.globalSearchDataLoaded ? (
 
-      <GlobalFossilMap setClickedDinosaur={this.setClickedDinosaur} globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
+      <GlobalFossilMap setClickedDinosaur={this.setClickedDinosaurViaMap} globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
 
     ) : null
 

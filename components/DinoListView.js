@@ -934,6 +934,7 @@ getDietTextFromImageName(){
 /* Results Modal, Dino image */
                     <View style={DinoListViewStyle.modalHeader}>
                     <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
+                    </Text>
                     </View>
                 ) :
 

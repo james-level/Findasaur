@@ -33,15 +33,8 @@ export default class GlobalFossilMap extends Component {
                             title={`${mappedDinosaur.name}`}
                             pinColor={'limegreen'}
                             description={"Fossil found here"}
+                            onPress={() => this.props.setClickedDinosaur(mappedDinosaur.name)}
                             >
-
-                            <MapView.Callout>
-                                      <TouchableHighlight underlayColor='#dddddd'>
-
-                                              <Text onPress={this.props.setClickedDinosaur(mappedDinosaur.name)}>Click to view</Text>
-
-                                      </TouchableHighlight>
-                                    </MapView.Callout>
 
 
                             </MapView.Marker>
@@ -61,15 +54,8 @@ export default class GlobalFossilMap extends Component {
                           title={`${mappedDinosaur.name}`}
                           pinColor={'limegreen'}
                           description={`${mappedDinosaur.name} fossil found here`}
+                          onPress={() => this.props.setClickedDinosaur(mappedDinosaur.name)}
                           >
-
-                          <MapView.Callout>
-                                    <TouchableHighlight underlayColor='#dddddd'>
-
-                                            <Text onPress={this.props.setClickedDinosaur(mappedDinosaur.name)}>Click to view</Text>
-
-                                    </TouchableHighlight>
-                                  </MapView.Callout>
 
                         </MapView.Marker>
       }
