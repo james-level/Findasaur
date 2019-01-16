@@ -715,6 +715,26 @@ export default class ChooseTimePeriod extends Component {
       .then((response) => response.json());
   }
 
+  getDietTextFromImageName(){
+
+    if (ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png")){
+      return "Omnivore"
+    }
+    else if (ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/carnivore.png")){
+      return "Carnivore"
+    }
+    else if (ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/herbivore.png")){
+      return "Herbivore"
+    }
+    else if (ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/diet_unknown.png")){
+      return "Research inconclusive"
+    }
+    else {
+      return
+    }
+
+  }
+
   retrieveImage(url){
     return fetch(url)
       .then((response) => response.json());
@@ -1294,69 +1314,94 @@ export default class ChooseTimePeriod extends Component {
 
         }
 
-          {
-            this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) === require("../assets/icons/omnivore.png") ? (
-
-/* Results Modal, Dino image */
-            <View style={DinoListViewStyle.modalHeader}>
-              <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}
-              </Text>
-            </View>
-
-          ) : null
-
-        }
-
-          {
-
-            this.state.clickedDinosaur && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/omnivore.png") ? (
 
 /* Results Modal, Dino name */
       <View style={DinoListViewStyle.modalHeader}>
-          <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Name: {this.returnClickedDinosaur()}
+          <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
           </Text>
       </View>
-        ) : null
-        }
+
+      {
+/* Results Modal, Dino Pronunciation (text) */
+  Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
+
+  <View style={DinoListViewStyle.modalHeader}>
+    <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.returnClickedDinosaur())}
+    </Text>
+  </View>
+
+    ) : null
+
+    }
+
+    /* Results Modal, Dino Meaning (text) */
+
+    {
+
+      Meanings.getNameMeaning(this.returnClickedDinosaur()) ? (
+
+        <View style={DinoListViewStyle.modalHeader}>
+        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Meaning: </Text>{Meanings.getNameMeaning(this.returnClickedDinosaur())}
+        </Text>
+        </View>
+
+      ) : null
+
+    }
+
+    /* Results Modal, Dino Type (Text)*/
+
+    {
+
+    Types.getType(this.returnClickedDinosaur()) ? (
+
+    <View style={DinoListViewStyle.modalHeader}>
+    <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Type: </Text>
+    {Types.getType(this.returnClickedDinosaur())}
+    </Text>
+    </View>
+
+  ) : null
+
+}
+
 
 /* Results Modal, Dino diet icon */
+
+{
+  ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/diet_unknown.png") ? (
+
       <View style={DinoListViewStyle.modalHeader}>
-        <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}>Diet:  <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{ }}/>
+        <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text> <Image source={  ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)}/>
         </Text>
       </View>
+
+    )  :
+
+    <View style={DinoListViewStyle.modalHeader}>
+      <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: {this.getDietTextFromImageName()}</Text>
+      </Text>
+    </View>
+
+    }
+
+
       }
 
 {/* Results Modal, Fossil Map Link*/}
       <View style={DinoListViewStyle.modalHeader}>
-        <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: <Image source={require("../assets/icons/fossil.png")} style={{width: 30, height: 30 }}/>
+        <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
         </Text>
       </View>
-          {
-/* Results Modal, Dino Pronunciation & Meaning (text) */
-      Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
-
-      <View style={DinoListViewStyle.modalHeader}>
-        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronunciation: {Pronunciations.getPronunciation(this.returnClickedDinosaur())}
-        </Text>
-        <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Meaning: {Meanings.getNameMeaning(this.returnClickedDinosaur())}
-        </Text>
-      </View>
-
-        ) : null
-
-        }
 
         {
 
-/* Results Modal, Dino Length & Type (Text)*/
+/* Results Modal, Dino Length (Text)*/
     Lengths.getLength(this.returnClickedDinosaur()) ? (
 
         <View style={DinoListViewStyle.modalHeader}>
-          <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())}
+          <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{Lengths.getLength(this.returnClickedDinosaur())}
           </Text>{"\n"}
-          <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Type:
-          {Types.getType(this.returnClickedDinosaur())}
-          </Text>
         </View>
 
       ) : null
@@ -1386,7 +1431,7 @@ export default class ChooseTimePeriod extends Component {
 
 /* Results Modal, Dino Description */
     <View style={DinoListViewStyle.modalHeader}>
-      <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>Description: {this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
+      <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
       </Text>
     </View>
 

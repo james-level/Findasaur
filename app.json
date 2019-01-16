@@ -10,7 +10,7 @@
     "orientation": "portrait",
     "icon": "./assets/diplodocus.png",
     "splash": {
-      "image": "./assets/Dino_images/transparent_dinos/triceratops.png",
+      "image": "./assets/Findasplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
