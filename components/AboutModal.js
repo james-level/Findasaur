@@ -23,16 +23,16 @@ export default class AboutModal extends Component {
 
           <View style={AboutModalStyle.aboutModal}>
 
+          <Text style= {[AboutModalStyle.aboutModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
+
+          <View style={{alignItems: "center"}}>
+            <Image source={require('../assets/coffee.gif')} style={{height: 150, width: 225, marginBottom: 20 }}/>
+          </View>
+
           {
             this.props.fontLoaded ? (
 
               <ScrollView>
-
-                <Text style= {[AboutModalStyle.aboutModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
-
-                <View style={{alignItems: "center"}}>
-                  <Image source={require('../assets/coffee.gif')} style={{height: 150, width: 225, padding:100 }}/>
-                </View>
 
                 <Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}>Findasaur, another app from those talented guys at LevelApps - <Text style={{fontSize: 17, fontFamily: 'PoiretOne-Regular', color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/jah1603')}>James Henderson</Text>,
                 <Text style={{fontSize: 18, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/DavidAPears')}> David Pears</Text><Text style= {[AboutModalStyle.aboutModalText, { fontFamily: 'PoiretOne-Regular'}]}></Text> & <Text style={{fontSize: 17, color: '#2f0f07'}} onPress={()=>Linking.openURL('https://github.com/SFR1981')}>Stephen Rooney.</Text>
@@ -47,8 +47,10 @@ export default class AboutModal extends Component {
                 <TouchableHighlight
                   onPress={() => {
                     this.props.setAboutModalVisible();
-                  }}>
-                <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 5, marginLeft: '45%'}}/>
+                  }}
+                  style={{alignItems: 'center', marginBottom: 70}}
+                  >
+                <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 5}}/>
                 </TouchableHighlight>
 
               </ScrollView>

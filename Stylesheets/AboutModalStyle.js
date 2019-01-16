@@ -5,7 +5,7 @@ const AboutModalStyle = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   aboutModalHeading:{
     color: 'black',
