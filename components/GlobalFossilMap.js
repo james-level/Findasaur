@@ -38,7 +38,7 @@ export default class GlobalFossilMap extends Component {
                             <MapView.Callout>
                                       <TouchableHighlight underlayColor='#dddddd'>
 
-                                              <Text>Click to view</Text>
+                                              <Text onPress={this.props.setClickedDinosaur(mappedDinosaur.name)}>Click to view</Text>
 
                                       </TouchableHighlight>
                                     </MapView.Callout>
@@ -66,7 +66,7 @@ export default class GlobalFossilMap extends Component {
                           <MapView.Callout>
                                     <TouchableHighlight underlayColor='#dddddd'>
 
-                                            <Text>Click to view</Text>
+                                            <Text onPress={this.props.setClickedDinosaur(mappedDinosaur.name)}>Click to view</Text>
 
                                     </TouchableHighlight>
                                   </MapView.Callout>
