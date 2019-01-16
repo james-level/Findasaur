@@ -23,7 +23,9 @@ export default class GlobalFossilMap extends Component {
     if (mappedDinosaur.coords[0][0]){
       return mappedDinosaur.coords.map( (coord, i) =>
 
-          <MapView.Marker key={i}
+          <MapView.Marker
+
+          key={i}
                             coordinate={{
                               latitude: coord[0],
                               longitude: coord[1]
@@ -31,13 +33,27 @@ export default class GlobalFossilMap extends Component {
                             title={`${mappedDinosaur.name}`}
                             pinColor={'limegreen'}
                             description={"Fossil found here"}
-                            />
+                            >
+
+                            <MapView.Callout>
+                                      <TouchableHighlight underlayColor='#dddddd'>
+
+                                              <Text>Click to view</Text>
+
+                                      </TouchableHighlight>
+                                    </MapView.Callout>
+
+
+                            </MapView.Marker>
+
+
         )
       }
       else if (!mappedDinosaur.coords[0][0]) {
 
         return
         <MapView.Marker
+
                           coordinate={{
                             latitude: mappedDinosaur.coords[0],
                             longitude: mappedDinosaur.coords[1]
@@ -45,7 +61,17 @@ export default class GlobalFossilMap extends Component {
                           title={`${mappedDinosaur.name}`}
                           pinColor={'limegreen'}
                           description={`${mappedDinosaur.name} fossil found here`}
-                          />
+                          >
+
+                          <MapView.Callout>
+                                    <TouchableHighlight underlayColor='#dddddd'>
+
+                                            <Text>Click to view</Text>
+
+                                    </TouchableHighlight>
+                                  </MapView.Callout>
+
+                        </MapView.Marker>
       }
   }
 
@@ -105,6 +131,7 @@ export default class GlobalFossilMap extends Component {
               }}
               >
               <MapView.Marker
+
                                 coordinate={{
                                   latitude: 25,
                                   longitude: 25
@@ -129,7 +156,6 @@ export default class GlobalFossilMap extends Component {
 
             </TouchableOpacity>
           </View>
-
 
           </Fragment>
         )

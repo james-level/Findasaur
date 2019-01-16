@@ -949,12 +949,7 @@ export default class ChooseTimePeriod extends Component {
 
     return (
 
-
-
       <View style={[ ChooseTimePeriodStyle.container ]}>
-
-
-
 
       {/*  <NavBar home={this.props.home}/> */}
         <FlatList
@@ -988,9 +983,9 @@ export default class ChooseTimePeriod extends Component {
     }
 
     {
-      this.state.globalSearchDataLoaded ? (
+      this.props.fontLoaded && this.state.globalSearchDataLoaded ? (
 
-      <GlobalFossilMap globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
+      <GlobalFossilMap setClickedDinosaur={this.setClickedDinosaur} globalFossilMapVisible={this.state.globalFossilMapVisible} allDinosaurs={this.state.allDinosaursForGlobalSearch} closeGlobalFossilMap={this.closeGlobalFossilMap}/>
 
     ) : null
 
