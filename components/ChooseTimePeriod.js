@@ -192,7 +192,7 @@ export default class ChooseTimePeriod extends Component {
   }
 
   closeDinosaurView(){
-    console.log("MAP ACTIVE", this.state.globalMapActive);
+
     this.setState({
       dinosaurViewVisible: false,
       imagesLoading: false,
@@ -201,7 +201,7 @@ export default class ChooseTimePeriod extends Component {
         globalMapLoading: this.state.globalMapActive === true ? true : false,
         newFavouriteAdded: false,
         globalFossilMapVisible: this.state.globalMapActive === true ? true : false
-      });
+      })
     })
   }
 
@@ -473,18 +473,47 @@ export default class ChooseTimePeriod extends Component {
   }
 
   setGlobalFossilMapVisible(){
+    var self  = this;
+
     this.setState({
-      globalFossilMapVisible: true,
+      clickedDinosaur: null,
+      globalMapLoading: true,
+    }, function(){
+    this.setState({
       globalMapActive: true
-    })
+    },
+    function(){
+    setTimeout(function(){
+
+      self.setState({
+
+        globalFossilMapVisible: true,
+
+      }, function(){
+        setTimeout(function(){
+        self.setState({
+          globalMapLoading: false
+        })
+      }, 500)
+      })
+
+    }, 4600)})
+  })
   }
 
   closeGlobalFossilMap(){
+    this.setState({
+      clickedDinosaur: null,
+      globalMapLoading: false
+      },
+    function(){
     this.setState({
       globalFossilMapVisible: false,
       globalMapActive: false,
       globalMapReloading: false
     })
+  }
+)
   }
 
   setFavouriteAnimationOverlayVisible(){
@@ -1238,7 +1267,7 @@ export default class ChooseTimePeriod extends Component {
     }
 
     {
-      self.state.searchedDinosaurData ? (
+      self.state.searchedDinosaurData && self.state.dinosaurViewVisible ? (
 
     <View>
     <Modal
