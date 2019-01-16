@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Font } from 'expo';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as Animatable from 'react-native-animatable';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import MultiToggleSwitch from 'react-native-multi-toggle-switch';
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
@@ -188,19 +189,53 @@ export default class TimePeriodPage extends Component {
       ) : null
       }
       </View>
-      {
-      Platform.OS === 'ios' ? (
 
-      <View>
+
+    {/*
+        <View>
       <TouchableHighlight
                 onPress={this.props.handleSearchSubmit}>
                 <Image style={TimePeriodStyle.plusButton}source={require('../assets/icons/plus.png')}/>
               </TouchableHighlight>
       </View>
+      */}
 
-    ) : null
+      {/*
+      <Button
+        onPress={this.props.handleSearchSubmit}
+        textStyle={{fontSize:24, color: 'black', fontFamily: "PoiretOne-Regular"}}
+        title="Dinos"
+        titleStyle={{ fontFamily: "PoiretOne-Regular" }}
+        buttonStyle={{
+          backgroundColor: "limegreen",
+          width: Dimensions.get("window").width * 0.22,
+          height: Dimensions.get("window").width * 0.22,
+          borderRadius: Dimensions.get("window").width * 0.11,
+          marginLeft: 0
+        }}
+        containerStyle={{ marginTop: 0 }}
+        />
+        */}
 
-  }
+      <View style={{alignItems: 'center'}}>
+      <TouchableHighlight
+                onPress={this.props.handleSearchSubmit}>
+                <Animatable.View animation="tada" iterationDelay={2000} iterationCount="infinite" direction="alternate">
+                <Image source={require("../assets/blackfootbutton.png")} style={{width: Dimensions.get("window").width * 0.22,
+                height: Dimensions.get("window").width * 0.22,
+                borderRadius: Dimensions.get("window").width * 0.11,
+                marginLeft: 0}} />
+
+
+                </Animatable.View>
+
+
+
+
+              </TouchableHighlight>
+      </View>
+
+
 
     </View>
     );

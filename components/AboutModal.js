@@ -48,7 +48,7 @@ export default class AboutModal extends Component {
                   onPress={() => {
                     this.props.setAboutModalVisible();
                   }}>
-                <Image source={require('../assets/icons/aboutback.png')} style={{height: 40, width: 40, marginBottom: 5, marginLeft: '45%'}}/>
+                <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 5, marginLeft: '45%'}}/>
                 </TouchableHighlight>
 
               </ScrollView>
