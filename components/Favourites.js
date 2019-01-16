@@ -153,7 +153,14 @@ export default class Favourites extends Component {
 
         </ScrollView>
 
+        {
+
+          this.state.clickedFavourite ? (
+
         <FavouriteModal clickedFavourite={this.state.clickedFavourite} favouriteModalVisible={this.state.favouriteModalVisible} toggleFavouriteModal={this.toggleFavouriteModal} fontLoaded={this.state.fontLoaded} />
+
+      ) : null
+    }
 
             </View>
           </LinearGradient>

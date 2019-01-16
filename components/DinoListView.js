@@ -96,11 +96,12 @@ export default class DinoListView extends Component {
     var meaning = Meanings.getNameMeaning(name)
     var length = Lengths.getLength(name)
     var type = Types.getType(name)
+    var coords = this.state.searchedDinosaurData.coords
     var diet = this.state.searchedDinosaurData.diet
     var image = this.state.searchedDinosaurImage
     var era = this.props.eraName
 
-    var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+    var dinosaur = {name: name, coords: coords, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {

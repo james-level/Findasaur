@@ -243,11 +243,12 @@ export default class ChooseTimePeriod extends Component {
     var type = Types.getType(name)
     var diet = this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet
     var image = this.state.addressBookImage
+    var coords = this.retrieveDinosaurFromName(this.state.clickedDinosaur).coords
     var era = this.state.viewableItems[0].item.title
 
     var self = this;
 
-    var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+    var dinosaur = {name: name, coords: coords, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {

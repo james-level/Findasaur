@@ -9,8 +9,40 @@ import * as Pronunciations from './Pronunciations.js'
 import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
+import FossilMap from './FossilMap.js';
 
 export default class FavouriteModal extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      fossilMapVisible: false
+    }
+
+    this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
+    this.closeFossilMap = this.closeFossilMap.bind(this);
+
+  }
+
+
+  setFossilMapVisible(){
+    this.setState({
+      fossilMapVisible: true
+    },
+  function(){
+    this.props.toggleFavouriteModal()
+  })
+  }
+
+  closeFossilMap(){
+    this.setState({
+      fossilMapVisible: false
+    },
+  function(){
+    this.props.toggleFavouriteModal()
+
+  })
+  }
 
   getDietTextFromImageName(){
 
@@ -39,6 +71,10 @@ export default class FavouriteModal extends Component {
     return (
 
       <View>
+
+        <FossilMap mappedDinosaur={this.props.clickedFavourite} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} />
+
+
       <Modal
         animationType="slide"
         transparent={false}
