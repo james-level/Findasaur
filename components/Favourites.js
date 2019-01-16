@@ -61,7 +61,7 @@ export default class Favourites extends Component {
        }
       )
         Alert.alert(
-               `${dinoToDelete.name} has been deleted from your favourites.`
+               `${dinoToDelete.name} has been deleted from your favourites`
             )
     }).catch((error) => {
       console.log(error)
@@ -150,13 +150,6 @@ export default class Favourites extends Component {
               self.renderFavourites()
             ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}>Oh no! Your favourites are currently empty. Find dinosaurs in the app and click the ⭐️ to add them to this list. </Text>
         }
-
-        <TouchableHighlight
-          onPress={() => {
-            this.props.setFavouritesVisible();
-          }}>
-        <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginBottom: 3, marginTop: 30, marginLeft: '50%'}}/>
-        </TouchableHighlight>
 
         </ScrollView>
 

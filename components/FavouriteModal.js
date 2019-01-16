@@ -11,6 +11,27 @@ import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 
 export default class FavouriteModal extends Component {
+
+  getDietTextFromImageName(){
+
+    if (ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/omnivore.png")){
+      return "Omnivore"
+    }
+    else if (ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/carnivore.png")){
+      return "Carnivore"
+    }
+    else if (ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/herbivore.png")){
+      return "Herbivore"
+    }
+    else if (ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/diet_unknown.png")){
+      return "Research inconclusive"
+    }
+    else {
+      return
+    }
+
+  }
+
   render() {
 
     var self = this;
@@ -34,18 +55,19 @@ export default class FavouriteModal extends Component {
 
         <View style={FavouriteModalStyle.infoModal}>
 
+        <TouchableHighlight
+        style={{alignItems: 'center'}}
+          onPress={() => {
+            this.props.toggleFavouriteModal();
+          }}>
+        <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginTop: 20, marginBottom: 20}}/>
+        </TouchableHighlight>
+
         {
 
           this.props.clickedFavourite ? (
 
             <ScrollView>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.props.toggleFavouriteModal();
-              }}>
-            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginTop: 20, marginBottom: 20, marginLeft: '48%'}}/>
-            </TouchableHighlight>
 
             <View style={{alignItems: "center", marginBottom: 15}}>
 
@@ -54,49 +76,34 @@ export default class FavouriteModal extends Component {
               source={{uri: `${this.props.clickedFavourite.image}`}}
             />
 
-            {
-                ImageFinder.getDietImage(this.props.clickedFavourite.diet) === require("../assets/icons/omnivore.png") ? (
-
-                <View style={FavouriteModalStyle.modalHeader}>
-
-                <Text style={FavouriteModalStyle.infoModalHeader}>{this.props.clickedFavourite.name}</Text>
-                <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet) } style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
-                </View>
-            ) :
-
 /* Faves Modal, Fave Dino name */
             <View style={FavouriteModalStyle.modalHeader}>
-              <Text style={[FavouriteModalStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Name: {this.props.clickedFavourite.name}
-              </Text>
-            </View>
-            }
-
-/* Faves Modal, Fave Dino diet icon */
-            <View style={FavouriteModalStyle.modalHeader}>
-              <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}>Diet:
-                <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet)} style={{}}/>
+              <Text style={[FavouriteModalStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.props.clickedFavourite.name}
               </Text>
             </View>
 
-{/* Faves Modal, Fossil Map Link*/}
-            <View style={FavouriteModalStyle.modalHeader}>
-                <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>Fossil Map: 🌎<Image source={"./assets/icons/globesmall.png"} style={{width: 30, height: 30 }}/>
-                </Text>
-              </View>
-
-/* Faves Modal, Dino-Era (text) */
-            <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Lived during the {this.props.clickedFavourite.era}</Text>
-            </View>
 
             {
-/* Faves Modal, Dino Pronunciation & Meaning (text) */
+/* Faves Modal, Dino Pronunciation (text) */
               this.props.clickedFavourite.pronunciation ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Pronounced: '{this.props.clickedFavourite.pronunciation}'
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Pronounced: </Text> '{this.props.clickedFavourite.pronunciation}'
             </Text>
-            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Meaning: {this.props.clickedFavourite.meaning}
+            </View>
+
+          ) : null
+
+          }
+
+            {
+
+            /* Faves Modal, Dino name Meaning (text) */
+
+            this.props.clickedFavourite.meaning ? (
+
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Meaning: </Text> {this.props.clickedFavourite.meaning}
             </Text>
             </View>
 
@@ -105,13 +112,54 @@ export default class FavouriteModal extends Component {
           }
 
           {
-/* Faves Modal, Dino Length & Type (Text)*/
+  /* Faves Modal, Dino Type (Text)*/
+            this.props.clickedFavourite.type ? (
+
+          <View style={FavouriteModalStyle.modalHeader}>
+          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Type: </Text>{this.props.clickedFavourite.type}
+          </Text>
+          </View>
+
+        ) : null
+
+      }
+
+/* Faves Modal, Fave Dino diet icon */
+          {
+            ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
+
+            <View style={FavouriteModalStyle.modalHeader}>
+              <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text>
+                <Image source={ ImageFinder.getDietImage(this.props.clickedFavourite.diet)} style={{}}/>
+              </Text>
+            </View>
+
+          ) :
+
+          <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+            </Text>
+          </View>
+
+        }
+
+{/* Faves Modal, Fossil Map Link*/}
+            <View style={FavouriteModalStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View Fossil Map: <Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
+                </Text>
+              </View>
+
+/* Faves Modal, Dino-Era (text) */
+            <View style={FavouriteModalStyle.modalHeader}>
+            <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Era: </Text>{this.props.clickedFavourite.era}</Text>
+            </View>
+
+          {
+/* Faves Modal, Dino Length (Text)*/
             this.props.clickedFavourite.length ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
-          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Length: {this.props.clickedFavourite.length}
-          </Text>
-          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}>Type: {this.props.clickedFavourite.type}
+          <Text style={[FavouriteModalStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{this.props.clickedFavourite.length}
           </Text>
           </View>
 
@@ -123,22 +171,17 @@ export default class FavouriteModal extends Component {
 
         ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name) ? (
 
-            <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
+            <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20, marginBottom: 20}} source={ImageFinder.findSizeComparisonImage(this.props.clickedFavourite.name)}/>
 
           ) : null
         }
 /* Results Modal, Dino Description */
-            <Text style={[FavouriteModalStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>Description: {this.props.clickedFavourite.description}
+          <View style={FavouriteModalStyle.modalDescription}>
+            <Text style={[FavouriteModalStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.props.clickedFavourite.description}
               </Text>
-
             </View>
 
-            <TouchableHighlight
-              onPress={() => {
-                this.props.toggleFavouriteModal();
-              }}>
-            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginTop: 20, marginBottom: 20, marginLeft: '48%'}}/>
-            </TouchableHighlight>
+            </View>
 
               </ScrollView>
             ) : null

@@ -11,6 +11,15 @@ const FavouriteModalStyle = StyleSheet.create({
     marginLeft: 20,
   },
 
+  modalDescription: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+    marginTop: 20,
+    marginBottom: 60
+  },
+
   modalHeader: {
     flex: 1,
     justifyContent: 'center',
@@ -39,11 +48,11 @@ const FavouriteModalStyle = StyleSheet.create({
 
   modalDietIcon: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+  
     fontSize: 20,
     color: 'white',
     marginLeft: 20,
+    marginRight: 25
   },
 
   modalMapLink: {
