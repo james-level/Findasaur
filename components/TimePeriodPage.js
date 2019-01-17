@@ -240,8 +240,13 @@ export default class TimePeriodPage extends Component {
         />
         */}
 
-      <View style={{alignItems: 'center'}}>
+        {
+
+          Platform.OS === 'ios' ? (
+
+      <View style={{alignItems: 'center', overflow: 'visible'}}>
       <TouchableHighlight
+      style={{overflow: 'visible'}}
                 onPress={this.props.handleSearchSubmit}>
                 <Animatable.View animation="tada" iterationDelay={2000} iterationCount="infinite" direction="alternate">
                 <Image source={require("../assets/blackfootbutton.png")} style={{width: Dimensions.get("window").width * 0.22,
@@ -251,12 +256,27 @@ export default class TimePeriodPage extends Component {
 
 
                 </Animatable.View>
-
-
-
-
               </TouchableHighlight>
       </View>
+
+    ) :
+
+    <View style={{alignItems: 'center', overflow: 'visible'}}>
+    <TouchableHighlight
+    style={{overflow: 'visible'}}
+              onPress={this.props.handleSearchSubmit}>
+              <Animatable.View animation="swing" iterationDelay={2000} iterationCount="infinite" direction="alternate">
+              <Image source={require("../assets/blackfootbutton.png")} style={{width: Dimensions.get("window").width * 0.22,
+              height: Dimensions.get("window").width * 0.22,
+              borderRadius: Dimensions.get("window").width * 0.11,
+              marginLeft: 0}} />
+
+
+              </Animatable.View>
+            </TouchableHighlight>
+    </View>
+
+  }
 
 
 
