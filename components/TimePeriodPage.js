@@ -56,6 +56,21 @@ export default class TimePeriodPage extends Component {
 
   eraImage(index){
 
+    if (Dimensions.get('window').width > 550) {
+
+    switch(index) {
+
+    case 6: return require("../assets/era_images/middle_triassic2.png");
+    case 5: return require("../assets/era_images/middle_triassic.png");
+    case 4: return require("../assets/era_images/early_jurassic.png");
+    case 3: return require("../assets/era_images/mid_jurassic.png");
+    case 2: return require("../assets/era_images/late_jurassic.png");
+    case 1: return require("../assets/era_images/late_cretaceous.png");
+    case 0: return require("../assets/era_images/early_cretaceous.png");
+  }
+}
+  else {
+
     switch(index) {
 
     case 6: return require("../assets/era_images/midTrsc2.png");
@@ -65,7 +80,10 @@ export default class TimePeriodPage extends Component {
     case 2: return require("../assets/era_images/lateJrsc.png");
     case 1: return require("../assets/era_images/lateCrtcs.png");
     case 0: return require("../assets/era_images/earlyCrtcs3.png");
+
   }
+  }
+
   }
 
   async componentDidMount() {

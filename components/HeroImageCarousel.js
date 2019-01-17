@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableHighlight, Text } from 'react-native';
+import { View, Image, Dimensions, TouchableHighlight, Text } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import HeroImageCarouselStyle from '../Stylesheets/HeroImageCarouselStyle.js';
 
