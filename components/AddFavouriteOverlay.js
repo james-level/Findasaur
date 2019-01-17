@@ -28,7 +28,7 @@ export default class AddFavouriteOverlay extends Component {
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.favouriteOverlayVisible} onClose={this.props.closeFavouriteOverlay} closeOnTouchOutside
-      animationType="fadeInUp" containerStyle={{backgroundColor: 'transparent'}}
+      animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.8)'}}
       childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15}}
       animationDuration={500}>
       {
@@ -39,8 +39,8 @@ export default class AddFavouriteOverlay extends Component {
         ) : null
       }
       { this.state.gifLoaded === true ? (
-          <View style={{backgroundColor: 'white', borderRadius: 5, marginTop: 5, borderWidth: 2, borderColor: 'black'}}>
-          <Text style={FavouriteAnimationOverlayStyle.favouriteOverlayDescription}>New Findasaur favourite added - looks like you're coming up on a full set!</Text>
+          <View style={{backgroundColor: 'black', borderRadius: 5, marginTop: 0, borderWidth: 2, borderColor: 'black'}}>
+          <Text style={FavouriteAnimationOverlayStyle.favouriteOverlayDescription}>Favourite added!</Text>
           </View>
 
         ) : null
