@@ -126,7 +126,7 @@ export default class Favourites extends Component {
 
         <LinearGradient
         colors={['black', 'black']}
-        style={{ height: Dimensions.get('window').height, padding: 25 }}>
+        style={{ height: Dimensions.get('window').height*1, padding: 25 }}>
 
           <View style={FavouritesStyle.favouritesModal}>
           <TouchableHighlight

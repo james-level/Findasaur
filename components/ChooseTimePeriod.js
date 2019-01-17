@@ -1024,7 +1024,6 @@ export default class ChooseTimePeriod extends Component {
 
       <View style={[ ChooseTimePeriodStyle.container ]}>
 
-      {/*  <NavBar home={this.props.home}/> */}
         <FlatList
             ref={r => this.refs = r}
             data={this.state.items}
@@ -1064,9 +1063,6 @@ export default class ChooseTimePeriod extends Component {
 
     }
 
-      {
-        Platform.OS != 'ios' ? (
-
           <View style={ChooseTimePeriodStyle.iconsContainer}>
 
           <TouchableHighlight
@@ -1080,27 +1076,34 @@ export default class ChooseTimePeriod extends Component {
           <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.handleSearchSubmit();
+              this.setGlobalFavouritesVisible();
               }}>
-                <Image source={require('../assets/icons/plus.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
           </TouchableHighlight>
 
-          <TouchableHighlight
+          { this.state.globalSearchDataLoaded ? (
+
+            <TouchableHighlight
           style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setEraModalVisible();
+              this.setGlobalFossilMapVisible();
               }}>
-              <Image source={require('../assets/icons/info2.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
+                  <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+            </TouchableHighlight>
 
-          {/*<TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
+        ) :
+
+        <TouchableHighlight
+        style={{position: 'relative', top: '0%'}}
             onPress={() => {
-              this.setFavouritesVisible();
+              Alert.alert(
+                     "Loading dinosaur data... Please wait a moment"
+                  )
               }}>
+              <Image source={require('../assets/globegrey.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
+        </TouchableHighlight>
 
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, width: 32, marginRight: 40, position: 'relative'}}/>
-          </TouchableHighlight>*/}
+      }
 
           { this.state.globalSearchDataLoaded ? (
 
@@ -1128,57 +1131,6 @@ export default class ChooseTimePeriod extends Component {
 
           </View>
 
-        ) :   /* Icons for home, favourites and era information overlay */
-
-          <View style={ChooseTimePeriodStyle.iconsContainer}>
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.props.home();
-              }}>
-                <Image source={require('../assets/icons/home.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.setGlobalFavouritesVisible();
-              }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-          {/*<TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.setFavouritesVisible();
-              }}>
-                <Image source={require('../assets/icons/favourite.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>*/}
-
-          { this.state.globalSearchDataLoaded ? (
-
-            <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.setGlobalFossilMapVisible();
-              }}>
-                  <Image source={require('../assets/globe.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-            </TouchableHighlight>
-
-        ) :
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              Alert.alert(
-                     "Loading dinosaur data... Please wait a moment"
-                  )
-              }}>
-              <Image source={require('../assets/globegrey.png')} style={{height: 32, marginRight: 40, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-      }
 
       {
         this.props.fontLoaded && this.state.globalFavouritesVisible ? (
@@ -1188,33 +1140,6 @@ export default class ChooseTimePeriod extends Component {
     ) : null
 
   }
-
-          { this.state.globalSearchDataLoaded ? (
-
-          <TouchableHighlight
-          style={{position: 'relative', top: '0%'}}
-            onPress={() => {
-              this.setSearchOverlayVisible();
-              }}>
-                <Image source={require('../assets/icons/search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
-          </TouchableHighlight>
-
-        ) :
-
-        <TouchableHighlight
-        style={{position: 'relative', top: '0%'}}
-          onPress={() => {
-            Alert.alert(
-                   "Loading dinosaur data... Please wait a moment"
-                )
-            }}>
-              <Image source={require('../assets/icons/grey_search.png')} style={{height: 32, width: 32, position: 'relative'}}/>
-        </TouchableHighlight>
-
-      }
-
-          </View>
-      }
 
 
   {
@@ -1320,7 +1245,7 @@ export default class ChooseTimePeriod extends Component {
                 <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
           </TouchableHighlight>
           </View>
-/* Results Modal, ADD TO FAVE's section */
+
         ) :
         <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
         <Text
@@ -1355,7 +1280,6 @@ export default class ChooseTimePeriod extends Component {
 
             self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
 
-/* Results Modal, Dino image */
             <Image
                 style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
                 source={{uri: `${this.state.addressBookImage}`}} onLoad={this.onDinosaurProfilePictureLoad}
@@ -1384,14 +1308,13 @@ export default class ChooseTimePeriod extends Component {
         }
 
 
-/* Results Modal, Dino name */
       <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
           </Text>
       </View>
 
       {
-/* Results Modal, Dino Pronunciation (text) */
+
   Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
 
   <View style={DinoListViewStyle.modalHeader}>
@@ -1402,8 +1325,6 @@ export default class ChooseTimePeriod extends Component {
     ) : null
 
     }
-
-    /* Results Modal, Dino Meaning (text) */
 
     {
 
@@ -1417,8 +1338,6 @@ export default class ChooseTimePeriod extends Component {
       ) : null
 
     }
-
-    /* Results Modal, Dino Type (Text)*/
 
     {
 
@@ -1434,8 +1353,6 @@ export default class ChooseTimePeriod extends Component {
 
 }
 
-
-/* Results Modal, Dino diet icon */
 
 {
   ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/diet_unknown.png") ? (
@@ -1457,7 +1374,6 @@ export default class ChooseTimePeriod extends Component {
 
       }
 
-{/* Results Modal, Fossil Map Link*/}
       <View style={DinoListViewStyle.modalHeader}>
         <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
         </Text>
@@ -1465,7 +1381,6 @@ export default class ChooseTimePeriod extends Component {
 
         {
 
-/* Results Modal, Dino Length (Text)*/
     Lengths.getLength(this.returnClickedDinosaur()) ? (
 
         <View style={DinoListViewStyle.modalHeader}>
@@ -1498,7 +1413,7 @@ export default class ChooseTimePeriod extends Component {
       {
         self.state.searchedDinosaurDescription ? (
 
-/* Results Modal, Dino Description */
+
     <View style={DinoListViewStyle.modalHeader}>
       <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
       </Text>
