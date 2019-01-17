@@ -119,7 +119,7 @@ export default class DinoGalleryView extends Component {
                 )
           })
         }
-        
+
         else {
           Alert.alert(
                  `${dinosaur.name} is already in your favourites!`
@@ -723,10 +723,6 @@ export default class DinoGalleryView extends Component {
 
           }
 
-
-              {/*<Text style={[s.name, { color: '#fff' }]}>
-                {_.get(this.state.activeItem, 'name', 'No Default')}
-              </Text>*/}
             </TouchableOpacity>
           )}
 
@@ -756,7 +752,6 @@ export default class DinoGalleryView extends Component {
             onViewableItemsChanged={this.onViewableItemsChanged}
           />
 
-{/* PAGINATION 'DOTS' ACROSS BOTTOM OF DINO-LIST PAGE, */}
         {
           this.state.items ? (
           <Pagination
@@ -783,8 +778,6 @@ export default class DinoGalleryView extends Component {
       }
         </View>
 
-        {/* ICONS FOR TOGGLING AND RETURNING TO ERAS */}
-
         <View style={{flexDirection: 'row', position: 'absolute', top: height*0.065}}>
     <TouchableHighlight
       onPress={() => {
@@ -802,8 +795,6 @@ export default class DinoGalleryView extends Component {
 
     </View>
 
-    {/* END OF ICONS */}
-
     {
       this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
 
@@ -816,46 +807,6 @@ export default class DinoGalleryView extends Component {
     null
 
     }
-
-
-        {/* SEARCH BAR Section */}
-        {/*
-
-                <View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
-              <Autocomplete
-                autoCapitalize="none"
-                autoCorrect={false}
-                containerStyle={{width: Dimensions.get('window').width*0.71}}
-                data={this.buildDinosaurNameList().length === 1 && comp(query, this.buildDinosaurNameList()[0]) ? [] : dinosaurs}
-                defaultValue={query}
-                inputContainerStyle={{flex: 1}}
-                onChangeText={dinosaur => this.setState({ dinosaurTyped: dinosaur })}
-                placeholder={this.searchBarPlaceholderText()}
-                placeholderTextColor="white"
-                placeholderTextFontFamily='PoiretOne-Regular'
-                renderItem={({ dinosaur }) => (
-                  <TouchableOpacity onPress={() => this.setState({ dinosaurTyped: `${dinosaur}` })}>
-                  </TouchableOpacity>
-                )}
-              />
-
-                {dinosaurs.length > 5 ? (
-                  <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', height: height*0.42, paddingLeft: 10}}>
-                  <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
-                  {this.renderMatches(dinosaurs, dinosaursAndDiets)}
-                  </ScrollView>
-                  </View>
-                ) : (
-                  <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'white', paddingLeft: 10}}>
-                  <ScrollView>
-                  {this.renderMatches(dinosaurs, dinosaursAndDiets)}
-                  </ScrollView>
-                  </View>
-                )}
-            </View>
-            */}
-        {/* End of SEARCH BAR Section */}
-
 
           {
             self.state.searchedDinosaurData ? (
@@ -898,7 +849,7 @@ export default class DinoGalleryView extends Component {
                           <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
                     </TouchableHighlight>
                     </View>
-    /* Results Modal, ADD TO FAVE's section */
+
                   ) :
                   <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
                   <Text
@@ -933,7 +884,7 @@ export default class DinoGalleryView extends Component {
 
                       self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
 
-    /* Results Modal, Dino image */
+
                     <Image
                       style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
                       source={{uri: `${this.state.addressBookImage}`}}
@@ -945,21 +896,21 @@ export default class DinoGalleryView extends Component {
                     {
                       ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
 
-    /* Results Modal, Dino image */
+
                         <View style={DinoListViewStyle.modalHeader}>
                         <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
                         </Text>
                         </View>
                     ) :
 
-    /* Results Modal, Dino name */
+
                     <View style={DinoListViewStyle.modalHeader}>
                       <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
                       </Text>
                     </View>
                     }
 
-                    /* Results Modal, Dino Meaning (text) */
+
                           {
                               Meanings.getNameMeaning(this.returnClickedDinosaur()) ? (
 
@@ -975,7 +926,7 @@ export default class DinoGalleryView extends Component {
 
 
                             {
-            /* Results Modal, Dino Pronunciation (text) */
+
                           Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
 
                             <View style={DinoListViewStyle.modalHeader}>
@@ -998,7 +949,7 @@ export default class DinoGalleryView extends Component {
 
                           }
 
-    /* Results Modal, Dino diet icon */
+
 
                     {
                       ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
@@ -1017,14 +968,14 @@ export default class DinoGalleryView extends Component {
 
                         }
 
-    {/* Results Modal, Fossil Map Link*/}
+
                     <View style={DinoListViewStyle.modalHeader}>
                       <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
                       </Text>
                     </View>
 
                   {
-    /* Results Modal, Dino Length (Text)*/
+
                   Lengths.getLength(this.returnClickedDinosaur()) ? (
 
                   <View style={DinoListViewStyle.modalHeader}>
@@ -1036,12 +987,10 @@ export default class DinoGalleryView extends Component {
 
                 }
 
-                /* Results Modal, Dino Type (Text)*/
 
                 {
                   ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
-    /* Results Modal, Dino Length (Image/Graphic)*/
                 <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
               ) : null
@@ -1059,7 +1008,6 @@ export default class DinoGalleryView extends Component {
                 {
                   self.state.searchedDinosaurDescription ? (
 
-    /* Results Modal, Dino Description */
               <View style={DinoListViewStyle.modalHeader}>
                 <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
                 </Text>
