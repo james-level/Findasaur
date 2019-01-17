@@ -183,7 +183,7 @@ export default class TimePeriodPage extends Component {
 
     {
 
-      this.state.fontLoaded ? (
+      this.state.fontLoaded && Platform.OS === 'ios' ? (
     <Text style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title}
 
       <TouchableHighlight
@@ -197,7 +197,12 @@ export default class TimePeriodPage extends Component {
       </TouchableHighlight>
 
     </Text>
-        ) : null
+        ) :
+        <Text onPress={() => {
+          this.props.setEraModalVisible();
+        }} style={[TimePeriodStyle.eraTitle, {fontFamily: 'PoiretOne-Regular'}]}>{title} ℹ︎
+
+        </Text>
       }
 
       {

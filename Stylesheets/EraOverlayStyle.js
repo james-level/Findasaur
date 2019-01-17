@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, ImageBackground } from 'react-native';
 
 const EraOverlayStyle = StyleSheet.create({
   eraOverlayHeader: {
@@ -10,7 +10,7 @@ const EraOverlayStyle = StyleSheet.create({
   eraOverlayDescription: {
     color: 'white',
     padding: 5,
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800 ? 17 : 20,
     fontFamily: 'PoiretOne-Regular'
   },
 });
