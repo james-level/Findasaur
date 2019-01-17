@@ -48,7 +48,7 @@ export default class InfoModal extends Component {
                   onPress={() => {
                     this.props.setModalVisible();
                   }}>
-                <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginTop: 40, marginBottom: 10}}/>
+                <Image source={require('../assets/icons/back2.png')} style={{height: 25, width: 25, marginTop: 40, marginBottom: 20}}/>
                 </TouchableHighlight>
               </ScrollView>
 

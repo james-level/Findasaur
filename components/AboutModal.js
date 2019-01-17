@@ -26,7 +26,7 @@ export default class AboutModal extends Component {
           <Text style= {[AboutModalStyle.aboutModalHeading, { fontFamily: 'PoiretOne-Regular'}]}>LevelApps</Text>
 
           <View style={{alignItems: "center"}}>
-            <Image source={require('../assets/coffee.gif')} style={{height: 150, width: 225, marginBottom: 20 }}/>
+            <Image source={require('../assets/coffee.gif')} style={{height: 150, width: 225, marginBottom: 25 }}/>
           </View>
 
           {
@@ -50,7 +50,7 @@ export default class AboutModal extends Component {
                   }}
                   style={{alignItems: 'center', marginBottom: 70}}
                   >
-                <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 5}}/>
+                <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 15}}/>
                 </TouchableHighlight>
 
               </ScrollView>
