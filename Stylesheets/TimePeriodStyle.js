@@ -50,7 +50,7 @@ const TimePeriodStyle = StyleSheet.create({
   },
   eraTitle: {
     color: 'white',
-    fontSize: 45,
+    fontSize: Dimensions.get('window').width < 350 ? 35 : 45,
     position: 'absolute',
     top: '35%',
     textShadowColor: 'black',

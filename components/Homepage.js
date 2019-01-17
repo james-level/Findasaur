@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
-import { StyleSheet, Text, View, Linking, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
+import { StyleSheet, Text, Dimensions, View, Linking, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
 import { Font, Asset, LinearGradient  } from 'expo';
 import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native';
