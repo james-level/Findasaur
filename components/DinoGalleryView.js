@@ -701,6 +701,8 @@ export default class DinoGalleryView extends Component {
 
       }
 
+
+
       {
         this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
 
@@ -778,7 +780,44 @@ export default class DinoGalleryView extends Component {
       }
         </View>
 
+        {/* ICONS FOR TOGGLING AND RETURNING TO ERAS */}
+
+        <View style={{flexDirection: 'row', position: 'absolute', top: height*0.065}}>
+    <TouchableHighlight
+      onPress={() => {
+        this.props.returnToErasPage();
+      }}>
+    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
+    </TouchableHighlight>
+
+    <TouchableHighlight
+      onPress={() => {
+        this.props.toggleLayout();
+      }}>
+    <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
+    </TouchableHighlight>
+
+    </View>
+
+    {/* END OF ICONS */}
+
+    {
+      this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+    <View style={{flexDirection: 'column', position: 'absolute', top: Dimensions.get('window').height*0.14}}>
+    <Text style={[DinoListViewStyle.galleryNameHeader, {fontFamily: 'PoiretOne-Regular', textAlign: 'center'}]}>{this.state.activeItem.name}</Text>
+    </View>
+
+    ) :
+
+    null
+
+    }
+
+
         {/* SEARCH BAR Section */}
+        {/*
+
                 <View style={{position: 'absolute', top: height*0.04, marginLeft: 15, marginRight: 15 }}>
               <Autocomplete
                 autoCapitalize="none"
@@ -811,25 +850,9 @@ export default class DinoGalleryView extends Component {
                   </View>
                 )}
             </View>
+            */}
         {/* End of SEARCH BAR Section */}
 
-
-        <View style={{flexDirection: 'row'}}>
-    <TouchableHighlight
-      onPress={() => {
-        this.props.returnToErasPage();
-      }}>
-    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
-    </TouchableHighlight>
-
-    <TouchableHighlight
-      onPress={() => {
-        this.props.toggleLayout();
-      }}>
-    <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
-    </TouchableHighlight>
-
-    </View>
 
           {
             self.state.searchedDinosaurData ? (

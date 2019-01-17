@@ -11,6 +11,14 @@ infoModalHeader: {
   marginLeft: 20,
 },
 
+galleryNameHeader: {
+  flex: 1,
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  fontSize: 26,
+  color: 'limegreen',
+},
+
 modalHeader: {
   flex: 1,
   justifyContent: 'center',
