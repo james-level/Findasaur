@@ -574,7 +574,7 @@ getDietTextFromImageName(){
                   justifyContent: 'flex-start',
                   alignItems: 'flex-start',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 23,
+                  fontSize: Dimensions.get('window').width < 400 ? 18 : 23,
                   color: 'limegreen',
                   marginLeft: 20,
                   paddingLeft: 30,
@@ -584,7 +584,7 @@ getDietTextFromImageName(){
                   justifyContent: 'flex-start',
                   alignItems: 'flex-start',
                   fontFamily: 'PoiretOne-Regular',
-                  fontSize: 23,
+                  fontSize: Dimensions.get('window').width < 400 ? 18 : 23,
                   color: 'white',
                   marginLeft: 20,
                   paddingLeft: 30,
@@ -592,7 +592,7 @@ getDietTextFromImageName(){
             ]}
           >
                   <AutoHeightImage
-                  width={ Dimensions.get('window').width*0.060 }
+                  width={ Dimensions.get('window').width < 400 ? Dimensions.get('window').width*0.1 : Dimensions.get('window').width*0.06 }
                   source={ require('../assets/icons/footprint.png')}
                   />
             {o.item.name ? o.item.name : 'Unknown'}
@@ -691,7 +691,7 @@ getDietTextFromImageName(){
                 style={{
                   color: 'limegreen',
                   fontWeight: '400',
-                  fontSize: 22,
+                  fontSize: Dimensions.get('window').width < 400 ? 16 : 22,
                   fontFamily: 'PoiretOne-Regular',
                   textAlign: 'center',
                   marginTop: 20
@@ -739,7 +739,7 @@ getDietTextFromImageName(){
               style={{
                 color: 'limegreen',
                 fontWeight: '400',
-                fontSize: 22,
+                fontSize: Dimensions.get('window').width < 400 ? 18 : 22,
                 fontFamily: 'PoiretOne-Regular',
                 textAlign: 'center',
                 marginTop: 20

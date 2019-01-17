@@ -22,6 +22,7 @@ const ChooseTimePeriodStyle = StyleSheet.create({
     fontSize: 22,
     color: 'white',
     paddingTop: 0,
+    textAlign: 'center'
   },
 });
 
