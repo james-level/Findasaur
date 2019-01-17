@@ -300,7 +300,7 @@ export default class ChooseTimePeriod extends Component {
           dinos.push(dinosaur);
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           Alert.alert(
-                 `Successfully added ${dinosaur.name} to your favourites!`
+                 `${dinosaur.name} has been added to your favourites!`
               )
         }
         console.log("DINOS AFTER", dinos);
@@ -391,7 +391,7 @@ export default class ChooseTimePeriod extends Component {
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
-    'Could not load data for dinosaur',
+    'Could not load data for this dinosaur',
     "Please check your internet connection and try again later"
     )
     })
@@ -1435,7 +1435,7 @@ export default class ChooseTimePeriod extends Component {
     )  :
 
     <View style={DinoListViewStyle.modalHeader}>
-      <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: {this.getDietTextFromImageName()}</Text>
+      <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text> <Text>{this.getDietTextFromImageName()}</Text>
       </Text>
     </View>
 
