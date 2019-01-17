@@ -1448,7 +1448,7 @@ export default class ChooseTimePeriod extends Component {
     )  :
 
     <View style={DinoListViewStyle.modalHeader}>
-      <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: {this.getDietTextFromImageName()}</Text>
+      <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'white'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}</Text>
       </Text>
     </View>
 
