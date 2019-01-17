@@ -15,7 +15,7 @@ export default class AboutModal extends Component {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <View>
+          <View> 
 
         <LinearGradient
         colors={['#a0cac8', '#a0cac8']}
