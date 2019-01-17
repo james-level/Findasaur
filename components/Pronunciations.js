@@ -2,6 +2,8 @@
 
 export function getPronunciation(dinosaur) {
 
+  console.log("NAME", dinosaur);
+
   switch(dinosaur) {
 
     case 'Aardonyx': return 'ar-don-ix';
