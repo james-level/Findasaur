@@ -119,6 +119,7 @@ export default class DinoGalleryView extends Component {
                 )
           })
         }
+        
         else {
           Alert.alert(
                  `${dinosaur.name} is already in your favourites!`
