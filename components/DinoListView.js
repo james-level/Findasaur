@@ -1055,7 +1055,7 @@ getDietTextFromImageName(){
 
 /* Results Modal, Dino Description */
           <View style={DinoListViewStyle.modalHeader}>
-            <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>Description: {this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
+            <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
             </Text>
           </View>
 
