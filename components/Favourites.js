@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Modal,Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
+import { Alert, StatusBar, Modal,Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
 import FavouriteModal from './FavouriteModal.js';
@@ -126,7 +126,7 @@ export default class Favourites extends Component {
 
         <LinearGradient
         colors={['black', 'black']}
-        style={{ height: Dimensions.get('window').height*1, padding: 25 }}>
+        style={{ height: Dimensions.get('window').height}}>
 
           <View style={FavouritesStyle.favouritesModal}>
           <TouchableHighlight
