@@ -657,7 +657,7 @@ export default class DinoGalleryView extends Component {
                   margin: 30
                 }}
               >
-                Scroll through {this.props.eraName} dinosaurs or type a name into the search bar. Tap the footprint icons for a preview and click the main image for info.
+                Scroll through the {this.props.eraName} era gallery and tap the footprints for more info.
               </Text>
             </View>
           )}
