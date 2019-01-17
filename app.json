@@ -10,7 +10,7 @@
     "orientation": "portrait",
     "icon": "./assets/diplodocus.png",
     "splash": {
-      "image": "./assets/Findasplash.png",
+      "image": "./assets/findasplash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },

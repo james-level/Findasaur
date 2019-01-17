@@ -664,7 +664,9 @@ export default class DinoGalleryView extends Component {
 
           {this.state.activeItem && (
 
-            <View
+            <TouchableOpacity
+              onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
+              style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
             {
               this.state.addressBookImageLoading ? (
@@ -682,95 +684,24 @@ export default class DinoGalleryView extends Component {
      {
        this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
 
-         <View style={{alignItems: 'center', height: Dimensions.get('window').height*0.6, width: Dimensions.get('window').width, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
+         <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+
+         <View style={{alignItems: 'center', marginTop: Dimensions.get('window').height*0.24, height: Dimensions.get('window').height*0.6, width: Dimensions.get('window').width, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
 
 
          <Image
-           style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
+           style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight, borderRadius: 10}}
            source={{uri: `${this.state.addressBookImage}`}}
            onLoad={this.onAddressBookImageLoad}
            />
 
-           <ScrollView style={{overflow: 'hidden', width: Dimensions.get('window').width, height: Dimensions.get('window').height, backgroundColor: 'red'}}>
-
-           <Text style={{textAlign: 'center', color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 0}} >
-             {this.state.activeItem.diet}
+           <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })} style={{marginTop: Dimensions.get('window').height*0.02, textAlign: 'center', color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 0}} >
+            Click image to view
            </Text>
 
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-          {
-            Pronunciations.getPronunciation(this.state.activeItem.name) ? (
-              <Text style={{fontFamily: 'PoiretOne-Regular', textAlign: 'center', fontSize: 20, color: 'white'}}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.state.activeItem.name)}
-                             </Text>
-
-         ) : null
-       }
-
-
-  </ScrollView>
           </View>
+
+          </TouchableOpacity>
 
 
       ) :
@@ -795,7 +726,7 @@ export default class DinoGalleryView extends Component {
               {/*<Text style={[s.name, { color: '#fff' }]}>
                 {_.get(this.state.activeItem, 'name', 'No Default')}
               </Text>*/}
-            </View>
+            </TouchableOpacity>
           )}
 
         </View>
