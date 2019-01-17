@@ -154,7 +154,7 @@ export default class ChooseTimePeriod extends Component {
       globalMapLoading: false,
       globalFossilMapVisible: false,
       globalMapActive: false,
-      vertical: Dimensions.get('window').width > 200 ? true : false,
+      vertical: Dimensions.get('window').width < 500 ? true : false,
       globalFavouritesVisible: false,
     };
 
@@ -863,7 +863,8 @@ export default class ChooseTimePeriod extends Component {
 
   returnToErasPage(){
     this.setState({
-      backClicked: true
+      backClicked: true,
+      vertical: Dimensions.get('window').width < 500 ? true : false
     })
   }
 

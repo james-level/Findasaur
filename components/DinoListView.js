@@ -745,7 +745,7 @@ getDietTextFromImageName(){
                 marginTop: 20
               }}
             >
-             Scroll through the {this.props.eraName} Dinosaurs
+             {this.props.eraName} Dinosaurs
             </Text>
             <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2}}/>
             </View>
@@ -1065,6 +1065,12 @@ getDietTextFromImageName(){
               </View>
 
             }
+            <TouchableHighlight
+          onPress={() => {
+              this.closeDinosaurView();
+              }}>
+                <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+      </TouchableHighlight>
     </ScrollView>
   </View>
 </LinearGradient>

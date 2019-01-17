@@ -300,6 +300,26 @@ export default class DinoGalleryView extends Component {
       }
     }
 
+    getDietTextFromImageName(){
+
+      if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png")){
+        return "Omnivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/carnivore.png")){
+        return "Carnivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/herbivore.png")){
+        return "Herbivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/diet_unknown.png")){
+        return "Research inconclusive"
+      }
+      else {
+        return
+      }
+
+    }
+
   retrieveDescription(dinosaur){
     var self = this;
     const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
@@ -814,155 +834,230 @@ export default class DinoGalleryView extends Component {
           {
             self.state.searchedDinosaurData ? (
 
-          <View>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.dinosaurViewVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
-            <View>
+              <View>
+              <Modal
+                animationType="slide"
+                transparent={false}
+                visible={this.state.dinosaurViewVisible}
+                onRequestClose={() => {
+                  Alert.alert('Modal has been closed.');
+                }}>
+                <View>
 
-          <LinearGradient
-          colors={['black', '#1e932d']}
-          style={{ padding: 25, height: Dimensions.get('window').height }}>
+              <LinearGradient
+              colors={['black', 'black']}
+              style={{ padding: 25, height: Dimensions.get('window').height }}>
 
-            <View style={DinoListViewStyle.infoModal}>
+                <View style={DinoListViewStyle.infoModal}>
 
-                <ScrollView>
+                    <ScrollView>
 
-                {
-                  self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
-                    <View style={{height: Dimensions.get('window').height}}>
-                      < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                    {
+                      self.state.searchDataLoading || !self.state.searchedDinosaurImage ? (
+                        <View style={{height: Dimensions.get('window').height}}>
+                          < BallIndicator count={7} size={80} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                        </View>
+                    ) :
+
+                    <View style={{alignItems: "center", marginBottom: 15}}>
+
+                    {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
+
+                    <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+                    <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'yellow', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
+                    <TouchableHighlight
+                      onPress={() => {
+                        this.addDinosaurToFavourites();
+                        }}>
+                          <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
+                    </TouchableHighlight>
                     </View>
-                ) :
-
-                <View style={{alignItems: "center", marginBottom: 15}}>
-
-                {this.state.newFavouriteAdded || this.state.clickedDinoAlreadyFavourite === true ? (
-
-                <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-                <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Favourite</Text>
-                <TouchableHighlight
-                  onPress={() => {
-                    this.addDinosaurToFavourites();
-                    }}>
-                      <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
-                </TouchableHighlight>
-                </View>
-
-              ) :
-              <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
-              <Text style={{paddingTop: 15, fontSize: 22, marginRight: 15, color: 'white', fontFamily: 'PoiretOne-Regular', padding: 10}}>Add to Favourites</Text>
-              <TouchableHighlight
-                onPress={() => {
-                  this.addDinosaurToFavourites();
-                  }}>
-                    <Image source={require('../assets/icons/grey_star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
-              </TouchableHighlight>
-              </View>
-            }
-
-                {
-
-                  self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
-
-                <Image
-                  style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-                  source={{uri: `${this.state.addressBookImage}`}}
-
-                  />
-
-                ) : null
-              }
-
-                {
-                  ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
-
-                    <View style={DinoListViewStyle.modalHeader}>
-
-                    <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-                    <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 65, height: 20, marginTop: 10, marginRight: 20}}/>
-                    </View>
-                ) :
-
-                <View style={DinoListViewStyle.modalHeader}>
-                <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>{this.returnClickedDinosaur()}</Text>
-                <Image source={ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)} style={{width: 30, height: 20, marginTop: 10, marginRight: 20}}/>
-                </View>
+    /* Results Modal, ADD TO FAVE's section */
+                  ) :
+                  <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
+                  <Text
+                    style={{
+                      paddingTop: 15,
+                      fontSize: 22,
+                      marginRight: 15,
+                      color: 'limegreen',
+                      fontFamily: 'PoiretOne-Regular',
+                      padding: 10,
+                      paddingTop: 20 }}
+                      >Add to Favourites
+                  </Text>
+                  <TouchableHighlight
+                    onPress={() => {
+                      this.addDinosaurToFavourites();
+                      }}>
+                        <Image
+                        source={require('../assets/icons/grey_star.png')} style={{
+                          height: 30,
+                          width: 30,
+                          marginRight: 7,
+                          marginBottom: 10,
+                          marginTop: 10,
+                          position: 'relative'
+                      }}/>
+                  </TouchableHighlight>
+                  </View>
                 }
 
-                <View style={DinoListViewStyle.modalHeader}>
-                <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>View fossil finds</Text>
-                </View>
+                    {
+
+                      self.state.addressBookImage && self.state.addressBookImageWidth && self.state.addressBookImageHeight ? (
+
+    /* Results Modal, Dino image */
+                    <Image
+                      style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
+                      source={{uri: `${this.state.addressBookImage}`}}
+                    />
+
+                    ) : null
+                  }
+
+                    {
+                      ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png") ? (
+
+    /* Results Modal, Dino image */
+                        <View style={DinoListViewStyle.modalHeader}>
+                        <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
+                        </Text>
+                        </View>
+                    ) :
+
+    /* Results Modal, Dino name */
+                    <View style={DinoListViewStyle.modalHeader}>
+                      <Text style={[DinoListViewStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.returnClickedDinosaur()}
+                      </Text>
+                    </View>
+                    }
+
+                    /* Results Modal, Dino Meaning (text) */
+                          {
+                              Meanings.getNameMeaning(this.returnClickedDinosaur()) ? (
+
+                              <View style={DinoListViewStyle.modalHeader}>
+
+                              <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Meaning: </Text>{Meanings.getNameMeaning(this.returnClickedDinosaur())}
+                              </Text>
+
+                              </View>
+
+                            ) : null
+                            }
+
+
+                            {
+            /* Results Modal, Dino Pronunciation (text) */
+                          Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
+
+                            <View style={DinoListViewStyle.modalHeader}>
+                              <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Pronunciation: </Text>{Pronunciations.getPronunciation(this.returnClickedDinosaur())}
+                              </Text>
+                            </View>
+
+                          ) : null
+                          }
+
+                          {
+                            Types.getType(this.returnClickedDinosaur()) ? (
+                              <View style={DinoListViewStyle.modalHeader}>
+                              <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Type: </Text>
+                              {Types.getType(this.returnClickedDinosaur())}
+                              </Text>
+                              </View>
+
+                            ) : null
+
+                          }
+
+    /* Results Modal, Dino diet icon */
+
+                    {
+                      ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
+
+                          <View style={DinoListViewStyle.modalHeader}>
+                            <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text> <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)}/>
+                            </Text>
+                          </View>
+
+                        )  :
+
+                        <View style={DinoListViewStyle.modalHeader}>
+                          <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}</Text>
+                          </Text>
+                        </View>
+
+                        }
+
+    {/* Results Modal, Fossil Map Link*/}
+                    <View style={DinoListViewStyle.modalHeader}>
+                      <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
+                      </Text>
+                    </View>
+
+                  {
+    /* Results Modal, Dino Length (Text)*/
+                  Lengths.getLength(this.returnClickedDinosaur()) ? (
+
+                  <View style={DinoListViewStyle.modalHeader}>
+                      <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{Lengths.getLength(this.returnClickedDinosaur())}
+                      </Text>{"\n"}
+                  </View>
+
+                ) : null
+
+                }
+
+                /* Results Modal, Dino Type (Text)*/
 
                 {
+                  ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
 
-                  Pronunciations.getPronunciation(this.returnClickedDinosaur()) ? (
-
-                <View style={DinoListViewStyle.modalHeader}>
-                <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>{Pronunciations.getPronunciation(this.returnClickedDinosaur())} | {Meanings.getNameMeaning(this.returnClickedDinosaur())}</Text>
-                </View>
+    /* Results Modal, Dino Length (Image/Graphic)*/
+                <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
               ) : null
 
-              }
+            }
 
-              {
+            {this.state.searchedDinosaurData != null ? (
 
-                Lengths.getLength(this.returnClickedDinosaur()) ? (
-
-              <View style={DinoListViewStyle.modalHeader}>
-              <Text style={[DinoListViewStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}>Length: {Lengths.getLength(this.returnClickedDinosaur())} | Type:{Types.getType(this.returnClickedDinosaur())}</Text>
-              </View>
+              <FossilMap mappedDinosaur={this.state.searchedDinosaurData} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
 
             ) : null
 
-            }
+          }
 
-            {
-              ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
+                {
+                  self.state.searchedDinosaurDescription ? (
 
-            <AutoHeightImage width={Dimensions.get('window').width*0.8} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
-
-          ) : null
-
-        }
-
-        {this.state.searchedDinosaurData != null ? (
-
-          <FossilMap mappedDinosaur={this.state.searchedDinosaurData} fossilMapVisible={this.state.fossilMapVisible} closeFossilMap={this.closeFossilMap} dinosaur={this.state.dinosaurClicked} />
-
-        ) : null
-
-      }
-
-            {
-              self.state.searchedDinosaurDescription ? (
-
-                <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)} </Text>
-
-              ) : null
-            }
-
+    /* Results Modal, Dino Description */
+              <View style={DinoListViewStyle.modalHeader}>
+                <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.renderDescriptionElements(this.state.searchedDinosaurDescription)}
+                </Text>
               </View>
 
-            }
+                  ) : null
+                }
 
-                  <TouchableHighlight
-                    onPress={() => {
-                      this.closeDinosaurView();
-                    }}>
-                  <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-                  </TouchableHighlight>
-                  </ScrollView>
-                </View>
-                </LinearGradient>
-              </View>
-            </Modal>
-          </View>
+                  </View>
+
+                }
+                <TouchableHighlight
+          onPress={() => {
+              this.closeDinosaurView();
+              }}>
+                <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+      </TouchableHighlight>
+        </ScrollView>
+      </View>
+    </LinearGradient>
+    </View>
+    </Modal>
+    </View>
+
 
         ) : null
       }
