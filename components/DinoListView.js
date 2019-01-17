@@ -670,33 +670,37 @@ getDietTextFromImageName(){
                   marginBottom: 0,
                 }}
               >
-              <TouchableHighlight
-                onPress={() => {
-                  this.props.returnToErasPage();
-                }}>
-                <Text
-                  style={{
-                    color: 'limegreen',
-                    fontWeight: '600',
-                    fontSize: 20,
-                    fontFamily: 'PoiretOne-Regular',
-                    textAlign: 'center',
-                  }}
-                >BACK{"\n"}
-               </Text>
-              </TouchableHighlight>
+              <View style={{flexDirection: 'row'}}>
+          <TouchableHighlight
+            onPress={() => {
+              this.props.returnToErasPage();
+            }}>
+          <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              this.props.toggleLayout();
+            }}>
+          <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
+          </TouchableHighlight>
+
+          </View>
+          <View style={{flexDirection: 'row'}}>
               <Text
                 style={{
-                  color: 'white',
+                  color: 'limegreen',
                   fontWeight: '400',
-                  fontSize: 20,
+                  fontSize: 22,
                   fontFamily: 'PoiretOne-Regular',
                   textAlign: 'center',
+                  marginTop: 20
                 }}
               >
-               Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
+               {this.props.eraName} Dinosaurs
               </Text>
-              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
+              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2}}/>
+            </View>
             </View>
           )}
 
@@ -714,33 +718,37 @@ getDietTextFromImageName(){
                 marginBottom: 0,
               }}
             >
-            <TouchableHighlight
-              onPress={() => {
-                this.props.returnToErasPage();
-              }}>
-              <Text
-                style={{
-                  color: 'limegreen',
-                  fontWeight: '600',
-                  fontSize: 20,
-                  fontFamily: 'PoiretOne-Regular',
-                  textAlign: 'center',
-                }}
-              >BACK{"\n"}
-             </Text>
-            </TouchableHighlight>
+            <View style={{flexDirection: 'row'}}>
+        <TouchableHighlight
+          onPress={() => {
+            this.props.returnToErasPage();
+          }}>
+        <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          onPress={() => {
+            this.props.toggleLayout();
+          }}>
+        <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
+        </TouchableHighlight>
+
+        </View>
+        <View style={{flexDirection: 'row'}}>
             <Text
               style={{
-                color: 'white',
+                color: 'limegreen',
                 fontWeight: '400',
-                fontSize: 20,
+                fontSize: 22,
                 fontFamily: 'PoiretOne-Regular',
                 textAlign: 'center',
+                marginTop: 20
               }}
             >
-             Scroll through the {this.props.eraName} dinosaurs & tap a name for more information
+             Scroll through the {this.props.eraName} Dinosaurs
             </Text>
-            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 75, width: 100, marginTop: 2}}/>
+            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2}}/>
+            </View>
           </View>
           )}
 
@@ -1057,13 +1065,6 @@ getDietTextFromImageName(){
               </View>
 
             }
-
-      <TouchableHighlight
-          onPress={() => {
-              this.closeDinosaurView();
-              }}>
-                <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-      </TouchableHighlight>
     </ScrollView>
   </View>
 </LinearGradient>

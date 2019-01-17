@@ -25,6 +25,7 @@ import Favourites from './Favourites.js'
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import { AsyncStorage } from "react-native"
 import DinoListView from './DinoListView.js';
+import DinoGalleryView from './DinoGalleryView.js';
 import MapView from 'react-native-maps';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
@@ -153,6 +154,7 @@ export default class ChooseTimePeriod extends Component {
       globalMapLoading: false,
       globalFossilMapVisible: false,
       globalMapActive: false,
+      vertical: Dimensions.get('window').width > 200 ? true : false,
       globalFavouritesVisible: false,
     };
 
@@ -183,6 +185,7 @@ export default class ChooseTimePeriod extends Component {
     this.setGlobalFossilMapVisible = this.setGlobalFossilMapVisible.bind(this);
     this.closeGlobalFossilMap = this.closeGlobalFossilMap.bind(this);
     this.setGlobalFavouritesVisible = this.setGlobalFavouritesVisible.bind(this);
+    this.toggleLayout = this.toggleLayout.bind(this);
   }
 
   componentDidMount(){
@@ -191,7 +194,7 @@ export default class ChooseTimePeriod extends Component {
 
   }
 
-  toggleHorizontalVertical(){
+  toggleLayout(){
     this.setState({
       vertical: !this.state.vertical
     })
@@ -1535,10 +1538,21 @@ export default class ChooseTimePeriod extends Component {
         var lowerDinosaurIndex = Math.random() * lowerIndexLimit;
         var upperDinosaurIndex = lowerDinosaurIndex + 18;
 
+        if (this.state.vertical === true){
+
         return (
 
-          <DinoListView eraName={this.state.viewableItems[0].item.title} returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} fontLoaded={this.props.fontLoaded} omnivores={this.state.omnivores} diets={this.state.diets} />
+          <DinoListView eraName={this.state.viewableItems[0].item.title} returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} fontLoaded={this.props.fontLoaded} omnivores={this.state.omnivores} diets={this.state.diets} toggleLayout={this.toggleLayout} />
         )
+      }
+      else {
+
+        return (
+
+          <DinoGalleryView eraName={this.state.viewableItems[0].item.title} returnToErasPage={this.returnToErasPage} handleImageUrl={this.handleImageUrl} getImageAddress={this.getImageAddress} images={this.state.images} dinosaurDescriptions={this.state.dinosaurDescriptions} everySingleDinosaur={this.state.dinosaurs} allDinosaurs={this.state.slicedDinosaurs} herbivores={this.state.herbivores} carnivores={this.state.carnivores} fontLoaded={this.props.fontLoaded} omnivores={this.state.omnivores} diets={this.state.diets} toggleLayout={this.toggleLayout} />
+        )
+
+      }
       }
   }
 }

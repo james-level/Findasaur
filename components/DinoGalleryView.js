@@ -794,12 +794,22 @@ export default class DinoGalleryView extends Component {
         {/* End of SEARCH BAR Section */}
 
 
+        <View style={{flexDirection: 'row'}}>
     <TouchableHighlight
       onPress={() => {
         this.props.returnToErasPage();
       }}>
-    <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25, marginBottom: 17}}/>
+    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
     </TouchableHighlight>
+
+    <TouchableHighlight
+      onPress={() => {
+        this.props.toggleLayout();
+      }}>
+    <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
+    </TouchableHighlight>
+
+    </View>
 
           {
             self.state.searchedDinosaurData ? (
