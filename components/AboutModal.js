@@ -15,7 +15,7 @@ export default class AboutModal extends Component {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <View> 
+          <View>
 
         <LinearGradient
         colors={['#a0cac8', '#a0cac8']}
@@ -48,7 +48,7 @@ export default class AboutModal extends Component {
                   onPress={() => {
                     this.props.setAboutModalVisible();
                   }}
-                  style={{alignItems: 'center', marginBottom: 70}}
+                  style={{alignItems: 'center', marginBottom: 120}}
                   >
                 <Image source={require('../assets/icons/aboutback.png')} style={{height: 25, width: 25, marginBottom: 5}}/>
                 </TouchableHighlight>
