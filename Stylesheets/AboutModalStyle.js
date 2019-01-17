@@ -15,7 +15,7 @@ const AboutModalStyle = StyleSheet.create({
     fontSize: 30,
     backgroundColor: 'transparent',
   },
-  aboutModalBody:{
+  aboutModalBody:{ 
     color: 'black',
     paddingTop: 25,
     fontSize: 20,

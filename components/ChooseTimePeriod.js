@@ -1470,7 +1470,7 @@ export default class ChooseTimePeriod extends Component {
 
         <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{Lengths.getLength(this.returnClickedDinosaur())}
-          </Text>{"\n"}
+          </Text>3
         </View>
 
       ) : null
