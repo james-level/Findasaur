@@ -191,6 +191,12 @@ export default class ChooseTimePeriod extends Component {
 
   }
 
+  toggleHorizontalVertical(){
+    this.setState({
+      vertical: !this.state.vertical
+    })
+  }
+
   closeDinosaurView(){
 
     this.setState({
@@ -874,7 +880,10 @@ export default class ChooseTimePeriod extends Component {
         carnivores: self.getDinosaursByDiet('carnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records))),
         omnivores: self.getDinosaursByDiet('omnivore', self.filterByGenusName(self.filterDinosaurData(response.data.records)))
 
-      }, function(){ this.retrieveImagesAndDescriptions() })
+      }, function(){ console.log("MOVING ON TO NEXT ONE "); this.retrieveImagesAndDescriptions() })
+      }).catch((err) => {
+        console.log("ERRORED OUT");
+        console.error(err);
       })
   }
 
