@@ -771,15 +771,17 @@ getDietTextFromImageName(){
         </TouchableHighlight>
 
         </View>
-        <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column'}}>
+        <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column', overflow: 'visible', backgroundColor: 'black'}}>
             <Text
               style={{
                 color: 'limegreen',
                 fontWeight: '400',
-                fontSize: Dimensions.get('window').width < 400 ? 18 : 22,
+                fontSize: Dimensions.get('window').width < 400 ? 16 : 22,
                 fontFamily: 'PoiretOne-Regular',
                 textAlign: 'center',
-                marginTop: 20
+                marginTop: Platform.OS === 'ios' ? 20 : 0
+
+
               }}
             >
              {this.props.eraName} Dinosaurs
@@ -787,7 +789,8 @@ getDietTextFromImageName(){
             {
               Platform.OS === 'ios' ? (
             <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
-          ) : null }            </View>
+          ) : null }
+          </View>
           </View>
           )}
 
@@ -895,6 +898,7 @@ getDietTextFromImageName(){
                       <Image source={require('../assets/icons/star.png')} style={{height: 30, width: 30, marginRight: 7, marginBottom: 10, marginTop: 10, position: 'relative'}}/>
                 </TouchableHighlight>
                 </View>
+
               ) :
               <View style={{borderRadius: 25, justifyContent: 'center', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 10}}>
               <Text
@@ -1044,10 +1048,8 @@ getDietTextFromImageName(){
             }
 
 
-
             {
               ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur()) ? (
-
 
             <AutoHeightImage width={Dimensions.get('window').width*1.0} style={{marginTop:20}} source={ImageFinder.findSizeComparisonImage(this.returnClickedDinosaur())}/>
 
@@ -1078,11 +1080,11 @@ getDietTextFromImageName(){
 
             }
             <TouchableHighlight
-          onPress={() => {
-              this.closeDinosaurView();
-              }}>
-                <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
-      </TouchableHighlight>
+      onPress={() => {
+          this.closeDinosaurView();
+          }}>
+            <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 10, marginLeft: '50%'}}/>
+  </TouchableHighlight>
     </ScrollView>
   </View>
 </LinearGradient>

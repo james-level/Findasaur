@@ -1002,7 +1002,7 @@ export default class DinoGalleryView extends Component {
 
                   <View style={DinoListViewStyle.modalHeader}>
                       <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{Lengths.getLength(this.returnClickedDinosaur())}
-                      </Text>{"\n"}
+                      </Text>
                   </View>
 
                 ) : null
