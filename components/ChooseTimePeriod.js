@@ -1171,7 +1171,6 @@ export default class ChooseTimePeriod extends Component {
         !this.state.imagesLoading ? (
 
             <Pagination
-        // DotThemeLight
           horizontal
           dotOnPress={(o) => console.log(' clicked: ', o)}
           hideEmptyDots

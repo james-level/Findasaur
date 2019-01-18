@@ -26,7 +26,6 @@ export default class AddFavouriteOverlay extends Component {
 
   render() {
     return (
-      /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
       <Overlay visible={this.props.favouriteOverlayVisible} onClose={this.props.closeFavouriteOverlay} closeOnTouchOutside
       animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.8)'}}
       childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15}}
