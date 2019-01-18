@@ -601,10 +601,31 @@ getDietTextFromImageName(){
                   }
             ]}
           >
+
+          {
+            Platform.OS === 'ios' ? (
                   <AutoHeightImage
                   width={ Dimensions.get('window').width < 400 ? Dimensions.get('window').width*0.1 : Dimensions.get('window').width*0.06 }
                   source={ require('../assets/icons/footprint.png')}
                   />
+
+                ) :
+
+                <AutoHeightImage
+                width={ Dimensions.get('window').width < 400 ? 130 : 100 }
+                source={ require('../assets/icons/footprint.png')}
+                />
+              }
+
+              {
+                Platform.OS === 'ios' ? (
+                    null
+
+                    ) :
+
+                    <Text style={{color: 'black'}}>:::::</Text>
+                  }
+
             {o.item.name ? o.item.name : 'Unknown'}
           </Text>
         </TouchableOpacity>
