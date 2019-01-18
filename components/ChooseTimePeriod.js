@@ -294,9 +294,7 @@ export default class ChooseTimePeriod extends Component {
               })
 
             }, 6000)})
-            // Alert.alert(
-            //        `Successfully added ${dinosaur.name} to your favourites!`
-            //     )
+
           }
         )
         }
@@ -428,9 +426,7 @@ export default class ChooseTimePeriod extends Component {
 
   handleImageUrl(object) {
       if (object.query.pages["-1"].imageinfo === undefined) {
-        // CURRENTLY REMOVING ALL DINOSAURS WITHOUT AN IMAGE IN THE WIKI API. COULD FIND SUITABLE 'NOT FOUND' IMAGE
          return 'https://www.buttonmuseum.org/sites/default/files/CA-no-dinosaurs-button_busy_beaver_button_museum.png';
-         // objects.pop(object);
       }
       else {
         const url = object.query.pages["-1"].imageinfo[0].url;
@@ -836,7 +832,7 @@ export default class ChooseTimePeriod extends Component {
         return this.retrieveWikiDescription(url);
       }))
       .then(() => {
-        
+
         Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
           var imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
           return this.retrieveImageFileName(imageUrl)
@@ -870,7 +866,6 @@ export default class ChooseTimePeriod extends Component {
   getDinosaursForPeriod(earliest_date, latest_date){
 
     var self = this;
-    // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
     axios.get(url).then((response) => {
@@ -893,7 +888,6 @@ export default class ChooseTimePeriod extends Component {
   getAllDinosaursForGlobalSearch(earliest_date, latest_date){
 
     var self = this;
-    // URL currently hardcoded with dates for the earliest period (Middle Triassic - 237-247 million years ago)
     const url = `https://paleobiodb.org/data1.2/occs/list.json?base_name=dinosauria^aves&show=coords,ident,ecospace,img&idreso=genus&min_ma=${earliest_date}&max_ma=${latest_date}`
 
     axios.get(url).then((response) => {
@@ -1009,7 +1003,6 @@ export default class ChooseTimePeriod extends Component {
   />);
 
   _keyExtractor = (item, index) => item.id.toString()
-  // REQUIRED for ReactNativePagination to work correctly
   onViewableItemsChanged = ({ viewableItems, changed }) => this.setState({ viewableItems })
   render() {
 
@@ -1028,7 +1021,7 @@ export default class ChooseTimePeriod extends Component {
             data={this.state.items}
             horizontal
             keyExtractor={this._keyExtractor}
-            onViewableItemsChanged={this.onViewableItemsChanged}// Map your keys to whatever unique ids the have (mine is a "id" prop)
+            onViewableItemsChanged={this.onViewableItemsChanged}
             pagingEnabled
             renderItem={this._renderItem}
         />
@@ -1196,14 +1189,12 @@ export default class ChooseTimePeriod extends Component {
           dotEmptyHide
           dotIconColorActive="limegreen"
           dotIconColorNotActive="limegreen"
-          // DotIconColorEmpty={"blue"}
+
           dotIconSizeActive={15}
-          /*
-           *  DotIconSizeNotActive={10}
-           */
-          listRef={this.refs}// To allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
-          paginationVisibleItems={this.state.viewableItems}// Needs to track what the user sees
-          paginationItems={this.state.items}// Pass the same list as data
+
+          listRef={this.refs}
+          paginationVisibleItems={this.state.viewableItems}
+          paginationItems={this.state.items}
           paginationItemPadSize={2}
         />
 
@@ -1392,7 +1383,7 @@ export default class ChooseTimePeriod extends Component {
 
         <View style={DinoListViewStyle.modalHeader}>
           <Text style={[DinoListViewStyle.modalLength, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Length: </Text>{Lengths.getLength(this.returnClickedDinosaur())}
-          </Text>3
+          </Text>
         </View>
 
       ) : null
