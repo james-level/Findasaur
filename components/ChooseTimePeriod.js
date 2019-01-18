@@ -1352,7 +1352,7 @@ export default class ChooseTimePeriod extends Component {
 
 
 {
-  ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/diet_unknown.png") ? (
+  Platform.OS === 'ios' && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) != require("../assets/icons/diet_unknown.png") ? (
 
       <View style={DinoListViewStyle.modalHeader}>
         <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text> <Image source={  ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet)}/>
@@ -1360,19 +1360,40 @@ export default class ChooseTimePeriod extends Component {
       </View>
 
     )  :
+    null
+
+    }
+
+    {
+
+      Platform.OS === 'ios' && ImageFinder.getDietImage(this.retrieveDinosaurFromName(this.state.clickedDinosaur).diet) == require("../assets/icons/diet_unknown.png") ? (
 
     <View style={DinoListViewStyle.modalHeader}>
       <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'white'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}</Text>
       </Text>
     </View>
 
-    }
+  ) : null
+
+}
+
+    {
+      Platform.OS === 'ios' ? (
 
 
       <View style={DinoListViewStyle.modalHeader}>
         <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
         </Text>
       </View>
+
+    ) :
+
+    <View style={DinoListViewStyle.modalHeader}>
+      <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: 🌏</Text>
+      </Text>
+    </View>
+
+  }
 
 
         {

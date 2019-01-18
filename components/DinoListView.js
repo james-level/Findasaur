@@ -1012,7 +1012,7 @@ getDietTextFromImageName(){
 
 
                 {
-                  ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
+                  Platform.OS === 'ios' && ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
 
                       <View style={DinoListViewStyle.modalHeader}>
                         <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text> <Image source={ ImageFinder.getDietImage(this.state.searchedDinosaurData.diet)}/>
@@ -1021,18 +1021,56 @@ getDietTextFromImageName(){
 
                     )  :
 
+                  null
+
+                    }
+
+                    {
+
+                    Platform.OS === 'ios' && ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) == require("../assets/icons/diet_unknown.png")  ? (
+
                     <View style={DinoListViewStyle.modalHeader}>
                       <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}</Text>
                       </Text>
                     </View>
 
-                    }
+                  ) : null
+
+                }
+
+                    {
+                      Platform.OS === 'android' && ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
+
+                          <View style={DinoListViewStyle.modalHeader}>
+                            <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+                            </Text>
+                          </View>
+
+                        )  :
+
+                        <View style={DinoListViewStyle.modalHeader}>
+                          <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}</Text>
+                          </Text>
+                        </View>
+
+                        }
 
 
+                  {
+                    Platform.OS === 'ios' ? (
                 <View style={DinoListViewStyle.modalHeader}>
                   <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
                   </Text>
                 </View>
+              ) :
+
+              <View style={DinoListViewStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: 🌏
+                </Text>
+                </Text>
+              </View>
+
+            }
 
               {
 

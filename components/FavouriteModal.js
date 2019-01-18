@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Alert, Platform, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import FavouriteModalStyle from '../Stylesheets/FavouriteModalStyle.js';
 import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
@@ -168,7 +168,7 @@ export default class FavouriteModal extends Component {
 
 /* Faves Modal, Fave Dino diet icon */
           {
-            ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
+            Platform.OS === 'ios' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
               <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text>
@@ -178,18 +178,39 @@ export default class FavouriteModal extends Component {
 
           ) :
 
-          <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
-            </Text>
-          </View>
+        null
 
         }
 
+        { Platform.OS === 'ios' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) == require("../assets/icons/diet_unknown.png") ? (
+
+        <View style={FavouriteModalStyle.modalHeader}>
+          <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+          </Text>
+        </View>
+
+      ) : null
+
+    }
+
 {/* Faves Modal, Fossil Map Link*/}
+
+        {
+          Platform.OS === 'ios' ? (
+
             <View style={FavouriteModalStyle.modalHeader}>
                 <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View Fossil Map: <Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
                 </Text>
               </View>
+
+            ) :
+
+            <View style={FavouriteModalStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View Fossil Map: 🌏
+                </Text>
+              </View>
+
+            }
 
 /* Faves Modal, Dino-Era (text) */
             <View style={FavouriteModalStyle.modalHeader}>
