@@ -696,7 +696,7 @@ getDietTextFromImageName(){
           </TouchableHighlight>
 
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', overflow: 'visible'}}>
               <Text
                 style={{
                   color: 'limegreen',
