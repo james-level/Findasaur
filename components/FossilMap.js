@@ -12,6 +12,7 @@ export default class FossilMap extends Component {
   }
 
   fossilsToMap(){
+
     if (this.props.mappedDinosaur.coords[0][0]){
       return this.props.mappedDinosaur.coords.map( (coord, i) =>
 
@@ -42,6 +43,7 @@ export default class FossilMap extends Component {
   }
 
   returnDefaultLatitude(){
+        console.log("COORDS DINO", this.props.mappedDinosaur);
     if (this.props.mappedDinosaur.coords[0][0]){
       return this.props.mappedDinosaur.coords[0][0]
     }
@@ -70,7 +72,7 @@ export default class FossilMap extends Component {
 
   render() {
     return (
-      /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
+
       <Overlay visible={this.props.fossilMapVisible} onClose={this.props.closeFossilMap} closeOnTouchOutside
       animationType="fadeInUp" containerStyle={{backgroundColor: 'rgba(0,0,0,0.9)', justifyContent: 'center', alignItems:'center', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
       childrenWrapperStyle={{position: 'absolute', top: 0, backgroundColor: 'transparent', height: Dimensions.get('window').height*0.9, width: Dimensions.get('window').width}}
@@ -78,11 +80,7 @@ export default class FossilMap extends Component {
       {
         (hideModal, overlayState) => (
           <Fragment>
-          {/*
-          <View style={{backgroundColor: 'green', borderRadius: 5, marginTop: 5, marginBottom: 10, borderWidth: 2, borderColor: 'green'}}>
-          <Text style={FossilMapStyle.fossilMapDescription}>{this.returnDinosaur()}</Text>
-          </View>
-          */}
+
               <MapView style={FossilMapStyle.map}
               scrollEnabled={true}
               toolbarEnabled={false}
