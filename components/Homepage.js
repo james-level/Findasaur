@@ -217,8 +217,7 @@ export default class Homepage extends React.Component {
       <View style={{backgroundColor: 'transparent', top: '0%', height: '100%', width: '100%'}}>
       <ImageBackground
                source={require('../assets/findasplash2.png')}
-               style={{width: '100%',
-               height: '100%'}}
+               style={{width: '100%', height: '100%'}}
                >
       </ImageBackground>
       </View>
