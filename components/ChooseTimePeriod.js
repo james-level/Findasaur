@@ -1171,6 +1171,7 @@ export default class ChooseTimePeriod extends Component {
         !this.state.imagesLoading ? (
 
             <Pagination
+        // DotThemeLight
           horizontal
           dotOnPress={(o) => console.log(' clicked: ', o)}
           hideEmptyDots
@@ -1218,7 +1219,7 @@ export default class ChooseTimePeriod extends Component {
     colors={['black', 'black']}
     style={{ padding: 25, height: Dimensions.get('window').height }}>
 
-      <View>
+      <View style={DinoListViewStyle.infoModal}>
 
           <ScrollView>
 
@@ -1369,7 +1370,7 @@ export default class ChooseTimePeriod extends Component {
     }
 
 
-      }
+      
 
       <View style={DinoListViewStyle.modalHeader}>
         <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
