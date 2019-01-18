@@ -37,8 +37,6 @@ export default class GlobalFossilMap extends Component {
                             >
 
                             </MapView.Marker>
-
-
         )
       }
       else if (!mappedDinosaur.coords[0][0]) {

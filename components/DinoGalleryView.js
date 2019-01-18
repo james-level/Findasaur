@@ -98,9 +98,10 @@ export default class DinoGalleryView extends Component {
     var type = Types.getType(name)
     var diet = this.state.searchedDinosaurData.diet
     var image = this.state.searchedDinosaurImage
+    var coords = this.state.searchedDinosaurData.coords
     var era = this.props.eraName
 
-    var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+    var dinosaur = {name: name, era: era, coords: coords, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
