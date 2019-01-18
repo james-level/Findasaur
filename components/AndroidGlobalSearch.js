@@ -58,22 +58,28 @@ export default class GlobalSearch extends Component {
 
     return (
       /* ANIMATION OPTIONS: fadeInUp, zoomIn, bounceIn, flipInX, lightSpeedIn */
-
       <Overlay visible={this.props.searchOverlayVisible} onClose={this.props.closeSearchOverlay} closeOnTouchOutside
       animationType="fadeInUp"
       containerStyle={{backgroundColor: 'transparent', justifyContent: 'center', flex: 1, flexDirection: 'column'}}
-      childrenWrapperStyle={{backgroundColor: 'transparent', borderRadius: 15, flex: 2, flexDirection: 'column'}}
+      childrenWrapperStyle={{backgroundColor: 'transparent', flex: 1}}
       animationDuration={1000}>
 
 
       {
         (hideModal, overlayState) => (
           <Fragment>
-          <View style={{flex: 1, flexDirection: 'column', top: 0, width: 150, marginBottom: 20, height: 40}}>
+          <View style={{position: 'absolute', width: Dimensions.get('window').width*0.71}}>
+          <TouchableHighlight
+          style={{alignItems: 'center', paddingTop: 15, paddingBottom: 10}}
+            onPress={() => {
+              this.props.closeSearchOverlay();
+            }}>
+          <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25}}/>
+          </TouchableHighlight>
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
-          containerStyle={{justifyContent: 'center', flex: 1, flexDirection: 'column'}}
+          containerStyle={{justifyContent: 'center'}}
           data={this.props.names.length === 1 && comp(query, this.props.names[0]) ? [] : dinosaurs}
           defaultValue={query}
           inputContainerStyle={{flex: 1}}
@@ -88,8 +94,8 @@ export default class GlobalSearch extends Component {
         />
 
           {this.findDinosaur(query).length > 0 ? (
-            <View style={{backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'black', height: height*0.55, paddingLeft: 10}}>
-            <ScrollView style={{flex: 1, flexWrap: 'wrap'}}>
+            <View style={{flex: 1, backgroundColor: 'black', borderBottomWidth: 0.5, borderRightWidth: 0.5, borderLeftWidth: 0.5, borderColor: 'black', height: height*0.55, paddingLeft: 10}}>
+            <ScrollView>
             {this.renderMatches(dinosaurs)}
             </ScrollView>
             </View>
@@ -99,6 +105,7 @@ export default class GlobalSearch extends Component {
             {this.renderMatches(dinosaurs)}
             </ScrollView>
             </View>
+
           )}
       </View>
           </Fragment>

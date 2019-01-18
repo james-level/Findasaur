@@ -70,6 +70,13 @@ export default class GlobalSearch extends Component {
         (hideModal, overlayState) => (
           <Fragment>
           <View style={{position: 'absolute', top: -height*0.44, marginLeft: 15, marginRight: 15 }}>
+          <TouchableHighlight
+          style={{alignItems: 'center', paddingTop: 15, paddingBottom: 10}}
+            onPress={() => {
+              this.props.closeSearchOverlay();
+            }}>
+          <Image source={require('../assets/icons/close.png')} style={{height: 25, width: 25}}/>
+          </TouchableHighlight>
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
