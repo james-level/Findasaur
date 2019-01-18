@@ -674,10 +674,11 @@ getDietTextFromImageName(){
                   backgroundColor: 'black',
                   flex: 1,
                   flexDirection: 'column',
-                  marginTop: 50,
+                  marginTop: 35,
                   marginLeft: 10,
                   marginRight: 10,
                   marginBottom: 0,
+                  overflow: 'visible',
                 }}
               >
               <View style={{flexDirection: 'row'}}>
@@ -696,7 +697,7 @@ getDietTextFromImageName(){
           </TouchableHighlight>
 
           </View>
-          <View style={{flexDirection: 'row', overflow: 'visible'}}>
+          <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column', overflow: 'visible', backgroundColor: 'black'}}>
               <Text
                 style={{
                   color: 'limegreen',
@@ -711,7 +712,10 @@ getDietTextFromImageName(){
               >
                {this.props.eraName} Dinosaurs
               </Text>
+              {
+                Platform.OS === 'ios' ? (
               <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
+            ) : null }
             </View>
             </View>
           )}
@@ -724,7 +728,7 @@ getDietTextFromImageName(){
                 backgroundColor: 'black',
                 flex: 1,
                 flexDirection: 'column',
-                marginTop: 50,
+                marginTop: 35,
                 marginLeft: 10,
                 marginRight: 10,
                 marginBottom: 0,
@@ -746,7 +750,7 @@ getDietTextFromImageName(){
         </TouchableHighlight>
 
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column'}}>
             <Text
               style={{
                 color: 'limegreen',
@@ -759,8 +763,10 @@ getDietTextFromImageName(){
             >
              {this.props.eraName} Dinosaurs
             </Text>
-            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2}}/>
-            </View>
+            {
+              Platform.OS === 'ios' ? (
+            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
+          ) : null }            </View>
           </View>
           )}
 
@@ -1082,6 +1088,7 @@ const s = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'visible'
 
   },
   innerContainer: {
@@ -1095,6 +1102,7 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
+      overflow: 'visible'
     // This is the grey background on top 1/2 of the screen
   },
 });
