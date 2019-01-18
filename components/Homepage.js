@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import ImageSlider from 'react-native-image-slider';
 import { StyleSheet, Text, Dimensions, View, Linking, Image, TouchableHighlight, Modal, ScrollView, ImageBackground } from 'react-native';
@@ -38,6 +39,78 @@ export default class Homepage extends React.Component {
    });
    await Asset.loadAsync([
         require('../assets/dancingstar.gif'),
+        require('../assets/Dino_images/dino.gif'),
+        require('../assets/Dino_images/friendlydino.gif'),
+        require('../assets/Dino_images/greendino.gif'),
+        require('../assets/Dino_images/runningdino.gif'),
+        require('../assets/blackfootbutton.png'),
+        require('../assets/coffee.gif'),
+        require('../assets/globe.png'),
+        require('../assets/globegrey.png'),
+
+        require('../assets/icons/aboutback.png'),
+        require('../assets/icons/aboutus.png'),
+        require('../assets/icons/back.png'),
+        require('../assets/icons/back2.png'),
+        require('../assets/icons/back3.png'),
+        require('../assets/icons/carnivore.png'),
+        require('../assets/icons/close.png'),
+        require('../assets/icons/diet_unknown.png'),
+        require('../assets/icons/dinoprint.png'),
+        require('../assets/icons/dinosaur.png'),
+        require('../assets/icons/downscroll.gif'),
+        require('../assets/icons/favourite.png'),
+        require('../assets/icons/footprint.png'),
+        require('../assets/icons/fossil.png'),
+        require('../assets/icons/garbage.png'),
+        require('../assets/icons/garbage2.png'),
+        require('../assets/icons/globesmall.png'),
+        require('../assets/icons/grey_search.png'),
+        require('../assets/icons/grey_star.png'),
+        require('../assets/icons/herbivore.png'),
+        require('../assets/icons/home.png'),
+        require('../assets/icons/info.png'),
+        require('../assets/icons/info2.png'),
+        require('../assets/icons/infowhite.png'),
+        require('../assets/icons/omnivore.png'),
+        require('../assets/icons/play-button.png'),
+        require('../assets/icons/plus.png'),
+        require('../assets/icons/scroll.png'),
+        require('../assets/icons/scrolldown.gif'),
+        require('../assets/icons/search.png'),
+        require('../assets/icons/star.png'),
+        require('../assets/icons/toggleview.png'),
+
+        require('../assets/era_images/early_cretaceous.png'),
+        require('../assets/era_images/early_jurassic.png'),
+        require('../assets/era_images/earlyCrtcs.png'),
+        require('../assets/era_images/earlyCrtcs3.png'),
+        require('../assets/era_images/earlyJrsc.png'),
+        require('../assets/era_images/late_cretaceous.png'),
+        require('../assets/era_images/late_jurassic.png'),
+        require('../assets/era_images/late_triassic.png'),
+        require('../assets/era_images/lateCrtcs.png'),
+        require('../assets/era_images/lateJrsc.png'),
+        require('../assets/era_images/mid_jurassic.png'),
+        require('../assets/era_images/middle_triassic.png'),
+        require('../assets/era_images/middle_triassic2.png'),
+        require('../assets/era_images/midJrsc.png'),
+        require('../assets/era_images/midTrsc.png'),
+        require('../assets/era_images/midTrsc2.png'),
+
+        require('../assets/Dino_images/transparent_dinos/ank.jpg'),
+        require('../assets/Dino_images/transparent_dinos/brachiosaurus.png'),
+        require('../assets/Dino_images/transparent_dinos/carnotaurus.png'),
+        require('../assets/Dino_images/transparent_dinos/gallimimus.png'),
+        require('../assets/Dino_images/transparent_dinos/Metriacanthosaurus.png'),
+        require('../assets/Dino_images/transparent_dinos/stegosaurus.png'),
+        require('../assets/Dino_images/transparent_dinos/suchomimus.jpeg'),
+        require('../assets/Dino_images/transparent_dinos/trex.png'),
+        require('../assets/Dino_images/transparent_dinos/trex2.png'),
+        require('../assets/Dino_images/transparent_dinos/triceratops.png'),
+        require('../assets/Dino_images/transparent_dinos/veloc.png'),
+
+
       ]);
     this.setState({ fontLoaded: true });
   }
@@ -61,9 +134,11 @@ export default class Homepage extends React.Component {
 
   render() {
 
-  if (this.state.buttonClicked === false){
+  if (this.state.buttonClicked === false && this.state.fontLoaded){
 
     return (
+
+
       <SafeAreaView style={HomepageStyle.container}>
 
 {/* 'APP TITLE' SECTION*/}
@@ -129,11 +204,25 @@ export default class Homepage extends React.Component {
 
   else {
 
+    if (this.state.fontLoaded){
+
     return (
       <ChooseTimePeriod home={this.handleButtonClick} fontLoaded={this.state.fontLoaded}
       />
-
     )
+  }
+
+  else {
+    return (
+      <View style={{backgroundColor: 'transparent', top: '0%', height: '100%', width: '100%'}}>
+      <ImageBackground
+               source={require('../assets/findasplash2.png')}
+               style={{width: '100%', height: '100%'}}
+               >
+      </ImageBackground>
+      </View>
+  )
+  }
   }
   }
 }
