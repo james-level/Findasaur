@@ -49,6 +49,7 @@ export default class DinoListView extends Component {
     this.setDinoProfilePictureAsLoaded = this.setDinoProfilePictureAsLoaded.bind(this);
     this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
     this.closeFossilMap = this.closeFossilMap.bind(this);
+    this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
   }
 
   setFossilMapVisible(){
@@ -218,6 +219,15 @@ export default class DinoListView extends Component {
       this.onAddressBookImageLoad();
     }
   )
+  }
+
+  onDinosaurProfilePictureLoad(){
+    this.setState({
+      imagesLoading: false
+    }, function(){
+      console.log("LOADING", this.state.imagesLoading);
+
+    })
   }
 
   processImageDimensions(){
@@ -893,10 +903,21 @@ getDietTextFromImageName(){
 
                 <Image
                   style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-                  source={{uri: `${this.state.addressBookImage}`}}
+                  source={{uri: `${this.state.addressBookImage}`}} onLoad={this.onDinosaurProfilePictureLoad}
                 />
 
                 ) : null
+              }
+
+              {
+                self.state.imagesLoading ? (
+
+                  <View style={{height: Dimensions.get('window').height*0.12}}>
+                    <DotIndicator count={5} size={10} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                  </View>
+
+                ) : null
+
               }
 
                 {
