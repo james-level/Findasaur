@@ -15,6 +15,7 @@ import Autocomplete from 'react-native-autocomplete-input';
 import EraOverlay from './EraOverlay.js';
 import AddFavouriteOverlay from './AddFavouriteOverlay.js';
 import GlobalSearch from './GlobalSearch.js';
+import AndroidGlobalSearch from './AndroidGlobalSearch.js';
 import * as ImageFinder from './ImageFinder.js'
 import * as Pronunciations from './Pronunciations.js'
 import * as Meanings from './Meanings.js'
@@ -827,7 +828,6 @@ export default class ChooseTimePeriod extends Component {
         this.toggleDinosaurListView();
       })
 
-      /* Next chunk of code currently unusued as we are no longer pre-populating the address book with 18 images */
 
       if (1 > 2){
 
@@ -836,8 +836,7 @@ export default class ChooseTimePeriod extends Component {
         return this.retrieveWikiDescription(url);
       }))
       .then(() => {
-        /* this.wikiDinosaurs = getExtraData(this.props.dinosaurs); */
-        /* Call a method (to be written later) here which adds the Wikipedia description of each dinosaur to the related dinosaur object */
+        
         Promise.all(this.state.slicedDinosaurs.map((dinosaur) => {
           var imageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${dinosaur.name}&format=json&prop=pageimages&origin=*`
           return this.retrieveImageFileName(imageUrl)
@@ -1151,9 +1150,17 @@ export default class ChooseTimePeriod extends Component {
   }
 
   {
-      this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
+      Platform.OS === 'ios' && this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
 
       <GlobalSearch handleSearchBarClick={this.handleSearchBarClick} typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible}  setClickedDinosaur={this.setClickedDinosaur} fontLoaded={this.props.fontLoaded} />
+
+    ) : null
+  }
+
+  {
+      Platform.OS === 'android' && this.props.fontLoaded && this.state.viewableItems && this.state.globalSearchDataLoaded ? (
+
+      <AndroidGlobalSearch handleSearchBarClick={this.handleSearchBarClick} typedDinosaur={this.state.typedDinosaur} names={this.state.allSearchableDinosaurNames} dinosaurs={this.state.allDinosaursForGlobalSearch} eraTitle={this.state.viewableItems[0].item.other_title} eraDescription={this.state.viewableItems[0].item.description} closeSearchOverlay={this.closeSearchOverlay} searchOverlayVisible={this.state.searchOverlayVisible} setSearchOverlayVisible={this.setSearchOverlayVisible}  setClickedDinosaur={this.setClickedDinosaur} fontLoaded={this.props.fontLoaded} />
 
     ) : null
   }
