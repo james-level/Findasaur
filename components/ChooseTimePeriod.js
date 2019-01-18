@@ -192,7 +192,6 @@ export default class ChooseTimePeriod extends Component {
   componentDidMount(){
 
       this.getAllDinosaursForGlobalSearch(0, 247)
-
   }
 
   toggleLayout(){
@@ -1367,9 +1366,6 @@ export default class ChooseTimePeriod extends Component {
     </View>
 
     }
-
-
-
 
 
       <View style={DinoListViewStyle.modalHeader}>
