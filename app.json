@@ -25,7 +25,7 @@
     },
     "android": {
      "package": "com.levelapps.findasaur",
-     "versionCode": 2.0
+     "versionCode": 3.0
    }
   }
 }

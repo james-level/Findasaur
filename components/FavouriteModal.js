@@ -118,7 +118,7 @@ export default class FavouriteModal extends Component {
               source={{uri: `${this.props.clickedFavourite.image}`}}
             />
 
-/* Faves Modal, Fave Dino name */
+
             <View style={FavouriteModalStyle.modalHeader}>
               <Text style={[FavouriteModalStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.props.clickedFavourite.name}
               </Text>
@@ -126,7 +126,7 @@ export default class FavouriteModal extends Component {
 
 
             {
-/* Faves Modal, Dino Pronunciation (text) */
+
               this.props.clickedFavourite.pronunciation ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
@@ -140,7 +140,7 @@ export default class FavouriteModal extends Component {
 
             {
 
-            /* Faves Modal, Dino name Meaning (text) */
+
 
             this.props.clickedFavourite.meaning ? (
 
@@ -154,7 +154,7 @@ export default class FavouriteModal extends Component {
           }
 
           {
-  /* Faves Modal, Dino Type (Text)*/
+
             this.props.clickedFavourite.type ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
@@ -166,7 +166,7 @@ export default class FavouriteModal extends Component {
 
       }
 
-/* Faves Modal, Fave Dino diet icon */
+
           {
             Platform.OS === 'ios' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
 
@@ -193,7 +193,7 @@ export default class FavouriteModal extends Component {
 
     }
 
-{/* Faves Modal, Fossil Map Link*/}
+
 
         {
           Platform.OS === 'ios' ? (
@@ -212,13 +212,12 @@ export default class FavouriteModal extends Component {
 
             }
 
-/* Faves Modal, Dino-Era (text) */
             <View style={FavouriteModalStyle.modalHeader}>
             <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Era: </Text>{this.props.clickedFavourite.era}</Text>
             </View>
 
           {
-/* Faves Modal, Dino Length (Text)*/
+
             this.props.clickedFavourite.length ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
@@ -238,7 +237,7 @@ export default class FavouriteModal extends Component {
 
           ) : null
         }
-/* Results Modal, Dino Description */
+
           <View style={FavouriteModalStyle.modalDescription}>
             <Text style={[FavouriteModalStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.props.clickedFavourite.description}
               </Text>
