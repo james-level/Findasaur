@@ -122,7 +122,7 @@ export default class Favourites extends Component {
             this.props.fontLoaded ? (
 
 
-          <View>
+          <View style={{marginBottom: 20}}>
 
         <LinearGradient
         colors={['black', 'black']}
@@ -130,7 +130,7 @@ export default class Favourites extends Component {
 
           <View style={FavouritesStyle.favouritesModal}>
           <TouchableHighlight
-          style={{alignItems: 'center', paddingTop: 15, paddingBottom: 25}}
+          style={{alignItems: 'center', paddingTop: Dimensions.get("window").height > 870 ? 40 : 20, paddingBottom: 25}}
             onPress={() => {
               this.props.setFavouritesVisible();
             }}>
