@@ -1218,7 +1218,7 @@ export default class ChooseTimePeriod extends Component {
     colors={['black', 'black']}
     style={{ padding: 25, height: Dimensions.get('window').height }}>
 
-      <View style={DinoListViewStyle.infoModal}>
+      <View>
 
           <ScrollView>
 
