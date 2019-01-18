@@ -694,12 +694,14 @@ getDietTextFromImageName(){
                   fontSize: Dimensions.get('window').width < 400 ? 16 : 22,
                   fontFamily: 'PoiretOne-Regular',
                   textAlign: 'center',
-                  marginTop: 20
+                  marginTop: Platform.OS === 'ios' ? 20 : 0
+
+
                 }}
               >
                {this.props.eraName} Dinosaurs
               </Text>
-              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2}}/>
+              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
             </View>
             </View>
           )}
