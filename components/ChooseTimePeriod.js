@@ -192,7 +192,6 @@ export default class ChooseTimePeriod extends Component {
   componentDidMount(){
 
       this.getAllDinosaursForGlobalSearch(0, 247)
-
   }
 
   toggleLayout(){
@@ -1370,12 +1369,11 @@ export default class ChooseTimePeriod extends Component {
     }
 
 
-      
-
       <View style={DinoListViewStyle.modalHeader}>
         <Text onPress={this.setFossilMapVisible} style={[DinoListViewStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>View Fossil Map: </Text><Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
         </Text>
       </View>
+
 
         {
 

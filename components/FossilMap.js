@@ -12,6 +12,7 @@ export default class FossilMap extends Component {
   }
 
   fossilsToMap(){
+
     if (this.props.mappedDinosaur.coords[0][0]){
       return this.props.mappedDinosaur.coords.map( (coord, i) =>
 
@@ -42,6 +43,7 @@ export default class FossilMap extends Component {
   }
 
   returnDefaultLatitude(){
+        console.log("COORDS DINO", this.props.mappedDinosaur);
     if (this.props.mappedDinosaur.coords[0][0]){
       return this.props.mappedDinosaur.coords[0][0]
     }
@@ -78,7 +80,7 @@ export default class FossilMap extends Component {
       {
         (hideModal, overlayState) => (
           <Fragment>
-        
+
               <MapView style={FossilMapStyle.map}
               scrollEnabled={true}
               toolbarEnabled={false}

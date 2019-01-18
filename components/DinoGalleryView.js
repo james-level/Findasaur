@@ -49,6 +49,7 @@ export default class DinoGalleryView extends Component {
     this.setDinoProfilePictureAsLoaded = this.setDinoProfilePictureAsLoaded.bind(this);
     this.setFossilMapVisible = this.setFossilMapVisible.bind(this);
     this.closeFossilMap = this.closeFossilMap.bind(this);
+    this.onDinosaurProfilePictureLoad = this.onDinosaurProfilePictureLoad.bind(this);
   }
 
   setFossilMapVisible(){
@@ -98,9 +99,10 @@ export default class DinoGalleryView extends Component {
     var type = Types.getType(name)
     var diet = this.state.searchedDinosaurData.diet
     var image = this.state.searchedDinosaurImage
+    var coords = this.state.searchedDinosaurData.coords
     var era = this.props.eraName
 
-    var dinosaur = {name: name, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+    var dinosaur = {name: name, era: era, coords: coords, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
@@ -353,6 +355,15 @@ export default class DinoGalleryView extends Component {
     }, function(){
       this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
     });
+  }
+
+  onDinosaurProfilePictureLoad(){
+    this.setState({
+      imagesLoading: false
+    }, function(){
+      console.log("LOADING", this.state.imagesLoading);
+
+    })
   }
 
   closeDinosaurView(){
@@ -887,10 +898,21 @@ export default class DinoGalleryView extends Component {
 
                     <Image
                       style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight}}
-                      source={{uri: `${this.state.addressBookImage}`}}
+                      source={{uri: `${this.state.addressBookImage}`}} onLoad={this.onDinosaurProfilePictureLoad}
                     />
 
                     ) : null
+                  }
+
+                  {
+                    self.state.imagesLoading ? (
+
+                      <View style={{height: Dimensions.get('window').height*0.12}}>
+                        <DotIndicator count={5} size={10} color={'limegreen'} style={{backgroundColor: 'transparent'}} />
+                      </View>
+
+                    ) : null
+
                   }
 
                     {
