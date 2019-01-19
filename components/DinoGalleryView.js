@@ -21,6 +21,7 @@ import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import { AsyncStorage } from "react-native"
 import FossilMap from './FossilMap.js';
+import ViewDinosaurModal from './ViewDinosaurModal.js';
 
 export default class DinoGalleryView extends Component {
   _isMounted = false;
@@ -822,7 +823,31 @@ export default class DinoGalleryView extends Component {
           {
             self.state.searchedDinosaurData ? (
 
-              <ViewDinosaurModal />
+              <ViewDinosaurModal
+
+              dinosaurViewVisible={self.state.dinosaurViewVisible}
+              searchDataLoading={self.state.searchDataLoading}
+              searchedDinosaurImage={self.state.searchedDinosaurImage}
+              newFavouriteAdded={self.state.newFavouriteAdded}
+              clickedDinoAlreadyFavourite={self.state.clickedDinoAlreadyFavourite}
+              addDinosaurToFavourites={self.addDinosaurToFavourites}
+              addressBookImage={self.state.addressBookImage}
+              addressBookImageWidth={self.state.addressBookImageWidth}
+              addressBookImageHeight={self.state.addressBookImageHeight}
+              onDinosaurProfilePictureLoad={self.onDinosaurProfilePictureLoad}
+              imagesLoading={self.state.imagesLoading}
+              searchedDinosaurData={self.state.searchedDinosaurData}
+              returnClickedDinosaur={self.state.clickedDinosaur}
+              getDietTextFromImageName={self.getDietTextFromImageName()}
+              setFossilMapVisible={self.setFossilMapVisible}
+              closeDinosaurView={self.closeDinosaurView}
+              renderDescriptionElements={self.renderDescriptionElements}
+              searchedDinosaurDescription={self.searchedDinosaurDescription}
+              fossilMapVisible={self.state.fossilMapVisible}
+              closeFossilMap={self.closeFossilMap}
+              dinosaurClicked={self.state.dinosaurClicked}
+
+              />
 
 
         ) : null
