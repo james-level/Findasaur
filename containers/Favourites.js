@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Alert, StatusBar, Modal,Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
-import FavouriteModal from './FavouriteModal.js';
+import FavouriteModal from '../components/FavouriteModal.js';
 import FavouritesStyle from '../Stylesheets/FavouritesStyle.js';
-import * as ImageFinder from './ImageFinder.js'
+import * as ImageFinder from '../components/ImageFinder.js'
 
 export default class Favourites extends Component {
 

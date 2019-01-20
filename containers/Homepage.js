@@ -8,11 +8,11 @@ import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native';
 import HomepageStyle from '../Stylesheets/HomepageStyle.js';
 import ChooseTimePeriod from './ChooseTimePeriod.js';
-import InfoModal from './InfoModal.js';
-import AboutModal from './AboutModal.js';
+import InfoModal from '../components/InfoModal.js';
+import AboutModal from '../components/AboutModal.js';
 import Favourites from './Favourites.js';
-import ExploreButton from './ExploreButton.js';
-import HeroImageCarousel from './HeroImageCarousel.js';
+import ExploreButton from '../components/ExploreButton.js';
+import HeroImageCarousel from '../components/HeroImageCarousel.js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class Homepage extends React.Component {
@@ -154,7 +154,6 @@ export default class Homepage extends React.Component {
     <HeroImageCarousel />
 
       <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
-
 
 {/* 'INFO' MODAL SECTION*/}
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />

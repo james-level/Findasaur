@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import { LinearGradient } from 'expo';
 import _ from 'lodash';
-import { MockRobotsList } from './FakerMocks';
+import { MockRobotsList } from '../components/FakerMocks';
 import Pagination from 'react-native-pagination';
 import AutoHeightImage from 'react-native-auto-height-image';
 const { width, height } = Dimensions.get('window');
@@ -14,16 +14,16 @@ const ITEM_HEIGHT = 100;
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
 import Autocomplete from 'react-native-autocomplete-input';
 import axios from 'axios';
-import * as ImageFinder from './ImageFinder.js'
-import * as Pronunciations from './Pronunciations.js'
-import * as Meanings from './Meanings.js'
-import * as Types from './Types.js'
-import * as Lengths from './Lengths.js'
+import * as ImageFinder from '../components/ImageFinder.js'
+import * as Pronunciations from '../components/Pronunciations.js'
+import * as Meanings from '../components/Meanings.js'
+import * as Types from '../components/Types.js'
+import * as Lengths from '../components/Lengths.js'
 import { AsyncStorage } from "react-native"
-import FossilMap from './FossilMap.js';
-import ViewDinosaurModal from './ViewDinosaurModal.js'
+import FossilMap from '../components/FossilMap.js';
+import ViewDinosaurModal from '../components/ViewDinosaurModal.js';
 
-export default class DinoListView extends Component {
+export default class DinoGalleryView extends Component {
   _isMounted = false;
 
   constructor(props) {
@@ -98,12 +98,12 @@ export default class DinoListView extends Component {
     var meaning = Meanings.getNameMeaning(name)
     var length = Lengths.getLength(name)
     var type = Types.getType(name)
-    var coords = this.state.searchedDinosaurData.coords
     var diet = this.state.searchedDinosaurData.diet
     var image = this.state.searchedDinosaurImage
+    var coords = this.state.searchedDinosaurData.coords
     var era = this.props.eraName
 
-    var dinosaur = {name: name, coords: coords, era: era, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
+    var dinosaur = {name: name, era: era, coords: coords, diet: diet, description: description, pronunciation: pronunciation, meaning: meaning, length: length, type: type, image: image}
 
     try {
       AsyncStorage.getItem('dinosaur_favourites').then((dinosaurs) => {
@@ -122,6 +122,7 @@ export default class DinoListView extends Component {
                 )
           })
         }
+
         else {
           Alert.alert(
                  `${dinosaur.name} is already in your favourites!`
@@ -165,7 +166,7 @@ export default class DinoListView extends Component {
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
-    'Could not load dinosaur data 🦕',
+    'Could not load data for dinosaur',
     "Please check your internet connection and try again later"
     )
     })
@@ -220,15 +221,6 @@ export default class DinoListView extends Component {
       this.onAddressBookImageLoad();
     }
   )
-  }
-
-  onDinosaurProfilePictureLoad(){
-    this.setState({
-      imagesLoading: false
-    }, function(){
-      console.log("LOADING", this.state.imagesLoading);
-
-    })
   }
 
   processImageDimensions(){
@@ -312,6 +304,26 @@ export default class DinoListView extends Component {
       }
     }
 
+    getDietTextFromImageName(){
+
+      if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png")){
+        return "Omnivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/carnivore.png")){
+        return "Carnivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/herbivore.png")){
+        return "Herbivore"
+      }
+      else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/diet_unknown.png")){
+        return "Research inconclusive"
+      }
+      else {
+        return
+      }
+
+    }
+
   retrieveDescription(dinosaur){
     var self = this;
     const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${dinosaur}&exintro=1&explaintext=1&exsectionformat=plain&origin=*`
@@ -330,7 +342,7 @@ export default class DinoListView extends Component {
       console.log(error);
       console.log("Error fetching dinosaur data.");
       Alert.alert(
-    'Could not load dinosaur data 🦖',
+    'Could not load data for dinosaur',
     "Please check your internet connection and try again later"
     )
     })
@@ -344,6 +356,15 @@ export default class DinoListView extends Component {
     }, function(){
       this.retrieveSearchedDinosaurData(this.state.clickedDinosaur)
     });
+  }
+
+  onDinosaurProfilePictureLoad(){
+    this.setState({
+      imagesLoading: false
+    }, function(){
+      console.log("LOADING", this.state.imagesLoading);
+
+    })
   }
 
   closeDinosaurView(){
@@ -425,7 +446,7 @@ export default class DinoListView extends Component {
       newArray.push(object.query.pages[`${pageNumber}`].extract);
     }
     if (newArray.length === 0){
-      return "Sorry, for some dinosaurs (such as this one) records are partial, incomplete or non-existent. Therefore Findasaur can't provide a description, needless to say it was probably not the kind of thing you would want to meet in a dark alley on a dark night..."
+      return "Unfortunately records are partial, incomplete or non-existent for certain dinosaurs. This means that, though Findasaur always strives to provide the most informative experience possible, in some cases no description is available."
     }
     else {
       return newArray;
@@ -506,26 +527,6 @@ export default class DinoListView extends Component {
   }))
 }
 
-getDietTextFromImageName(){
-
-  if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/omnivore.png")){
-    return "Omnivore"
-  }
-  else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/carnivore.png")){
-    return "Carnivore"
-  }
-  else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/herbivore.png")){
-    return "Herbivore"
-  }
-  else if (ImageFinder.getDietImage(this.state.searchedDinosaurData.diet) === require("../assets/icons/diet_unknown.png")){
-    return "Research inconclusive"
-  }
-  else {
-    return
-  }
-
-}
-
   returnImageFromStored(){
     console.log("IMAGES", this.props.images);
     return this.props.images[0][this.state.activeItem.index];
@@ -550,7 +551,7 @@ getDietTextFromImageName(){
       addressBookImageLoading: true
     }, function(){
           /* IMAGE LOADING METHOD TO RETRIEVE IMAGE FOR DINOSAURS (CURRENTLY ALL; ORIGINALLY JUST 18) */
-          this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })
+          this.retrieveInitialImageLink(activeItem.item.name);
     })
   }
   }
@@ -559,12 +560,12 @@ getDietTextFromImageName(){
     return (
       <View
         style={{
+          flex: 1,
+          // height:40,
           margin: 5,
           marginTop: 25,
-          marginBottom: 10,
-          flex: 1,
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <TouchableOpacity
@@ -572,61 +573,20 @@ getDietTextFromImageName(){
           style={[
             s.renderItem,
             this.state.activeId === _.get(o, 'item.id', false)
-              ? { backgroundColor: 'black', borderRadius: 5, marginBottom: 0 }
+              ? { backgroundColor: 'black', borderRadius: 10, marginBottom: 0 }
               : { backgroundColor: 'black', marginBottom: 0 }
           ]}
         >
+        <AutoHeightImage width={Dimensions.get('window').width*0.25} source={require('../assets/icons/footprint.png')}/>
+
           <Text
             style={[
               s.name2,
               this.state.activeId === o.item.id
-                ? {
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  fontFamily: 'PoiretOne-Regular',
-                  fontSize: Dimensions.get('window').width < 400 ? 18 : 23,
-                  color: 'limegreen',
-                  marginLeft: 20,
-                  paddingLeft: 30,
-                  }
-                : {
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                  fontFamily: 'PoiretOne-Regular',
-                  fontSize: Dimensions.get('window').width < 400 ? 18 : 23,
-                  color: 'white',
-                  marginLeft: 20,
-                  paddingLeft: 30,
-                  }
+                ? { color: 'limegreen', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
+                : { color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 16 }
             ]}
           >
-
-          {
-            Platform.OS === 'ios' ? (
-                  <AutoHeightImage
-                  width={ Dimensions.get('window').width < 400 ? Dimensions.get('window').width*0.1 : Dimensions.get('window').width*0.06 }
-                  source={ require('../assets/icons/footprint.png')}
-                  />
-
-                ) :
-
-                <AutoHeightImage
-                width={ Dimensions.get('window').width < 400 ? 130 : 100 }
-                source={ require('../assets/icons/footprint.png')}
-                />
-              }
-
-              {
-                Platform.OS === 'ios' ? (
-                    null
-
-                    ) :
-
-                    <Text style={{color: 'black'}}>:::::</Text>
-                  }
-
             {o.item.name ? o.item.name : 'Unknown'}
           </Text>
         </TouchableOpacity>
@@ -687,122 +647,105 @@ getDietTextFromImageName(){
       </View>
     );
     return (
-       <View style={[s.container]}>
-          <View style={s.innerContainer}>
-            {!this.state.activeItem && (
-              <View
-                style={{
-                  alignItems: 'center',
-                  backgroundColor: 'black',
-                  flex: 1,
-                  flexDirection: 'column',
-                  marginTop: 35,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  marginBottom: 0,
-                  overflow: 'visible',
-                }}
-              >
-              <View style={{flexDirection: 'row'}}>
-          <TouchableHighlight
-            onPress={() => {
-              this.props.returnToErasPage();
-            }}>
-          <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
-          </TouchableHighlight>
+      <View style={[s.container]}>
 
-          <TouchableHighlight
-            onPress={() => {
-              this.props.toggleLayout();
-            }}>
-          <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
-          </TouchableHighlight>
+        <View style={s.innerContainer}>
 
-          </View>
-          <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column', overflow: 'visible', backgroundColor: 'black'}}>
-              <Text
-                style={{
-                  color: 'limegreen',
-                  fontWeight: '400',
-                  fontSize: Dimensions.get('window').width < 400 ? 16 : 22,
-                  fontFamily: 'PoiretOne-Regular',
-                  textAlign: 'center',
-                  marginTop: Platform.OS === 'ios' ? 20 : 0
-
-
-                }}
-              >
-               {this.props.eraName} Dinosaurs
-              </Text>
-              {
-                Platform.OS === 'ios' ? (
-              <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
-            ) : null }
-            </View>
-            </View>
-          )}
-
-
-          {this.state.activeItem && (
+          {!this.state.activeItem && (
             <View
               style={{
+                justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'black',
-                flex: 1,
-                flexDirection: 'column',
-                marginTop: 35,
-                marginLeft: 10,
-                marginRight: 10,
-                marginBottom: 0,
+                flex: 1
               }}
             >
-            <View style={{flexDirection: 'row'}}>
-        <TouchableHighlight
-          onPress={() => {
-            this.props.returnToErasPage();
-          }}>
-        <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
-        </TouchableHighlight>
+              <Text
+                style={{
+                  textAlignVertical: 'center',
+                  color: 'white',
+                  textAlign: 'center',
+                  fontWeight: '400',
+                  fontSize: 21,
+                  fontFamily: 'PoiretOne-Regular',
+                  margin: 30
+                }}
+              >
+                Scroll through the {this.props.eraName} era gallery and tap the footprints for more info.
+              </Text>
+            </View>
+          )}
 
-        <TouchableHighlight
-          onPress={() => {
-            this.props.toggleLayout();
-          }}>
-        <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
-        </TouchableHighlight>
+          {this.state.activeItem && (
 
-        </View>
-        <View style={{flexDirection: Platform.OS === 'ios' ? 'row' : 'column', overflow: 'visible', backgroundColor: 'black'}}>
-            <Text
-              style={{
-                color: 'limegreen',
-                fontWeight: '400',
-                fontSize: Dimensions.get('window').width < 400 ? 16 : 22,
-                fontFamily: 'PoiretOne-Regular',
-                textAlign: 'center',
-                marginTop: Platform.OS === 'ios' ? 20 : 0
-
-
-              }}
+            <TouchableOpacity
+              onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}
+              style={[DinoListViewStyle.renderItem, DinoListViewStyle.activeItem]}
             >
-             {this.props.eraName} Dinosaurs
-            </Text>
             {
-              Platform.OS === 'ios' ? (
-            <Image source={require('../assets/icons/downscroll.gif')} style={{height: 54, width: 72, marginTop: 2, overflow: 'visible'}}/>
-          ) : null }
+              this.state.addressBookImageLoading ? (
+
+                <View style={{backgroundColor: 'black', width: width*0.35, height: height*0.35}}>
+                  < DotIndicator Indicator count={5} size={10} color={'limegreen'}/>
+                </View>
+       ) :
+
+      null
+
+     }
+
+
+     {
+       this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+         <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
+
+         <View style={{alignItems: 'center', marginTop: Dimensions.get('window').height*0.24, height: Dimensions.get('window').height*0.6, width: Dimensions.get('window').width, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
+
+
+         <Image
+           style={{width: this.state.addressBookImageWidth, height: this.state.addressBookImageHeight, borderRadius: 10}}
+           source={{uri: `${this.state.addressBookImage}`}}
+           onLoad={this.onAddressBookImageLoad}
+           />
+
+           <Text onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })} style={{marginTop: Dimensions.get('window').height*0.02, textAlign: 'center', color: 'white', fontFamily: 'PoiretOne-Regular', fontSize: 20, paddingLeft: 0}} >
+            Click image to view
+           </Text>
+
           </View>
-          </View>
+
+          </TouchableOpacity>
+
+
+      ) :
+
+      null
+
+      }
+
+
+
+      {
+        this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+        null
+           ) :
+
+          null
+
+          }
+
+            </TouchableOpacity>
           )}
 
         </View>
 
-        <View style={{ flex: 1, height: height, width, marginTop: 50}}>
+        <View style={{ flex: 1, height: height, width}}>
           <FlatList
           style={{marginBottom: -(height*0.08)}}
             ListEmptyComponent={ListEmptyComponent}
             //  initialNumToRender={5}
-            vertical
+            horizontal
             ref={r => (this.refs = r)}
             getItemLayout={(data, index) => ({
               length: ITEM_HEIGHT,
@@ -824,31 +767,21 @@ getDietTextFromImageName(){
         {
           this.state.items ? (
           <Pagination
-            vertical
+            horizontal
             debugMode={true}
             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list
-            /*
-            startDotIconFamily="Ionicons"
-            startDotIconName="md-arrow-round-down"
-            startDotIconColor="black"
-            startDotIconSize={25}
-
-            endDotIconFamily="Ionicons"
-            endDotIconName="md-arrow-round-up"
-            endDotIconColor="black"
-            endDotIconSize={25}
-
+            endDotIconFamily={'MaterialIcons'}
             dotIconNameActive={'checkbox-blank-circle'}
-            dotIconColorActive={'black'}
+            dotIconColorActive={'limegreen'}
             dotIconNameNotActive={'checkbox-blank-circle-outline'}
-            dotIconColorNotActive={'black'}
-            dotIconNameEmpty={'black'}
+            dotIconColorNotActive={'limegreen'}
+            dotIconNameEmpty={'close'}
             dotTextHide={true}
-            dotTextColor={'black'}
+            dotTextColor={'limegreen'}
             dotIconSizeNotActive={15}
             dotIconSizeActive={15}
             dotIconSizeEmpty={15}
-            */
+            dotColorhasNotSeen={"red"}
             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
             paginationItems={this.state.items} //pass the same list as data
             paginationItemPadSize={3}
@@ -857,6 +790,35 @@ getDietTextFromImageName(){
       }
         </View>
 
+        <View style={{flexDirection: 'row', position: 'absolute', top: height*0.065}}>
+    <TouchableHighlight
+      onPress={() => {
+        this.props.returnToErasPage();
+      }}>
+    <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25, marginBottom: 17, marginRight: Dimensions.get('window').width*0.06}}/>
+    </TouchableHighlight>
+
+    <TouchableHighlight
+      onPress={() => {
+        this.props.toggleLayout();
+      }}>
+    <Image source={require('../assets/icons/toggleview.png')} style={{height: 25, width: 25, marginBottom: 17, marginLeft: Dimensions.get('window').width*0.06}}/>
+    </TouchableHighlight>
+
+    </View>
+
+    {
+      this.state.searchedDinosaurImage && !this.state.addressBookImageLoading ? (
+
+    <View style={{flexDirection: 'column', position: 'absolute', top: Dimensions.get('window').height*0.14}}>
+    <Text style={[DinoListViewStyle.galleryNameHeader, {fontFamily: 'PoiretOne-Regular', textAlign: 'center'}]}>{this.state.activeItem.name}</Text>
+    </View>
+
+    ) :
+
+    null
+
+    }
 
           {
             self.state.searchedDinosaurData ? (
@@ -887,6 +849,7 @@ getDietTextFromImageName(){
 
               />
 
+
         ) : null
       }
 
@@ -896,31 +859,26 @@ getDietTextFromImageName(){
 }
 const s = StyleSheet.create({
   container: {
-    flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'black',
-    paddingTop: 0,
-    paddingBottom:0,
-    marginTop: 0,
-    marginBottom: 0,
-    position: 'relative',
+    height,
+    width,
     justifyContent: 'center',
     alignItems: 'center',
-    overflow: 'visible'
-
+    backgroundColor: 'black'
   },
   innerContainer: {
-    flex: 0.2,
-    height: 20,
-    paddingTop: 5,
-    paddingBottom:5,
-    marginTop: 5,
-    marginBottom: 5,
+    flex: 1.17,
     position: 'relative',
+    top: height*0.15,
+    height,
+    width,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
-      overflow: 'visible'
     // This is the grey background on top 1/2 of the screen
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20
   },
 });

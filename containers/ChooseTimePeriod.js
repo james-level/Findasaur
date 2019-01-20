@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal, Platform } from 'react-native';
 import faker from 'faker';
 import { LinearGradient } from 'expo';
-import TimePeriodPage from './TimePeriodPage';
-import NavBarAndroidLight from './NavBarAndroidLight'
-import NavBarIOSLight from './NavBarIOSLight'
+import TimePeriodPage from '../components/TimePeriodPage';
+import NavBarAndroidLight from '../components/NavBarAndroidLight'
+import NavBarIOSLight from '../components/NavBarIOSLight'
 import Pagination from 'react-native-pagination';
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
-import ViewDinosaurModal from './ViewDinosaurModal.js';
+import ViewDinosaurModal from '../components/ViewDinosaurModal.js';
 import _ from 'lodash';
-import { MockTweetList } from './FakerMocks';
+import { MockTweetList } from '../components/FakerMocks';
 import axios from 'axios';
 import AutoHeightImage from 'react-native-auto-height-image';
 import Autocomplete from 'react-native-autocomplete-input';
-import EraOverlay from './EraOverlay.js';
-import AddFavouriteOverlay from './AddFavouriteOverlay.js';
-import GlobalSearch from './GlobalSearch.js';
-import AndroidGlobalSearch from './AndroidGlobalSearch.js';
-import * as ImageFinder from './ImageFinder.js'
-import * as Pronunciations from './Pronunciations.js'
-import * as Meanings from './Meanings.js'
-import * as Types from './Types.js'
-import * as Lengths from './Lengths.js'
-import EraFavourites from './EraFavourites.js';
+import EraOverlay from '../components/EraOverlay.js';
+import AddFavouriteOverlay from '../components/AddFavouriteOverlay.js';
+import GlobalSearch from '../components/GlobalSearch.js';
+import AndroidGlobalSearch from '../components/AndroidGlobalSearch.js';
+import * as ImageFinder from '../components/ImageFinder.js'
+import * as Pronunciations from '../components/Pronunciations.js'
+import * as Meanings from '../components/Meanings.js'
+import * as Types from '../components/Types.js'
+import * as Lengths from '../components/Lengths.js'
+import EraFavourites from '../components/EraFavourites.js';
 import Favourites from './Favourites.js'
 import TimePeriodStyle from '../Stylesheets/TimePeriodStyle.js';
 import { AsyncStorage } from "react-native"
@@ -32,8 +32,8 @@ import MapView from 'react-native-maps';
 import { BallIndicator, BarIndicator, DotIndicator, MaterialIndicator, PacmanIndicator, PulseIndicator, SkypeIndicator, UIActivityIndicator, WaveIndicator } from 'react-native-indicators';
 import ChooseTimePeriodStyle from '../Stylesheets/ChooseTimePeriodStyle.js';
 import TimePeriodPageStyle from '../Stylesheets/TimePeriodStyle.js';
-import FossilMap from './FossilMap.js';
-import GlobalFossilMap from './GlobalFossilMap.js';
+import FossilMap from '../components/FossilMap.js';
+import GlobalFossilMap from '../components/GlobalFossilMap.js';
 
 
 export default class ChooseTimePeriod extends Component {
