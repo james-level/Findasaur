@@ -151,9 +151,17 @@ export default class Homepage extends React.Component {
       </View>
 
 {/* 'IMAGE CAROUSEL' SECTION*/}
-    <HeroImageCarousel />
+    {
+      this.state.fontLoaded ? (
+        <HeroImageCarousel />
+      ) : null
+    }
 
-      <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
+    {
+      this.state.fontLoaded ? (
+        <ExploreButton fontLoaded={this.state.fontLoaded} handleButtonClick={this.handleButtonClick} />
+     ) : null
+    }
 
 {/* 'INFO' MODAL SECTION*/}
   <InfoModal modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible} fontLoaded={this.state.fontLoaded} />
@@ -164,6 +172,9 @@ export default class Homepage extends React.Component {
 {/* 'ABOUT' MODAL SECTION*/}
   <AboutModal aboutModalVisible={this.state.aboutModalVisible} setAboutModalVisible={this.setAboutModalVisible} fontLoaded={this.state.fontLoaded} />
 
+
+  {
+    this.state.fontLoaded ? (
 
     <View style={HomepageStyle.iconsContainer}>
 
@@ -195,6 +206,10 @@ export default class Homepage extends React.Component {
           </TouchableHighlight>
 
         </View>
+
+      ) : null
+
+    }
 
   </SafeAreaView>
 
