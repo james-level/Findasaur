@@ -13,7 +13,7 @@ export default class InfoModal extends Component {
           transparent={false}
           visible={this.props.modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            this.props.setModalVisible();
           }}>
           <View>
 

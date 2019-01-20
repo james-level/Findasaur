@@ -13,7 +13,7 @@ export default class AboutModal extends Component {
           transparent={false}
           visible={this.props.aboutModalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            this.props.setAboutModalVisible();
           }}>
           <View>
 

@@ -86,7 +86,7 @@ export default class FavouriteModal extends Component {
         transparent={false}
         visible={this.props.favouriteModalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
+          this.props.toggleFavouriteModal();
         }}>
 
         <View>

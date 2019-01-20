@@ -22,7 +22,7 @@ export default class ViewDinosaurModal extends Component {
         transparent={false}
         visible={this.props.dinosaurViewVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
+          this.props.closeDinosaurView();
         }}>
         <View>
 
@@ -193,7 +193,7 @@ export default class ViewDinosaurModal extends Component {
                                     ) : null
 
                                   }
-                      
+
 
                       {
                         Platform.OS === 'android' && ImageFinder.getDietImage(this.props.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (

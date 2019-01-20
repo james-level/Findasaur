@@ -1210,7 +1210,7 @@ export default class ChooseTimePeriod extends Component {
       transparent={false}
       visible={this.state.dinosaurViewVisible}
       onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
+        this.closeDinosaurView();
       }}>
       <View>
 
