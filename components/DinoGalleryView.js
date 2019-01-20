@@ -753,7 +753,7 @@ export default class DinoGalleryView extends Component {
               index
             })}
             //onEndReached={this._onEndReached}
-            onRefresh={o => console.log(o);}
+            onRefresh={o => console.log(o)}
             initialScrollIndex={0}
             refreshing={this.state.isLoading}
             onEndReached={o => this.onEndReached}
