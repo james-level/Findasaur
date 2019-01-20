@@ -134,7 +134,7 @@ export default class Homepage extends React.Component {
 
   render() {
 
-  if (this.state.buttonClicked === false && this.state.fontLoaded){
+  if (this.state.buttonClicked === false){
 
     return (
 
@@ -204,25 +204,10 @@ export default class Homepage extends React.Component {
 
   else {
 
-    if (this.state.fontLoaded){
-
     return (
       <ChooseTimePeriod home={this.handleButtonClick} fontLoaded={this.state.fontLoaded}
       />
     )
-  }
-
-  else {
-    return (
-      <View style={{backgroundColor: 'transparent', top: '0%', height: '100%', width: '100%'}}>
-      <ImageBackground
-               source={require('../assets/findasplash2.png')}
-               style={{width: '100%', height: '100%'}}
-               >
-      </ImageBackground>
-      </View>
-  )
-  }
   }
   }
 }
