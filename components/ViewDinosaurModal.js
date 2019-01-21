@@ -8,6 +8,7 @@ import * as Meanings from './Meanings.js'
 import * as Types from './Types.js'
 import * as Lengths from './Lengths.js'
 import FossilMap from './FossilMap.js'
+import AddFavouriteOverlay from './AddFavouriteOverlay.js'
 import AutoHeightImage from 'react-native-auto-height-image';
 
 import DinoListViewStyle from '../Stylesheets/DinoListViewStyle.js';
@@ -97,6 +98,14 @@ export default class ViewDinosaurModal extends Component {
 
             ) : null
           }
+
+          {
+            this.props.fontLoaded && this.props.viewableItems ? (
+
+            <AddFavouriteOverlay closeFavouriteOverlay={this.props.closeFavouriteAnimationOverlay} favouriteOverlayVisible={this.props.favouriteOverlayVisible} setFavouriteOverlayVisible={this.props.setFavouriteOverlayVisible} fontLoaded={this.props.fontLoaded} />
+
+          ) : null
+        }
 
           {
             self.props.imagesLoading ? (

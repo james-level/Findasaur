@@ -1229,6 +1229,13 @@ export default class ChooseTimePeriod extends Component {
         closeFossilMap={self.closeFossilMap}
         dinosaurClicked={self.state.dinosaurClicked}
 
+        fontLoaded={self.props.fontLoaded}
+        closeFavouriteAnimationOverlay={self.closeFavouriteAnimationOverlay}
+        favouriteOverlayVisible={self.state.animatedFavouriteOverlayVisible}
+        setFavouriteOverlayVisible={self.setFavouriteAnimationOverlayVisible}
+        viewableItems={self.state.viewableItems}
+
+
         />
 
   ) : null
