@@ -118,7 +118,7 @@ export default class DinoGalleryView extends Component {
           AsyncStorage.setItem('dinosaur_favourites', JSON.stringify(dinos));
           this.setState({newFavouriteAdded: true}, function(){
             Alert.alert(
-                   `${dinosaur.name} added to your favourites!`
+                   `${dinosaur.name} was added to your favourites!`
                 )
           })
         }
@@ -181,9 +181,9 @@ export default class DinoGalleryView extends Component {
   calculateImageDimensions(){
     var aspectRatio = this.state.width / this.state.height;
 
-    if (this.state.height > Dimensions.get('window').height*0.55){
+    if (this.state.height > Dimensions.get('window').height*0.46){
 
-      var height = Dimensions.get('window').width*0.55;
+      var height = Dimensions.get('window').width > 740 ? Dimensions.get('window').width*0.46 : Dimensions.get('window').width*0.52;
       var width = height * aspectRatio;
 
       if (width > Dimensions.get('window').width){
@@ -197,8 +197,8 @@ export default class DinoGalleryView extends Component {
       var width = Dimensions.get('window').width*0.90;
       var height = width / aspectRatio;
 
-      if (height > Dimensions.get('window').height*0.55){
-        var height = Dimensions.get('window').height*0.55;
+      if (height > Dimensions.get('window').height*0.46){
+        var height = Dimensions.get('window').width > 740 ? Dimensions.get('window').width*0.46 : Dimensions.get('window').width*0.52;
         var width = height * aspectRatio;
       }
     }
@@ -207,8 +207,8 @@ export default class DinoGalleryView extends Component {
       var width = Dimensions.get('window').width*0.90;
       var height = width / aspectRatio;
 
-      if (height > Dimensions.get('window').height*0.55){
-        var height = Dimensions.get('window').height*0.55;
+      if (height > Dimensions.get('window').height*0.46){
+        var height = Dimensions.get('window').width > 740 ? Dimensions.get('window').width*0.46 : Dimensions.get('window').width*0.52;
         var width = height * aspectRatio;
       }
     }
@@ -699,7 +699,7 @@ export default class DinoGalleryView extends Component {
 
          <TouchableOpacity style={{backgroundColor: 'black'}} onPress={() => this.setState({clickedDinosaur: this.state.activeItem.name}, function(){ this.toggleDinosaurView() })}>
 
-         <View style={{alignItems: 'center', marginTop: Dimensions.get('window').height*0.24, height: Dimensions.get('window').height*0.6, width: Dimensions.get('window').width, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
+         <View style={{alignItems: 'center', marginTop: Dimensions.get('window').height*0.20, height: Dimensions.get('window').height*0.6, width: Dimensions.get('window').width, borderWidth: 1, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20}}>
 
 
          <Image
