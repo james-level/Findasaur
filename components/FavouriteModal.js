@@ -193,6 +193,32 @@ export default class FavouriteModal extends Component {
 
     }
 
+    {
+      Platform.OS === 'android' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
+
+      <View style={FavouriteModalStyle.modalHeader}>
+        <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text>
+          
+        </Text>
+      </View>
+
+    ) :
+
+  null
+
+  }
+
+  { Platform.OS === 'android' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) == require("../assets/icons/diet_unknown.png") ? (
+
+  <View style={FavouriteModalStyle.modalHeader}>
+    <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+    </Text>
+  </View>
+
+) : null
+
+}
+
 
 
         {

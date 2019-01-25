@@ -220,7 +220,7 @@ export default class ViewDinosaurModal extends Component {
 
 
                           {
-                            Platform === 'android' ? (
+                            Platform === 'android' && ImageFinder.getDietImage(this.props.searchedDinosaurData.diet) != require("../assets/icons/diet_unknown.png") ? (
 
                             <View style={DinoListViewStyle.modalHeader}>
                               <Text style={[DinoListViewStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.props.getDietTextFromImageName}</Text>
