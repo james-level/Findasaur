@@ -188,6 +188,7 @@ export default class TimePeriodPage extends Component {
 
       <TouchableHighlight
         style={{position: 'relative', top: '0%' }}
+        underlayColor="transparent"
         onPress={() => {
           this.props.setEraModalVisible();
           }}>
