@@ -842,7 +842,7 @@ export default class DinoGalleryView extends Component {
               setFossilMapVisible={self.setFossilMapVisible}
               closeDinosaurView={self.closeDinosaurView}
               renderDescriptionElements={self.renderDescriptionElements}
-              searchedDinosaurDescription={self.searchedDinosaurDescription}
+              searchedDinosaurDescription={self.state.searchedDinosaurDescription}
               fossilMapVisible={self.state.fossilMapVisible}
               closeFossilMap={self.closeFossilMap}
               dinosaurClicked={self.state.dinosaurClicked}
