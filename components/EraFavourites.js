@@ -116,7 +116,7 @@ export default class EraFavourites extends Component {
           transparent={false}
           visible={this.props.favouritesVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+              this.props.setFavouritesVisible();
           }}>
 
           {

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Alert, StatusBar, Modal,Dimensions, View, Text, ScrollView, Linking, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import { AsyncStorage } from "react-native"
-import FavouriteModal from './FavouriteModal.js';
+import FavouriteModal from '../components/FavouriteModal.js';
 import FavouritesStyle from '../Stylesheets/FavouritesStyle.js';
-import * as ImageFinder from './ImageFinder.js'
+import * as ImageFinder from '../components/ImageFinder.js'
 
 export default class Favourites extends Component {
 
@@ -115,7 +115,7 @@ export default class Favourites extends Component {
           transparent={false}
           visible={this.props.favouritesVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            this.props.setFavouritesVisible();
           }}>
 
           {
@@ -137,8 +137,8 @@ export default class Favourites extends Component {
           <Image source={require('../assets/icons/back3.png')} style={{height: 25, width: 25}}/>
           </TouchableHighlight>
           <Text style={[FavouritesStyle.favouritesModalHeader, {fontFamily: 'PoiretOne-Regular'}]}>Your Favourite Dinosaurs</Text>
-          <View style={{alignItems: "center", height: 60, marginBottom: 15}}>
-            <Image source={require('../assets/Dino_images/greendino.gif')} style={{height: 80, width: 140, alignItems: 'center' }}/>
+          <View style={{alignItems: "center", height: 60, marginBottom: Dimensions.get('window').height*0.05}}>
+            <Image source={require('../assets/Dino_images/greendino.gif')} style={{ height: 80, width: 140, alignItems: 'center', marginBottom: Dimensions.get('window').height*0.1 }}/>
           </View>
             <ScrollView>
 
@@ -146,7 +146,7 @@ export default class Favourites extends Component {
           {
             this.state.favourites ? (
               self.renderFavourites()
-            ) : <Text style={[FavouritesStyle.favouritesText, , {fontFamily: 'PoiretOne-Regular'}]}>Oh no! Your favourites are currently empty. Find dinosaurs in the app and click the ⭐️ to add them to this list. </Text>
+            ) : <Text style={[FavouritesStyle.favouritesText, {textAlign: 'center', fontFamily: 'PoiretOne-Regular', paddingLeft: 10, paddingRight: 10}]}>Oh no! Your favourites are currently empty. Find dinosaurs in the app and click the ⭐️ to add them to this list. </Text>
         }
 
         </ScrollView>

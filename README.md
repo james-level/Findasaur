@@ -1,5 +1,8 @@
 # Di
 
+Built over 3 weeks, this app is designed to educate via a digital exhibition of dinosaurs and fossils.
+
+
 <b>To run on Android/Apple emulator device:</b>
 
 Apple: Download XCode
@@ -58,3 +61,4 @@ react-native-autocomplete-input
 brew cask install android-platform-tools
 
 adb logcat | grep ReactNativeJS (can see logs in new window or in window in which 'expo start' was typed)
+

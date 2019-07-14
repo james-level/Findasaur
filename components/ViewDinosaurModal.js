@@ -283,7 +283,7 @@ export default class ViewDinosaurModal extends Component {
           self.props.searchedDinosaurDescription ? (
 
       <View style={DinoListViewStyle.modalHeader}>
-        <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.props.renderDescriptionElements(this.props.searchedDinosaurDescription)}
+        <Text style={[DinoListViewStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{self.props.renderDescriptionElements(self.props.searchedDinosaurDescription)}
         </Text>
       </View>
 

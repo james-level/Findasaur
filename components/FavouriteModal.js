@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Alert, Platform, Dimensions, FlatList, ScrollView, Image, TouchableHighlight, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import { Font, LinearGradient  } from 'expo';
 import FavouriteModalStyle from '../Stylesheets/FavouriteModalStyle.js';
 import InfoModalStyle from '../Stylesheets/InfoModalStyle.js';
@@ -86,7 +86,7 @@ export default class FavouriteModal extends Component {
         transparent={false}
         visible={this.props.favouriteModalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
+          this.props.toggleFavouriteModal();
         }}>
 
         <View>
@@ -118,7 +118,7 @@ export default class FavouriteModal extends Component {
               source={{uri: `${this.props.clickedFavourite.image}`}}
             />
 
-/* Faves Modal, Fave Dino name */
+
             <View style={FavouriteModalStyle.modalHeader}>
               <Text style={[FavouriteModalStyle.infoModalHeader, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Name: </Text>{this.props.clickedFavourite.name}
               </Text>
@@ -126,7 +126,7 @@ export default class FavouriteModal extends Component {
 
 
             {
-/* Faves Modal, Dino Pronunciation (text) */
+
               this.props.clickedFavourite.pronunciation ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
@@ -140,7 +140,7 @@ export default class FavouriteModal extends Component {
 
             {
 
-            /* Faves Modal, Dino name Meaning (text) */
+
 
             this.props.clickedFavourite.meaning ? (
 
@@ -154,7 +154,7 @@ export default class FavouriteModal extends Component {
           }
 
           {
-  /* Faves Modal, Dino Type (Text)*/
+
             this.props.clickedFavourite.type ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
@@ -166,9 +166,9 @@ export default class FavouriteModal extends Component {
 
       }
 
-/* Faves Modal, Fave Dino diet icon */
+
           {
-            ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
+            Platform.OS === 'ios' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
 
             <View style={FavouriteModalStyle.modalHeader}>
               <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text>
@@ -178,26 +178,72 @@ export default class FavouriteModal extends Component {
 
           ) :
 
-          <View style={FavouriteModalStyle.modalHeader}>
-            <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
-            </Text>
-          </View>
+        null
 
         }
 
-{/* Faves Modal, Fossil Map Link*/}
+        { Platform.OS === 'ios' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) == require("../assets/icons/diet_unknown.png") ? (
+
+        <View style={FavouriteModalStyle.modalHeader}>
+          <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+          </Text>
+        </View>
+
+      ) : null
+
+    }
+
+    {
+      Platform.OS === 'android' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) != require("../assets/icons/diet_unknown.png") ? (
+
+      <View style={FavouriteModalStyle.modalHeader}>
+        <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}<Text style={{color: 'black'}}>::::: </Text>
+          
+        </Text>
+      </View>
+
+    ) :
+
+  null
+
+  }
+
+  { Platform.OS === 'android' && ImageFinder.getDietImage(this.props.clickedFavourite.diet) == require("../assets/icons/diet_unknown.png") ? (
+
+  <View style={FavouriteModalStyle.modalHeader}>
+    <Text style={[FavouriteModalStyle.modalDietIcon, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Diet: </Text>{this.getDietTextFromImageName()}
+    </Text>
+  </View>
+
+) : null
+
+}
+
+
+
+        {
+          Platform.OS === 'ios' ? (
+
             <View style={FavouriteModalStyle.modalHeader}>
                 <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View Fossil Map: <Image source={require("../assets/icons/globesmall.png")} style={{width: 20, height: 20 }}/>
                 </Text>
               </View>
 
-/* Faves Modal, Dino-Era (text) */
+            ) :
+
+            <View style={FavouriteModalStyle.modalHeader}>
+                <Text onPress={this.setFossilMapVisible}  style={[FavouriteModalStyle.modalMapLink, {fontFamily: 'PoiretOne-Regular'}]}>View Fossil Map: 🌏
+                </Text>
+              </View>
+
+            }
+
             <View style={FavouriteModalStyle.modalHeader}>
             <Text style={[FavouriteModalStyle.modalPronunciation, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Era: </Text>{this.props.clickedFavourite.era}</Text>
             </View>
 
           {
-/* Faves Modal, Dino Length (Text)*/
+
             this.props.clickedFavourite.length ? (
 
           <View style={FavouriteModalStyle.modalHeader}>
@@ -217,7 +263,7 @@ export default class FavouriteModal extends Component {
 
           ) : null
         }
-/* Results Modal, Dino Description */
+
           <View style={FavouriteModalStyle.modalDescription}>
             <Text style={[FavouriteModalStyle.infoModalText, {fontFamily: 'PoiretOne-Regular'}]}><Text style={{color: 'limegreen'}}>Description: </Text>{this.props.clickedFavourite.description}
               </Text>

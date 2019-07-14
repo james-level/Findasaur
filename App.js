@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Homepage from './components/Homepage.js';
+import Homepage from './containers/Homepage.js';
 import { StyleSheet, Text, View } from 'react-native';
 import AppStyle from './Stylesheets/AppStyle.js';
 
