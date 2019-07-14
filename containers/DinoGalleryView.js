@@ -841,6 +841,7 @@ export default class DinoGalleryView extends Component {
               getDietTextFromImageName={self.getDietTextFromImageName()}
               setFossilMapVisible={self.setFossilMapVisible}
               closeDinosaurView={self.closeDinosaurView}
+              getDescriptionText={self.getDescriptionText}
               renderDescriptionElements={self.renderDescriptionElements}
               searchedDinosaurDescription={self.state.searchedDinosaurDescription}
               fossilMapVisible={self.state.fossilMapVisible}

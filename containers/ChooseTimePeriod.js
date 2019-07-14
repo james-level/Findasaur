@@ -1224,6 +1224,7 @@ export default class ChooseTimePeriod extends Component {
         setFossilMapVisible={self.setFossilMapVisible}
         closeDinosaurView={self.closeDinosaurView}
         renderDescriptionElements={self.renderDescriptionElements}
+        getDescriptionText={self.getDescriptionText}
         searchedDinosaurDescription={self.state.searchedDinosaurDescription}
         fossilMapVisible={self.state.fossilMapVisible}
         closeFossilMap={self.closeFossilMap}
