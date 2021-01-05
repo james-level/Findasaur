@@ -14,7 +14,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "clip-path": "^1.1.0",
     "expo": "^30.0.1",
     "expo-cli": "^2.1.3",
